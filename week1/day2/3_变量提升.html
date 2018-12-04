@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+</body>
+</html>
+<script>
+    /*var a = 12;
+    console.log(a);// 12
+    console.log(b);// 报错
+    var obj = {
+        a:12
+    };
+    console.log(obj.b);// undefined*/
+
+    /*console.log(a);
+    // console.log(b);
+    console.log(fn,fn2);// 函数体   undefined
+    var a = 12;
+    b = 13;
+    function fn(){
+        console.log(123);
+    }
+    var fn2 = function(){
+        console.log(345);
+    };
+    console.log(a,b);
+    */
+/*
+
+    console.log(a,fn,fn2);//
+    if(1>2){
+        var a = 12;
+        function fn() {
+            console.log(123)
+        }
+    }
+    for(var i = 0; i < 3; i++){
+        function fn2() {
+            console.log(111)
+        }
+    }
+    fn();// 报错
+*/
+
+    /*
+    * 变量提升；
+    * 在代码执行之前；先浏览一遍所有的代码；
+    * 把其中带var和带 function 关键字的 提前声明；
+    * 用 var 声明的  只声明 不定义；
+    * 用 function声明的  既声明又定义
+    *
+    *
+    * 变量提升 只能提升等号左边的部分
+    * 变量提升 不管条件是否成立；都要进行变量提升
+    *         在标准浏览器下；在{}中；对于function声明的
+    *         只声明 不定义；
+    *
+    *
+    * */
+
+
+    //声明变量的 关键字  var  let  const;
+    // const 声明的是一个常量； 不能再去重新赋值
+    // let const 不存在变量提升
+    // let const 是不能重复声明的
+    // var 会给window 增加一个属性
+    // let const  不会增加
+    console.log(a);
+    // console.log(b);
+    // console.log(c);
+    var a = 12;
+    a = 120;
+    // var b = 10;
+    let b = 13;
+    // var b = 10;  因为用var 声明的；
+    // 在变量提升阶段就已经声明过了；所以，写到let 上下都一样；
+    b = 130;
+    const c = 14;
+    // c = 140;
+    console.log(a,b,c);
+
+
+
+    var a = 13;
+    var a = 14;// 在变量提升阶段只声明一次
+
+    f();//111
+    function f() {
+        console.log(111)
+    }
+    f();//111
+    var f = function () {
+        console.log(222);
+    };
+    f();//222
+
+
+
+
+
+    console.log(a);// undefined
+    console.log("a" in window);// a 是不是 window的一个属性 true
+    if(!("a" in window)){
+        var a = 10;
+    }
+    console.log(a);//undefined
+
+    console.log(fn);//undefined
+    if(9==8){
+        function fn(){
+            alert(2);
+        }
+    }
+
+
+
+</script>
