@@ -72,16 +72,18 @@ function outer(){
 outer()
 //-----------------------------
 var n=0;
+var c=0;
 function a(){
-    var n=10;
+    var n=10;//11
     function b(){
         n++;
+        console.log(c);
         alert(n);
     }
     b();
 }
 a();
-alert(n);
+alert(n);//0
 //--------------------------
 console.log(num,str);
 var num = 18;
@@ -136,15 +138,15 @@ function test() {
 console.log(str);
 
 //2、
-console.log(a);
+console.log(a);//undefined
 a=12;
 function fn(a){
-    console.log(a);
+    console.log(a);//undefined
     a=13
 }
-fn();
+fn(a)
 var a;
-console.log(a);
+console.log(a);//12
 
 //3、
 function test(){
@@ -210,4 +212,4 @@ function outer(){
     inner();
 };
 outer();
-console.log(n)
+console.log(n);

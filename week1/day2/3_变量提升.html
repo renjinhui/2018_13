@@ -117,6 +117,16 @@
         }
     }
 
+    var a = {
+        x:1
+    };
+    var b = a;
+    // a = {w:1};
+    console.log(b);//{x:1}
+    a.c = a = {y:1};
+    console.log(a, b);// {y:1}  {x:1,c:{y:1}}
+    console.log(b.c);// b.c === a  true
+
 
 
 </script>

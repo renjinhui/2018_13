@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+</body>
+</html>
+<script>
+    /*
+    * 对于代码执行  有作用域的概念；
+    * 全局作用域  一打开页面，浏览器就会形成一个全局作用域
+    *            在控制台写内容 就相当于在全局作用域写代码
+    * 私有作用域  函数执行 会形成一个私有作用域;
+    *                   代码执行之前会有变量提升；
+    *                   在变量提升之前还有一个形参赋值的动作；
+    *
+    * 在全局作用域 声明的变量就是全局变量；
+    * 在私有作用域 声明的变量就是私有变量；形参也是私有变量
+    *
+    * 在私有作用域 我们可以拿到全局变量
+    * 在全局作用域 我们拿不到私有变量
+    *
+    * 作用域 就是开辟的一个栈内存；
+    *
+    * 作用域链  它是一种变量的查找机制；上级作用域；函数在哪个作用域定义的；
+    *           那么；函数执行时形成的作用域的上级作用域就是谁；
+    *
+    * */
+    /*
+    var a = 100;
+    function f(a) {
+        var b = 200;
+        console.log(123,a);
+        return b
+    }
+
+    console.log(f(a));// f(100)
+    console.log(a);
+    console.log(b);
+    */
+
+    console.log(a);
+    var a=12;
+    function fn(){
+        console.log(a);
+        a=13;
+        console.log(a);
+    }
+    fn();
+    console.log(a);
+
+
+    var foo=1;
+    function bar(){
+        if(foo){
+            var foo=10;
+        }
+        console.log(foo);
+    }
+    bar();
+
+
+    var n=13;
+    function fn(n){
+        console.log(n);
+        var n=14;
+        console.log(n);
+    }
+    fn(n);
+
+    var n = 13;
+    function fn(){
+        console.log(n);//13
+        n = 15;
+        console.log(n);//15
+    }
+    fn();
+    console.log(n);//15
+
+
+
+
+
+
+
+</script>
