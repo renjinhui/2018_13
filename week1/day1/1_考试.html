@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+<div id='div1' class='box'>哈哈哈</div>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+</ul>
+</body>
+</html>
+<script>
+    var a = 12;
+    var b = a;
+    b = 13;
+
+    var obj = {name:"123"};
+    var obj2 = obj;
+    obj2.age = 9;
+
+    console.log(a,obj);
+    /*
+    * 对象的存储过程
+    * 现在堆内存中 开辟一个空间；
+    * 把对象中的键值对 一对一对的存储到 这个空间中；
+    * 存储完成之后  把这个空间的地址给了 前边的变量
+    * */
+
+    /*
+    * 函数的形参 实参
+    * 函数的存储过程
+    * 现在堆内存中开一个新的空间；把函数体 当作 字符串 存到这个空间
+    * 存储完成之后  把这个空间地址给了 函数名
+    * */
+    function add(a,b) {
+        return a + b;
+    }
+    add(2,3);
+
+    add2();
+    // fn();
+    function add2() {
+        // arguments
+         // 通过 function 关键字声明的函数 ；我们在声明的代码上方
+        //  调用该函数
+    }
+    var fn = function () {
+        // 这种方式声明的函数 只能在函数声明的下方使用
+        console.log(123);
+        return 333;// 函数的运行结果  阻断函数执行
+        // return 可以省略； 默认返回 undefined
+        // return 后边可以不跟任何值； 这是默认返回 undefined
+        // return 表达式；  返回的是表达式的结果
+    };
+    add2();
+    fn();
+    function add3() {
+        return;
+        console.log('hahaha');
+    }
+    var m = add3();
+    console.log(m);//  undefined; 控制台不会输出  hahaha
+
+
+    /*
+    * 面中有这样一个DIV标签<div id=’div1’ class=’box’></div> ，想获取到这个元素可以用哪些方法(至少两种办法,可以不兼容)：_____1_____
+    * getElementById('id名')
+    * getElementsByClassName('box')[0] // 类数组（arguments 元素集合）
+    * getElementsByTagName('div')[0]
+    * querySelector('css选择器') // 只能拿到一个元素；
+    * querySelectorAll('css 选择器')[0] // 也是一个元素集合
+    * 若获取到的是一个元素集合； 则想获取对应元素时；必须把 索引加上；
+    * */
+
+
+    /*
+    * 动态创建一个p标签，并且把其添加到body的末尾位置：____2_____
+    * document.createElement('标签名')
+    * var ele = document.createElement('p');
+    * document.body // body 元素标签
+    *
+    * 父节点.appendChild(子节点) // 把子节点 放到 父节点的末尾
+    * document.body.appendChild(ele);
+    *
+    * 父节点.insertBefore(新节点,老节点) // 在父节点中的 老节点 前边添加一个 新节点
+    *
+    * previousSibling// 哥哥节点  找不到时 值是 null
+    * parentNode 父亲节点
+    * children   元素子节点
+    * childNodes 子节点
+    *
+    *
+    * */
+
+    var val = 2||0 ? 'haha' : 'hengheng';
+
+    /*
+    * 任意数求和  不定项求和
+    *
+    * */
+    function sum() {
+        // 首先要把传进来的所有参数都获取到
+        // console.log(arguments);
+        // arguments[0]// 实参的第一项
+        // var total = arguments[0]+arguments[1]+arguments[2];
+        var total = 0;
+        for(var i=0;i<arguments.length;i++){
+            // 判断是不是数字(排除NaN)  是数字才相加；
+            // 是数字 并且不能是 NaN;
+            if(typeof arguments[i] === 'number' && !isNaN(arguments[i])){
+                total = total + arguments[i];
+            }
+            // total = total + arguments[i];
+            // total += arguments[i];
+        }
+        return total;
+    }
+
+
+
+    console.log(sum(1, 2, 3, '4'));
+    /*sum(1,2);
+    sum(1,2,3,4,5);*/
+
+
+
+    /*
+    * 递归求和
+    * */
+    // 1-100；
+    function sum2(n) {
+        var total = 0;
+        for(var i = 0; i <= n;i++){
+            // 相加时 加一个判断  只加 既能被5整除 又能被3整除的数；
+            if(i%5 == 0 && i%3 == 0){
+                total += i
+            }
+            // total = total + i;// total += i;
+        }
+        return total;
+    }
+    sum2(100);// 1-100 之间的和 5050
+
+    function demo() {
+        // 首先注意边界；
+        // demo();
+    }
+    demo();
+
+    function sum3(n) {
+        if(n<=0){
+            return 0;
+        }
+        // 既能被3 又能被5整除
+        if(n%3==0&&n%5==0){
+            return n + sum3(n-1);
+        }else {
+            return sum3(n-1);
+        }
+        // return n + sum3(n-1);
+    }
+
+    console.log(sum3(100));// 0 - 100 : 315
+    sum3(4);
+    /*
+    * 4 + sum3(3)
+    * 4 + 3 + sum3(2)
+    * 4 + 3 + 2 + sum3(1)
+    * 4 + 3 + 2 + 1 + sum3(0)
+    * 4 + 3 + 2 + 1 + 0
+    * 10
+    * */
+
+
+
+    /*
+    * 验证码
+    * */
+    var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
+    function getAry(n) {
+        // n 决定获取 几位数字的；
+        n = n || 4;// 给n 默认值是4；
+        var ary = [];// 存储 n个 不重复的数字
+        while (ary.length < n){
+            var m = Math.round(Math.random()*61);
+            // ary.push(m)// m 放之前先要查看 ary 中是否有这一项
+            if(ary.indexOf(m) == -1){
+                ary.push(m)
+            }
+        }
+        // ary 中存储的就是 n 不重复的数字；
+        return ary;
+    }
+    function getStr(n) {
+        n = n || 4;
+        var arr = getAry(n);// n 个不重复的数字 组成的数组；
+        // 接下来 要用数组中的 每一项 当作 str 的 索引 去获取对应的字符；
+        var s = '';
+        for(var i =0; i < arr.length; i++){
+            var cur = arr[i];
+            s += str[cur];
+        }
+        // s 就是要的字符串；。
+        return s;
+    }
+
+    console.log(getStr(6));
+
+    function getStr2(n) {
+        n = n || 4;
+        var s = '';
+        while (s.length < n){
+            var m = Math.round(Math.random()*61);
+            // str[m]
+            if(s.indexOf(str[m])===-1){
+                s += str[m];
+            }
+        }
+        return s;
+    }
+
+    console.log(getStr2(6));
+
+
+    /*
+    * 最后一题
+    *
+    * */
+
+    var oLis = document.getElementsByTagName('li');
+    for(var i = 0; i< oLis.length;i++){
+        if(i%2==0){
+            // 奇数行
+            oLis[i].style.background = 'red';
+        }else {
+            oLis[i].style.background = 'green';
+        }
+        oLis[i].qqq = i;
+        // 给每一个li 添加一个 qqq 属性；属性值 当前 li的索引
+        oLis[i].onclick = function () {
+            // this 当前点击的元素
+            alert(`我是第${this.qqq+1}个li`)
+        }
+    }
+
+
+
+
+
+</script>
