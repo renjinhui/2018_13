@@ -69,11 +69,11 @@ function outer(){
     }
     inner();
 }
-outer()
+outer();
 //-----------------------------
 var n=0;
 var c=0;
-function a(){
+function a(q){
     var n=10;//11
     function b(){
         n++;

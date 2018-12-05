@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+</body>
+</html>
+<script>
+    /*
+    * git init  把本地文件夹 初始化成 git 仓库；
+    * 远程仓库  new 仓库
+    * git remote add 通道名 远程仓库地址
+    *
+    * git add 文件名 或者 点
+    * git commit -m '备注信息'
+    * git push 通道名
+    *
+    * 第二种方式
+    * 先在远程创建一个仓库；
+    * git clone 远程仓库地址
+    * 本地会多出一个文件夹；在这个文件夹里开发代码就可以了；
+    * git add .
+    * git commit -m '备注'
+    * git push
+    *
+    *
+    * fork  把别人的远程仓库里的某个仓库 复制到 我自己的 远程仓库中；
+    * git clone 自己fork过来的仓库地址；
+    * */
+
+    /*
+    * linux 命令
+    * ls 查看当前文件夹下有哪些文件及文件夹
+    * cd 切换路径 ../../
+    * mkdir  创造文件夹
+    * touch  创造文件
+    * vi 文件名  按i键进入编辑状态；按 esc键 ； 输入:wq
+    * cat 文件名 查看文件
+    * rm -rf 文件或文件夹
+    * */
+
+    /*
+    * 变量提升
+    * 在代码执行之前；先把代码中的带var 和 带 function 的提前声明；
+    * 带var是只声明 不定义；带function 既声明又定义
+    *
+    * 提前声明 只声明等号 左边的；
+    * 条件判断里边的代码也要进行变量提升；对于function 声明，标准浏览器只声明不定义
+    *
+    *
+    * let
+    * const 两者的共同点 没有变量提升； 不能重复声明；
+    *            不同点 const 声明的是个常量；值不能更改
+    *
+    *
+    * */
+    fn();//1 变量提升阶段 ； 把fn 确定为 输出1
+    function fn(){
+        console.log(1);
+    }
+    var fn = function () { // 重新把 fn 确定为 输出2
+        console.log(2);
+    };
+    fn();//2
+
+    /*
+    * 作用域 提供了代码的执行环境，他是个栈内存；
+    * 全局作用域 页面一打开就会形成一个 全局作用域；
+    *           全局变量： 在全局作用域声明的变量 我们称为全局变量；
+    * 私有作用域 函数执行会形成一个私有作用域；
+    *          声明函数的时候， 开辟一个堆内存；把函数中的代码当作字符串存储；
+    *          函数执行：把函数体中的字符串当作代码执行；
+    *          先形参赋值，再去变量提升；之后再去执行代码；
+    *
+    *          私有变量：形参，在私有作用域声明的；
+    *
+    * 块级作用域 大括号{}包含的部分会形成一个块级作用域；
+    *           只对let 和 const 声明的变量起作用
+    *
+    *
+    * 作用域链  变量的一种查找机制；假如一个私有作用的中的某个变量，不是私有变量；那么他就需要向**上级作用域**查找对应的变量，若没有该变量，则再向上级查找；一直找到全局；若全局仍没有；则会报错
+    *
+    * 上级作用域：函数执行形成的私有作用域A;那么A的上级作用域是指的，函数在哪个作用域定义的；
+    * */
+    /*
+    let a = 12;
+    var b = 12;
+    const c = 12;
+    // var c = 333;
+    if(2>1){
+        let a = 13;
+        var b = 13;
+        // const c = 13;
+        var c = 13;
+        console.log(a,b);//13 13
+    }
+    console.log(a,b);//12 13
+    */
+
+    var a = 10;
+    function fn1(){
+        var a = 12;
+        function f() {
+           console.log(a)
+        }
+        return f
+    }
+    var fun = fn1();
+    // console.log(fun);
+    fun();
+
+
+
+    console.log(num,str);// undefined*2
+    var num = 18;
+    var str = "lily";
+    function fn2(){
+        console.log(str,num);// lily undefined
+        num = 19;
+        str = "candy";
+        var num = 14;
+        console.log(str,num);// candy 14
+    }
+    fn2();
+    console.log(str,num); // candy 18
+
+
+
+    var n = 10;
+    function outer(){
+        n = 15;// outer 的私有变量
+        function inner(n){// inner的上级作用域是 outer
+            n=18;
+            function center(){
+                alert(n);//18
+            }
+            center();
+        }
+        inner(n);// inner(15)
+    }
+    outer();
+    console.log(n);//15
+
+
+
+
+
+    f = function(){return true};
+    g = function(){return false};
+    (function (){
+        console.log(g);//undefined
+        // if(g()&&[]==![]){
+        if(f()&&[]==![]){// [] == false  -->true
+            f = function f(){return false};
+            function g(){return true};
+        }
+    })();
+    alert(f());
+    alert(g());
+
+    var n = 10;//15  16  18
+    function outer(){
+        n = 15;
+        function inner(){
+            console.log(n++);//n++ 先做其他运算  再做累加；  15
+            function center(){
+                n+=2;
+                console.log(n); //18
+            }
+            center();
+        }
+        inner();
+    };
+    outer();
+    console.log(n); // 18
+
+
+
+</script>
