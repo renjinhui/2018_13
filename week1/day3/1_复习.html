@@ -163,7 +163,7 @@
 
     var n = 10;//15  16  18
     function outer(){
-        n = 15;
+        var n = 15;
         function inner(){
             console.log(n++);//n++ 先做其他运算  再做累加；  15
             function center(){

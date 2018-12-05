@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+</body>
+</html>
+<script>
+    /*
+    * 暂时性死区
+    * let const  没有变量提升；
+    * 但是在代码执行之前，也会先浏览一遍；
+    * 把带let 和 const 的变量提前解析一下；
+    * 在let 和 const 声明变量的那一行之前是不能调用的；
+    * 只能在声明的下方调用；
+    *
+    * */
+    let a = 12;
+    function fn() {
+        // a = 100;
+        // console.log(a);
+        let a ;
+        a = 100;
+        console.log(a);
+
+    }
+    function fn2() {
+        console.log(a);// undefined;
+        var a = 11;
+    };
+    function fn3(a){
+        let a = 10;
+        console.log(a);
+    }
+    fn2();
+    fn();
+    // fn3();s
+
+    function fn4(a,b) {
+        console.log(arguments);
+        console.log(a);//2
+        arguments[0] = 100;
+        console.log(a, b);//100 3
+        b = 300;
+        console.log(arguments[1]);//300
+        console.log(arguments)
+        // arguments 和 形参之间有一一映射的关系
+    }
+    fn4(2,3);
+
+    function fn5(a,b) {
+        console.log(arguments);//类数组【2】
+        console.log(a);//2
+        arguments[0] = 100;
+        console.log(a, b);//100 undefined
+        b = 300;
+        console.log(arguments[1]);//undefined
+        console.log(arguments);
+        // 一一映射关系 一开始若没有建立起来 则后边不再有映射关系的
+    }
+    fn5(2);
+
+
+    function f(name, age) {
+        console.log(arguments[0]);//'zf'
+        arguments[0] = 'xiaohong';
+        age = age && 100;
+        console.log(name,age,arguments)//'xh' 100  【'xh',100】
+    };
+    var name = 'zhufeng',age = 9;// var name ='';var age = 9;
+    f(name,age);
+
+
+
+
+
+
+
+</script>

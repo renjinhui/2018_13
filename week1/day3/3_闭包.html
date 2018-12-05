@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<h1>第13期公开课</h1>
+</body>
+</html>
+<script>
+    //闭包 一个不销毁的作用域；
+    //珠峰理解： 闭包是一种变量的保护机制，保护私有变量不受被外界影响
+    function f() {
+        var a = 12;
+        var b = 13;
+        console.log(a,b);
+    }
+    //作用域销毁；立即销毁  不立即销毁  不销毁；
+    f();
+    f();
+    f();
+
+    function f1(c) {
+        var a = 12;
+        var b = 13;
+        return {
+            a:a,
+            b:b,
+            c:c
+        }
+    }
+    var obj = f1();
+    var obj3 = f1();
+    var obj2 = f1(3);
+    // 函数执行返回值 是一个 引用数据类型；
+    // 并且 外界占用了这个返回值；
+    // 则该作用域是不销毁的
+
+
+    function f2() {
+        return function () {
+            console.log(123)
+        }
+    }
+    var f3 = f2();
+    f3();
+    f3();
+    f3();
+
+    f2()()// 暂时不销毁
+
+
+    // var i = 2;
+    function fn() {
+        // i += 2;
+        var i = 2;
+        return function (n) {
+            console.log(n + (--i));// 先把i 减1；后进行其他运算
+        }
+    }
+    var f=fn();//私有作用域A  i = 2;1;0;-1
+    f(2);//2 + (--i) 3
+    f(3);//3 + (--i) 3
+    fn()(2);// 私有作用域B  i=2;1; 2 + (--i) 3
+    fn()(3);// 私有作用域C  i=2;1;   3 + (--i) 4
+    f(4);// 4 + (--i) 3
+
+
+    var obj = (function () {
+        var a = 12;
+        var b = 13;
+        return {
+            a,b// a:a,b:b 的简写
+        }
+    })();
+    console.log(obj);
+
+
+    /*
+    * return  arguments  this
+    * */
+    // 事件绑定的this 指向绑定的元素
+    // 其他情况看点，点前边是谁 this就是谁；没点就是window
+    (function () {
+        console.log(this)
+    })();
+    var obj = {
+        name:123,
+        fn:function () {
+            console.log(this)
+        }
+    };
+    var f = obj.fn;
+    f === obj.fn// true
+    f();// window
+    obj.fn();// obj
+
+
+</script>
