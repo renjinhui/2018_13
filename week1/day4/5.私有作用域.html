@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /**
+     * 函数执行 形成一个私有作用域
+     * 形参赋值（形参也是私有变量 声明一个私有变量 有实参就赋值为实参 没有默认值undefined）
+     * 变量提升
+     * 执行函数体里代码
+     * 
+    */
+
+    // function fe(a) {
+    //   var a // 不会重新声明
+    //   console.log(a)
+    // }
+
+    // fe(10)
+    // fe()
+    // fe()
+
+    // console.log(a)
+
+
+    // 函数作用域中 变量提升时 function的优先级 高于 形参变量
+    // function fe(a) {
+    //   console.log(a) // a这个函数
+
+    //   function a() {}
+    // }
+    // fe(1)
+
+    // function fe() {
+    //   console.log(a)
+    //   function a() {}
+    //   var a
+    // }
+    // fe()
+
+
+
+    // 在变量提升时 通过function 重复声明定义时 会以最后一个函数体为主
+    console.log(fe) // 666那个
+
+    fe() // 666
+    // 由于变量提升时 对函数进行了 定义赋值  代码执行到函数定义部分时 就会忽略
+    function fe() {
+      console.log(111)
+    }
+
+    fe() // 666
+
+    function fe() {
+      console.log(222)
+    }
+
+    fe() // 666
+
+    function fe() {
+      console.log(3333)
+    }
+    
+    fe() // 666
+
+    // 当代码执行到这一行时 对fe进行了重新赋值操作 将之前值覆盖掉
+    var fe = function() {
+      console.log(444)
+    }
+    // console.log('444', fe)
+    fe() // 444
+
+    // 执行到这一行时 再次 将我们的fe 赋值为数字123
+    var fe = 555
+    console.log(fe)
+
+    // 赋值后fe 是一个数字类型的值 不能当做 一个函数来调用
+    fe() // not is function
+
+    function fe() {
+      console.log(666)
+    }
+
+    fe()
+  </script>
+</body>
+</html>
