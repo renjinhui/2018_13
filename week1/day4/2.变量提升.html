@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 当变量名重复时 带function的优先级 大于 带var的变量
+
+    // 带function 是在变量提升阶段 就进行了定义赋值的
+    // console.log(fn) // fn函数
+
+    // fn() // 'fn'
+    // function fn() {
+    //   console.log('fn')
+    // }
+
+    // 对于带var关键字 当我们代码执行到这一行的时候 才会 进行赋值操作
+    // var fn = 123
+    // console.log(fn)
+    // fn()
+
+    /**
+     * 变量提升 只发生在作用域中
+     * 最开始的时候 是对全局作用域 进行变量提升
+     * 函数执行的时候 会产生一个函数作用域 进行变量提升
+    */
+   
+    
+    // console.log(cc) // undefined
+    // if (true) {
+    //   var cc = 'hello'
+    // } 
+    // console.log(cc)
+
+
+    // 全局作用域 和 私有作用域 都有自己的 变量提升阶段
+
+    // console.log(ff) // undefined
+    // var ff = 'ff'
+
+    // function fn() {
+    //   var aa = 'fe' // 函数作用域中 也有变量提升阶段
+    //   console.log(aa)
+    // }
+
+    // fn() // 根据引用地址 找到存储的 函数体里代码
+    // console.log(aa)
+
+    // 在全局中 声明的变量（参加全局中的变量提升）全局变量
+    // 在函数中 声明的变量（参加私有作用域中的变量提升）私有变量
+
+    // 全局作用域 私有作用域
+    // 全局变量   私有变量
+
+  
+    // function fe() {
+    //   var aa = 'aa'
+    // }
+    // fe() 
+    // console.log(aa) // 报错 全局中 并没有声明过这个变量
+    
+    
+    var aa = 123
+    function fe () {
+      console.log(aa) // 123
+    }
+    fe()
+    console.log(aa) // 123
+    
+
+    // 作用域链
+  </script>
+</body>
+</html>

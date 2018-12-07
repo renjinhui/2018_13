@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 如何查找上级作用域
+    // 上级作用域 就是看在哪定义 跟在哪执行没关系
+ 
+    // var aa = '全局中aa'
+    // function fe() {
+    //   var aa = 'fe中aa'
+      
+    //   function fn() {
+    //     var aa = 'fn中' 
+    //     console.log(aa)
+    //   }
+    //   return fn
+    // }
+
+    // var fo = fe()
+    // fo()
+
+
+   // 全局中变量提升 
+   // var aa = undefined
+   // function fe = xxxfff
+   // var obj
+
+    var aa = 'window'
+
+    // fe是在全局中定义的 所以fe的上级作用域就是 window
+    // 跟在哪执行没有关系
+    function fe() {
+      console.log(aa)
+    }
+
+    // 定义一个引用数据类型 会产生一个堆内存 
+
+    // 目前作用域三种：window  函数执行私有作用域  块级作用域（ES6）
+    
+    var obj = {
+       // 对应obj.foo来说 它的上级作用域是window 
+       // 因为定义一个对象不会产生作用域
+       foo: function() {
+          aa = 'foo'
+          fe()
+       }
+    }
+    // console.log(obj.foo)
+    obj.foo()
+
+    console.log('win', aa)
+
+
+    console.log(i)
+
+    // (var i = 0) 相当于定义了一个全局变量
+    for (var i = 0; i < 3; i++) {
+      // dom.onclick = function() {
+      //   log(i) // 当我们执行这个函数的时候 
+      // }
+    }
+
+    console.log(i)
+    // codereview 审查代码
+
+  </script>
+</body>
+</html>

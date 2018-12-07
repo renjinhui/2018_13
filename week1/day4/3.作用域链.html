@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 作用域链 就是一个变量查找机制 (向上查找) 
+    // 在私有作用域中 遇到一个变量 先看这个变量 是不是当前作用域中私有的
+    // 如果不是私有的 就会去上层作用域中查找 一直找到window为止
+    // 如果window全局作用域中也没有 就会报错 
+    // Uncaught ReferenceError: aa is not defined
+    
+    // var aa = 123
+    // function fe () {
+    //   console.log(aa) // 123
+    // }
+    // fe()
+    // console.log(aa) // 123
+
+    var nn = 'nn'
+    function fn () {
+      var fe = 123
+      // 先看当前作用域 fn 中有没有声明这个变量 如果没有就去上级window查找
+      console.log(nn) // 'nn'
+    }
+    fn()
+
+    // 首先 在当前作用域 window中查找 
+    // 如window中没有 is not defined
+    console.log(fe)
+    
+  </script>
+</body>
+</html>
