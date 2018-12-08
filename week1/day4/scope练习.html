@@ -1,37 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
   <script>
-    //        var num = 12;
-    //        var obj = {
-    //            num: 3,
-    //            bar: (function (n) {
-    //                  var n = 12;
-    //                  return function (k) {
-    //                      console.log(k + (++n));
-    //                  }
-    //            })(window.num)
-    //        };
-    //        obj.bar(1);
-    //        obj.bar(2);
-    //        var fn3 = obj.bar;
-    //        fn3(2);
-    //        fn3(4); 
-    //    function fn(n) {
-    //        return function (a) {
-    //            a++;
-    //            console.log(n += a);
-    //        }
-    //    }
-    //    var f = fn(10);
-    //    f(1);
-    //    f(2);
+
+    // 自执行函数 IIFE
+    // (function(n) {
+    //   console.log(n)
+
+    // })(window.num)
+
+
+    // var num = 12;
+    // var obj = {
+    //   num: 3,
+    //   // 这个自执行函数 形成的栈内存不会被销毁 它里面私有变量会被保存下来
+    //   bar: (function (n) { // n = 12
+    //     var n = 12; // 12 => 13 => 14 => 15 =>16
+    //     return function (k) {
+    //       // 第一次 k = 1 n = 12 => 14
+    //       // 第二次 k = 2 n = 13 => 16
+    //       // 第三次 k = 2 n = 14 => 17
+    //       // 第四次 k = 4 n = 15 => 20
+    //       console.log(k + (++n));
+    //       console.log('n', n)
+    //     }
+    //   })(window.num) // 12
+    // };
+    // // console.log(obj.bar)
+    // obj.bar(1); // 14
+    // obj.bar(2); // 16
+    // var fn3 = obj.bar;
+    // fn3(2); // 17
+    // fn3(4); // 20
+
+
+
+    // var say
+
+    // jQuery  模块化开发
+
+    var fe = (function() {
+      var say = 'hello 珠峰'
+
+      return function() {
+        console.log(say)
+      }
+    })()
+
+
+
+    var fe = (function() {
+      var say = 'hello 珠峰'
+
+      return function() {
+        console.log(say)
+      }
+    })()
+
+    var say = 100
+
+
+    // 过不知多久
+    var say = 200
+
+
+    // function fe() {
+    //   return function () {
+
+    //   }
+    // }
+    // var foo = fe()
+
+
+    
+
+    // function fn(n) {
+    //   return function (a) {
+    //     a++;
+    //     console.log(n += a);
+    //   }
+    // }
+    // var f = fn(10);
+    // f(1);
+    // f(2);
+    // [li, li, li]
+    // var list = document.getElementsByTagName('li')
+
+    // var obj = {}
+
+    // for(var i = 0; i < 3; i++) {
+    //   // i = 0
+    //   // i = 1
+    //   // i = 2
+    //   obj.onclick = (function(n) {
+    //     console.log('n', n)
+    //     return function() {
+    //     }
+    //   })(i)
+    // }
+
+    // var obj = {
+    //   bar: (function() {
+    //     return function() {
+
+    //     }
+
+    //   })()
+    // }
+
+    // obj.bar = (function() {
+    //     return function() {
+
+    //     }
+
+    //   })()
+ 
+
     // function fn(n) {
     //    n = n;
     //    return function (a) {
@@ -131,7 +223,7 @@
     //    var fn3 = obj.bar;
     //    fn3();
     //    fn3();
-
   </script>
 </body>
+
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 变量提升阶段 var len fn main
+
+    // var obj = {
+    //   0: function() {
+    //     console.log(this)
+    //   }
+    // }
+    // obj.fe()
+    // obj[0]()
+
+    // var len = 5; // 5
+
+    // var fn = function (){
+    //   console.log(this);
+    // };
+
+    // var main = {
+    //   fn: function (fn){ // [fn]
+    //     console.log(this); // main
+    //     fn(); // this => window
+    //     // arguments.0()
+    //     arguments[0](); // this => arguments
+    //   },
+    //   len: 10
+    // };
+    
+    // main.fn(fn);
+
+    //    function fn1() {
+    //        console.log(this === ary);
+    //    }
+    //    function fn2() {
+    //        console.log(this);
+    //    }
+    //    function fn3() {
+    //    }
+    //    function fn4() {
+    //    }
+    //    var ary = [fn1, fn2, fn3, fn4];
+    //    ary[1](); 
+    //    var arry = ary[1];
+    ////    var arry = function fn2 (){
+    ////        console.log(this);
+    ////    };
+    ////    console.log(arry);
+    //    arry(); 
+    ////////////////////////////////////////////////////////////////////////////
+    // var num = 5; // 5 => 6 => fn() 7
+    // var obj = {
+    //     num: 4, // 5
+    //     fn: (function (num) { // num = undefined
+    //         num++; // undefined++ NaN
+    //         // 自执行函数中 this 指的是 window
+    //         this.num++;
+    //         var num = 2; // 自执行函数私有的num = 2 => 3 => 4
+    //         return function () {
+    //             num++;
+    //             // fn() this => window window.num++
+    //             // obj.fn() this => obj obj.num++
+    //             this.num++;
+    //             console.log(num);
+    //         }
+    //     })()
+    // };
+    // console.log(obj.fn)
+    // var fn = obj.fn;
+    // fn(); // 3
+    // obj.fn(); // 4
+    // // this.num 7  obj.5
+    // console.log(this.num, obj.num); 
+  </script>
+</body>
+</html>
