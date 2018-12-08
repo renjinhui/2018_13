@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 堆内存：用来存储引用数据类型的数据 JS引擎给分配的内存空间
+    // var obj = {
+    //   id: 100,
+    //   name: '浩杰'
+    // }
+    // // var arr = [1, 2, 3]
+
+    // var obj2 = obj
+
+    // obj2.id = 200
+    // console.log(obj.id)
+
+    // console.log(obj2 == obj)
+    // console.log(obj2 === obj)
+    
+    // 比较的是引用地址
+    // var arr1 = {}
+    // var arr2 = {}
+    // console.log({} == {}) // false
+    // console.log(arr1 == arr2) // false
+    // console.log([] === [])
+    // console.log([] == [])
+
+
+    // var arr = [1, 2, 3] // [1, 2, 100]
+    // function fn(ary) {
+    //   console.log('1', arr === ary) // true
+    //   ary[2] = 100 // [1, 2, 100]
+    //   ary = [] // 将ary 指向了一个新的数组内存
+    //   console.log('2', arr === ary)
+    //   ary[0] = 200
+    //   console.log(ary) // [200]
+    //   console.log(arr)
+    // }
+
+    // fn(arr) // fn([1, 2, 3])
+    // console.log(arr) // [1, 2, 100]
+
+
+    // var arr = [1, 2, 3]
+    // function fn(c) {
+    //   c[1] = 1000
+
+    //   c = [100] // 将变量c指向了一个新的数组对象
+
+    //   c[0] = 200
+    //   console.log(c) // [200]
+    // }
+    // fn(arr)
+    // console.log(arr) // [1, 1000, 3]
+
+    // var arr = [100, 200]
+    // arr = [666]
+
+    // 栈内存 执行JS代码的环境 存储基本数据类型
+    // 全局作用域 是一个不销毁的栈内存 只有当关闭了当前页面或浏览器时 才会销毁
+
+    // var num = 100
+
+    // setTimeout(() => {
+    //   console.log(num)
+    // }, 3000)
+
+    // function fn() {
+    //   console.log(num)
+    // }
+
+    // function fn() {
+    //   var num = 123
+    // }
+    // // 函数每一次执行 都会形成一个新的作用域 然后重新执行里面代码
+    // fn()
+
+    // fn()
+
+
+    // 栈内存不销毁的情况
+
+    // 1.函数执行形成一个作用域（栈内存） 
+    // 如果作用域中 返回一个引用数据类型的值（堆内存）
+    // 并且被外部占用 (所占用的堆内存 也不会销毁)
+
+    function fn() {
+      return { id: 100 } // 堆内存
+      // return []
+      // return function() {
+
+      // }
+    }
+    var fe = fn()
+    console.log(fe) // {id: 100}
+
+  </script>
+</body>
+</html>

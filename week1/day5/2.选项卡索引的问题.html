@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>陈浩杰</li>
+    <li>张渌勃</li>
+    <li>韩飞</li>
+  </ul>
+
+  <script>
+    var list = document.getElementsByTagName('li')
+    
+    // for (var i = 0; i < list.length; i++) {
+    //   // console.log(list[i])
+    //   console.log('i', i)
+    //   // 分别给每个元素绑定点击事件
+    //   list[i].onclick = function() {
+    //     // 当你点击时 找到的全局变量i 都是for循环完后的i => 3
+    //     console.log('click', i) // 这里面 输出的是 全局变量i
+    //   }
+    // }
+
+
+    // 自定义属性 推荐
+    // for (var i = 0; i < list.length; i++) {
+    //   console.log('i', i)
+    //   var cur = list[i] // 每一轮 取出的 li元素对象
+    //   cur._ind = i // 给当前元素对象 添加了自定义属性 存储当前这一轮i代表的值
+    //   cur.onclick = function() {
+    //     // this 指向当前绑定事件的元素
+    //     console.log('click', this._ind)
+    //   }
+    // }
+
+    // 循环三次 每次都会创建一个不销毁的栈内存 
+    // 并且里面 声明一个自己私有变量n 存储每一轮变量i的值
+    // 缺点形成三个不销毁的栈内存
+    // for (var i = 0; i < list.length; i++) {
+    //   // cur.onclick = function() {
+    //   //   console.log('click', i)
+    //   // }
+
+    //   // i = 0 list[0].onclick =
+    //   list[i].onclick = (function() {
+    //     // 将当前这一轮变量i代表的值 复制一份 给私有变量n
+    //     var n = i // 0
+    //     return function() {
+    //       console.log(n)
+    //     }
+    //   })()
+    // }
+
+    // for (var i = 0; i < list.length; i++) {
+    //   list[i].onclick = (function(n) {
+    //     return function() {
+    //       console.log(n)
+    //     }
+    //   })(i)
+    // }
+
+    for (var i = 0; i < list.length; i++) {
+      (function(n) {
+        list[n].onclick = function() {
+          console.log(n)
+        }
+      })(i)
+    }
+
+
+
+
+  </script>
+</body>
+</html>
