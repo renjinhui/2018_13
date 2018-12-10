@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+</body>
+</html>
+<script>
+    let btns = document.querySelectorAll('button');
+    // for(var i = 0; i < btns.length; i++){
+    //     btns[i].qqq = i+1;
+    //     btns[i].onclick = function () {
+    //         alert(this.qqq);
+    //     }
+    // }
+
+    // for(var i = 0; i < btns.length; i++){
+    //     (function(n){
+    //         btns[n].onclick = function () {
+    //             alert(n+1)
+    //         }
+    //     })(i)
+    // }
+
+    // for(var i = 0 ; i < btns.length; i++){
+    //     btns[i].onclick = (function(n){
+    //         return function(){
+    //             alert(n+1)
+    //         }
+    //     })(i)
+    // }
+
+
+    function tc(n) {
+        return function () {
+            alert(n+1)
+        }
+    }
+    for(var i=0;i<btns.length; i++){
+        btns[i].onclick = tc(i);
+    }
+    // i = 0 btns[0].onclick = tc(0); // tc(0)
+
+    // let i = 11;
+    for(let i = 0; i < btns.length; i++){
+        // let  i  = 222;
+        btns[i].onclick = function () {
+            alert(i+1);
+        }
+    }
+    //for 拆开
+    // {
+    //     i = 0;
+    //     {
+    //         btns[0].onclick = function () {
+    //             alert(i+1);
+    //         } 
+    //     }
+    // }
+    // {
+    //     i = 1;
+    //     {
+    //         btns[1].onclick = function () {
+    //             alert(i+1);
+    //         } 
+    //     }
+    // }
+
+
+</script>
