@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /* 
+        类                         实例
+        人类                       张三 所有的 人  都是  人类  的一个实例
+        狮子类                     辛巴
+        动物类                     张三
+
+
+        Array                      []  所有的  数组  都是  Array类  的一个实例
+        Number                     2.3
+
+        Number  String  Boolean Array Object Function  Date  RegExp .... 都属于JS的内置类
+        Object 基类 
+        我们可以通过   new 类名 去创造该类的一个实例
+    */
+
+
+   var t = new Date // 产生 Date 的一个实例,类后边的小括号可以省略;
+   // t 是 Date 的一个实例；  Date本身属于内置类
+   var ary = new Array();// ary 是一个空数组
+
+
+   /* 
+        自定义类
+        所有的类 本质就是一个函数； 只不过通过 new 执行的时候； 
+        把这个普通函数当作了类；
+
+        所有的实例 都是一个对象；
+   */
+
+   /* 
+        普通函数执行
+        先开辟一个私有作用域，形参赋值，变量提升；函数执行；默认return undefined
+
+        new 函数执行
+        先开辟一个私有作用域，形参赋值，变量提升；
+        开辟一个新的堆内存，把函数中的this 指向这个堆内存；
+        函数执行;
+        默认返回this， 若手动加了一个return ，但是 return 的值 是一个值类型；
+        那么，默认返回仍然是 this;
+        若return 的值 是一个引用数据类型；那么会把默认的return this 修改掉；
+   
+   */
+    function Person() {
+        this.name = 'zf';
+        age = 9;
+        console.log('person');
+        // return 123;
+        return {
+            name:'hahaha'
+        }
+    }
+    var p1 = new Person;
+    console.log(p1 instanceof Person);
+    console.log(p1);
+
+    var p3 = Person();
+    console.log(p3)
+
+    // var p2 = new Person();
+
+    function person2(name,age) {
+        this.name = name || 'zf';
+        this.age = age || 9;
+        // 构造函数中的this 是指向 该构造函数（类）的实例
+    }
+    var per1 = new person2('小红',9);
+    // per1  是  person2 的一个实例； 一般 自定义的类名 首字母大写
+    console.log(per1);
+    
+    
+</script>

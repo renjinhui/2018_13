@@ -37,4 +37,37 @@
     let f = obj.f2();
     f();
 
+    obj.name = 'zfpx';
+
+
+    // 高级单例模式
+    // 优点是 可以有一些自己私有的变量；
+    // 缺点是 会形成一个不销毁的作用域；
+    function fn(){
+        var name = 'zf';
+        function f3() {
+            return Math.random();
+        }
+        return {
+            name:name,
+            f1(){
+                if(f3() > 0.5){
+                    console.log(this.name)
+                }
+            },
+            f2(){}
+        }
+    }
+    var obj2 = fn();// fn() 的作用域 不销毁
+    obj2.name = 'www';
+    obj2.f3();
+    obj2.f3 = 123;
+
+
+
+
+
+
+    var obj3 = fn();
+    obj3.name // ‘zf’
 </script>

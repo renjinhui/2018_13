@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /* 
+        每一个函数都有一个属性 prototype 指向该函数的  原型对象;
+        每一个实例（对象）都有一个属性 __proto__(双下划线) 指向所属类的  原型对象;
+        每一个默认的原型对象上都有一个属性 constructor,指向该原型对象的构造函数本身；
+
+        原型对象的本质就是一个对象；
+
+        所有的数组都是 Array类的一个实例；
+        所有的对象都是 Object类的一个实例；
+        Object类 就是说的基类；
+    */
+   function f(){};
+   console.dir(f);
+
+   function Person() {
+       this.name = 'zf';
+   }
+   var p1 = new Person;// Person 自定义类； p1 属于 Person的一个实例；
+   Person.prototype
+   console.log(p1.__proto__ === Person.prototype);//true
+   console.log(p1.__proto__);
+   console.log(Person.prototype.constructor === Person);// true
+   
+</script>
