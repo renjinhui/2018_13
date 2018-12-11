@@ -47,15 +47,13 @@ Foo.getName = function () {console.log(2);};
 Foo.prototype.getName = function () {console.log(3);};
 var getName = function () {console.log(4);};
 function getName() {console.log(5);}
-
-Foo.getName(); 
-getName(); 
-Foo().getName();
-getName();
-var a = new Foo.getName(); 
-
-var b = new Foo().getName();
-var c = new new Foo().getName();
+Foo.getName(); //2
+getName(); //4
+Foo().getName();//window.getName() // 1
+getName();//1
+var a = new Foo.getName(); //2  a 是 Foo.getName 的一个实例
+var b = new Foo().getName();// new Foo() 返回的是 Foo的一个实例 3 b是undefined
+var c = new new Foo().getName();//先执行 new Foo();  new 实例.getName() 3 c实例.getName的实例
 console.log(a,b,c);
 
 

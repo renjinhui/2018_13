@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+        // this.getName = function () {
+        //     console.log(`私有属性`)
+        // }
+    }
+    Object.prototype.getName = function () {
+        console.log(this.name);
+    }
+    // getName 添加到 person类的原型上； 
+    // 那么所有的Person类的实例 都能调用到该方法
+    // Person.prototype.getName = function () {
+    //     console.log(`我的名字是${this.name}`)
+    // }
+    // Person.prototype.setName = function (name) {
+    //     this.name = name;
+    // }
+
+
+    var obj = {
+        constructor:Person,
+        getName(){
+            console.log(this.name)
+        },
+        setName(name){
+            this.name = name
+        },
+        getAge(){},
+        setAge(){}
+    }
+    Person.prototype = obj; //  批量  修改, 一般需要手动补充一个 constructor 属性
+    var p1 = new Person('小红',9);
+    p1.setName('小红22222');
+    // p1.__proto__ === Person.prototype
+    p1.getName();// 先在 p1 上查找；没有的话 去 Person的原型对象上查找
+    p1.constructor === Person //false
+    console.log(p1.constructor)//f Object
+</script>

@@ -39,6 +39,11 @@
     // obj.hasPubProperty('age')//true
     Object.prototype.hasPubProperty = function (str) {
         console.log(this,str);// this 是 前边的对象； str是要查看的属性
-        return !this.hasOwnProperty(str);
+        // 是 this 的属性 并且不是私有属性
+        // this[str] !== undefined;
+        return str in this && !this.hasOwnProperty(str);
     }
+
+
+    // in 只要对象能够调到 某个属性； 那么  该属性 in 对象 结果就是true
 </script>

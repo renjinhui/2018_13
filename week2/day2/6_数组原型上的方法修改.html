@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
+<script>
+    var oLis = document.getElementsByTagName('li');
+    Array.prototype.pop = function () {
+        console.log('my pop')
+        return 123
+    }
+    var obj = {
+        myPush(){
+            console.log('my push')
+        }
+    }
+    Array.prototype = obj;// 内置类 不支持批量修改；
+    var ary = [1,2,3];
+    var t = ary.pop();
+    console.log(t,ary);
+    
+    // ary.reverse().join('+').push(10);
+    Array.prototype.myPush = function () {
+        // this 需要时 Array的实例
+        // 把 arguments 中的项 放到 this 中即可；
+        for(let i = 0; i < arguments.length; i++){
+            this[this.length] = arguments[i];
+        }
+        // return this.length;
+        return this;
+    }
+    Array.prototype.myPop = function(){
+        // this 的最后一项删除
+        let last = this[this.length-1];
+        this.length--;
+        // return last;
+        return this;
+    }
+    // ary.push();
+    // 改造一下myPush  增加一个myPop
+    // ary.myPush(1,2,3,4).myPop().myPop();
+    // 想实现链式调用的前提是 前边运行的返回值可以让我们调用后边的方法；
+</script>
