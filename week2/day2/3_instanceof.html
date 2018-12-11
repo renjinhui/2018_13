@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var n = 12;
+    // console.log(n.constructor.toString());
+    function getType(n) {
+        // console.log(n.constructor.toString())
+        // console.log(n.constructor.toString().split(' '))
+        // console.log(n.constructor.toString().split(' ')[1])
+        return n.constructor.toString().split(' ')[1].split('()')[0].toLowerCase();
+    }
+    getType(n);// Number
+    // constructor 调用时 都是调用的 所属类原型上的 constructor
+    var ary = [];
+
+    // [] instanceof  Array   查看某数据 是否在对应的原型链上；
+
+    [] instanceof Array;// true
+    [] instanceof Object; // true
+    ({}) instanceof Array;// false
+    ({}) instanceof Object;// true
+
+
+</script>

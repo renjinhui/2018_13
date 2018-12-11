@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 查看私有属性的方法
+    // 私有属性  公有属性
+
+    var obj = {
+        name:123
+    }
+    Object.prototype.name = 'zf';// obj.__proto__ === Object.prototype
+    Object.prototype.age = 0;
+    Array.prototype.sex = 1;
+    console.log(obj.age);// 0
+    console.log(obj.sex); // undefined
+
+    obj.hasOwnProperty('name')// name 是不是 obj 的私有属性；
+    var ary = [1];
+    for(let k in ary){
+        // 只想要数组自己的
+        if(ary.hasOwnProperty(k)){
+            console.log(ary[k])
+        }
+    }
+    for(let k in obj){
+        console.log('obj:'+k)
+    }
+
+    
+    // obj.hasPubProperty('age')//true
+    Object.prototype.hasPubProperty = function (str) {
+        console.log(this,str);// this 是 前边的对象； str是要查看的属性
+        return !this.hasOwnProperty(str);
+    }
+</script>

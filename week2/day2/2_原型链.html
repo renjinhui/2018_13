@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id='btn'></button>
+</body>
+</html>
+<script>
+    /*
+        作用域链  变量的查找机制,本级作用域没有，就向上级作用域查，一直查到全局；
+                 全局没有该变量，则就报错
+        原型链    属性的查找机制(通过__proto__向上级的原型查找)，一直查到基类的原型对象上；
+                 没有的话就是  undefined
+    */
+   var ary = [1,2,3];
+   var obj = {qqq:100};
+   var str = '234';
+   Object.prototype.qqq = 13;
+   Array.prototype.www = 200;
+   console.log(ary.qqq);
+   console.log(obj.qqq);
+   console.log(str.qqq);
+   console.log(btn.qqq);
+</script>

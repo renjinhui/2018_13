@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 面向对象   面向过程
+    // 封装  继承  多态      高内聚 低耦合
+    // 单例模式  高级单例模式
+    // 工厂模式
+    // 构造函数模式
+    // 原型模式
+    // 单例模式   就是一个普通对象 {} ; obj 命名空间
+    var obj = {
+        name:'zf',
+        setName(name){
+            obj.name = name;
+            // this.name = name;
+        },
+        getName:function(){
+            return obj.name;
+        }
+    };
+    obj.setName('hahaha');
+    let fn = obj.setName;
+    fn('hello');
+
+    // 高级单例模式
+    // 能够造就一些私有的变量和方法；
+    // 会形成一个不销毁的作用域；
+    var obj2 = (function () {
+        var name = 'zf';
+        var info = {age:12,sex:0};
+        function getName() {
+            return name
+        } 
+        function setName(n) {
+            name = n
+            // obj2.name = n;
+        }
+        function setInfo(age,sex) {
+            // info.age = age;
+            // info.sex = sex;
+            var obj = {age,sex};
+            info = obj;
+        }
+        return {
+            setName,// setName:setName
+            setInfo,
+            name, // name:name
+            info
+        }
+    })();
+    console.log(obj2);
+    obj2.setName('hello');
+    obj2.setInfo(10,1);
+    console.log(obj2);
+
+
+    function fn(ary) {
+        ary.push(10);
+        ary = [];
+        ary.push(100);
+        console.log(ary);//[100]
+    }
+    var arr = [1,2,3];
+    fn(arr);
+    console.log(arr);//[1,2,3,10]
+
+    var banner = (function () {
+        var init = function () {
+            
+        };
+        var getData = function () {
+            
+        };
+        return {
+            init:init
+        }
+    })();
+    banner.init();
+
+
+    // 工厂模式
+    // 批量生产单例
+    function factory(name,age){
+        var obj = {
+            name:name,
+            age:age
+        }
+        return obj;
+    }
+    var p1 = factory('zf',9);
+    p1.height = 2200;
+    var p2 = factory('xh',10);
+    p2.hobby = 'play';
+
+    // 构造函数模式
+    //    类               实例
+    //  Array             所有的数组
+    //   人类            地球上所有的人
+    //  Object(基类)             所有的对象
+
+    // 内置类       自定义类
+
+    // 所有的类都是一个函数
+    // 所有的实例都是一个对象
+
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    // 函数的执行方式   函数名()；  new 函数名
+
+    var p1 = new Person('zf',9);
+    // p1 称为 Person 的一个实例
+
+    /*
+        每一个函数都有一个属性prototype 指向函数自己的原型对象
+        每一个实例（对象）都有一个属性 __proto__ 指向所属类的原型对象
+        每一个默认的原型对象 都有一个属性constructor 执行该类的构造函数本身；
+
+        所有的函数都是 Function的一个实例； Function 也是一个内置类；
+        Function 是 Function 自己的实例；
+        Function.__proto__ === Function.prototype
+        实例Function  的__proto__属性  是指向所属  类Function  的  原型对象
+    */
+
+    //创造数组  new Array() ; var ary = [];
+    
+</script>
