@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var obj = {name:'zf'};
+    function fn() {
+        console.log(this);
+        console.log(arguments);
+    }
+    fn.apply(obj,[1,2,3,4,5,6]);
+    // apply 的第二个参数，是一个 数组或者类数组；
+    // 传参时， 虽然是以一个整体的形式传给了fn;但 fn接收时
+    // 还是分开接收的；
+    var ary = [23,5,45,322,435,345,34,5];
+    Math.max(1,2,4,5,3,2);
+
+    Math.max.apply(Math,ary);// Math.max(23,5,45,322,435,345,34,5)
+
+    Math.max(...ary);
+
+
+    //call apply 的区别就在于 传给函数实参的形式不同
+</script>

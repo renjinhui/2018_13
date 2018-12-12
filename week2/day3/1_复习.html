@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 原型 原型链  prototype __proto__
+    // 属性的查找机制，先在obj自身查找，没有的话 去所属类的原型查找，再通过__proto__查找；
+    // 直到找到Object的原型上；
+    // obj.a;
+
+    // 内置类 可以修改内置类原型上的方法，也可添加；不可以覆盖
+    Array.prototype = {};
+
+    // 自定义类  可以修改原型上的方法；也可以直接覆盖，注意constructor；
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+        this.getAge = function () {
+            console.log(this.age)
+        }
+    }
+    Person.prototype.name = 'world';
+    Person.prototype.getName = function () {
+        console.log(this.name)
+    }
+    var res = Person();// this --> window
+
+    var p1 = new Person('zf',9);//{name:'zf',age:9} name age p1的私有属性 
+    p1.getName === Person.prototype.getName // true
+    p1.getName();//'zf'
+    Person.prototype.getName();//'world'
+    p1.getAge();
+
+    var p2 = new Person('xh',10); // p1  p2 不是一个地址
+    p2.getAge === p1.getAge;// false
+    p2.getName === p1.getName;//true
+    Person.getName = function () {
+        console.log(this.name)
+    };
+    Person.getName();
+
+    /*
+        函数的三种角色
+        一、普通函数  作用域 作用域链 变量 this(看点)
+        二、构造函数（类）  原型 原型链 属性 this(该类的实例)
+        三、普通对象  属性名 属性值
+    */
+
+
+</script>

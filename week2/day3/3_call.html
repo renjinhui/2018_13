@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // call 是用來改變this 指向的
+    var obj = {name:'zf'};
+    function fn() {
+        console.log(this);
+    }
+    var fn2 = ()=>{
+        console.log(this);
+    }
+    fn();// window
+    fn.call(obj);
+    fn2.call(obj);
+    //让 fn 执行，但是在执行之前 先把 fn 中的 this 指向改成 call 的第一个参数
+
+    function fn3(a,b,c,d) {
+        console.log(arguments)
+    }
+    fn3.call(obj,1,2,3,4,5,6,7,8);
+    // 从第二个参数开始，依次传给 前边的函数
+    // fn3 中 this 改成  obj
+    // fn3(1,2,3,4,5,6,7,8);
+
+    Object.prototype.toString.call([]);
+    obj.toString();
+</script>

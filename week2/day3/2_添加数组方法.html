@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // function Fn() {
+        
+    // }
+    // Fn.prototype.qqq = 12;
+    // var f = new Fn;
+    // Fn.prototype = {
+    //     www:1
+    // }
+    // var f2 = new Fn;
+    // f.qqq
+    // f2.qqq
+
+    function unique(arr) {
+        let obj = {};
+        // arr.sort(function(a,b){})
+        arr.forEach(function (item,index,ary) {
+            // item  是数组中的当前项
+            // index 是当前项对相应的索引
+            // ary 是循环的数组
+            obj[item] = item;
+        });
+        console.log(obj);
+        let ary = [];
+        for(let k in obj){
+            ary.push(k*1)
+        }
+        return ary;
+    }
+    var ary = [1,2,1,2,4,5,2,3,2,1];
+    function unique2(arr) {
+        let obj = {};
+        // arr.sort(function(a,b){})
+        // arr.forEach(function (item,index,ary) {
+        //     // 查看 item 是不是 obj的私有属性；  hasOwnProperty
+        //     // 是的话，证明item项是重复的 跟据 index 
+        //     // 把该项删除；
+        //     // obj.hasOwnProperty(item) 查看 item 是否是 obj 的私有属性
+        //     if(obj.hasOwnProperty(item)){
+        //         ary.splice(index,1);
+        //     }
+        //     obj[item] = item;
+        // });
+        for(let i = 0; i < arr.length; i++){
+            if(obj.hasOwnProperty(arr[i])){
+                ary.splice(i,1);
+                i--;
+            }
+            obj[arr[i]] = arr[i]
+        }
+    }
+    
+    
+    //箭头函数 (形参)=>{函数体} 
+    //箭头函数中的this 是 指向上级作用域的this
+    //箭头函数没有 arguments 
+    //箭头函数是不能通过 new 执行
+
+    let f4 = item => item+2;
+    // let f4 = (item) => {return item + 2}
+    var fn = (a,b)=>{
+        console.log(this);
+        // console.log(arguments);
+        return a + b
+    }
+    var obj = {
+        fn:fn
+    }
+    obj.fn()
+
+
+
+
+
+    var f = function(a,b){
+        return a + b;
+    }
+    
+    unique2(ary);
+    console.log(ary);
+    Array.prototype.myUnique = function () {
+        // this//是点前边
+        let obj = {};
+        for(let i = 0 ; i < this.length; i++){
+            if(obj.hasOwnProperty(this[i])){
+                // 把要删除的项跟最后一项交换位置； 然后把最后一项删除
+                this[i] = this[this.length-1];
+                this.length--;
+                // this.splice(i,1);
+                i--
+            }
+            obj[this[i]] = '';
+        }
+    }
+    // Array.prototype.myUnique = () => {
+    //     this//上级的this window
+    // }
+
+    // var ary = [1,2,1,2,4,5,2,3,2,1];
+    ary.myUnique();// 对ary 去重
+</script>

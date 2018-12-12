@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // bind 的用法 形式上跟 call 一样
+    var obj = {name:'zf'};
+    function fn() {
+        console.log(this);
+        console.log(arguments);
+    }
+    var res1 = fn.call(obj,1,2,3,4,5,6);
+    var res2 = fn.bind(obj,1,2,3,4,5,6);
+    // bind 不会让函数立即执行
+    // 他的返回值是一个 改变后的函数
+    // （改变了this，加了一些默认的实参）
+    // res2(11,11,11) 会把新的实参 补充到默认实参的后边
+    Function.prototype.myBind = myBind;
+
+
+
+    var f6 = fn.myBind(obj,1,2,3,4,5,6);
+    f6(8,9,10) // 其实是让 改变后的 fn 执行；
+    function myBind(context,...arr) {
+        // ... 剩余运算符； 把其他的实参 都放到一个叫arr（自定义的）的数组中
+        // this ---》 fn ;;
+        return (...ary) => {// ary 中放的是后进来实参
+            // this --> 上计作用域的this 也就是 fn
+            // this.apply(context,arr.concat(ary));
+            this.call(context,...arr,...ary)
+        }
+    }
+
+    function myBind2() {
+        var con  = arguments[0];
+        var ary = [];
+        for(var i = 1 ; i < arguments.length;i++){
+            ary.push(arguments[i])
+        }
+        // this ---> fn
+        var that = this;
+        return function () {
+            var arr = [];
+            for(var i = 0; i < arguments.length; i++){
+                arr.push(arguments[i]);
+            }
+            that.apply(con,ary.concat(arr));
+        }
+    }
+</script>

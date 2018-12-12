@@ -19,41 +19,44 @@ Fn.prototype = {
 };
 var f1 = new Fn;
 var f2 = new Fn;
-console.log(f1.getX === f2.getX);
-console.log(f1.getY === f2.getY);
-console.log(f1.__proto__.getY === Fn.prototype.getY);
-console.log(f1.__proto__.getX === f2.getX);
-console.log(f1.getX === Fn.prototype.getX);
-console.log(f1.constructor);
-console.log(Fn.prototype.__proto__.constructor);
-f1.getX();
-f1.__proto__.getX();
-f2.getY();
-Fn.prototype.getY();
-f1.sum();
-Fn.prototype.sum();
-
-
-
-
-
-
+console.log(f1.getX === f2.getX);// false 
+console.log(f1.getY === f2.getY);// true
+console.log(f1.__proto__.getY === Fn.prototype.getY);//true
+console.log(f1.__proto__.getX === f2.getX);// false
+console.log(f1.getX === Fn.prototype.getX);//false
+console.log(f1.constructor);// f Object
+console.log(Fn.prototype.__proto__.constructor);// f Object
+f1.getX();// 100
+f1.__proto__.getX(); // undefined
+f2.getY(); // 200
+f2.getY === Fn.prototype.getY // true;
+Fn.prototype.getY();//400
+f1.sum(); // 300
+Fn.prototype.sum();// NaN
 
 function Foo() {
-    getName = function () {console.log(1);};
+    getName = function () {
+        console.log(1);
+    };
     return this;
 }
-Foo.getName = function () {console.log(2);};
-Foo.prototype.getName = function () {console.log(3);};
-var getName = function () {console.log(4);};
+Foo.getName = function () {
+    console.log(2);
+};
+Foo.prototype.getName = function () {
+    console.log(3);
+};
+var getName = function () {
+    console.log(4);
+};
 function getName() {console.log(5);}
-Foo.getName(); //2
-getName(); //4
-Foo().getName();//window.getName() // 1
-getName();//1
-var a = new Foo.getName(); //2  a 是 Foo.getName 的一个实例
-var b = new Foo().getName();// new Foo() 返回的是 Foo的一个实例 3 b是undefined
-var c = new new Foo().getName();//先执行 new Foo();  new 实例.getName() 3 c实例.getName的实例
+Foo.getName(); 
+getName();
+Foo().getName();
+getName();
+var a = new Foo.getName();
+var b = new Foo().getName();
+var c = new new Foo().getName();
 console.log(a,b,c);
 
 
@@ -61,20 +64,19 @@ console.log(a,b,c);
 
 
 function Fn(){
-    var a =1;
-    this.a = a
+    var a = 1;
+    this.a = a;
 }
 Fn.prototype.say = function(){
-    this.a = 2
+    this.a = 2;
 };
 Fn.prototype = new Fn;
 var f1 = new Fn;
-
 f1.__proto__.b = function (){
-    this.a = 3
+    this.a = 3;
 };
-console.log(f1.a);
-console.log(f1.prototype);
+console.log(f1.a);//1
+console.log(f1.prototype);// undefined  只有函数才有prototype
 console.log(f1.b);
 console.log(f1.hasOwnProperty('b'));
 console.log('b' in f1);
