@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sum() {
+        // arguments [1, 2, 3, 4, 5]
+        // 方式一 ES6 展开运算符
+        let newArr = [...arguments]
+
+        // 方式二 for 循环
+        // let newArr = [];
+        // for (let i = 0; i < arguments.length; i++) {
+        //   newArr.push(arguments[i]);
+        // }
+
+      }
+      sum(1, 2, 3, 4, 5);
+
+      var arr1 = [100];
+      var arr2 = [200];
+
+      // 将类数组转换成数组
+      // let newArr = []
+      // for (let i = 0; i < arguments.length; i++) {
+      //   newArr.push(arguments[i])
+      // }
+      // console.log(newArr)
+
+      // console.log(arr1 instanceof Array)
+      // console.log(arr2 instanceof Array)
+      // console.log(arr1.__proto__ === Array.prototype)
+      // console.log(arr2.__proto__ === Array.prototype)
+
+      // console.log(arr1.slice === Array.prototype.slice)
+      // console.log(arr2.slice === Array.prototype.slice)
+
+
+     var ary = [1, 2, 3]
+     var ary2 = [1]
+     console.log(ary.slice(0))
+
+     // 数组原型中方法 操作的都是this 默认情况下数方法中的this都是 数组的实例
+     Array.prototype.mySlice = function(n) {
+       console.log('myslice', this)
+      //  return [...this]
+      
+      let newArr = []
+      for (let i = 0; i < this.length; i++) {
+        newArr[i] = this[i]
+        // newArr.push(this[i])
+      }
+      return newArr
+     }
+
+    //  console.log('1', ary.mySlice(0))
+    //  console.log('2', ary2.mySlice(0))
+
+
+     function arg() {
+       console.log([].slice.call(arguments, 0))
+      //  console.log([].slice.call({id: 1}, 0))
+     }
+     arg(1, 2, 3)
+    </script>
+  </body>
+</html>

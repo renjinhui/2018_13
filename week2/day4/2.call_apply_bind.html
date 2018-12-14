@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 'use strict' 
+
+    // function() {
+    //   'use strict'
+    // }
+
+    // ES6
+    // babel - 编译器
+  
+    // call bind apply
+
+    // 都是改变函数中的this
+     
+    // call apply
+    // function fe(num1, num2) {
+    //   console.log(this) // obj
+    //   console.log(num1, num2) // 10 20
+    // }
+    // var obj = {id: 1}
+    // fe.call(obj, 10, 20)
+
+    // call与apply 都是为了改变函数中this关键字 并且让函数执行
+    // 区别 apply传参时 需要把实参放到数组集合中
+    // fe.apply(obj, [1, 2])
+
+    // apply
+    // function foo() {
+
+    // }
+
+    // bind
+    // 返回一个this改造后的新函数 并不会让这个函数立即执行
+    // function fe(num1, num2, num3) {
+    //   // console.log(this)
+    //   console.log(arguments)
+    // }
+    // var o = {o: 100}
+
+    // 固化参数
+    // var fn = fe.bind(o, 100, 200)
+    // 需要的时候 再执行
+    // fn(10, 20)
+    // fn()
+
+
+    // function fe() {
+    //   console.log(typeof this)
+    //   console.log(this + 3)
+    // }
+
+    // fe.call(1)
+
+
+    function f1() {
+      console.log('f1')
+    }
+
+    function f2() {
+      console.log('f2', this)
+    }
+
+    // 最终谁执行 f2
+    // 连续调用两个或两个以上call方法 最终执行的都是 最后一个call指定的this(f2)
+    
+    // f1.call.call(f2) 
+    // f1.call.call.call(f2) // f2.call()
+    f1.call.call.call.call(f2)
+
+
+    
+    // 最先执行右边call(f2)方法
+    // f1.call => f2.call()
+    // f2.call() // 让f2执行里面this指向window
+
+   var obj = {
+     say: function() {
+       console.log('say', this)
+     }
+   }
+
+  //  obj.say()
+  //  obj.say.call(fe) 等价于 fe.say()
+  </script>
+</body>
+</html>

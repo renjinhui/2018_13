@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // call apply方法应用
+
+  var arr = [10, 19, 1, 5, 26] // 1, 5, 10 ,19, 26
+
+  // 一
+  // console.log(...arr)
+  // Math.max(...arr) // Math.max(10, 19, 1, 5, 26)
+  // Math.min(...arr)
+
+  // 二
+  // 先从小到大排序 然后第一项就是最小的 最后一项就是最大的
+  arr.sort(function(a, b) {
+    return a - b
+  })
+
+  // let min = arr[0]
+  // let max = arr[arr.length - 1]
+  // console.log(arr)
+
+  // console.time('timer')
+  // let min = arr[0]
+  // let max = arr[arr.length - 1]
+  // console.timeEnd('timer')
+
+  // 三 apply
+  // Math.max(10, 19, 1, 5, 26)
+
+  // arr = [10, 19, 1, 5, 26]
+  var max = Math.max.apply(null, arr)
+  // var max = Math.max.apply(null, [10, 19, 1, 5, 26]) 
+  var min = Math.min.apply(null, arr)
+  console.log(max)
+  console.log(min)
+
+  // function fe(num1, num2) {
+
+  
+  // }
+  // fe.apply(null, [100, 200]) // fe(100, 200)
+
+// <!-- 
+//   function fe() {
+
+//   } -->
+
+  // var arr = [1, 2]
+  // fe.apply(null, arr)
+  // fe.apply(null, [1, 2])
+
+  // 假设法
+  let min = arr[0] // [ 5, 4, 2]
+  let max = arr[0]
+  // min = 5
+  // arr[i] = 4
+  // min = 4
+  // min = 4
+  // arr[i] = 2
+  // min = 2
+  for (var i = 1; i < arr.length; i++) {
+    if (min > arr[i]) {
+      min = arr[i]
+    }
+
+    if (arr[i] > max) {
+      max = arr[i]
+    }
+
+    var cur = arr[i]
+    // 每一次比较出来最小值
+    cur < min ? min = cur : null
+
+    // 每一次比较出来最大值
+    cur > max ? max = cur : null
+    // min = min > arr[i] ? arr[i] : min
+  }
+  console.log(min, max)
+
+  // [ 5, 4, 2]
+  let min = arr[0]
+  // let max = arr[0]
+  for (var i = 1; i < arr.length; i++) {
+    var cur = arr[i]
+    cur < min ? min = cur : null
+    
+    cur > max ? max = cur : null
+  }
+  console.log(min, max)
+
+  </script>
+</body>
+</html>

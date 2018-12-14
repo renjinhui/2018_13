@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fe() {
+      console.log(this)
+    }
+    var obj = {id: 100}
+    fe.call(obj)
+    console.log(fe)
+
+    // 每一个函数都是Function这个类的实例
+    // 每一个实例对象都有一个__proto__ 对于function来说 指向是Function.prototype
+
+    console.log(fe.__proto__ === Function.prototype)
+
+    // 原型链
+    var obj = {
+      id: 100
+    }
+
+    Object.prototype.www = 'Object www'
+    obj.www = 'obj www'
+
+    console.log(obj.id)
+    console.log(obj.www)
+
+    // 通过对象名.属性名 查找一个属性时 先看自己私有属性里面有没有，如果没有
+    // 则根据__proto__ 找到所属类的原型 一直找到Object.prototype为止 
+    // 如果也没有就是undefined
+    console.log(Function instanceof Object)
+
+    // 所有的函数数据类型 都是Function 这个类的一个实例(包括Function自身)
+    console.log(Function instanceof Function) // true
+    console.log(Function.__proto__ === Function.prototype) // true
+    console.log(Function.__proto__.__proto__ === Object.prototype) // true
+
+    // 所有类都是函数数据类型的 也都是Function的实例
+    console.log(Object.__proto__ === Function.prototype)
+    console.log(Object instanceof Function)
+  </script>
+</body>
+</html>
