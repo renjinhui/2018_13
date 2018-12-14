@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 将类数组转换成数组 封装成一个方法
+    // function likeAryTo(likeAry) {
+    //   return [].slice.call(likeAry, 0)
+    // }
+
+    // let likeAry = {
+    //   0: 100,
+    //   1: 200,
+    //   2: 300,
+    //   length: 3
+    // }
+
+    // let arr = likeAryTo(likeAry)
+
+    // JS中如何来捕获异常
+    // JS代码从上到下执行 如果前面的代码报错 就会导致后面代码停止执行
+
+    // try catch
+
+    // try {
+    //   // 将有兼容性代码放到try里面
+    //   // console.log(arr)
+    //   console.log(123)
+
+    //   // catch里面代码 只有try里面报错 才会执行catch里面的
+    // } catch(e) { // e 捕获的异常信息
+    //   console.log('err', e)
+    //   console.log('end')
+    // }
+    
+    // console.log('100')
+
+    // console.log(arr)
+    try {
+      // console.log(arr)
+      // [].slice() // 第一种解决方案
+    } catch(n) {
+      // console.log(n)
+      // for 第二种解决方案
+    }
+
+    // console.log()
+
+    try {
+      
+    } catch(e) { // 如果try里面报错 才会执行 并且通过参数e可以捕获到异常
+
+    } finally{ // 不管try里面报不报错 这里都会执行
+
+    }
+
+    console.log(123123)
+
+
+    function fn(n) {
+      if (typeof n !== 'number') {
+        // throw new Error('恭喜你 报错了')
+        // throw new RangeError('韩非 太丑')
+        // throw new TypeError(' 韩飞 太帅')
+        // throw new TypeError('CreateListFromArrayLike called on non-object')
+      }
+    }
+    fn('aa')
+
+    // fn.apply(null, 123)
+
+
+    function likeAryTo(likeAry) {
+      try {
+        return [].slice.call(likeAry, 0)
+      } catch(e) {
+        let newArr = []
+        for (let i = 0; i < likeAry.length; i++) {
+          newArr[i] = likeAry[i]
+        }
+        return newArr
+      }
+    }
+
+    let likeAry = {
+      0: 100,
+      1: 200,
+      2: 300,
+      length: 3
+    }
+
+    console.log(likeAryTo(likeAry))
+
+  </script>
+</body>
+</html>

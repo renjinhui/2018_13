@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="list">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+  </ul>
+
+  <script src="./utils2.js"></script>
+  <script>
+    const list = document.getElementById('list')
+    const lists = list.getElementsByTagName('li')
+
+    // 转换成数组
+    const listAry = UtilObject.likeAryTo(lists)
+    console.log(listAry)
+
+    list.removeChild(lists[0])
+    console.log(listAry)
+
+    // console.log(lists[0])
+
+    // DOM映射
+    // 通过JS获取的元素对象 和 html页面中标签 是一一对应 一个元素对象改变了页面中也会相应的改变，
+    // 比如 修改了元素对象就会反馈到页面中
+
+    // console.log(lists)
+    
+    // list.removeChild(lists[0])
+
+    // console.log(lists)
+
+    // HTMLCollection 元素集合是 即时更新 增加或删除 都会进行自动同步 
+
+    
+  </script>
+</body>
+</html>

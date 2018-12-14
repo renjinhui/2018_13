@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [1, 2, 3, 4]
+
+    arr.slice(function() {})
+
+    // 数组方法中 主要操作的都是this，类数组恰好具备和数组有一样的特性（索引，length）
+    function sum() {
+      // slice 转换成一个真正的新数组
+      var args = [].slice.call(arguments, 0)
+      console.log(args)
+      // console.log(args, arguments)
+
+      // console.log([].sort.call(arguments))
+      // console.log([].unshift.call(arguments, 100))
+      // console.log(arguments)
+      args.sort()
+    }
+    // sum(1, 0, 4, 3)
+
+
+
+    // 实现一个数组的slice方法 mySlice
+    // 克隆 截取 正负数 小数 不合法参数 ...
+
+
+    // arr.push() // 要在里面操作的是this这个对象
+    // arr.slice(0)
+    // arr.unshift()
+
+    Array.prototype.mySlice = function(n) {
+      var newArr = []
+      for (var i = 0; i < this.length; i++) {
+        newArr.push(this[i])
+      }
+      return newArr
+    }
+
+    var fe = function(){}
+    console.log([].mySlice(fe))
+
+
+    // let likeAry = {
+    //   0: 100,
+    //   1: 200,
+    //   2: 300,
+    //   length: 3
+    // }
+    // console.log(likeAry)
+    // console.log([].slice.call(likeAry))
+
+
+
+  </script>
+</body>
+</html>
