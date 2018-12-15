@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3 id="btn">点我 点我</h3>
+    <script>
+      // // 第一步 创建一个ajax对象
+      // var xhr = new XMLHttpRequest()
+
+      // // 第二步 设置请求配置信息 请求方式 请求的服务器接口地址 同步或异步
+      // xhr.open('GET', './idata.json', true)
+
+      // // 第三步 监听ajax请求
+      // xhr.onreadystatechange = function() {
+      //   if (xhr.readyState === 4 && xhr.status === 200) {
+      //     console.log(typeof xhr.responseText)
+      //     console.log(jsonTo(xhr.responseText))
+
+      //   }
+      // }
+
+      // // 第四步 开始发送请求
+      // xhr.send()
+
+      function jsonTo(jsonStr) {
+        return "JSON" in window ? JSON.parse(jsonStr) : eval(`(${jsonStr})`);
+      }
+
+      btn.onclick = function() {
+        // 第一步 创建一个ajax对象
+        var xhr = new XMLHttpRequest();
+
+        // 第二步 设置请求配置信息 请求方式 请求的服务器接口地址 同步或异步
+        xhr.open("GET", "./idata.json", true);
+
+        // 第三步 监听ajax请求
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(typeof xhr.responseText);
+            console.log(jsonTo(xhr.responseText));
+          }
+        };
+
+        // 第四步 开始发送请求
+        xhr.send();
+      };
+    </script>
+  </body>
+</html>

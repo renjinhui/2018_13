@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    // JSON 前后端交互 一种数据格式
+
+    // JSON 对象
+    // 属性名必须是双引号 如果属性值是字符串也必须是双引号
+
+    // let obj = {
+    //   "name": "zhufeng",
+    //   "id": 1
+    // }
+
+    // // 二维数组
+    // let data = [
+    //   {
+    //     "name": "zhufeng",
+    //     "id": 1
+    //   },
+    //   {
+    //     "name": "zhufeng",
+    //     "id": 2
+    //   }
+    // ]
+
+    // JSON字符串
+    // let str = '{"name": "zhufeng","id": 1}'
+
+    // let str2 = '[{"name": "zhufeng","id": 1}, {"name": "zhufeng","id": 2}]'
+
+
+    // window 提供了一个JSON对象 两方法 parse stringify
+
+    // JSON.parse 将json字符串 转换为 json对象
+    // let jsonStr = '{"name": "zhufeng","id": 1}'
+    // console.log(jsonStr)
+    // let jsonObj = JSON.parse(jsonStr)
+    // console.log(jsonObj)
+
+    // JSON.stringify 将json对象以及普通js对象 转换成 json字符串
+    // json对象
+    // let jsonObj = {"name": "zhufeng", "id": 1}
+    // let jsonStr = JSON.stringify(jsonObj)
+    // console.log(jsonStr) // '{"name": "zhufeng", "id": 1}'
+
+    // 将普通js对象转换成 json字符串
+    // let obj = {name: 'chenhaojie', id: 2}
+    // let jsonStr2 = JSON.stringify(obj)
+    // console.log(jsonStr2) // '{"name":"chenhaojie","id":2}'
+
+
+    // window.JSON  ie6 7 没有JSON对象
+
+    // 低版本浏览器 将json字符串 转换为 json对象 eval
+    // let jsonStr = '{"name":"chenhaojie","id":2}'
+
+    // 必须要外层 加上小括号
+    // eval(`(${要转换json字符串变量})`)
+    // eval('({"name":"chenhaojie","id":2})')
+    // let jsonObj = eval(`(${jsonStr})`)
+
+    // 不加括号 报语法错误
+    // let jsonObj = eval(`${jsonStr}`)
+    // console.log(jsonObj)
+
+   // 将json字符串 转换为 json对象 加括号的原因
+   // 默认情况下 eval函数会把 花括号（{}）当作代码块语句来运行
+   // 加上小括号（）就是告诉 eval 将这个字符串当作 表达式（js对象）来解析
+    eval('({id: 1, name: "zhufeng"})')
+
+    // function fe() {
+    //  var id = 1
+    // }
+
+    // 将json字符串 转换为json对象
+    // JSON.parser  eval()
+
+    // // 将json字符串转换成json对象 兼容写法
+    // function jsonTo(jsonStr) {
+    //   // 如果window上有JSON这对象
+    //   // "JSON" in window
+    //   if (window.JSON) {
+    //     return JSON.parse(jsonStr)
+    //   }
+    //   // 如果没有window上没有JSON对象
+    //   return eval(`(${jsonStr})`)
+    // }
+    
+    // 将JSON字符串 转换为JSON对象
+    function jsonTo(jsonStr) {
+      if ("JSON" in window) {
+        return JSON.parse(jsonStr)
+      }
+      return eval(`(${jsonStr})`)
+    }
+
+    let jsonStr = '{"name":"chenhaojie","id":2}'
+    console.log(jsonTo(jsonStr))
+
+    // var obj = {}
+    // console.log(obj.title)
+
+
+    // JSON 是前后端交互的一种数据格式
+    // JSON数据格式的两种写法 
+    // json对象 属性名 以及 属性值 必须 用 双引号""包起来，如果属性值是数字 不用加引号
+    let obj1 = {"name": "zhufeng", "id": 100}
+
+    // json字符串
+    let str = '{"name": "zhufeng", "id": 100}'
+
+
+    // window.JSON  
+    // parse 将json字符串转换为 json对象
+
+    let jsonStr1 = '{"name": "zhufeng", "id": 100}'
+    JSON.parse(jsonStr1)
+
+    // 报错
+    var str2 = '{name: "zhufeng", id: 100}'
+    // console.log(JSON.parse(str2))
+
+    // JSON.stringify(str2)
+    // JSON.parse(JSON.stringify(str2))
+    // JSON.parse(JSON.parse(JSON.stringify(str2)))
+
+    // stringify
+
+
+    // 将json字符串转换为json对象的兼容写法
+
+    function jsonTo(jsonStr) {
+      // if (window.JSON) {
+      //   return JSON.parse(jsonStr)
+      // }
+      // return eval(`(${jsonStr})`)
+
+      // 三元运算
+      // 如果window上有JSON这个属性 就执行 JSON.parse 如果没有就 执行eval 
+      // 并通过 return 将执行后结果 给return出去
+      return "JSON" in window ? JSON.parse(jsonStr) : eval(`(${jsonStr})`)
+
+      // return JSON.parse(jsonStr)
+      // return eval(`(${jsonStr})`)
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="oUl">
+
+  </ul>
+
+  <script>
+  
+    //  var arr = [11, 22 ,33 ,44 ,55]
+     
+     // 数据绑定 字符串拼接 DOM动态添加
+     
+
+     // 字符串拼接
+    //  let str = ''
+    //  for (let i = 0; i < arr.length; i++) {
+    //     str += `<li>${arr[i]}</li>`
+    //  }
+     
+    //  // html字符串
+    //  // '<li>11</li><li>22</li><li>33</li><li>44</li><li>55</li>'
+    //  console.log(str)
+
+    //  var oUl = document.getElementById('oUl')
+    //  // 只会引发一次回流
+    //  oUl.innerHTML = str
+
+    // DOM方法 动态添加  appendChild
+
+    var arr = [11, 22 ,33 ,44 ,55]
+
+    var oUl = document.getElementById('oUl')
+
+    // 创建一个文档碎片
+    var frg = document.createDocumentFragment()
+
+    for (let i = 0; i < arr.length; i++) {
+      // 动态创建li元素
+      let oLi = document.createElement('li')
+      // 将每次的内容 赋值给li元素
+      oLi.innerHTML = arr[i]
+
+      oLi.onclick = function() {
+        console.log('hello')
+      }
+      
+      // 最后将每次创建li元素 添加到页面ul中
+      // 引发多次回流
+      // oUl.appendChild(oLi)
+
+      // 先暂存到文档碎片中 并没有直接添加到页面中
+      frg.appendChild(oLi)
+    }
+
+    console.log(frg)
+    
+    // 将文档片段 中 li元素 一次性 动态添加到 页面ul元素中 减少回流次数了
+    oUl.appendChild(frg)
+    // 将文档片段 用完后 内存释放
+    frg = null
+
+    // DOM回流 reflow
+    // 页面中DOM元素 发生改变时（添加 删除 移动 大小），html解析器就 重新计算html结构，
+    // 最终 重新绘制到页面中
+    
+    // DOM 重绘 repaint html页面中元素 （样式 字体颜色 背景颜色 边框颜色） 
+    // 改变就会引发重绘
+
+    // DOM回流 一定也会引发重绘
+    // 重绘不一定 引发回流
+
+    // 性能优化其中一个点：尽量避免 操作DOM
+  </script>
+</body>
+</html>

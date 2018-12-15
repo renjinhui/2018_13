@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <H3></H3>
+  <script>
+    // ajax (Async JavaScript And XML)
+
+    // ajax 网页交互的一种技术 
+    // 在不需要整个页面刷新的情况 进行页面内容 局部更新
+
+    // ajax  XMLHttpRequest
+
+    // 怎么用呢 ajax对象
+    var xhr = new XMLHttpRequest()
+    
+    // 用来设置请求信息
+    // 第一个参数请求方式 'GET' 'POST' 'DELETE' 'PUT' 'DELETE'等
+    // GET 通常是用来获取资源
+    // 第二个参数 要请求的服务器地址（接口地址）
+    // 第三个参数 默认值true  true 异步 false同步
+    xhr.open('GET', '请求的服务器地址', true)
+
+    
+    // 第三个参数
+
+    // 后面代码
+    // 发送请求 服务器要有一个响应的时间
+    // 再客户端发送请求时 等待 服务器响应时
+
+
+    // 如果是同步请求 false
+    // 就要让后面代码 等 服务端将数据成功返回给浏览器 后再继续往下执行
+
+    // 异步请求 true  
+    // 发送请求时 再等待服务器响应时 后面的代码 照常执行
+
+    // 监听请求状态  ajax状态改变时 就会触发这个函数
+    // 绑定了ajax请求监听事件
+    xhr.onreadystatechange = function() {
+      // xhr.readyState ajax状态 如果状态为4 代表请求完成
+      // 0 1 2 3 4
+      // xhr.status  http网络状态码 200-201 ok
+
+      // 请求成功了 得到了服务器返回的数据
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        // 成功请求回来的数据
+        console.log(xhr.responseText)
+      }
+    }
+
+    // 开始发送请求
+    xhr.send()
+
+
+
+
+    console.log(123123)
+  </script>
+</body>
+</html>

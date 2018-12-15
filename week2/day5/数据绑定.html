@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <h3>hello page</h3>
+  <ul id="oUl">
+    <!-- <li>id: 1 name: 周杰伦</li> -->
+  </ul>
+  <script>
+    const list = document.getElementsByTagName('li')
+
+    // // 二维数组
+    // let data = [
+    //   {id: 1, name: '周杰伦'},
+    //   {id: 2, name: '林俊杰'},
+    // ]
+
+    // let arr = [1, 2] // 一维数组
+
+    
+    // 字符串拼接 
+    // <li>id: 1 name: 周杰伦</li>
+
+    // let str = ''
+    // for(let i = 0; i < data.length; i++) {
+    //   let curData = data[i]
+    //   // {id: 1, name: "周杰伦"}
+    //   // 累加每一次拼接好的字符串
+    //   str += `<li>id: ${curData.id} name: ${curData.name}</li>`
+    // }
+    // console.log(str)
+
+    // const oUl = document.getElementById('oUl')
+    
+    // console.log('40 before', list)
+    // 将拼接好的字符串 输出到页面
+    // 一次性将拼接好的内容 输出到页面中 只会引发一次回流
+    // oUl.innerHTML = str
+
+    // // 当输出后 元素集合 list 就会发生自动更新
+    // console.log('43 after', list)
+
+    // for (let i = 0; i < list.length; i++) {
+    //   let cur = list[i]
+    //   cur._ind = i
+    //   cur.onclick = function() {
+    //     alert(this._ind)
+    //   }
+    // }
+
+
+    // DOM方法
+
+    const oUl = document.getElementById('oUl')
+
+    // // 创建一个元素
+    // let oLi = document.createElement('li')
+    // oLi.innerText = 'hello liwenli'
+
+    // // 将创建的元素添加到页面中
+    // oUl.appendChild(oLi)
+
+    // 二维数组
+    let data = [
+      {id: 1, name: '周杰伦'},
+      {id: 2, name: '林俊杰'},
+      {id: 2, name: '林俊杰'},
+      {id: 2, name: '林俊杰'},
+      {id: 2, name: '林俊杰'}
+    ]
+
+
+    // 创建文档碎片（DOM临时容器）
+    let frg = document.createDocumentFragment()
+    for (let i = 0; i < data.length; i++) {
+      let curData = data[i]
+      // 动态创建li元素
+      let oLi = document.createElement('li')
+      // 将拼接好的内容 赋值给 元素自身 innerText属性（代表元素自身内容）
+      oLi.innerText = `id: ${curData.id} name: ${curData.name}`
+
+      // appendChild只能用来添加一个DOM节点
+      // 将创建的li节点 添加到指定容器ul中
+      // oUl.appendChild(oLi)
+      
+
+      // 将创建的节点 想添加到 frg文档碎片中
+      frg.appendChild(oLi)
+    }
+    console.log('before', frg)
+    // 最后将我们frg文档碎片中的元素 一次性 添加到页面容器ul中
+    oUl.appendChild(frg)
+    frg = null
+
+    console.log('after', frg)
+      // innerHTML支持字符串
+      // oUl.innerHTML = oLi
+
+
+    // 操作DOM 很昂贵的 尽量避免操作DOM
+    // DOM 回流 reflow  操作页面中元素 （增加 删除 改变大小 位置发生改变）
+    // html解析器 就会整体重新计算一下 html结构 进行重新绘制 
+
+    // appendChild 会引发多次回流
+    // innerHTML 将拼接好的一次性 输出到页面中的 只会引发一次回流
+
+  </script>
+</body>
+</html>
