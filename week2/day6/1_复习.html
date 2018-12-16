@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class='aaa'>
+        <button id='sortBtn'>排序</button>
+        <ul class="btn">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+    let sortBtn = document.getElementById('sortBtn');
+    let btn = document.getElementsByClassName('btn')[0];
+    let oLis = btn.getElementsByTagName('li');// 获取btn 里边的 li
+    let oLis2 = document.querySelectorAll('li'); 
+    // ByClassName  ByTagName  上下文 都可以是其他元素；不一定非得是 document
+    // let li = document.createElement('li');
+    // btn.appendChild(li);
+    // console.log(oLis[0] === oLis2[0]);
+    // JS 中获取的变量（getElement）； 当DOM结构发生改变时；对应的JS变量会跟着改变； 
+
+    // 点击按钮 实现升降排序
+    // 先获取所有的li  然后在一个数组中把这个集合排序；
+    // 排好序之后 再把每一个li append到btn中；
+    let ary = utils.toAry(oLis);// 把oLis转成数组
+    // ary.sort(function(a,b){ // 把数组 以每一项的innerHTML 为根据 排序
+    //     return b.innerHTML - a.innerHTML;
+    // })
+    // 下一步  把数组中的每一项  append 到 btn 中即可;
+    // ary.forEach((item,index,arr)=>{
+    //     // item 数组中的每一项
+    //     // index 数组当前项对应的索引
+    //     // arr 传进来的数组（原数组）；
+    // });
+    // ary.forEach((item)=>{
+    //     btn.appendChild(item);
+    // });
+    let flag = 1;// 1 代表当前是升序；  2 代表当前是降序
+    sortBtn.onclick = function () {
+        if(flag == 1){
+            ary.sort(function(a,b){ // 把数组 以每一项的innerHTML 为根据 排序
+                return b.innerHTML - a.innerHTML;
+            });
+            flag = 2;
+        }else{
+            ary.sort(function(a,b){
+                return a.innerHTML - b.innerHTML;
+            })
+            flag = 1;
+        }
+        ary.forEach((item)=>{
+            btn.appendChild(item);
+        });
+    }
+</script>
