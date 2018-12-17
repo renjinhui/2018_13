@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 原型链  属性的查找机制 
+    var obj = {
+        name:'eee'
+    }
+    obj.age = 13;
+    // console.log(qqq);
+
+    // 函数的三种角色 
+    // 普通函数 变量 作用域
+    // 构造函数 原型
+    // 普通对象
+    // Array
+
+    // new 执行 
+    //（在代码执行之前， 多了一步 开辟堆内存，把this指到这个堆内存，默认return this）
+    // 普通函数执行  
+
+    var Person = function () {
+        this.name = 'zf';
+    }
+    Person.prototype.getName = function () {
+        
+    }
+    var p1 = new Person();
+    // name 是 p1 的私有属性；
+    // name  in  p1 : p1 是否能够调用到 name 属性；不管name是私有还是公有
+    // p1.hasOwnProperty(name)  ： 查看私有属性
+
+    //JSON 数据格式 
+    var obj = {"name":"hello"}
+    // JSON.parse()// 把JSON字符串 转成JSON对象 eval(`${}`)
+    // JSON.stringify();// 
+
+    // 类数组 list : [].slice.call(list);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','./data.json',false);
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+        }
+    }
+    xhr.send('aa=12');
+</script>

@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.btn_box{
+    width: 1200px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 20px auto;
+}
+.content_box{
+    width: 1200px;
+    /* border: 1px solid #ccc; */
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: auto
+}
+.content_box ul{
+    overflow: hidden;
+}
+.content_box ul li{
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 360px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+.content_box ul li:nth-child(5n){
+    margin-right: 0;
+}
+.img_box{
+    width: 100%;
+    padding-top:20px;
+}
+.img_box img{
+    width: 100%;
+    margin: auto
+}
+.desc,.price{
+    text-align: center;
+    padding: 5px;
+}
+.bot_box{
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.bot_box div{
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.buyBtn{
+    border-right:1px solid #ccc;
+}

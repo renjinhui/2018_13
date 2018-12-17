@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    //正则  处理字符串的一种规则； 都是用来处理字符串的；
+    // 正则的语法：字面量方式   构造函数的方式
+    var ary = [];
+    var arr = new Array();
+
+    // 字面量
+    var reg = /w/;
+
+    // 构造函数
+    var reg2 = new RegExp('w');
+
+    console.log(reg === reg2); // false; 正则是引用数据类型；
+
+    // 元字符： 我们把 两个斜杠之间的内容称为元字符
+    // 特殊的元字符
+    // \  ：转义字符  把有 特殊含义的字符 转成 字符本身
+    // .  ：代表所有字符（除了换行）
+    // \d ：代表 0-9的数字
+    // \D ：除了 0-9之外的所有字符；
+    // \w ：代表 数字 字母 下划线
+    // \W ：跟\w范围相反
+    // ^  ：表示 以什么开头
+    // $  ：表示 以什么结尾
+
+    var str = '12erwrwr2342424';
+    str.replace(/\w/g,'');
+</script>
