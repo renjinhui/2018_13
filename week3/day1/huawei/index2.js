@@ -1,4 +1,5 @@
 var ulBox = document.getElementById('list_box');
+var oLis = ulBox.getElementsByTagName('li');
 var btns = document.getElementsByTagName('button');
 
 // 第一步 先获取数据
@@ -22,7 +23,7 @@ function giveHtml(data) {
     data = data || [];
     var str = ''; //用来存储拼接好的 li 字符串；
     data.forEach((item, index, ary) => {
-        str += `<li>
+        str += `<li time='${item.time}' price='${item.price}' hot='${item.hot}'>
                     <div class="img_box">
                         <img src="${item.picImg}" alt="">
                     </div>
@@ -41,47 +42,39 @@ giveHtml(data); // data 实参；
 
 
 // 实现排序
-// 操作数据  把数据排好序  然后重新渲染数据；
-// var ary = ['time','price','hot'];
-var ary = [{
-    key: 'time',
-    flag: 1
-}, {
-    key: 'price',
-    flag: 1
-}, {
-    key: 'hot',
-    flag: 1
-}];
-// 1 代表升序 2 代表降序
-for (let i = 0; i < btns.length; i++) {
-    btns[i].flag2 = 1;
+// 直接操作DOM； 获取到DOM列表之后； 把这个列表先排序
+// 利用 文档碎片 把append的操作放到文档碎片中；
+// 最后 把文档碎片 append到咱们的 ulBox 中；
+
+// console.log(oLis)
+var flag = 1;// 1  -1 
+function mySort(type) {
+    console.log(type);
+    var ary = [].slice.call(oLis,0);
+    ary.sort((a,b)=>{
+        // a
+        // li 元素
+        // a.getAttribute('price')
+        return (a.getAttribute(type).replace(/-/g,'') - b.getAttribute(type).replace(/-/g,''))*flag;
+    });
+    // ary 中存储是 排好序的 每一个 li 
+    var frag = document.createDocumentFragment();// 创造一个文档碎片
+    ary.forEach((item)=>{
+        frag.appendChild(item);
+    })
+    ulBox.appendChild(frag);
+    frag = null;
+    flag*=-1;
+}
+var ary = ['time','price','hot'];
+for(let i = 0; i < btns.length; i++){
     btns[i].onclick = function () {
-        // 点击每一个按钮
-        // 若点击的是 上架时间  data按照时间排序 time '2018-01-23' - '2018-10-23' 
-        // data.sort((a,b)=>{
-        //     return a.time.replace(/-/g,'') - b.time.replace(/-/g,'')
-        // })
-        for(let i = 0; i < btns.length; i++){
-            if(this !== btns[i]){
-                ary[i].flag = 1;
+        for(let i=0;i<btns.length;i++){
+            let cur = btns[i] ;
+            if(this != cur){
+                
             }
         }
-        if (ary[i].flag === 1) {
-            data.sort((a, b) => { // b 小对象 b[ary[i].key] b['price']
-                return b[ary[i].key].toString().replace(/-/g, '') - a[ary[i].key].toString().replace(/-/g, '');
-            })
-            ary[i].flag = 2;
-        } else {
-            data.sort((a, b) => { // b 小对象 b[ary[i].key] b['price']
-                return a[ary[i].key].toString().replace(/-/g, '') - b[ary[i].key].toString().replace(/-/g, '');
-            })
-            ary[i].flag = 1;
-        }
-        // data.sort((a,b)=>{
-        //     return a[ary[i]].toString().replace(/-/g,'') - b[ary[i]].toString().replace(/-/g,'') //
-        // })//把原始数据排好序
-        // debugger;
-        giveHtml(data);
+        mySort(ary[i])
     }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var str = 'zhufeng2018peixun2019';
+    console.log(str.replace(/\d+/g,','))
+    var str2 = str.replace(/\d+/g,function(cur){
+        console.log(arguments);
+        return cur+'==='
+    })
+    var str3 = str.replace(/(\d+)/g,function(cur){
+        console.log(arguments);
+        // 从第二项开始 也是捕获的小正则匹配的内容
+        // 跟exec很像
+        return cur+'==='
+    })
+    console.log(str3);
+
+    var str = 'zf2018px2019';
+    var str4 = str.replace(/(([a-z]+)(\d+))/g,'$2$1');
+    // $1 $2 ... $99 ;分别代表捕获到的小分组
+    console.log(str4);
+</script>

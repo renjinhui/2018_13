@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 懒惰
+    var reg = /\d+/g;
+    var str = 'zhufeng2018zhufeng2019';
+    reg.exec(str)
+    reg.exec(str);// reg.lastIndex
+
+
+    var ary = [];
+    str.replace(reg,function (cur) {
+        ary.push(cur);
+    })
+    console.log(ary,str);
+
+
+    // 正则捕获的贪婪性
+    var reg = /d(\w+)d/;
+    var reg2 = /d(\w+?)d/;
+    var str = 'dffffdffdfd';
+    console.log(reg.exec(str));
+    console.log(reg2.exec(str));
+
+    var reg = /\d+?/
+    reg.exec('2018')
+
+
+
+</script>

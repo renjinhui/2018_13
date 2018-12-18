@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    //捕获  exec
+    var reg = /\d/g;
+    //加上 g 之后； 每一次的exec或test 都会改变 lastIndex 这个属性
+    //lastIndex 规定了每一次开始查找的起始索引；
+    //不加g  每一的lastIndex 都是0；
+    reg.test('q2234f');
+    // reg = /\d*/g;
+    // console.log(reg.exec('zhufeng2018'));
+
+    var reg = /([a-z])+(\d)+/;
+    var reg2 = /\d+/;
+    var reg3 = /([a-z]+)(\d+)/
+    console.log(reg.exec('zhufeng2018')) 
+    // 小括号在捕获时；起到分组的作用；返回的结果 第一项是大正则的内容；
+    // 第二项开始 若有小正则；则就是各个小正则捕获的内容
+    console.log(reg2.exec('zhufeng2018'));
+    console.log(reg3.exec('珠峰zhufeng2018珠峰'));
+
+
+    var reg = /\d+/;
+    var str = '珠峰2018培训2019';
+    //reg.execAll(str)  --->  ['2018','2019'];
+    RegExp.prototype.execAll = function (str) {
+        //this -- reg
+        // 先看是否有 g ; 有g 获取多次（次数不一定）
+        // 没有g  直接返回 默认返回的值；//返回的内容添加一个属性； 说没有g
+        // if(!this.global){
+        //     var ary = [this.exec(str)[0]];
+        //     ary[1] = '没有全局修饰符';
+        //     // throw new Error('dfdfgdgfdgd');
+        //     return ary;
+        // }
+        var reg = this;
+        if(!reg.global){
+            let str = reg.toString() + 'g';
+            reg = eval(str);
+        }
+        var res = reg.exec(str);
+        var ary = [];// 存储每次捕获到的内容
+        while (res) {
+            ary.push(res[0]);// 若能捕获到内容，就把捕获到的第一项放到数组里
+            res = reg.exec(str); // 接着向后捕获
+        }
+        return  ary;
+    }
+    var reg = /\d+/;
+    var str = '珠峰2018培训2019';
+
+    console.log(reg.execAll(str))
+
+    
+
+</script>

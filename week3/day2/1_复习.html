@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 商城排序 思路
+    // 操作数据 先获取数据； 然后把数据渲染到页面上；
+    //         先把原始数据按照执行要求排序；然后再把排好序的数据渲染到页面上
+
+    // 操作DOM  先获取数据；然后渲染到页面上，把对应的数据写成了元素的行内属性；
+    //          获取所有的LI；把获取到的类数组 转成数组；然后再去按照元素的行内属性的值进行排序；
+    //          排好序之后；把数组中的每一项都append到一个文档碎片中；最后再把这个文档碎片append到ul中；
+
+
+    // 正则 
+    var reg =  /\d/;
+
+    var str = 'abc'
+    var reg2 = new RegExp(str);// /abc/ 
+
+    var reg = /q/;
+    reg.test('QQQ');
+
+    // img
+
+    // 有效数；
+    // 有可能有 -+
+    // 整数部分 单位 【0-9】； 多位 首位不能是0
+    // 小数部分 可有可无；
+    var reg = /^18|19$/;// 18开头  或  19结尾
+    var reg = /^(18|19)$/;// 18 或 19
+
+    var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?$/; //  wewrwr12.23wrwrwr
+
+    //10-29 验证一个人年龄是否在这个年龄段
+
+    var reg = /^[12]\d$/;
+
+
+    // 18-65 验证一个人年龄是否在这个年龄段 
+    //18 19
+    //20-59
+    //60-65
+    var reg = /^(18|19|[2-5]\d|6[0-5])$/;
+    var reg = /^(1[89]|[2-5]\d|6[0-5])$/;
+    var reg = /(^1[89]$)|(^[2-5]\d$)|(^6[0-5]$)/;
+
+
+
+</script>

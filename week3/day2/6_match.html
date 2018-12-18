@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var str = 'zhufeng2018zf2019';
+    var reg = /\d+/g;
+    var reg2 = /\d+/;
+    var reg3 = /20(\d+)/g;
+    console.log(str.match(reg));
+    console.log(str.match(reg2));
+    console.log(str.match(reg3));
+    str.replace(reg3,function(big,lit){
+        console.log(big,lit)
+    })
+
+    // match 正则不加g  则返回结果跟exec一样
+    // 加上 g  把字符串中所有满足正则的字符都捕获到; 只会捕获大正则
+
+    var reg = /(\d)\1{2}/;//  \1代表第一个小分组重复出现；
+    reg.test('wwerwr333sdsda1111sdad');
+
+
+
+    var str = 'raetredfaaertaerfdfadfgdsgsrt';
+    // 求出字符串中出现次数最多的字符
+    // 1、利用对象
+    // 2、正则
+    var str2 = str.split('').sort().join('');//"aaaaaddddeeeeffffggrrrrrssttt"
+    var reg = /(\w)\1*/g;
+    var ary = str2.match(reg);
+
+    var max = 0;
+    var s = '';
+    str2.replace(reg,function(cur,lit){
+        // cur aaaaa
+        // lit a
+        console.log(cur,lit)
+        // max > cur.length ? null : (max = cur.length,s=lit);
+        if(max<cur.length){
+            max = cur.length;
+            s = lit;
+        }
+    })
+    console.log(max,s)
+</script>
