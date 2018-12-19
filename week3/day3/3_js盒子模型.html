@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .inner{
+            margin: 40px auto;
+            width: 200px;
+            height: 200px;
+            border: 20px solid rgb(96, 49, 224);
+            padding: 30px;
+            border-left-width: 100px;
+            /* box-sizing: border-box; */
+            overflow: auto;
+        }
+        .outer{
+            width: 500px;
+            padding: 40px;
+            background: #ccc;
+            margin: auto;
+            position: relative;
+            box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class='inner'>
+            同学，祝贺你喜提彩蛋~
+            或许你们还在犹豫是否加入，我会坦诚的告诉你我们超酷；
+            在这里大家都用无人车代步，AI音箱不仅播放还可以交互；
+            人工智能是发展的核心技术，做自己让未来不只领先几步；
+            在这里做自己，欢迎来到百度!
+            同学，祝贺你喜提彩蛋~
+            或许你们还在犹豫是否加入，我会坦诚的告诉你我们超酷；
+            在这里大家都用无人车代步，AI音箱不仅播放还可以交互；
+            人工智能是发展的核心技术，做自己让未来不只领先几步；
+            在这里做自己，欢迎来到百度!
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <td id='td'></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    //css 盒子模型； width  height  boder  padding  margin
+    //JS  盒子模型； client  offset  scroll
+    var inner = document.getElementsByClassName('inner')[0];
+
+
+    // client ： 盒子可视区域
+    // clientWidth clientHeight clientLeft clientTop
+    console.log(inner.clientWidth);
+    console.log(inner.clientLeft);
+    // clientWidth: 盒子的宽度 加  左右padding
+    // clientLeft : 左border的宽度
+    // 内容溢出，对于client 没有任何影响
+
+    //offset
+    //offsetWidth  offsetHeight  offsetLeft offsetTop
+    //offsetParent 上级参照物 有定位的父级盒子  td的offsetParent是table
+    console.log(inner.offsetWidth);
+    console.log(inner.offsetLeft);
+    //offsetWidth  盒子宽 + 左右padding + 左右border : clientWidth+左右border;
+    //offsetLeft 盒子的  外边框 到 上级参照物  内边框  的距离；
+    // 跟内容溢出；没任何关系
+
+
+    //scroll
+    //scrollWidth scrollHeight scrollTop scrollLeft
+    // 跟内容溢出，有关系; 内容溢出时；
+    // 有overflow 属性，scrollHeight 内容  +  上下padding
+    // 没有时， 内容 + 上padding；
+
+    // 内容没有溢出时 ； 跟client 一样
+
+    // scrollTop 滚动条卷去的内容的高度；
+    console.log(inner.scrollHeight);
+
+    // 以上 13个属性中  只有 scrollTop 和 scrollLeft 是可以设置的属性；其他都是只读属性
+
+
+    //获取屏幕的高度
+    document.documentElement.clientHeight || document.body.clientHeight
+    
+    //获取整个文档的高度
+    document.documentElement.scrollHeight || document.body.scrollHeight;
+
+    // window.onresize = function 监听可视窗口发生改变的事件；
+</script>

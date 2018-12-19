@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='ul'>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+</html>
+<script>
+    // 1 3 8 9  nodeType
+
+    //getElementById 元素
+    //getElementsByClassName 集合  DOM映射
+    //getElementsByTagName 集合    DOM映射
+
+    //querySelector(css选择器) 元素 
+    //querySelectorAll() 集合  不存在DOM映射
+    var oLis = ul.getElementsByTagName('li');
+    var oLis2 = document.querySelectorAll('li');
+    var ary = [].slice.call(oLis);
+    var li = document.createElement('li');// 创造元素
+    li.innerHTML = 'hello';// 设置元素内容
+    ul.appendChild(li);// 把元素放到ul最后
+    console.log(oLis,oLis2,ary);
+    oLis2[2].innerHTML = 123;
+
+    // ul.insertBefore(new,old);
+
+    // 文档碎片
+    var frag = document.createDocumentFragment();
+
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer{
+            width: 400px;
+            height: 400px;
+            background: #ccc;
+            /* position: relative; */
+            margin: 40px auto;
+            border:20px solid rgb(223, 50, 50);
+        }
+        .inner{
+            width: 200px;
+            height: 200px;
+            border: 20px solid rgb(233, 236, 29);
+            padding:30px; 
+            margin:20px auto;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner" id='inner'></div>
+    </div>
+</body>
+</html>
+<script>
+    function offset(ele) {
+        // 先求出 ele 的 offsetParent 
+        // 查看是不是body  不是body
+        // ele.offsetLeft + parent.clientLeft
+        var left = ele.offsetLeft,top = ele.offsetTop;
+        var parent = ele.offsetParent;// parent 是 ele 的父级参照物
+        while (parent&&parent.nodeName.toUpperCase()!='BODY') {
+            //         parent != document.body
+            left += parent.clientLeft + parent.offsetLeft;
+            // 再 left 的基础上  加   父级参照物的边框 和 父级参照物的offsetLft
+            top  += parent.clientTop + parent.offsetTop;
+            parent = parent.offsetParent;
+        }
+        return{
+            left:left,top:top //简写 left,top
+        }
+    }
+    console.log(offset(inner));//{left:100,top:100}  指的是 inner盒子到body内边框的距离
+</script>

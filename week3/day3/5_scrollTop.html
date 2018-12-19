@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 100px;
+            border: 10px solid rgb(36, 123, 223);
+            margin: 40px auto;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id='box'>
+        同学，祝贺你喜提彩蛋~
+        或许你们还在犹豫是否加入，我会坦诚的告诉你我们超酷；
+        在这里大家都用无人车代步，AI音箱不仅播放还可以交互；
+        人工智能是发展的核心技术，做自己让未来不只领先几步；
+        在这里做自己，欢迎来到百度!
+        同学，祝贺你喜提彩蛋~
+        或许你们还在犹豫是否加入，我会坦诚的告诉你我们超酷；
+        在这里大家都用无人车代步，AI音箱不仅播放还可以交互；
+        人工智能是发展的核心技术，做自己让未来不只领先几步；
+        在这里做自己，欢迎来到百度!
+    </div>
+</body>
+</html>
+<script>
+    //盒子的最大卷去高度  ： 盒子的scrollHeight - 盒子的clientHeight
+    var maxH = Math.floor(box.scrollHeight - box.clientHeight);
+    // var timer = setInterval(()=>{
+    //     box.scrollTop++;
+    //     // 达到最大值时 重新赋值成0；
+    //     // console.log(box.scrollTop,maxH)
+    //     if(Math.ceil(box.scrollTop) >= maxH){
+    //         box.scrollTop = 0;
+    //     }
+    // },20)
+
+    // 使用setTimeout 实现
+    var timer = null;
+    function fn() {
+        clearTimeout(timer);
+        box.scrollTop++;
+        if(Math.ceil(box.scrollTop) >= maxH){
+            box.scrollTop = 0;
+        }
+        timer = setTimeout(fn,20);
+    }
+    fn();
+
+</script>

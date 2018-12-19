@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="btn">
+        <span id='的法国三国时代' time = 'gsdgfsdg
+        sgsdfgsg'>hello</span>
+        <span>world</span>
+    </div>
+</body>
+</html>
+<script>
+    var str = '2018-12-19 18:34:45';
+    var template = '今天是{1}年{2}月{3}日 {4}时{5}分{6}秒';
+    // str.formate(template);
+    String.prototype.formate = function (template) {
+        var reg = /\d+/g;//
+        // var ary = this.match(reg);//['2018',...,'45'];
+        // var ary = [];
+        // this.replace(reg,function(cur){
+        //     ary.push(cur)
+        // });
+
+        var ary = this.split(/[ :-]/);
+        // 替换template中的 {}
+        //   /\{\d\}/  把{}转译成 大括号本身；而不是他在正则里特殊的含义 
+        var str2 = template.replace(/\{(\d)\}/g,function (cur,lit) {// cur {1}; lit 1
+            // return 的值 都是把大正则捕获到的内容替换掉
+            // console.log(11)
+            return ary[lit-1]
+        })
+        return str2;// 把替换好的字符串 return 出来；
+    }
+    console.log(str.formate(template));
+
+    var btn = document.getElementsByClassName('btn')[0];
+    var str = btn.innerHTML;
+    console.log(str);
+    var reg = /<.+?>/g;
+    var reg2 = /<[^<>]+>/g;
+    var s = str.replace(reg,'');
+    var s2 = str.replace(reg2,'');
+    console.log(s,s2);
+</script>
