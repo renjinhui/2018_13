@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    #box {
+      width: 200px;
+      height: 200px;
+      background: red;
+      border: 15px solid blue;
+      margin: 100px auto;
+      padding: 10px;
+    }
+
+    #container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border: 10px solid black;
+      margin: 50px auto;
+    }
+
+    #box {
+      /* position: fixed; */
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="box"></div>
+  </div>
+  <script>
+    // JS盒模型属性
+
+    // client
+    // clientWidth clientHeight 
+    // clientWidth 内容宽度 + 左右padding
+    // clientHeight 内容高度 + 上下padding
+    // 获取浏览器可视区域宽高（一屏幕的宽高）
+    const winW = document.documentElement.clientWidth || document.body.clientWidth
+    const winH = document.documentElement.clientHeight || document.body.clientHeight
+    
+    // clientLeft clientTop
+    // clientLeft 左边框
+    // clientTop 上边框
+    // console.log(box.clientLeft)
+
+    // offset
+    // offsetWidth offsetHeight
+    // offsetWidth clientWidth + 左右边框border
+    // offsetHeight clientHeight + 上下边框border
+    // 通常获取一个元素整体的宽高 用offsetWidth offsetHeight
+
+    // offsetLeft offsetTop offsetParent
+    // 通常浏览器中 元素的父级参照物(定位参照物)指的是body (某些指的是HTML)
+    // offsetLeft 元素的左边框外边到offsetParent的左边距离
+    // offsetTop 元素的上边框外边到offsetParent的上边距离
+
+    // 页面中元素距离body的偏移值
+
+    function offset(ele) {
+      // 先获取它的偏移值
+      let left = ele.offsetLeft
+      let top = ele.offsetTop
+      let parent = ele.offsetParent
+      // 只要找到的offsetParent不是body 就继续递归往上一层一层找
+      while(parent && parent.tagName.toLowerCase() !== 'body') {
+        // while里面执行 就说明此时的父级参照物不是body
+        // 将父级参照物的左偏移和上偏移 以及边框进行累加
+        left += parent.offsetLeft + parent.clientLeft
+        top += parent.offsetTop + parent.clientTop
+        parent = parent.offsetParent
+      }
+
+      return {
+        left,
+        top
+      }
+    }
+    offset(box)
+
+    // scrollWidth scrollHeight scrollLeft scrollTop
+    // scrollWidth  左边内容（溢出内容）+ 左边padding
+    // scrollHeight 上边内容（溢出内容）+ 上边padding
+    // 没有溢出的情况下 scrollWidth/scrollHeight 等于 clientWidth/clientHeight
+
+    // 可读可写 上面offset client scroll都是只读的属性
+    // scrollTop 纵向滚动条卷曲的高度
+    // scrollLeft 横向滚动条卷曲的宽度
+
+  </script>
+</body>
+</html>

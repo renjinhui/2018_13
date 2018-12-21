@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background: red;
+      border: 15px solid blue;
+      /* margin: 100px auto; */
+      padding: 10px 20px;
+      margin: 10px 11px 12px 20px;
+      opacity: 0.5;
+      /* IE低版本透明度 */
+      filter: alpha(opacity=50);
+    }
+    
+    #box:before {
+      content: 'hello';
+      color: rgb(0, 255, 255);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="box" style="width: 100%; height: 300px"></div>
+  <script>
+    const box = document.querySelector('#box')
+    // 获取样式第一种方式
+    // style只能获取行内样式 可读可写的
+    // console.log('width', box.style.width)
+    // console.log('height', box.style.height)
+    // 通常css都是 内嵌式 或者外链式形式 很少写行内样式
+
+    // window.getComputedStyle(当前元素, 伪元素|null) 返回一个样式style对象
+    // 第二个参数通常写为null
+    // getComputedStyle 获取的是经过浏览器最终计算后的样式（最终渲染到页面后的样式）
+    // 只读的 只能用来获取样式 不能修改样式
+    // let styleObj = window.getComputedStyle(box, null)
+    // console.log(styleObj.width)
+    // console.log(styleObj.height)
+    // // styleObj.width = '100px'
+    // box.style.width = '100px'
+
+    // let styleBefore = window.getComputedStyle(box, 'before')
+    // console.log('styleBefore', styleBefore.color)
+
+    // window.getComputedStyle IE中 6 - 8不兼容
+    let wid = window.getComputedStyle(box, null)['width']
+    console.log(wid)
+
+    // IE中 6 - 8 通过currentStyle 对象属性
+    // 元素.currentStyle[样式属性] IE特有的属性 currentStyle
+    // 在IE 6 - 8中 只能用currentStyle 
+    let boxWidth = box.currentStyle
+    console.log(boxWidth)
+
+    // 标准浏览器中 window.getComputedStyle
+    // IE 6 - 8中 元素.currentStyle
+
+    // 封装获取css样式的通用方法, 兼容所有浏览器的方法
+    /**
+     * getCss 获取元素样式
+     * ele 当前元素
+     * attr 要获取的样式属性
+     * */
+    // function getCss(ele, attr) {
+    //   let value;
+    //   // 如果window上提供了getComputedStyle这个属性方法 就说明浏览器支持这个方法
+    //   if ("getComputedStyle" in window) {
+    //     value = window.getComputedStyle(ele, null)[attr]
+    //   } else { // IE 6 - 8情况下
+    //     value = ele.currentStyle[attr]
+    //   }
+    //   return value
+    // }
+
+    // getCss(box, 'width') // "400px"
+
+    // 需求：对于常用的带单位的属性 获取到的值 将单位去掉并转换成数字
+    // 便于我们用来计算
+    // width|height|left|top|right|bottom|margin|padding
+    function getCss(ele, attr) {
+      let value;
+      // 如果window上提供了getComputedStyle这个属性方法 就说明浏览器支持这个方法
+      if ("getComputedStyle" in window) {
+        value = window.getComputedStyle(ele, null)[attr]
+      } else { // IE 6 - 8情况下
+        value = ele.currentStyle[attr]
+      }
+      // "12300px" left -100px  margin-left -100[x]
+      // "0.5" => 0.5
+      // 数字 有可能小数 负数
+      // css中单位 px pt rem em
+      // 将 数字加单位（"12300px"） 以及 字符串纯数字"0.5" 都要转换成 数字
+      // 匹配 "123px" "-123px" "123.3px" 像opacity "0.5" 转换成数字
+      // 去单位
+      // console.log('border', value) // 15px solid rgb(0, 0, 255)
+      // console.log('获取之前', value)
+      // 对于 margin border 这种复合样式属性 不要处理 margin 10px 11px 12px 20px
+      let reg = /^-?\d+(\.\d+)?(px|pt|rem|em)?$/;
+      if (reg.test(value)) {
+        // "123px" "0.5"
+        value = parseFloat(value)
+      }
+
+      return value
+    }
+
+    // getCss(box, 'width') // "400px" => 400  position
+    // getCss(box, 'position') //
+    // getCss(box, 'opacity')
+    // getCss(box, 'borderWidth')
+    // console.log(getCss(box, 'border'))
+    // getCss(box, 'margin')
+
+// 通常驼峰式命名规范
+//     window.getComputedStyle(box, null)["marginRight"]
+// "11px"
+// window.getComputedStyle(box, null)["marginTop"]
+// "10px"
+
+
+
+ // 去除单位
+function getCss(ele, attr) {
+  let value;
+  if ("getComputedStyle" in window) {
+    value = window.getComputedStyle(ele, null)[attr]
+  } else { // IE 6 - 8情况下
+    // 如果是要获取透明度 filter: alpha(opacity=50);
+    if (attr === 'opacity') {
+      // filter属性值 => "alpha(opacity=50)"
+      // filter: grayscale(100%);
+      value = ele.currentStyle['filter']
+      // let reg = /^alpha\(opacity=(.+)\)$/
+
+      let reg = /^alpha\(opacity=(.+)\)$/
+      // if (reg.test(value)) {
+      //    value = reg.exec(value)[1] / 100  
+      // } else {
+      //   value = 1
+      // }
+
+      value = reg.test(value) ? reg.exec(value)[1] / 100 : 1
+    } else {
+      value = ele.currentStyle[attr]
+    }
+  }
+  
+  // 去单位
+  let reg = /^-?\d+(\.\d+)?(px|pt|rem|em)?$/i;
+  if (reg.test(value)) {
+    value = parseFloat(value)
+  }
+
+  return value
+}
+// getCss(box, 'padding')
+// opacity IE低版本中不支持 这css属性
+// filter: alpha(opacity=50);
+
+getCss(box, 'opacity')
+
+
+let str = "alpha(opacity=50)"
+
+let reg = /^alpha\(opacity=(.+)\)$/
+console.log(reg.test(str))
+if (reg.test(str)) {
+  console.log(reg.exec(str)[1] / 100) // 为了和标准浏览器opacity的值保持一致
+} else {
+  return 1
+}
+
+
+
+ // 获取css样式 兼容所有浏览器
+ function getCss(ele, attr) {
+  let value;
+
+  // 如果浏览器支持 getComputedStyle 就用它来获取样式
+  if ("getComputedStyle" in window) {
+    value = window.getComputedStyle(ele, null)[attr]
+  } else { // IE 6 - 8浏览器currentStyle
+    // IE中透明度 filter: alpha(opacity=50)
+    if (attr === 'opacity') {
+      value = ele.currentStyle['filter'] // "alpha(opacity=50)"
+      // 通过正则将里面 50提取出来
+      let reg = /^alpha\(opacity=(.+)\)$/
+      // 如果符合这个正则 就说明 我们通过filter设置过透明度
+      // 如果不符合 透明度就是默认值
+      value = reg.test(value) ? reg.exec(value)[1] / 100 : 1
+    } else {
+      value = ele.currentStyle[attr]
+    }
+  }
+
+  // 获取的常用样式值 是带单位 或不带单位的数字字符串 "10px" "0.5"
+  let reg = /^-?\d+(\.\d+)?(px|pt|rem|em)?$/i;
+  if (reg.test(value)) {
+    value = parseFloat(value)
+  }
+
+  return value
+}
+
+getCss(box, 'opacity')
+  </script>
+</body>
+</html>
