@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>设置样式</title>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .box {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+        /* margin: 40px auto; */
+        /* opacity: 0.5; */
+        /* 兼容IE低版本 */
+        /* filter: alpha(opacity=50);  */
+      }
+      #active {
+        width: 400px;
+        height: 400px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script type="text/javascript">
+      // JS中如何设置样式
+      var box = document.querySelector(".box");
+      // box.style.width = "400px"
+
+      // 通过类名批量设置
+      // setTimeout(function() {
+      //   box.id = 'active'
+      // }, 3000)
+
+      // setCss 设置样式属性
+
+      // function setCss(ele, attr, value) {
+
+      //   // JS中设置透明度兼容IE
+      //   if (attr === 'opacity') {
+      //     // opacity: 0.3;
+      //     // filter: alpha(opacity=30);
+      //     ele.style['opacity'] = value
+      //     ele.style['filter'] = `alpha(opacity=${value * 100})`
+      //     return
+      //   }
+
+      //   // 将常用样式属性 如果传进来的值 如果是数字 帮它加上单位
+      //   // attr width height marginLeft paddingTop left top bottom 等
+      //   let reg = /^(height|width|((padding|margin)?(top|right|bottom|left)?))$/i
+      //   // 设置的是不是常用带单位的样式属性
+      //   if (reg.test(attr)) {
+      //     // 如果是有效数字 就需要加单位
+      //     if (!isNaN(value)) {
+      //       value += 'px'
+      //     }
+      //   }
+      //   ele.style[attr] = value
+      // }
+      // // setCss(box, 'marginLeft', 500)
+      // setCss(box, 'padding', 20)
+      // setCss(box, 'left', 220)
+      // setCss(box, 'top', 220)
+
+      // box.style.width = "400px"
+      // box.style.width = 400
+      // setCss(box, 'width', '500px')
+      // setCss(box, 'width', 100)
+      // setCss(box, 'opacity', 1)
+
+      function setCss(ele, attr, value) {
+        // filter: aplpha(opacity=30)
+        // 针对透明度的兼容写法
+        if (attr === "opacity") {
+          ele.style["opacity"] = value;
+          ele.style["filter"] = `alpha(opacity=${value * 100})`;
+          return;
+        }
+
+        // 常用属性 自动加单位处理 paddingTop  top left padding maring
+        let reg = /^(width|height|((padding|margin)?(top|right|left|bottom)?))$/i;
+
+        // 判断是不是需要加单位的属性
+        if (reg.test(attr)) {
+          // 如果是有效数字 就需要加单位 500 => 500px
+          if (!isNaN(value)) {
+            value += "px";
+          }
+        }
+        ele.style[attr] = value;
+      }
+      // setCss(box, 'width', '100px')
+      // setCss(box, 'width', 500)
+      // setCss(box, 'opacity', 0.3)
+
+      // setCss(box, "height", 300);
+      // setCss(box, "width", 200);
+      // setCss(box, "backgroundColor", "red");
+
+      setCssBatch(box, {
+        height: 300,
+        width: 200,
+        backgroundColor: "red"
+      });
+      
+      // 批量设置css样式
+      function setCssBatch(ele, options) {
+        let isObj = Object.prototype.toString.call(options) === '[object Object]'
+        if (isObj) {
+          // 将要设置的样式属性 依次遍历出来
+          for (let attr in options) {
+            if (options.hasOwnProperty(attr)) {
+              // 将当前元素 属性  属性值 传给 setCss
+              setCss(ele, attr, options[attr]);
+            }
+          }
+        }
+      }
+      
+      // 
+      function css() {
+      }
+
+      // 面向对象 封装 继承 多态 （重写 重载：根据传入的不同参数 做不同处理）
+
+      // 情况一 获取样式 getCss
+      css(box, 'width')
+
+      // 情况二 设置样式 setCss
+      css(box, 'width', 400)
+
+      // 情况三 批量设置 setCssBatch
+      css(box, {
+        height: 300,
+        width: 200,
+        backgroundColor: "red"
+      })
+
+    </script>
+  </body>
+</html>
