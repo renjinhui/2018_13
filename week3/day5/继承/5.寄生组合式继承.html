@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 寄生组合式继承：原型式继承 + 借用构造函数继承（call继承）
+    // call 将父类私有继承为子类自己的实例属性 
+    // 原型式继承 将父类公有的继承为子类的自己的原型属性
+    // 公私分明
+
+    function A() {
+      this.title = '私有A'
+    }
+
+    A.prototype.mess = '公有A'
+
+    // 原型式继承 只负责继承父类公有属性
+    B.prototype = Object.create(A.prototype) // b => {} => {}.__proto__ => A.prototype
+    B.prototype.constructor = B
+
+    function B() {
+      if (this instanceof B) {
+        A.call(this) // call 继承 只负责继承父类私有的属性
+      }
+    }
+
+    let b = new B()
+    console.log(b)
+  </script>
+</body>
+</html>

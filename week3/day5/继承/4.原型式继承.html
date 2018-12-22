@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Object.create(obj|null) ES5
+    // 首先创建一个新对象 并且把第一个参数 作为 这个新对象原型obj2.__proto__ = obj
+    //  let obj = {id: 24}
+    // //  let obj2 = Object.create(null)
+    //  let obj2 = Object.create(obj)
+    //  console.log(obj2)
+    //  console.log(obj2.__proto__ === obj)
+
+    // 原型式继承
+    // 只能继承父类的原型属性
+
+    function A() {
+      this.name = 'A私有'
+    }
+    A.prototype.tile = 'mess'
+    
+    // B.prototype = new A()
+    // 创建一个新对象 这个新对象{}.__proto__ => A.prototype(A的原型)
+    // 将子类的原型改写为 这个新对象
+    B.prototype = Object.create(A.prototype) // {}.__proto__ = A.prototype
+    B.prototype.constructor = B
+
+    console.log(B.prototype.__proto__ === A.prototype)
+    function B() {
+
+    }
+    let b = new B()
+    console.log(b.constructor())
+  
+    // Object.create实现
+    //  Object._create(o1)
+    Object._create = function(o) {
+      // 临时的构造函数
+      function F() {}
+      F.prototype = o // o1 将o作为了F的原型对象
+      return new F() // o2
+    }
+
+    let o1 = {id: 100}
+    let o2 = Object._create(o1)
+    console.log(o2.__proto__ === o1)
+    console.log(o2)
+
+  </script>
+</body>
+</html>

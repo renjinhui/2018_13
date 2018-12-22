@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 组合式继承 原型链继承 + call继承
+
+    // 缺点
+    // 1.组合式继承 子类会把父类的实例属性（私有属性），继承过来两份
+    // 一份存储在子类实例对象本身 另一份存储在子类原型上
+    // 2. 调用了两次父类
+
+    
+    function A() {
+      this.name = 'A私有的'
+    }
+    
+    A.prototype.title = 'A原型属性'
+
+    B.prototype = new A() // 当作构造函数执行
+    B.prototype.constructor = B
+
+    function B() {
+      if (this instanceof B) {
+        A.call(this) // call 继承 当作普通函数执行
+      }
+    }
+
+    let b = new B()
+    console.log(b)
+  </script>
+</body>
+</html>

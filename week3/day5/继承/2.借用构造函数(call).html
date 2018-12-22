@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 借用构造函数（call继承）
+    // 在子类的构造函数中 通过call方法调用父类（当作一个普通函数执行），
+    // 同时将父类里面的this 修改为子类的当前的b实例对象
+
+    // 结果 将父类的实例属性 复制一份 给子类的实例
+
+    // 特点 只继承了父类的私有属性 作为自己的私有属性
+
+    function A() {
+      this.name = 'AAA'
+      this.say = function() {
+
+      }
+    }
+
+    A.prototype.say = function() {
+      console.log('sayA')
+    }
+
+    function B() {
+      // 通过call方法调用父类 并且 让父类里面this 修改为子类的实列
+      A.call(this) // B this => new B => b
+    }
+    let b1 = new B()
+    let b2 = new B()
+    console.log(b1.say === b2.say)
+
+    function Fn() {
+      // 如果当前函数Fn中的this 是自己的实例（说明我们是通过构造函数方式执行 new Fn）
+      if (this instanceof Fn) {
+
+      }
+    }
+    Fn()
+    new Fn()
+
+  </script>
+</body>
+</html>

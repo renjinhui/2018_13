@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 继承：父类里有些属性和方法，子类继承过来，给自己的实例来使用。
+    // 对于一个类来说：实例属性（私有属性） 原型属性（公有属性）  
+
+
+    // 原型链继承
+    function Super() {
+      this.name = 'super实例属性'
+      this.superSay = function() {
+        console.log('super的方法')
+      }
+    }
+
+    Super.prototype.title = '原型属性'
+    // Object.prototype.id = 100
+
+    let sup = new Super()
+    
+    // 把子类（Sub）的原型对象改写为 父类（Super）的一个实例
+    let tempSup = new Super()
+    Sub.prototype = tempSup
+    Sub.prototype.constructor = Sub
+
+
+    // console.log(Sub.prototype instanceof Super)
+
+    function Sub() {
+
+    }
+    let sub = new Sub()
+   
+    // sub实例先找到tempsup(父类的一个实例) 再通过tempsup找到Super.prototype(父类原型)
+    // console.log(sub.__proto__ === tempSup)
+    // console.log(tempSup.__proto__ === Super.prototype)
+    // console.log(sub.__proto__.__proto__ === Super.prototype)
+    // sub.say() // 调用的时Super这个父类属性方法say
+
+    // 继承后的关系
+    let sub1 = new Sub()
+    // 此时子类的__proto__ 指向 改写后的 tempSup父类实例
+    console.log(sub1.__proto__ === tempSup)
+
+    console.log(sub1.__proto__.__proto__ === Super.prototype)
+    console.log(sub1.__proto__.__proto__.__proto__ === Object.prototype)
+
+    // sub1 => tempSup(Super的实例) => Super.prototype => Object.prototype
+
+    let sub2 = new Sub()
+
+    console.log(sub1.superSay === sub2.superSay) // true
+
+    // 原型链继承：将子类(B)的原型对象改写为 父类(A)的一个实例
+    // B.prototype = new A()
+    // B.prototype.constructor = B
+    
+    // 特点
+    // 子类B会把 父类A中 私有和公有的属性 都继承为B自己的公有属性
+
+    function A() {
+
+    }
+    A.prototype.title = 'hello'
+
+    B.prototype = new A()
+    B.prototype.constructor = B
+
+    function B() {
+
+    }
+
+    let b = new B()
+    console.log('b', b.title) // hello
+
+    var obj = {}
+    obj.title = '123'
+    console.log('b', b)
+    b.si = '123123'
+    console.log('b2', b)
+    // 给b自身添加一个私有属性
+    // b.title = 'hi hi' // 'hi hi'
+    // console.log(b.title)
+    
+    // 子类重写父类
+    // 不安全 当子类将父类原型属性修改后，就会影响到 父类所有的实例对象
+
+    // console.log(b.__proto__.__proto__.title = 'hi nihao')
+    console.log(B.prototype.__proto__.title = 'hi nihao')
+    console.log(b.title)
+    let a = new A()
+    console.log(a.title)
+  </script>
+</body>
+</html>

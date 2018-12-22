@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 冒充对象继承
+    // 将父类的私有和公有 都复制了一份 作为子类的私有属性
+
+    function A() {
+      this.name = '私有A'
+    }
+
+    A.prototype.mess = '原型A'
+
+    function B() {
+      if(this instanceof B) {
+        // 当子类执行时 在函数体内 生成一个父类的实列 将父类的实列进行遍历，复制给子类实列一份
+        let a = new A()
+        for (let k in a) {
+          this[k] = a[k] // b[k] = a[k]
+        }
+      }
+    }
+
+    let b = new B()
+    console.log(b)
+  </script>
+</body>
+</html>
