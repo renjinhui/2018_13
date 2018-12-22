@@ -110,10 +110,11 @@
         width: 200,
         backgroundColor: "red"
       });
-      
+
       // 批量设置css样式
       function setCssBatch(ele, options) {
-        let isObj = Object.prototype.toString.call(options) === '[object Object]'
+        let isObj =
+          Object.prototype.toString.call(options) === "[object Object]";
         if (isObj) {
           // 将要设置的样式属性 依次遍历出来
           for (let attr in options) {
@@ -124,25 +125,55 @@
           }
         }
       }
-      
-      // 
+
+      //
+      // function css(...arg) {
+      //   let len = arg.length;
+      //   if (len >= 3) {
+      //     setCss(...arg);
+      //   }
+      //   len === 2 && typeof arg[1] !== "object" ? getCss(...arg) : null;
+      //   setCssBatch(...arg);
+      // }
+
+      // function css() {
+      //   let len = arguments.length;
+      //   let fn = getCss
+      //   // let isObj = Object.prototype.toString.call(arguments[1]) === '[object Object]'
+      //   if (len >=3) {
+      //     fn = setCss
+      //   } else if(len === 2 && Object.prototype.toString.call(arguments[1]) === '[object Object]') {
+      //     fn = setCssBatch
+      //   }
+      //   return fn.apply(this, arguments)
+      // }
+
       function css() {
+        let len = arguments.length;
+        let fn = getCss
+        let isObj = Object.prototype.toString.call(arguments[1]) === '[object Object]'
+        if (len >=3) {
+          fn = setCss
+        } else if(len === 2 && isObj) {
+          fn = setCssBatch
+        }
+        return fn.apply(this, arguments)
       }
 
       // 面向对象 封装 继承 多态 （重写 重载：根据传入的不同参数 做不同处理）
 
       // 情况一 获取样式 getCss
-      css(box, 'width')
+      css(box, "width");
 
       // 情况二 设置样式 setCss
-      css(box, 'width', 400)
+      css(box, "width", 400);
 
       // 情况三 批量设置 setCssBatch
       css(box, {
         height: 300,
         width: 200,
         backgroundColor: "red"
-      })
+      });
 
     </script>
   </body>

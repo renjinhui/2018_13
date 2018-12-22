@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">213123</div>
+  <script src="./utils.js"></script>
+  <script>
+    let box = document.querySelector('#box')
+    utilObj.css(box, 'width', 200)
+
+    utilObj.css(box, {
+      height: 300,
+      backgroundColor: 'red'
+    })
+
+    console.log(utilObj.css(box, 'width'))
+
+    function fe(a, b) {
+        console.log(a)
+      }
+      // fe.call(null, [1, 2, 3])
+      fe.apply(null, [1, 2, 3])
+  </script>
+</body>
+</html>

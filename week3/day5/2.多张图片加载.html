@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style type="text/css">
+      .timg {
+        display: block;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+    <img
+      class="timg"
+      src="./images/timg.gif"
+      data-src="./images/img.jpg"
+      alt=""
+    />
+  </body>
+
+  <script src="./utils.js"></script>
+  <script>
+    // 获取到页面中所有的img图片
+    let imgList = document.querySelectorAll(".timg");
+
+    // imgList[0].getBoundingClientRect()
+
+    // 循环检测每张图片
+    function checkImg() {
+      for (let i = 0; i < imgList.length; i++) {
+        let curImg = imgList[i];
+        // 如果当前图片加载过 就跳过 避免了重复加载
+        if (curImg.loaded) continue;
+        delayImg(curImg);
+      }
+    }
+
+    // 将图片加载逻辑进行封装
+    function delayImg(img) {
+      // 元素距离body顶端的上偏移 {left, top}
+      let imgOffset = utilObj.offset(img).top + img.offsetHeight;
+      // 获取浏览器窗口可视区域的高度
+      let winH = utilObj.win("clientHeight");
+      // 获取滚动条的滚动距离
+      let scrollTop = utilObj.win("scrollTop");
+
+      // 出现在了可视区域中
+      if (scrollTop + winH >= imgOffset) {
+        // 获取到要加载的真实图片地址
+        let imgSrc = img.getAttribute("data-src");
+        // 检测图片的有效性
+        let tempimg = new Image();
+        tempimg.src = imgSrc;
+        // 加载成功事件
+        tempimg.onload = function() {
+          // img.src = imgSrc
+          console.log('加载')
+          img.src = this.src;
+          img.loaded = true
+        };
+      }
+    }
+  
+    // 首次加载 
+    checkImg()
+
+    window.onscroll = function() {
+      checkImg()
+    }
+  </script>
+</html>

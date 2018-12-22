@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      margin: 1600px auto;
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+
+    .container img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="timg" src="./images/timg.gif" data-src="./images/img.jpg" alt="">
+  </div>
+  <script src="./utils.js"></script>
+  <script>
+     let img = document.querySelector('.container .timg')
+    //  console.log(img)
+     // 获取元素底部距离body的上偏移
+     let imgOffsetTop = utilObj.offset(img).top
+     let imgHei = img.offsetHeight
+
+     let imgOffset = imgOffsetTop + imgHei
+
+     // 获取浏览器scrollTop clientHeight
+     // 浏览器可视区域高度
+     let winH = utilObj.win('clientHeight')
+    
+     // 监听滚动条滚动事件
+     window.onscroll = function() {
+       // 避免重复加载
+       if(img.loaded) return;
+
+       // 获取滚动条实时改变的值
+       let scrollTop = utilObj.win('scrollTop')
+
+       // 判断当前元素是否出现在可是区域
+       if(scrollTop + winH >= imgOffset) {
+        // 获取到要加载的真实图片地址
+        let imgSrc = img.getAttribute('data-src')
+
+        // 确保资源的真实可用性
+        // 在JS中创建一个临时img元素
+        let tempimg = new Image()
+        // 将图片地址先赋值给 这个临时图片 测试一下图片的是否有效
+        tempimg.src = imgSrc
+        // 图片加载成功 就会触发这个事件
+        tempimg.onload = function() {
+          console.log('加载成功')
+          img.src = imgSrc
+          // 标记当前img元素已经加载过了
+          img.loaded = true
+        }
+
+        // tempimg.onerror = function() {
+        //   console.log('图片出错了')
+        // }
+       }
+     }
+    
+
+    // function win(attr, value) {
+    //   if(typeof value === 'undefined') {
+    //     return document.documentElement[attr] || document.body[attr]
+    //   }
+    //   document.documentElement[attr] = value
+    //   document.body[attr] = value
+    // }
+    // // 获取
+    // win('clientHeight')
+    // // 设置
+    // win('scrollTop', 200)
+  </script>
+</body>
+</html>

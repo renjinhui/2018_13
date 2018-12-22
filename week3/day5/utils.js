@@ -106,6 +106,15 @@ window.utilObj = (function() {
     return fn.apply(this, arguments)
   }
 
+  // 获取或设置浏览器window盒模型属性
+  function win(attr, value) {
+    if(typeof value === 'undefined') {
+      return document.documentElement[attr] || document.body[attr]
+    }
+    document.documentElement[attr] = value
+    document.body[attr] = value
+  }
+
   return {
     jsonParse,
     likeAryTo,
@@ -113,6 +122,7 @@ window.utilObj = (function() {
     getCss,
     setCss,
     setCssBatch,
-    css
+    css,
+    win
   };
 })();
