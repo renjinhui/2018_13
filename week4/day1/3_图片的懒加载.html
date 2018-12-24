@@ -58,9 +58,9 @@
             tempImg.src =realSrc;// 获取图片真实路径 并赋给这个临时的img
             tempImg.onload = function () {
                 // 从远程把图片资源获取到计算机浏览器本地缓存区；
-                
                 img.src = realSrc;// 
                 img.flag = true;// 自定义一个属性 用来判断是否加载过
+                fadeIn(img);// 当真正的图片显示的时候 执行fadeIn
             }
         }
     }
@@ -74,6 +74,23 @@
     window.onscroll = function(){
         loadAll(imgs);
         // loadImg(img);// 滚轮滚动时 再去执行
+    }
+
+    //控制渐显 控制元素的 opacity ；让这个属性累加(定时器)到1;加到1 清除定时器；
+    function fadeIn(ele){
+        // ele 要进行 渐显的元素
+        ele.style.opacity = 0;
+        var timer = setInterval(function(){
+            let t = parseFloat(ele.style.opacity);
+            // 现在的问题是定时器一直在执行；
+            if(t>=1){// 若opacity已经加到了1 ； 则直接清除定时器并把opacity设置成1
+                ele.style.opacity = 1;
+                clearInterval(timer);
+                return;
+            }
+            // ele.style.opacity += 0.1;
+            ele.style.opacity = t+0.1;
+        },10)
     }
 
 </script>
