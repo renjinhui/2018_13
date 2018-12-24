@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            /* margin-top: 2000px; */
+            width: 200px;
+            height: 200px;
+            border: 1px dashed darkkhaki;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- //realSrc 存储真实的图片路径 -->
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+    <img src="./images/timg.gif" realSrc='http://cms-bucket.nosdn.127.net/2018/12/24/0349960a22ec4ca296c3d6f7d4fc5c64.jpeg' alt="">
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+    // 图片懒加载的思路
+    // 先获取元素底部 到 body上边框的距离 a
+    // 获取可视区域的高度b
+    // 滚动条卷去的高度c
+    // b+c >= a; 说明要加载该图片
+    // 拿到图片的真正链接，判断图片路径是否对？加载成功之后，把真实地址给了 这个img
+    // var img = document.getElementById('img');
+    var imgs = document.getElementsByTagName('img');
+    // var offsetTop = utils.offset(img).top; // a时顶部到body 的距离
+    var screenHeight = utils.win('clientHeight'); // b
+    var scrollTop = utils.win('scrollTop'); // c
+
+    function loadImg(img) { // 专门实现图片的懒加载
+        // 进来先判断该图片是否已经加载出来？
+        if(img.flag){return};
+        var offsetTop = utils.offset(img).top + 100;
+        var screenHeight = utils.win('clientHeight');
+        var scrollTop = utils.win('scrollTop');
+        if(screenHeight + scrollTop >= offsetTop){
+            // 说明图的顶部已经露出
+            // img.src = img.getAttribute('realSrc');
+            var tempImg = new Image();// document.creatElement('img');
+            var realSrc = img.getAttribute('realSrc');
+            tempImg.src =realSrc;// 获取图片真实路径 并赋给这个临时的img
+            tempImg.onload = function () {
+                // 从远程把图片资源获取到计算机浏览器本地缓存区；
+                
+                img.src = realSrc;// 
+                img.flag = true;// 自定义一个属性 用来判断是否加载过
+            }
+        }
+    }
+    // loadImg(img);// 一进页面先执行一次 图片加载  保证第一屏的图片先加载出来
+    function loadAll(imgs) {// 页面中所有图片懒加载
+        for(var i = 0; i < imgs.length; i++){
+            loadImg(imgs[i]);
+        }
+    }
+    loadAll(imgs);
+    window.onscroll = function(){
+        loadAll(imgs);
+        // loadImg(img);// 滚轮滚动时 再去执行
+    }
+
+</script>

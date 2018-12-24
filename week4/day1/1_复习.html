@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 正则
+    // \w \d .
+    // i m g
+    // + 一到多
+    // * 0到多
+    // ? 0或1次
+    // {n} {n,m} {n,}
+    var reg = /2/;
+    var str = 'qqq'
+    var reg2 = new RegExp(str,'img')//  /qqq/
+    var reg3 = new RegExp(/qqq/);// g 
+
+    var reg = /\d/;
+    eval(reg.toString()+'g') // '/\d/g';
+    new RegExp(reg,'g');
+
+    var reg = /\d+/;
+    reg.test('werwrq3r324');
+    reg.exec('sfgsdgdse34erwe34535');
+    // 懒  g
+    // 贪  ?
+
+    var reg = /^\d$/;
+    // 一个用户名 只能是数字字母下划线；8到20位
+    // <><.dsrgsgfgsdg>?.?
+    /^\w{8,20}$/ // 只能是8-20位的 \w
+
+
+    var reg = /^18|19$/;  
+    var reg2 = /^(18|19)$/ ;
+    // 小括号的作用
+    // 第一种 提升优先级
+    // 第二种 分组捕获
+
+    //给一个身份证 得出 出生年月日 和 性别；
+    // 130435199410134245;
+    var reg = /^\d{6}(\d{4})(\d{2})(\d{2})\d{2}(\d)\w$/;
+
+    var str = '珠+峰,培_训 2018'; //  '珠峰培训2018'；
+    var ary = str.split(/[+,_ ]/);// ['珠','峰',...]
+    ary.join('')
+
+    // match 
+    // 当正则 没有全局修饰符 g 的时候； 得到的结果同exec
+    // 有g 时 能捕获所有的符合大正则的内容；小分组的获取不到；
+
+    // replace
+    var str = 'zhufeng2018';
+    str.replace(/\d+/g,'');
+    str.replace(/\d+/g,function () {
+        // arguments  跟exec捕获的内容一样
+    })
+    str.replace(/(\d+)([a-z]+)/,'$2$1');
+
+
+    var url = 'https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&rsv_idx=2&tn=baiduhome_pg&wd=getboundingclientrect&oq=0x000000&rsv_pq=9ac4f59e000370a4&rsv_t=04ffwCXwvJ3H7jdL8onmlPhD3hGD9ewCeWIRHvdu8YpZ%2BY9Qb74MBUjJnPek2naZhBNL&rqlang=cn&rsv_enter=1&inputT=3664&rsv_sug3=21&rsv_sug1=14&rsv_sug7=100&rsv_sug2=0&prefixsug=getB&rsp=0&rsv_sug4=5050';
+    var reg = /([^?=&]+)=([^?=&]+)/g;
+    var obj = {};
+    url.replace(reg,function (cur,lit1,lit2) {
+        // console.log(arguments)
+        obj[lit1] = lit2;
+    });
+    console.log(obj);
+
+    //一个字符串中出现次数最多的字符
+
+    // 先转数组 
+    // 排序  sort();
+    // join() 
+    // replace(/(\w)\1*/g,function(cur,lit){}) cur的length  就是  lit 出现的次数
+
+
+
+    
+
+</script>
