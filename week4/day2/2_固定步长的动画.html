@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: darkcyan;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+    // 控制盒子的移动  left top
+    var box = document.getElementById('box');
+    // 需要一个left 的最大值
+    // 屏幕的宽度 - 盒子的宽度
+    var flag = 1;
+    let maxL = utils.win('clientWidth') - utils.css(box,'width');
+    var timer = setInterval(function(){
+        let l = utils.css(box,'left');// 获取元素的left值
+        if(l >= maxL){
+            clearInterval(timer); //清除定时器
+            utils.css(box,'left',maxL);// 设置成最大值
+            return;// 不再执行下边的代码
+        }
+        l = l + 2;
+        utils.css(box,'left',l)
+    },10)
+</script>

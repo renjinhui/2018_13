@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            height: 5000px;
+            background: -webkit-linear-gradient(top left,red,blue,green,orange);
+        }
+        .btn{
+            position: fixed;
+            bottom: 50px;
+            right:50px;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div class="btn">上去</div>
+    <!-- <a href="#box">回到顶部</a> -->
+    <!-- 锚点定位 -->
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+    // 直接回到顶部  锚点定位;  scrollTop = 0;
+    
+    var btn = document.querySelector('.btn');
+    btn.flag = true;
+    // true  代表能点，也就是定时走完了； false 代表不能点，也就是定时器没走完
+    btn.onclick = function () {
+        // 解决连续点击
+        // 用一个属性或者变量 去决定 下边的代码要不要执行
+        // 若下边的代码不需要执行；则直接return;
+        // 下边定时器完成 才可以进行下边的代码
+        if(!this.flag)return;//若 flag 是 false  则直接return 打断函数执行
+        this.flag = false;
+        // 1s 上去
+        let t = utils.win('scrollTop');// 当前卷去的高度
+        let speed = t/1000;// 速度；
+        var time = 0;// 记录 运动时长
+        var timer = setInterval(()=>{
+            time += 50;
+            if(time >= 1000){
+                time = 1000;
+                this.flag = true;// ture 代表定时器完成
+                clearInterval(timer);// 清除定时器；下次函数不再执行；本次接着执行
+            }
+            let st = t - time*speed; // 当前剩的卷去的高度 应该是 初始的卷去高度 - 移动过的距离
+            utils.win('scrollTop',st);
+        },50)
+    }
+
+
+    // 固定步长
+    // btn.onclick = function () {
+    //     clearInterval(this.timer);
+    //     this.timer = setInterval(() => {
+    //         let t = utils.win('scrollTop');// 获取 当前卷去的高度
+    //         t-=20;// 在当前的卷去高度上再去减少20
+    //         //判断是否已经到顶
+    //         if(t<=0){
+    //             t = 0;
+    //             clearInterval(this.timer);// 箭头函数 的this 是上级作用域的this
+    //         }
+    //         utils.win('scrollTop',t);
+    //     },10)
+    // }
+
+
+</script>

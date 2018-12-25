@@ -23,7 +23,7 @@ function giveHtml(data) {
     // 把数据挨个放到每一个ul中 ; 用数据的索引跟 5 取余；
     data = data || [];
     data.forEach(function(item,index){
-        var str = `<li><img src='../images/timg.gif' realSrc="${item.src}" alt="" height="${item.height}">
+        var str = `<li><img src="../images/timg.gif" realSrc="${item.src}" alt="" height="${item.height}">
         <h3>${item.title}</h3></li>`;
         // oUl[index%5] 每5个一轮
         // oUl[index%5].innerHTML += str;// 在原来的基础上 再去添加新的li
@@ -61,6 +61,7 @@ function loadImg(img) { // 专门实现图片的懒加载
         // img.src = img.getAttribute('realSrc');
         var tempImg = new Image();// document.creatElement('img');
         var realSrc = img.getAttribute('realSrc');
+        if(!realSrc)return;// 为了解决页面报404错误
         tempImg.src =realSrc;// 获取图片真实路径 并赋给这个临时的img
         tempImg.onload = function () {
             // 从远程把图片资源获取到计算机浏览器本地缓存区；
@@ -91,6 +92,24 @@ function loadAll(imgs) {// 页面中所有图片懒加载
     }
 }
 loadAll(imgs);// 保证首屏的图先出现
+
+// 滚轮滚动时  什么情况才去获取新数据？
+// 最短的那一列 底部露出来时加载；
+// getMinUl 获取最短的那一列
+// 底部露出来  ul的底部 到 body 的偏移量A  跟  页面卷去的高度B + 可视窗口的高度C
+// A < B+C  说明 A的底部已经露出
+function getMore() {
+    let ul = getMinUl();
+    let ulST = utils.offset(ul).top + ul.offsetHeight;// A
+    let scrollT = utils.win('scrollTop');//B
+    let clientH = utils.win('clientHeight');//C
+    if(ulST < scrollT+clientH){
+        getData();// 获取新的数据
+        giveHtml(data);// 新数据放到页面上
+    }
+}
+
 window.onscroll = function () {
+    getMore();
     loadAll(imgs);
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="   box   box2 box3" id='box'></div>
+</body>
+</html>
+<script>
+    // 给一个元素 然后通过自己的函数去给这个元素增加类名或者删除类名？
+    var ele = document.getElementById('box');
+
+    // 获取ele的所有类名 然后查看 所有类名中包不包含 str
+    // hasClass(ele,str);// 用来判断 ele是否有该类名
+    // addClass(ele,'box');// 添加之前 先判断之前是否有这个类名；
+    // removeClass(ele,str);
+
+    function hasClass(ele,str){
+        // str.trim() 去除字符串首尾空客
+        // str = str.trim();
+        str = str.replace(/^ +| +$/g,'');
+        // 获取所有类名
+        let classStr = ele.className.trim();
+        // 把改类名字符串分割成数组
+        let ary = classStr.split(/ +/) // 以一个或多个空格分割
+        if(ary.indexOf(str) === -1){
+            return false
+        }
+        return true;
+    }
+    console.log(hasClass(ele,'box'));
+
+
+    // 正则1  /( +|^)box1( +|$)/.test('box1 box2')
+    //  前边要不就是 直接以b开头 中间只能是 ox1 后边是空格 或者 直接就是box1
+    //      要不就是 几个空格 中间时box1  后边是空格 或者 直接就是box1
+    // /^box1 +/ ; /^box1$/ ; / +box1 +/ ; / +box1$/ 
+
+    // 正则2 /\bbox1\b/
+    function hasClass2(ele,str) {
+        var classStr = ele.className;
+        str = str.replace(/^ +| +$/g,'');
+        //classStr 中 有没有str 这个类名；
+
+        var reg = new RegExp('\\b'+str+'\\b');
+        // if(reg.test(classStr)){
+        //     return true
+        // }
+        // return false
+
+        return reg.test(classStr)
+    }
+    // hasClass(ele,'box box2') 扩展
+
+    function addClass(ele,str) {
+        if(hasClass(ele,str))return;// 若有该类名；则不用再去添加
+        // 添加 str 类名
+        ele.className = ele.className + ' ' + str;
+    }
+    addClass(ele,'box4 box5')//  作业 addClass(ele,'box5 box5')
+
+    function removeClass(ele,str) {
+        str = str.trim();
+        let ary = str.split(/ +/);
+        ary.forEach((item)=>{
+            let reg = new RegExp('\\b'+item+'\\b','g');
+            ele.className = ele.className.replace(reg,'')
+        })
+    }
+    // removeClass(ele,'box4  box5');
+
+</script>

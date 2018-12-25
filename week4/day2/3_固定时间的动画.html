@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: darkcyan;
+            position: relative;
+            left: 0;
+            top:0;
+            opacity: 1;
+            transition: 3s linear;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    let box = document.querySelector('#box');
+    // 固定时间  3s从左走到右
+    let s = 800;// 路程是 800；
+    let t = 3000;// 3000毫秒
+    let speed = s/t; // 速度
+    let time = 0;// 存储 运动的总时间
+    // let timer = setInterval(()=>{
+    //     time += 10;
+    //     // 总的运动时间一共是3000
+    //     if(time >= t){
+    //         time = t;
+    //         clearInterval(timer);
+    //     }
+    //     // time  总时间;  speed 速度
+    //     let l = time * speed;
+
+    //     //让盒子的left值 变成 l 即可；
+    //     box.style.left = l + 'px';
+    // },10)
+</script>
