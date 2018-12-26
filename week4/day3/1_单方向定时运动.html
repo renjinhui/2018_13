@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+            position: relative;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
+<script src="./utils.js"></script>
+<script>
+    var box = document.querySelector('.box');
+    // 要动哪个元素？
+    // 动元素的哪个属性
+    // 动多长时间？
+    // 动到哪里去
+    function move(ele,attr,duration,target){
+        // ele  元素
+        // attr 属性
+        // duration 时间
+        // target 目标位置 
+
+        // 获取当前位置；
+        var curP = utils.css(ele,attr);
+        // 总路程  target - curP
+        // var s = target - curP;
+        // var speed = s/duration;// 速度；
+        var time = 0;// 存储运动过的时间
+        var timer = setInterval(()=>{
+            time += 10;
+            if(time >= duration){
+                // 已经到时间
+                time = duration;
+                clearInterval(timer);
+            }
+            // 用运动时间算出 运动的距离
+            // var l = speed * time;
+            // 元素的当前位置  初始位置 + 运动的距离
+            var curL = linear(curP,target,time,duration);
+            // utils.css(ele,attr,curP+l)
+            utils.css(ele,attr,curL);
+        },10)
+
+    }
+    function linear(begin,target,time,duration) {
+        // begin初始位置 target目标位置，time运动的时间，duration运动需要的总时间
+        return begin + (target-begin)/duration * time
+    }
+    function easeInOut(begin,target,time,duration) {
+        if ((time /= duration / 2) < 1) {
+            return -(target-begin) / 2 * (Math.sqrt(1 - time * time) - 1) + begin;
+        }
+        return (target-begin) / 2 * (Math.sqrt(1 - (time -= 2) * time) + 1) + begin;
+    }
+    move(box,'left',1000,800);
+</script>

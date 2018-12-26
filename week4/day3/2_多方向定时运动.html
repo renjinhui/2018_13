@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+            position: relative;
+            left: 100px;
+            top:0;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>
+<script src="./utils.js"></script>
+<script>
+    var box = document.querySelector('.box');
+    var moveType = {
+        linear:function linear(time,changeL,duration,beginL) {
+            return changeL/duration*time + beginL;
+        },
+        easeIn: function (t,c,d,b) {
+            return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
+        },
+        easeOut: function (t,c,d,b) {
+            return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
+        },
+        easeInOut: function (t,c,d,b) {
+            if ((t /= d / 2) < 1) {
+                return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
+            }
+            return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
+        }
+    };
+    function move(ele,attr,duration,target){
+        var curP = utils.css(ele,attr);
+        var time = 0;// 存储运动过的时间
+        var timer = setInterval(()=>{
+            time += 10;
+            if(time >= duration){
+                time = duration;
+                clearInterval(timer);
+            }
+            var curL = linear(curP,target,time,duration);
+            utils.css(ele,attr,curL);
+        },10)
+    }
+    function linear(begin,target,time,duration) {
+        return begin + (target-begin)/duration * time
+    }
+    // move(box,'left',3000,800)
+    move2(box,3000,{left:800})
+    function move2(ele,duration,obj) {
+        var curP = {};// 用来存储所有属性的初始值
+        var changeP = {};// 用来存储要去改变的值（目标值-初始值）
+        // 获取obj 中属性的初始值
+        for(var k in obj){
+            // k代表了left  top  opacity
+            curP[k] = utils.css(ele,k);
+            changeP[k] = obj[k] - curP[k];
+        }
+        var time = 0;
+        var timer = setInterval(function(){
+            time += 10;
+            if(time >= duration){
+                time = duration;
+                clearInterval(timer);
+                
+            }
+            for(var k in curP){
+                // cur 是元素 k 属性的当前值；time 是运动的时长
+                // changeP[k] k 属性 要去改变的值
+                // duration 总的运动时间
+                // curP[k] k 属性的初始位置
+                var cur = moveType.linear(time,changeP[k],duration,curP[k])
+                utils.css(ele,k,cur)
+            }
+        },10)
+    }
+</script>
