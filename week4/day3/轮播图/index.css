@@ -14,6 +14,7 @@
     width: 600px;
     height: 500px;
     overflow: hidden;
+    position: relative;
 }
 .box .banner_box li     {
     width: 600px;
@@ -50,10 +51,28 @@
     font-size: 25px;
     color: #fff;
     cursor: pointer;
+    user-select: none;
 }
 .left_btn{
     left: 0;
 }
 .right_btn{
     right:0
+}
+.tip_box{
+    position: absolute;
+    bottom:60px;
+    left: 20px;
+    overflow: hidden;
+}
+.tip_box li{
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border:1px solid lightpink;
+    margin: 10px;
+}
+.tip_box li.current{
+    background: #fff;
 }
