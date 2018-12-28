@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+        }
+
+        .tab_til {
+            overflow: hidden;
+            border: 1px dashed lightblue;
+            display: flex
+        }
+
+        .tab_til li {
+            flex: 1;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid lightblue;
+        }
+
+        .tab_til li.current {
+            color: #fff;
+            background: darkorange
+        }
+
+        .tab_body {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px dashed darkkhaki;
+        }
+
+        .tab_body li {
+            line-height: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    (function ($) {
+        function tab(options) {
+            // options {eventType:'mouseenter'}
+            var defaultOptions = {// 默认的大对象 存储的都是各个属性的默认值；
+                eventType:'click', // 默认事件类型
+                className:'current', // 默认选中类名
+                defaultIndex:0 // 默认选中的索引
+            };
+            for(var k in options){ // 把options 传进来的值 给 默认对象
+                defaultOptions[k] = options[k];
+            }
+
+            var $tils = this.find('.tab_til li');
+            var $bodys = this.find('.tab_body li');
+
+            // 给默认的元素 加上相应的类名
+            $tils.eq(defaultOptions.defaultIndex).addClass(defaultOptions.className).siblings().removeClass(defaultOptions.className);
+            $bodys.eq(defaultOptions.defaultIndex).show().siblings().hide();
+            
+            $tils.on(defaultOptions.eventType, function () {
+                var n = $(this).index();
+                $(this).addClass(defaultOptions.className).siblings().removeClass(defaultOptions.className);
+                // $bodys.eq(n).show().siblings().hide();
+                $(this).parent().siblings().children('li').eq(n).show().siblings().hide();
+            })
+        }
+        $.fn.extend({
+            tabPlugin: tab
+        })
+    })(jQuery);
+    $('.box').eq(0).tabPlugin(); 
+    $('.box').eq(1).tabPlugin({
+        eventType:'mouseenter',
+        defaultIndex:2
+    });
+    $('.box').eq(2).tabPlugin({
+        defaultIndex:2
+    });
+</script>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+        }
+
+        .tab_til {
+            overflow: hidden;
+            border: 1px dashed lightblue;
+            display: flex
+        }
+
+        .tab_til li {
+            flex: 1;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid lightblue;
+        }
+
+        .tab_til li.current {
+            color: #fff;
+            background: darkorange
+        }
+
+        .tab_body {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px dashed darkkhaki;
+        }
+
+        .tab_body li {
+            line-height: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    (function ($) {
+
+        function tab(type) {
+            type = type || 'click';
+            // console.log(this)// this 是JQ对象
+            // children('li') 是获取儿子一级的元素
+            var $tils = this.find('.tab_til li');
+            var $bodys = this.find('.tab_body li');
+            $tils.on(type, function () {
+                var n = $(this).index();
+                $(this).addClass('current').siblings().removeClass('current');
+                // $bodys.eq(n).show().siblings().hide();
+                $(this).parent().siblings().children('li').eq(n).show().siblings().hide();
+            })
+        }
+
+        // 在JQ的原型扩展
+        // $.extend({
+        //     a:12
+        // });
+        $.fn.extend({
+            // a:100,
+            tabPlugin: tab
+        })
+    })(jQuery);
+    $('.box').eq(0).tabPlugin(); // 前提是 原型上有这个方法
+    // $('.box').a //100
+    // $.a //12
+
+    $('.box').eq(1).tabPlugin('mouseenter');
+</script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 类库  JQ zepto animate.css
+    // 插件  单独的实现某个功能
+    // 框架  具有自己的独立的一套设计思想
+    // UI框架 iview element-ui ant-design  bootstrap
+    (function (global, factory) {
+
+    })(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
+        //  node 的全局变量是global
+        //  浏览器的全局变量是window
+        var
+            version = "3.3.1",
+            jQuery = function (selector, context) {
+                // selector 选择器
+                // context  上下文
+                // document.getElementsByTagName('li')
+                // box.getElementsByTagName('li')
+                return new jQuery.fn.init(selector, context);
+
+                // 当jQuery执行时； 返回的结果是一个 jQuery.fn.init 的一个实例A
+                // A.toArray() // 查找toArray 是在 jQuery.fn.init.prototype 上查找的
+                //                                 jQuery.prototype
+            },
+            rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+        jQuery.fn = jQuery.prototype = {
+            // jQuery的实例 能调用 toArray
+            toArray: function () {
+                return slice.call(this);
+            },
+        }
+        var init = jQuery.fn.init = function (selector, context, root) {
+
+        };
+        // init 的 原型对象等于了 jQuery的fn属性
+        // jQuery 的原型 跟 init 的原型是一个 地址
+        // jQuery.fn.init的原型 跟 jQuery的原型是一个地址
+        init.prototype = jQuery.fn;
+        // jQuery.fn.init.prototype = jQuery.fn
+        // jQuery.fn.init.prototype = jQuery.prototype
+
+
+        jQuery.extend = jQuery.fn.extend = function(){
+
+        }
+        // jQuery.extend 是把传进来的参数扩展到 jQuery自身上(把jQuery当作对象)
+        // $.extend({a:12})  $.a
+
+        //jQuery.fn.extend 是把传进来的参数扩展到 jQuery的原型上
+        // $.fn.extend({a:13})  $().a
+
+
+        // 让渡使用权 $ 
+        var
+            _jQuery = window.jQuery,
+            _$ = window.$; // window 下 之前的 $ jQuery
+        jQuery.noConflict = function (deep) {
+            // 若 deep 是 true；  则 把jQuery这个变量也让渡出去
+            if (window.$ === jQuery) { // 让渡 $
+                window.$ = _$;
+            }
+
+            if (deep && window.jQuery === jQuery) {// 让渡 jQuery
+                window.jQuery = _jQuery;
+            }
+
+            return jQuery;
+        };
+
+
+        if (!noGlobal) {
+            window.jQuery = window.$ = jQuery;
+        }
+    })
+</script>

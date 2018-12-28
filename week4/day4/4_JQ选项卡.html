@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 400px;
+            margin: 50px auto;
+        }
+        .tab_til{
+            overflow: hidden;
+            border: 1px dashed lightblue;
+            display: flex
+        }
+        .tab_til li{
+            flex: 1;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid lightblue;
+        }
+        .tab_til li.current{
+            color: #fff;
+            background: darkorange
+        }
+        .tab_body{
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px dashed darkkhaki;
+        }
+        .tab_body li{
+            line-height: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="tab_til">
+            <li class="current">css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+        <ul class="tab_body">
+            <li>css</li>
+            <li>js</li>
+            <li>VUE</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    var $tils = $('.tab_til li');// 获取要点击的元素
+    var $bodys = $('.tab_body li');// 获取下边现实的元素
+    $tils.on('click',function(){
+        //this 点击的那个元素
+        // console.log(this);
+        var n = $(this).index(); // 获取点击的那个元素对应的索引
+        $(this).addClass('current').siblings().removeClass('current');
+        $bodys.eq(n).show().siblings().hide();
+        // 第n+1个元素显示；他的兄弟们 隐藏
+    });
+
+    // $tils.click(function(){console.log(111)})
+    // $('.tab_til li').on('click',function(){
+    //     var n = $(this).index()
+    //     $(this).addClass('active').siblings()
+    //     .removeClass('active').parent().siblings()
+    //     .children('li').eq(n).addClass('active').siblings()
+    //     .removeClass('active')
+    // })
+
+</script>

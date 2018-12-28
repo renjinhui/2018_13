@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    // jQuery 
+    console.log($('.box')) // css选择器 结果是个类数组
+
+    var box1 = document.getElementsByClassName('box')[0];
+
+    // JQ对象 和 原生对象的相互转化
+    // JQ --> 原生   索引
+    // 原生 --> JQ   $(box1)
+    // $(box1).addClass('box box box  box2').removeClass('box');
+    // $(box1).hasClass('box3');
+    // $('.box').addClass('box2');
+
+    // console.log($('.box')[0]) ; // 索引
+    // console.log($('.box').get(0)) // get
+    $($('.box')[2]).addClass('box2');
+    $('.box:nth-child(3)').addClass('box3');
+    $('.box').eq(2).addClass('box4');
+    var  $box = $('.box');
+</script>
