@@ -22,6 +22,7 @@ $.ajax({
         max = data.length;
         autoPlay();// 在数据渲染完成之后再去autoPlay
         eventBind();
+        $lis.eq(0).css({zIndex:10}).fadeIn().siblings().fadeOut().css({zIndex:1});
     },
     error:function () {
         console.log(arguments);
@@ -51,6 +52,7 @@ function giveHtml(data){
 }
 
 // 轮播函数
+
 function play(){
     index++;
     console.log(index);

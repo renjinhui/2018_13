@@ -119,10 +119,7 @@ window.utils = (function() {
     jsonParse,
     likeAryTo,
     offset,
-    getCss,
-    setCss,
-    setCssBatch,
-    css,
+    getCss, 
     win
   };
 })();

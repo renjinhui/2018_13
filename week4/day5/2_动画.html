@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: lightcoral;
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        固定步长： 总路程
+                  定时器执行一次 就是咱们的 一步；
+        
+        固定时间： 总路程 总时间  --》 速度
+                  定时器执行一次  把运动的时间加一次(定时器的时间因子)
+                  
+        回到顶部： 锚点  scrollTop = 0;  
+                  固定时间的 总的需要滚动的时间totalT； 总的滚动路程totalS
+                  speed = totalS/totalT
+                  time 运动过的时间
+                  totalS - time*speed : 当前的scrollTop 
+        单方向定时运动：
+                  move(ele,attr,target,duration) {
+                      begin// 初始位置
+                      target - begin // 总路程
+                      总路程/duration  速度
+                      运动的时间 * 速度 运动的距离
+                      初始位置+运动的距离  当前的位置
+                  }
+
+    -->
+    <div id="box"></div>
+</body>
+</html>
+<script src="../day4/jquery-3.3.1.js"></script>
+<script>
+    var $box = $('#box');
+    function move(ele,attr,target,duration) {
+        var begin = parseFloat($(ele).css(attr));
+        var s = target - begin;
+        var speed = s/duration;
+        var time = 0;
+        var timer = setInterval(()=>{
+            time += 20;
+            if(time >= duration){
+                time = duration;
+                clearInterval(timer);
+            }
+            // var cur = time * speed + begin;
+            cur = linear(s,duration,time,begin)
+            $(ele).css(attr,cur);
+        },20)
+    }
+    function linear(c,d,t,b) {
+        // c 路程；d 总的运动时间； t 运动过的时间； b 初始位置
+        return c/d * t + b
+    }
+    // move($box,'left',300,2000);
+
+
+    //options :  {left:200,top:400}
+    function move2(ele,duration,options) {
+        // var begin = parseFloat($(ele).css(attr));
+        var begin = {};
+        // var s = target - begin;
+        var change = {};
+        for(var k in options){
+            begin[k] = parseFloat($(ele).css(k));
+            change[k] = options[k] - begin[k];
+        }
+        var time = 0;
+        var timer = setInterval(()=>{
+            time += 20;
+            if(time >= duration){
+                time = duration;
+                clearInterval(timer);
+            }
+            // cur = linear(s,duration,time,begin)
+            var cur = {};// left 的当前值 和 top 的当前值
+            for(var k in options){
+                cur[k] = linear(change[k],duration,time,begin[k])
+            }
+            $(ele).css(cur);
+        },20)
+    }
+    move2($box,2000,{
+        left:800,
+        top:400
+    });
+</script>
