@@ -92,3 +92,14 @@ function eventBind() {
         play();
     })
 }
+
+
+(function ($) {
+    function banner() {
+        
+    }
+    
+    $.fn.extend({
+        banner,
+    })
+})(jQuery)

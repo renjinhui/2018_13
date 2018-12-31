@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .outer {
+            margin: auto;
+            width: 400px;
+            height: 400px;
+            background: rgb(230, 154, 179);
+        }
+
+        .center {
+            margin: auto;
+            width: 300px;
+            height: 300px;
+            background: darkorange;
+            position: absolute;
+            /* top: 600px; */
+        }
+
+        .inner {
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            background: firebrick;
+            position: absolute;
+            top:400px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer" id='outer'>
+        <div class="center" id='center'>
+            <div class="inner" id='inner'></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // mouseover鼠标滑过； 从子元素 滑过 父元素  也会触发该事件
+
+    // outer.onmouseover = function (e) {
+    //     var ele = document.createElement('div');
+    //     ele.className = 'inner';
+    //     ele.style.left = e.clientX + 'px';
+    //     ele.style.top = e.clientY + 'px';
+    //     outer.appendChild(ele);
+    // }
+
+    // outer.onmouseover = function(){
+    //     console.log('over1')
+    // }
+    // center.onmouseover = function(){
+    //     console.log('over2')
+    // }
+    // inner.onmouseover = function(){
+    //     console.log('over3')
+    // }
+
+    outer.onmouseenter = function(){
+        console.log('over1')
+    }
+    center.onmouseenter = function(){
+        console.log('over2')
+    }
+    inner.onmouseenter = function(){
+        console.log('over3')
+    }
+    // over  先自己 后别人
+    // enter 先别人 后自己
+
+    // 放大镜   事件委托  多级菜单案例； 拖拽的部分
+</script>

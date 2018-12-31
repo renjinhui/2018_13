@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://baidu.com" id='OA'>百度一下</a>
+    <!-- <a href="javascript:;" id='OA'>百度一下</a> -->
+    <!-- <a href="javascript:void(0);" id='OA'>百度一下</a> -->
+    <input type="text" id='inp' style="margin-bottom:2000px">
+</body>
+</html>
+<script>
+    let OA = document.getElementById('OA');
+    // 阻止默认行为 结构上直接阻止
+    OA.onclick = function (e) {
+        // e.preventDefault(); 
+        // e.returnValue = false; 低版本IE用 
+        alert(11);
+        return false;
+    }
+    inp.onkeydown = function(e){
+        // e.preventDefault();
+        // e.returnValue = false;
+        console.log(e.keyCode);
+        if(e.keyCode<48||e.keyCode>57)return false;
+        // return false;
+    }
+    inp.oninput = function(e){
+        console.log('input');
+    }
+    inp.onkeyup = function(e){
+        console.log('up');
+    }
+</script>

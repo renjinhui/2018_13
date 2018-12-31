@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            overflow: scroll;
+            background: -webkit-linear-gradient(top left,red,blue,orange);
+            margin-bottom:2000px; 
+        }
+    </style>
+</head>
+<body>
+    <button id='btn'>按钮</button>
+    <div class="box">
+
+            鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件鼠标事件v
+    </div>
+    <input type="text" id='inp' value='3333'>
+    <textarea id='text'></textarea>    
+</body>
+</html>
+<script>
+    // 鼠标事件
+    // 元素.onclick = function(){} 单击
+    // 元素.ondblclick = function(){} 双击 大约300ms内连续点击两次
+    // 元素.onmouseenter = function(){} 鼠标移入
+    // 元素.onmouseleave = function(){} 鼠标移出
+    // 元素.onmouseover = function(){}  鼠标滑过
+    // 元素.onmouseout = function(){}   鼠标滑出
+    // 元素.onmousemove = function(){}  鼠标滑动
+    // 元素.onmousedown = function(){}  鼠标按下
+    // 元素.onmouseup = function(){}    鼠标抬起
+    // 元素.onmousewheel = function(){} 滚轮移动
+
+    var box = document.querySelector('.box');
+    box.onmouseover = function () {
+        console.log(222);
+    }
+    box.onmouseout = function () {
+        console.log(111);
+    }
+    // box.onmousemove = function () {
+    //     console.log(333);
+    // }
+    box.onmousedown = function () {
+        console.log(444)
+    }
+    box.onmousewheel = function(){
+        console.log(555);
+    }
+
+
+    // 键盘的事件
+    // 元素.onkeydown = function(){} 键盘按下
+    // 元素.onkeyup = funtion(){} 键盘抬起 
+    // 元素.onkeypress = function(){} 有些系统键监听不到
+    // 元素是 input  textarea  document.body  document.documentElement 
+    //        document  window
+    // 
+    // document.body.onkeydown = function(){
+    //     console.log(666);
+    // }
+    // inp.onkeydown = function(){
+    //     console.log(777)
+    // }
+    // text.onkeydown = function () {
+    //     console.log(888);
+    // }
+    // window.onkeypress = function () {
+    //     console.log(999)
+    // }
+
+
+
+    // input 事件
+    // input.onfocus = function(){}  获取焦点（光标）时触发
+    // input.onblur = function(){}   失去焦点
+    // input.onchange = function(){}  内容改变并且失去焦点才会触发
+    // input.oninput = function(){}   只要内容发生改变就会触发
+    //       onpropertychange
+
+    inp.oninput = function(){
+        console.log(this.value);
+        // /^\d+$/.test(this.value) ? null : this.value = this.value.replace(/\D/g,'')
+        // this.value = 2222;
+        this.value = this.value.replace(/\D/g,'')
+    }
+
+    // 系统事件
+    // window.onload = function(){}
+    // window.onresize = function(){}
+    // document.body.onscroll = function(){}
+    // window.onscroll = function(){}
+
+
+    // 移动端常用事件
+    // 元素.ontouchstart = function(){}  触碰到元素触发
+    // 元素.ontouchend = function(){}    离开元素触发
+    // 元素.ontouchmove = function(){} 
+    // 元素.onclick = function(){}  有大约300ms的延迟
+    box.ontouchstart = function(){
+        console.log('start');
+    }
+    box.ontouchend = function(){
+        console.log('end');
+    }
+
+
+    // 事件对象  事件的传播机制
+</script>
