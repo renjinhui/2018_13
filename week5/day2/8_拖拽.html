@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0"></div>
+</body>
+</html>
+<script>
+    let box = document.getElementById('box');
+    box.onmousedown = function(e){
+        // console.log(e.pageX);
+        // console.log(e.pageY);
+        // console.log('------------------------')
+        this.startX = e.pageX;
+        this.startY = e.pageY;
+        this.startL = parseFloat(this.style.left);
+        this.startT = parseFloat(this.style.top);
+        this.canM = true;
+    }
+    document.onmousemove = function (e) {
+        if (!box.canM) {
+            return;
+        }
+        // console.log(e.pageX-this.startX); // 鼠标横轴移动
+        // console.log(e.pageY-this.startY);//  鼠标纵轴移动
+        move.call(box,e)
+    }
+    box.onmouseup = function () {
+        this.canM = false;
+    }
+    function move(e){
+        this.style.left = this.startL + e.pageX-this.startX + 'px';
+        this.style.top = this.startT + e.pageY-this.startY + 'px';
+    }
+
+    // 解决鼠标丢失的问题   1、this.setCapture() IE 火狐 有这个方法；谷歌没有
+    // 把move 事件绑定到 根节点上；
+</script>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='box'>
+        <li>
+            <span>第一级菜单1</span>
+            <ul>
+                <li>
+                    <span>第二级菜单1</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                        <li>
+                            <span>第三级菜单11</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span>第二级菜单2</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span>第一级菜单12</span>
+            <ul>
+                <li>
+                    <span>第二级菜单1</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                        <li>
+                            <span>第三级菜单11</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span>第二级菜单2</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span>第一级菜单13</span>
+            <ul>
+                <li>
+                    <span>第二级菜单1</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                        <li>
+                            <span>第三级菜单11</span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span>第二级菜单2</span>
+                    <ul>
+                        <li>
+                            <span>第三级菜单</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
+<script>
+    // 把所有的菜单先折住
+    // 获取所有的ul  让 ul display none
+    let box = document.getElementById('box');
+    let oUls = box.getElementsByTagName('ul');
+    var qqq = [...oUls].forEach((item)=>{
+        item.style.display = 'none';
+        return 123
+    });
+    // var www = [...oUls].map((item,index)=>{
+    //     // return 123
+    // });
+    // map  返回值 是一个数组； 数组的长度 跟 循环的数组一致
+    //                  数组中的每一项 是由回调函数的return值决定的
+
+    // console.log(qqq,www)
+
+    box.onclick = function (e) {
+        e = e || window.event;
+        let tar = e.target || e.srcElement;
+        if(tar.nodeName.toLowerCase()==='span'){
+            let nextE = tar.nextElementSibling;
+            if(nextE && nextE.nodeName.toLowerCase()==='ul'){
+                if(nextE.style.display == 'none'){
+                    nextE.style.display = 'block'
+                }else{
+                    nextE.style.display = 'none';
+
+                    // 保证 所有的儿子及孙子 全部 折住
+                    let temp = nextE.getElementsByTagName('ul');
+                    [...temp].forEach((item)=>{
+                        item.style.display = 'none';
+                    })
+                }
+            }
+        }
+    }
+    
+</script>

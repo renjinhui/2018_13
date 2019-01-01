@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            margin: 20px;
+            padding: 20px;
+            border: 1px dashed blue;
+            margin-top: 300px
+        }
+    </style>
+</head>
+<body>
+    <div><button id="btn">按钮</button></div>
+    <div id="outer">
+        <div id="center">
+            <div id="inner">
+                inner
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function fn1(e) {
+        e.preventDefault();
+        
+        console.log(this)
+    }
+    function fn2() {
+        console.log(2)
+    }
+    function fn3() {
+        console.log(3)
+    }
+
+    //DOM 0级事件绑定
+    // btn.onclick = fn1;
+    // btn.onclick = fn2;
+    // btn.onclick = fn3;
+    // btn.onclick = null;// DOM0级 移除事件
+
+    //DOM 2级事件绑定
+    // 第一个参数是事件类型； 第二参数是点击时要执行的函数； 
+    // false 代表函数(fn1)要在事件冒泡阶段触发； 
+    // true 代表函数(fn1)要在捕获阶段触发
+    // btn.addEventListener('click',fn1,false); 
+    // btn.removeEventListener('click',fn1,false);
+
+    // IE低版本 DOM 2级事件绑定；只有冒泡
+    // fn1中的this是指向window的
+    // btn.attachEvent('onclick',fn1); //添加
+    // btn.detachEvent('onclick',fn1); //移除 btn ???
+
+
+    // outer.addEventListener('click',fn1,true)
+    // center.addEventListener('click',fn2,false)
+    // inner.addEventListener('click',fn3,true)
+    window.addEventListener('touchmove', fn1, { passive: false })
+
+</script>

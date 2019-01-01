@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 20px;
+            border: 1px dashed darkblue
+        }
+        ul li:nth-child(2n){
+            background: lightcoral;
+            margin: 10px 0;
+        }
+        ul li:nth-child(2n+1){
+            background: skyblue;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="center">
+            <div id="inner">
+                inner
+            </div>
+        </div>
+    </div>
+    <ul id='ul_box'>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+</body>
+</html>
+<script>
+    // var oLis = document.getElementsByTagName('li');
+    // for(let i = 0; i < oLis.length; i++){
+    //     oLis[i].onclick = function () {
+    //         alert(i+1)
+    //     }
+    // }
+    ul_box.onclick = function (e) {
+        e = e || window.event;
+        var tar = e.target || e.srcElement;
+        alert(tar.innerHTML)
+    }
+    outer.onclick = function (e) {
+        console.log(e.target)
+    }
+</script>
