@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 发布订阅
+    // 订阅   发布   取消订阅
+
+    var ary = [];// 名单列表
+
+    // 订阅函数
+    function on(f){
+        ary.push(f)
+    }
+
+    // 发布函数
+    function fire(){
+        ary.forEach((item)=>{
+            item && item()
+        })
+
+        // 把数组中没用的 null 去掉
+        let arr = [];
+        ary.forEach((item)=>{
+            item !==null ? arr.push(item): null
+        })
+        ary = arr;
+    }
+
+    // 取消订阅函数
+    function off(f){
+        // 怎么从 ary 中删除 f;
+        // let n = ary.indexOf(f);
+        // if(n != -1){
+        //     ary.splice(n,1)
+        // }
+        ary = ary.map((item)=>{
+            return item !== f ? item : null 
+        })
+    }
+
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+        off(f1)
+    }
+    function f3() {
+        console.log(3);
+    }
+    on(f1);
+    on(f2);
+    on(f3);
+    fire();
+    // off(f2);
+    // off(f1);
+    // off(f3);
+    // fire();
+
+</script>

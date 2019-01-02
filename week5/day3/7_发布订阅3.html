@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    function on(ele,type,f) {
+        ele[type] = ele[type] || [];
+        ele[type].push(f);
+    }
+    function fire(ele,type) {
+        ele[type] = ele[type] || [];
+        for(let i =0; i < ele[type].length;i++){
+            ele[type][i] && ele[type][i]()
+        }
+        let arr = [];
+        ele[type].map((item)=>{
+            item === null ? null : arr.push(item)
+        })
+        ele[type] = arr;
+    }
+
+    function off(ele,type,f){
+        ele[type] = ele[type] || [];
+        ele[type] = ele[type].map((item)=>{
+            return item !==f ? item : null
+        });
+    }
+
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        off(box,f2)
+        console.log(2);
+    }
+    function f3() {
+        console.log(3);
+    }
+
+</script>

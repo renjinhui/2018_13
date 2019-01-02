@@ -92,11 +92,11 @@
     function drop() {
         if(!this.flag){this.flag = 0}
         if(!this.dropSpeed){
-            this.dropSpeed = 5
+            this.dropSpeed = 7
         }else{
-            this.dropSpeed += 5;
+            this.dropSpeed += 7;
         }
-        this.dropSpeed *= 0.98;
+        // this.dropSpeed *= 0.98;
         let t = this.offsetTop + this.dropSpeed;
         if(t > this.maxT){
             this.dropSpeed *= -1;

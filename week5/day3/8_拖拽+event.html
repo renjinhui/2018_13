@@ -26,6 +26,7 @@
     <div id="box" style="left: 0;top:0"></div>
 </body>
 </html>
+<script src="./event.js"></script>
 <script>
     var box = document.getElementById('box');
 
@@ -42,8 +43,15 @@
         // this ---> box
         this.DRAGM = dragMove.bind(this);// 把新产生的函数体存到一个属性上 是为了 在移除事件时 能够把该事件对应的函数移除掉；
         this.DRAGE = dragEnd.bind(this)
-        document.addEventListener('mousemove',this.DRAGM,false);
-        document.addEventListener('mouseup',this.DRAGE,false);
+        // document.addEventListener('mousemove',this.DRAGM,false);
+        // document.addEventListener('mouseup',this.DRAGE,false);
+        on(document,'onmousemove',this.DRAGM);
+        on(document,'mouseup',this.DRAGE);
+        // 约定 事件类型只要是 以 ‘my’开头的； 就是自己定义的事件
+        //                    其他的都是原生事件
+
+        on(this,'myFly',fly);
+        on(this,'myDrop',drop);
     }
 
     function dragMove(e) {
@@ -62,11 +70,13 @@
         document.removeEventListener('mouseup',this.DRAGE,false);
         // this.flag = 500;
         this.maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
-        fly.call(this);// 让fly 中的this 变成这个小球
+        // fly.call(this);// 让fly 中的this 变成这个小球
         
         this.maxT = (document.documentElement.clientHeight||document.body.clientHeight) - this.offsetHeight;
         this.dropSpeed = 5;
-        drop.apply(this);
+        // drop.apply(this);
+        fire(this,'myFly');
+        fire(this,'myDrop');
     }
 
     // 实现左右弹的效果
@@ -94,11 +104,6 @@
             fly.call(this)// this 是 箭头函数的，但是箭头函数没有this ;找的是上级的this
         }, 20);
     }
-
-    // setTimeout(function(){
-    //     // this 定时器中的this 是 window 
-    //     // fly() fly中的this 是 window ; fly前没点
-    // }, timeout);
 
     // 实现上下弹的效果    
     function drop(){
