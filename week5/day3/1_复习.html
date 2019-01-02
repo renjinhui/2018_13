@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id='btn'>按钮</button>
+</body>
+</html>
+<script>
+    // 放大镜的思路 
+    // 俩盒子 左盒子L放小图   右盒子R 放大图BM
+    // 左盒子 有个小蒙层M  M/L = R/BM
+    // M 跟着 鼠标移动；鼠标到 body 的偏移 - 盒子 到 body 的偏移 = 鼠标到盒子的偏移
+    // 若按照上边的方式移动 那么 蒙层在鼠标的 右下角
+    // 为了让 鼠标位于盒子的正中间；我们在上边的偏移量的基础上 减去了盒子 宽高的一半
+    // 给蒙层的位置设置了 上下左右边界；
+    // 大图片的移动  跟 小蒙层移动 方向相反； 距离是 小蒙层移动的  R/M 倍
+
+    // 事件委托  绑定事件的时候只给父亲绑定；
+    //          通过事件源 得到点击的具体元素； 然后再去做具体的逻辑；
+
+    // DOM2  btn.addEventListener('事件类型',要执行的函数,false) 事件类型 没有 on
+    //       btn.removeEventListener('事件类型',要执行的函数,false)
+    // IE低版本  btn.attachEvent('on事件类型',要执行的函数)
+    //           btn.detachEvent('on事件类型',要执行的函数)
+
+    // btn.addEventListener('click',function(){
+    //     console.log(111)
+    // },false);
+    // btn.removeEventListener('click',function(){
+    //     console.log(111)
+    // },false);
+    btn.addEventListener('click',fn,false);
+    btn.removeEventListener('click',fn,false);
+    function fn() {
+        console.log(1111)
+    }
+
+    // 拖拽
+    // 鼠标按下 让小球跟着鼠标移动  鼠标抬起； 运动停止
+    // 鼠标按下  记录了鼠标的初始位置、小球的初始位置； 添加了一个属性 控制 鼠标移动时 计算的代码是否执行
+    // 鼠标移动  鼠标当前的位置 - 鼠标初始位置；把这个差值 给了 小球（小球的初始位置 + 差值）
+    // 鼠标抬起  把属性改成false
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0"></div>
+</body>
+</html>
+<script>
+    var box = document.getElementById('box');
+
+    box.onmousedown = dragStart;
+    function dragStart(e) {
+        // this  小球
+        // 鼠标的初始位置
+        this.startX = e.pageX;
+        this.startY = e.pageY;
+
+        // 盒子的初始位置
+        this.startL = parseFloat(this.style.left);
+        this.startT = parseFloat(this.style.top);
+        // this ---> box
+        this.DRAGM = dragMove.bind(this);// 把新产生的函数体存到一个属性上 是为了 在移除事件时 能够把该事件对应的函数移除掉；
+        this.DRAGE = dragEnd.bind(this)
+        document.addEventListener('mousemove',this.DRAGM,false);
+        document.addEventListener('mouseup',this.DRAGE,false);
+    }
+
+    function dragMove(e) {
+        this.style.left = this.startL + e.pageX - this.startX + 'px';
+        this.style.top = this.startT + e.pageY - this.startY + 'px';
+    }
+
+    function dragEnd(e){
+        console.log(this);
+        document.removeEventListener('mousemove',this.DRAGM,false);
+        document.removeEventListener('mouseup',this.DRAGE,false);
+    }
+</script>

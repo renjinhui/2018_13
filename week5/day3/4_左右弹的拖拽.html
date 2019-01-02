@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0"></div>
+</body>
+</html>
+<script>
+    var box = document.getElementById('box');
+
+    box.onmousedown = dragStart;
+    function dragStart(e) {
+        // this  小球
+        // 鼠标的初始位置
+        this.startX = e.pageX;
+        this.startY = e.pageY;
+
+        // 盒子的初始位置
+        this.startL = parseFloat(this.style.left);
+        this.startT = parseFloat(this.style.top);
+        // this ---> box
+        this.DRAGM = dragMove.bind(this);// 把新产生的函数体存到一个属性上 是为了 在移除事件时 能够把该事件对应的函数移除掉；
+        this.DRAGE = dragEnd.bind(this)
+        document.addEventListener('mousemove',this.DRAGM,false);
+        document.addEventListener('mouseup',this.DRAGE,false);
+    }
+
+    function dragMove(e) {
+        this.style.left = this.startL + e.pageX - this.startX + 'px';
+        this.style.top = this.startT + e.pageY - this.startY + 'px';
+        if(!this.prevX){
+            this.prevX = this.startX;
+        }
+        this.flag = e.pageX - this.prevX;// 距离  两次move触发的时间间隔 当作单位时间
+        this.prevX = e.pageX;
+    }
+
+    function dragEnd(e){
+        console.log(this);
+        document.removeEventListener('mousemove',this.DRAGM,false);
+        document.removeEventListener('mouseup',this.DRAGE,false);
+        // this.flag = 500;
+        this.maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        fly.call(this);// 让fly 中的this 变成这个小球
+    }
+
+    // 实现左右弹的效果
+    function fly() {
+        // this 是小球
+        clearTimeout(this.flyTimer);
+        // this.flag--;
+        this.flag*=0.98;
+        let l = parseFloat(this.style.left) + this.flag;
+        // let maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        if(l > this.maxL){
+            l = this.maxL;
+            this.flag *= -1;
+        }
+        if(l < 0){
+            l = 0;
+            this.flag *= -1;
+        }
+        this.style.left = l + 'px';
+        console.log(this.flag)
+        if(Math.abs(this.flag) < 0.1){
+            return
+        }
+        this.flyTimer = setTimeout(() => {
+            fly.call(this)// this 是 箭头函数的，但是箭头函数没有this ;找的是上级的this
+        }, 20);
+    }
+
+    // setTimeout(function(){
+    //     // this 定时器中的this 是 window 
+    //     // fly() fly中的this 是 window ; fly前没点
+    // }, timeout);
+
+
+</script>

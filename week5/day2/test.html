@@ -1,53 +1,114 @@
-
 <!DOCTYPE html>
-<html lang="ch-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
         *{
             margin: 0;
             padding: 0;
-            list-style: none;
         }
-        .outer{
-            width: 400px;
-            height: 400px;
-            margin:auto;
-            background: darkcyan;
-        }
-        .center{
-            width: 300px;
-            height: 300px;
-            margin:auto;
-            background: lightcoral;
-        }
-        .inner{
-            width: 200px;
-            height: 200px;
-            margin:auto;
-            background: darkgoldenrod;
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
             position: absolute;
+            left: 0;
+            top:0;
         }
     </style>
 </head>
 <body>
-
-<div class="outer" id="outer">
-    <div class="center" id="center">
-        <div class="inner" id="inner"></div>
-    </div>
-</div>
-<script>
-
-
-    outer.onmouseover = function () {
-        console.log('冒泡阶段');
-    }
-    outer.onmouseenter = function () {
-        console.log('捕获阶段');
-    }
-
-</script>
+    <div id="box" style="left: 0;top:0"></div>
 </body>
-<html>
+</html>
+<script>
+    let box = document.getElementById('box');
+    // box.onmousedown = function(e){
+    //     this.startX = e.pageX;
+    //     this.startY = e.pageY;
+    //     this.startL = parseFloat(this.style.left);
+    //     this.startT = parseFloat(this.style.top);
+    //     document.onmousemove = function (e) {
+    //         move.call(box,e)
+    //     }
+    //     document.onmouseup = function () {
+    //         document.onmousemove = null;
+    //         ocument.onmouseup = null
+    //     }
+    // }
+    box.onmousedown = dragStart;
+    function dragStart(e) {
+        this.startX = e.pageX;
+        this.startY = e.pageY;
+        this.startL = parseFloat(this.style.left);
+        this.startT = parseFloat(this.style.top);
+        this.DragM = dragMove.bind(this);
+        this.DragE = dragEnd.bind(this)
+        document.addEventListener('mousemove',this.DragM,false);
+        document.addEventListener('mouseup',this.DragE,false);
+    }
+    function dragMove(e) {
+        this.style.left = this.startL + e.pageX-this.startX + 'px';
+        this.style.top = this.startT + e.pageY-this.startY + 'px';
+        if(!this.prevX){
+            this.prevX = this.startX
+        }
+        this.speed = e.pageX - this.prevX;
+        this.prevX = e.pageX;
+    }
+    function dragEnd(e) {
+        document.removeEventListener('mousemove',this.DragM,false);
+        document.removeEventListener('mouseup',this.DragE,false);
+        this.maxL = (document.documentElement.clientWidth || document.body.clientWidth) - this.offsetWidth;
+        fly.call(this);
+        this.maxT = (document.documentElement.clientHeight || document.body.clientHeight) - this.offsetHeight;
+        drop.call(this)
+    }
+
+    function fly() {
+        clearTimeout(this.flyTimer);
+        this.speed *= 0.98;
+        let l = parseFloat(this.style.left) + this.speed;
+        if(l >= this.maxL){
+            this.speed *= -1;
+            l = this.maxL
+        }
+        if(l <= 0){
+            this.speed *= -1;
+            l = 0;
+        }
+        this.style.left = l + 'px';
+        if(Math.abs(this.speed) > 0.1){
+            this.flyTimer = setTimeout(() => {
+                fly.call(this)
+            }, 20);
+        }
+    }
+    function drop() {
+        if(!this.flag){this.flag = 0}
+        if(!this.dropSpeed){
+            this.dropSpeed = 5
+        }else{
+            this.dropSpeed += 5;
+        }
+        this.dropSpeed *= 0.98;
+        let t = this.offsetTop + this.dropSpeed;
+        if(t > this.maxT){
+            this.dropSpeed *= -1;
+            t = this.maxT
+            this.flag++
+        }else{
+            this.flag = 0;
+        }
+        this.style.top = t + 'px';
+        if(this.flag>2){
+            return;
+        }
+        this.dropTimer = setTimeout(drop.bind(this),30);
+    }
+</script>
