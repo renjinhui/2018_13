@@ -21,12 +21,13 @@
         ele.ary = ele.ary || []; //[f1,f2,f3]
         // ele.ary = ele.ary.filter((item)=>{ //[f1,f2,f3]
         //     item && item(); //f2执行  ele.ary变成了[null,f2,f3] ---》 [f1,f2,f3]
+        //     console.log(ele.ary)
         //     return item;
         // });
-        // ele.ary.forEach((item)=>{
-        //     debugger;
-        //     item && item()
-        // })
+        ele.ary.forEach((item)=>{
+            debugger;
+            item && item()
+        }) 
         for(let i =0; i < ele.ary.length;i++){
             ele.ary[i] && ele.ary[i]()
         }

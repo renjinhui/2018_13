@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box,#box2,#box3{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        #box2{
+            background: black
+        }
+        #box3{
+            background: salmon
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0">1</div>
+    <div id="box2" style="left: 0;top:0">2</div>
+    <div id="box3" style="left: 0;top:0">3</div>
+</body>
+</html>
+<script src="./event.js"></script>
+<script src="./drag.js"></script>
+<script>
+    var box = document.getElementById('box');
+    new Drag(box);
+    new Drag(box2);
+    new Drag(box3);
+    
+    var n = 1;
+    function addZIndex() {
+        n++;
+        //this  小球
+        this.style.zIndex = n;
+    }
+    on(box,'myZIndex',addZIndex);
+    on(box2,'myZIndex',addZIndex);
+    on(box3,'myZIndex',addZIndex);
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0"></div>
+</body>
+</html>
+<script>
+    // function Persron(){}
+    // Person.prototype.aaa = function(){}
+    // Person.qqq = function(){}
+    class Person{
+        // 只能通过 new  执行
+        constructor(a,b,c){
+            // a b c 就是 对应的 new 时，传进来的实参
+            // this 就是新产生的实例
+            this.a = a;
+            this.b = b;
+            console.log(arguments)
+        }
+        aaa(){
+            // Person类的公有属性；  this 也是指向产生的实例
+            console.log(this)
+        }
+        bbb(){
+
+        }
+        static qqq(){
+            console.log(this);// this 看点
+        }
+    }
+    // class 声明的 类； 我们只能通过 new 执行
+    var  p = new Person(1,2,3,4,5);
+    console.log(p);
+
+    // class 继承  私有  公有  静态的
+    class Child extends Person{
+        constructor(){
+            // 继承 时； 若写了 constructor 则必写super
+            super(100,200);// 是把 Person的私有属性继承过来;必写
+            this.c = 1;
+            this.d = 2;
+        }
+        aaa(){}
+        www(){
+
+        }
+    }
+
+    class Child2 extends Child{
+        
+    }
+    var c = new Child();
+</script>

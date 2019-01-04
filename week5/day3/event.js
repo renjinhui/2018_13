@@ -1,7 +1,9 @@
 function on(ele,type,f) {
     if(/^my\w+/.test(type)){
         ele[type] = ele[type] || [];
-        ele[type].push(f);
+        if(ele[type].indexOf(f)==-1){
+            ele[type].push(f);
+        }
     }else{
         type = type.replace(/on/g,'')
         ele.addEventListener(type,f,false);

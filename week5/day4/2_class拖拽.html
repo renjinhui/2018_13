@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: darkblue;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left: 0;top:0"></div>
+</body>
+</html>
+<script src="./event.js"></script>
+<script>
+    var box = document.getElementById('box');
+    // box.onmousedown = dragStart;
+
+    class Drag{
+        constructor(ele){
+            // this Drag 的实例
+            // this.ele 小球
+            // 把 dragStart dragMove  dragEnd 中的this 全部换成 this.ele
+            this.ele = ele;
+            this.DragS = this.dragStart.bind(this);
+            this.DragM = this.dragMove.bind(this);
+            this.DragE = this.dragEnd.bind(this);
+            // on(this.ele,'mousedown',this.dragStart.bind(this))
+            on(this.ele,'mousedown',this.DragS)
+        }
+        dragStart(e) {
+            this.ele.startX = e.pageX;
+            this.ele.startY = e.pageY;
+            this.ele.startL = parseFloat(this.ele.style.left);
+            this.ele.startT = parseFloat(this.ele.style.top);
+            // this.ele.DRAGM = this.dragMove.bind(this);// 把新产生的函数体存到一个属性上 是为了 在移除事件时 能够把该事件对应的函数移除掉；
+            // this.ele.DRAGE = this.dragEnd.bind(this)
+            // on(document,'onmousemove',this.ele.DRAGM);
+            on(document,'onmousemove',this.DragM);
+            on(document,'mouseup',this.DragE);
+        }
+
+        dragMove(e) {
+            this.ele.style.left = this.ele.startL + e.pageX - this.ele.startX + 'px';
+            this.ele.style.top = this.ele.startT + e.pageY - this.ele.startY + 'px';
+        }
+
+        dragEnd(e){
+            console.log(this.ele);
+            off(document,'mousemove',this.DragM);
+            off(document,'mouseup',this.DragE);
+        }
+
+    }
+
+    new Drag(box);
+</script>
