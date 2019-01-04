@@ -16,10 +16,11 @@
         #ul_box {
             width: 470px;
             margin: 30px auto;
-            min-height: 300px;
+            height: 650px;
             background: gold;
-            overflow: hidden;
-            padding: 0 10px 10px;
+            /* overflow: hidden; */
+            padding: 0 10px 0px;
+            position: relative;
         }
 
         li {
@@ -37,7 +38,7 @@
         }
 
         li:nth-child(3n+2) {
-            /* 2 5 8 11 */
+            /* 2 5 8 11  第几个 */
             margin: 10px 10px 0;
         }
     </style>
@@ -85,3 +86,109 @@
 </body>
 
 </html>
+<script src="../event.js"></script>
+<script src="../drag.js"></script>
+<script src="./utils.js"></script>
+<script src="./animate.js"></script>
+<script>
+    // 获取所有的元素
+    var oLis = document.getElementsByTagName('li');
+    [...oLis].reverse().forEach((item,index)=>{
+        // console.log(item.offsetLeft);
+        item.style.left = item.offsetLeft + 'px';
+        item.style.top = item.offsetTop + 'px';
+        item.style.position = 'absolute';
+        // 要把 2 5 8 11 这几项的css margin 改成 ‘10px 0’ 3n+2 = 11
+        item.style.margin = '0';
+        // (index+1-2)%3 == 0 ? item.style.margin = '10px 0' : null;// 2 5 8 11
+        new Drag(item);
+        on(item,'myZIndex',addZIndex);
+        on(item,'myIsHit',isHit);
+        on(item,'myChange',changePosition);
+    })
+
+    // 提升z-index
+    var n = 0;
+    function addZIndex() {
+        n++;
+        this.style.zIndex = n;
+    }
+
+    //判断是否碰撞
+    function isHit() {
+        // console.log(this);
+        // this 拖动的元素
+        // 判断是否碰上？ 用取反的思想去判断
+        // 获取 拖动元素的 上下左右边框 到 ul 的偏移量
+        this.l = this.offsetLeft;
+        this.r = this.l + this.offsetWidth;
+        this.t = this.offsetTop;
+        this.b = this.t + this.offsetHeight;
+
+        this.hitAry = []; // 存储碰撞上的元素
+        [...oLis].forEach((item)=>{
+            if(item === this)return;
+            // 查看 item 是否跟 this 碰上
+            item.l = item.offsetLeft;
+            item.r = item.l + item.offsetWidth;
+            item.t = item.offsetTop;
+            item.b = item.t + item.offsetHeight;
+            if(item.l > this.r || item.r < this.l || item.t > this.b || item.b < this.t){
+                // item.l > this.r 拖动的元素在 碰撞元素的左边
+                // item.r < this.l 拖动的元素在 碰撞元素的右边
+                // item.t > this.b 拖动的元素在 碰撞元素的上边
+                // item.b < this.t 拖动的元素在 碰撞元素的下边
+                // 以上四种情况是碰不上的
+
+                // 碰不上的 被背景色设回来
+                item.style.background = '';
+            }else{
+                item.style.background = 'blue';// 给碰撞上的元素设置背景色;
+                this.hitAry.push(item);
+            }
+        })
+        // console.log(this.hitAry)
+    }
+
+    //交换位置
+    function changePosition(){
+        // console.log(112);
+        // this.hitAry 中存储都是碰撞的元素
+        this.hitAry.sort((a,b)=>{
+            // a,b 是 碰撞的元素
+            let l  = a.offsetLeft-this.offsetLeft;
+            let t = a.offsetTop-this.offsetTop;
+            let instanceA = Math.pow(l,2) + Math.pow(t,2);
+
+            let l2  = b.offsetLeft-this.offsetLeft;
+            let t2 = b.offsetTop-this.offsetTop;
+            let instanceB = Math.pow(l2,2) + Math.pow(t2,2);
+
+            return instanceA - instanceB;
+        })
+        console.log(this.hitAry[0])
+
+        // 判断 this.hitAry是否是空数组； 若是空数组 让this 回到原来的位置
+        if(this.hitAry.length == 0){
+            // this.style.left = this.startL + 'px';
+            // this.style.top = this.startT + 'px';
+            animate(this,1000,{left:this.startL,top:this.startT})
+            return;
+        }
+
+        // 交换位置 this.hitAry[0] 和 this交换位置
+        let sl = this.hitAry[0].offsetLeft;// 记录 最近元素的初始位置
+        let st = this.hitAry[0].offsetTop;
+
+        // this.hitAry[0].style.left = this.startL + 'px';
+        // this.hitAry[0].style.top = this.startT + 'px';
+        // this.style.left = sl + 'px';
+        // this.style.top = st + 'px';
+        //$(this).animate({left:top:})
+        animate(this.hitAry[0],1000,{left:this.startL,top:this.startT});
+        animate(this,1000,{left:sl,top:st});
+        // 交换完位置之后  把背景还原
+        this.hitAry.forEach(item => item.style.background = '');
+    }
+    animate
+</script>

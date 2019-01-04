@@ -14,7 +14,8 @@ class Drag{
         on(document,'onmousemove',this.DragM);
         on(document,'mouseup',this.DragE);
 
-        fire(this.ele,'myZIndex')
+        fire(this.ele,'myZIndex');
+        fire(this.ele,'myIsHit');
     }
 
     dragMove(e) {
@@ -23,12 +24,15 @@ class Drag{
         e.returnValue = false;
         this.ele.style.left = this.ele.startL + e.pageX - this.ele.startX + 'px';
         this.ele.style.top = this.ele.startT + e.pageY - this.ele.startY + 'px';
+        
+        fire(this.ele,'myIsHit');
     }
 
     dragEnd(e){
         console.log(this.ele);
         off(document,'mousemove',this.DragM);
         off(document,'mouseup',this.DragE);
+        fire(this.ele,'myChange');// 松手时 触发从交换位置函数
     }
 
 }
