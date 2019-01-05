@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='ulBox'>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</body>
+</html>
+<script>
+    // ulBox.onclick = fn.bind(ulBox,1,2,3);
+    // function fn(a,b,c,eee) {
+    //     console.log(eee);
+    // }
+    ulBox.onclick = function (e,a,b,c) {
+        // e 事件对象
+        // a,b,c undefined
+        console.log(arguments)
+    }
+</script>

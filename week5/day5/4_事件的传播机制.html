@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id='btn'>按钮</button>
+</body>
+</html>
+<script>
+    // 捕获  冒泡
+    // 
+    // 阻止 冒泡   e.stopPropagation() e.cancelBubble = true;
+    // 元素.addEventListener('事件类型','对应的回调函数',true); true 捕获阶段触发 false 冒泡阶段触发
+    //     removeEventListener
+    // 元素.attachEvent('on事件类型',回调函数) // 冒泡阶段触发
+    //      detachEvent
+    btn.onclick = function(e){
+        e.stopPropagation();
+        console.log(1)
+    };
+    // btn.onclick = function () {
+    //     console.log(2)
+    // }
+    // on(ele,type,f)
+    // off(ele,type,f)
+    btn.addEventListener('click',function(e){
+        console.log(3);
+        e.stopPropagation();
+        
+    },false)
+    btn.addEventListener('click',function(){console.log(2)},false)
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #litBox{
+            width: 100px;
+            height: 100px;
+            background: rgb(58, 56, 56);
+        }
+        #bigBox{
+            width: 300px;
+            height: 300px;
+            border: 1px solid salmon;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id='litBox' draggable="true"></div>
+    <div id='bigBox'></div>
+</body>
+</html>
+<script>
+    litBox.ondragstart = function(){
+        console.log('start');
+    }
+    bigBox.ondragover = function () {
+        console.log('over');
+    }
+    litBox.ondragend = function(){
+        console.log('end')
+    }
+    bigBox.ondragenter = function(){
+        console.log('enter');
+    }
+    bigBox.ondragleave = function(){
+        console.log('leave');
+    }
+    bigBox.ondrop = function(){
+        // 需要配合着 ondragover 使用 ？？？？ 自己查一下 写到总结里边
+    }
+</script>

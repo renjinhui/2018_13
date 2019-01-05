@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://baidu.com" id='OA'>百度</a>
+    <div>
+        <img id='img' src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=838930462,2792354004&fm=173&app=25&f=JPEG?w=218&h=146&s=EE127F877BF01E8A08C1B90C0300A041" alt="">
+    </div>
+</body>
+</html>
+<script>
+    OA.onclick = function (e) {
+        e.preventDefault();
+    };
+    /// scroll ????
+    img.onmousemove = function(e){
+        e.preventDefault();
+        e.returnValue = false;
+    }
+</script>

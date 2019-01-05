@@ -172,7 +172,7 @@
         if(this.hitAry.length == 0){
             // this.style.left = this.startL + 'px';
             // this.style.top = this.startT + 'px';
-            animate(this,1000,{left:this.startL,top:this.startT})
+            animate(this,100,{left:this.startL,top:this.startT})
             return;
         }
 
@@ -185,8 +185,8 @@
         // this.style.left = sl + 'px';
         // this.style.top = st + 'px';
         //$(this).animate({left:top:})
-        animate(this.hitAry[0],1000,{left:this.startL,top:this.startT});
-        animate(this,1000,{left:sl,top:st});
+        animate(this.hitAry[0],100,{left:this.startL,top:this.startT});
+        animate(this,100,{left:sl,top:st});
         // 交换完位置之后  把背景还原
         this.hitAry.forEach(item => item.style.background = '');
     }

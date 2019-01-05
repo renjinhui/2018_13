@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        #lit_img{
+            width: 200px;
+            height: 100px;
+        }
+        #big_img{
+            width: 400px;
+            height: 200px;
+            position: absolute;
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <img src="https://img.alicdn.com/tfs/TB1xLheyNnaK1RjSZFBXXcW7VXa-520-280.jpg_q90_.webp" alt="" id='lit_img'>
+    <img src="https://img.alicdn.com/tfs/TB1xLheyNnaK1RjSZFBXXcW7VXa-520-280.jpg_q90_.webp" alt="" id='big_img'>
+</body>
+</html>
+<script>
+    var litImg = document.getElementById('lit_img');
+    var bigImg = document.getElementById('big_img');
+    litImg.onmouseenter = function(){
+        bigImg.style.display = 'block'
+    }
+    litImg.onmousemove = function(e){
+        // 获取鼠标的位置； 然后让大图的位置跟鼠标相同即可
+        bigImg.style.left = e.pageX + 10 + 'px';
+        bigImg.style.top = e.pageY + 10 + 'px';
+    }
+    litImg.onmouseleave = function(){
+        bigImg.style.display = 'none';
+    }
+</script>

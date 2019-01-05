@@ -7,6 +7,9 @@ class Drag{
         on(this.ele,'mousedown',this.DragS)
     }
     dragStart(e) {
+        e = e || window.event;
+        e.preventDefault();
+        e.returnValue = false;
         this.ele.startX = e.pageX;
         this.ele.startY = e.pageY;
         this.ele.startL = parseFloat(this.ele.style.left);

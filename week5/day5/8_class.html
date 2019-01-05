@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.getName = function(){
+        console.log(this.name)
+    }
+    Person.getName = function(){
+        console.log(this.name)
+    }
+    var p1 = new Person('小红',9);
+    p1.getName() // ‘小红’
+    Person.getName() // 'Person'
+
+    class Animal{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+            return 123;
+        }
+        getName(){
+            console.log(this.name)
+        }
+        static getName(){
+            console.log(this.name)
+        }
+    }
+    // class 声明 只能通过 new 执行；
+    var lion = new Animal('辛巴',9);
+    lion.getName();
+    Animal.getName();
+
+    class Monkey extends Animal{
+        // 声明一个 Monkey类 继承 Animal类；
+        constructor(name,age,sex){
+            super(name,age) // Animal的contructor执行; 继承Animal的私有属性
+            var aa = sex + 12;
+            this.sex = aa;
+            // return 123  继承时不能return 值类型  其他跟 function 声明是一样的
+            // return function(){console.log(aa)} 
+            // // return {name:name}
+        }
+        getAge(){
+            console.log(this.age)
+        }
+    }
+    var wk = new Monkey('悟空',1000,'男');
+    wk.getName(); // 悟空
+    Monkey.getName();// Monkey  Animal.getName
+
+</script>

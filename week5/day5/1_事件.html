@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 30px;
+            border: 1px solid salmon
+        }
+        input{
+            outline: none ;
+            /* 
+              获取焦点时的外边框 消失
+            */
+        }
+    </style>
+</head>
+<body>
+    <button id='btn'>按钮</button>
+    <div id="outer">outer
+        <div id="center">center
+            <div id="inner">
+                inner
+            </div>
+        </div>
+    </div>
+    <input type="text" id='inp'> 
+    <!--  只能6-10位 数字字母下滑线 -->
+</body>
+</html>
+<script>
+    // 天生自带的
+    // 鼠标常用的事件
+    // onclick ondblclick onmouseover onmouseenter
+    //                    onmouseout  onmouseleave
+    // onmousedown  onmousemove  onmouseup  onmousewheel
+
+    // 键盘的常用事件  onkeydown onkeyup  onkeypress
+    //      window body document documentElement input textarea
+
+    // input 获取焦点触发  onfocus; 失去焦点触发 onblur;
+    //       onchange  内容改变 并且失去焦点时触发
+    //       oninput   只要内容改变 就会触发   IE 低版本onpropertychange
+
+    // 系统的常用事件 window.onload  $(document).ready  onscroll  onresize  window.onunload
+
+    // 移动端 ontouchstart  ontouchmove  ontouchend  onclick
+
+    outer.onmouseenter = function(){
+        console.log(1)
+    }
+    inp.onfocus = function(){
+        console.log('focus');
+    }
+    inp.onblur = function () {
+        console.log('blur')
+    }
+    inp.onkeydown = function () {
+        console.log(this.value)
+        // this.value = this.value.replace(/\W+/,'');
+    }
+    inp.oninput = function(){
+        // this.value  既能获取 也能设置
+        // console.log('input')
+        // console.log(this.value)
+        // this.value = 100
+        // /\w+/
+        // this.value = this.value.replace(/\W+/,'');
+        console.log(2)
+    }
+    inp.onkeyup = function () {
+        console.log(3);
+        // this.value = this.value.replace(/\W+/,'');
+        let str = this.value.replace(/\W+/,'');
+        // 6-10  splice   slice
+        if(str.length >10){
+            str = str.slice(0,10)
+        }
+        if(str.length < 6){
+            this.style.border = '1px solid red';
+        }else{
+            this.style.border = '1px solid #ccc';
+        }
+        this.value = str
+    }
+    inp.onblur = function () {
+        // this.value.length < 6 ? alert('最少6位'): null
+    }
+</script>

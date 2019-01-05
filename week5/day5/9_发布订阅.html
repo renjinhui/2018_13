@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="./jquery-3.3.1.js"></script>
+<script>
+    // 订阅  发布   取消订阅
+    var ary = [];
+    function on(f) {
+        if(ary.indexOf(f)==-1){
+            ary.push(f)
+        }
+    }
+    function fire() {
+        for(let i = 0; i < ary.length;i++){
+            ary[i] && ary[i]()
+        }
+    }
+    function off(f) {
+        // map循环数组 查看数组中的那一项时跟 f 相同的;
+        // 把相同的这一项换成 null
+        ary = ary.map(item=> f===item ? null : item)
+
+    }
+
+    var qqq = $.Callbacks();
+    function f1(){console.log(1)}
+    function f2(){console.log(2)}
+    qqq.add(f1);
+    qqq.add(f2);//添加
+    qqq.remove(f2);// 移除
+    qqq.fire();
+
+    on(f1)
+    on(f2);
+    fire()
+</script>
