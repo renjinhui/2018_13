@@ -1,0 +1,43 @@
+.lt {
+  float: left;
+}
+.rt {
+  float: right;
+}
+.of {
+  overflow: hidden;
+}
+.fff {
+  background: #ccc;
+}
+#ddd,
+.parent3 {
+  background: #ccc;
+  width: 300px;
+  height: 300px;
+}
+#ddd div {
+  background: #ccc;
+  font-size: 30px;
+}
+.pub {
+  width: 100px;
+  height: 100px;
+}
+.parent {
+  background: #ccc;
+  width: 300px;
+  height: 300px;
+  width: 100px;
+  height: 100px;
+}
+.parent div {
+  background: lightcoral;
+}
+.parent div {
+  background: #ccc;
+  font-size: 30px;
+}
+.parent3 {
+  background: red;
+}

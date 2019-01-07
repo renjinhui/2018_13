@@ -1,0 +1,39 @@
+@w:300px;// 这是宽度
+.lt{
+    float: left;
+}
+.rt{
+    float: right
+}
+.of{
+    overflow: hidden;
+}
+.fff{
+    background: #ccc
+}
+#ddd{
+    .fff;
+    width: @w;
+    height: @w;
+    div{
+        background: #ccc;
+        font-size: 30px;
+    }
+}
+.pub{
+    width: 100px;
+    height: 100px;
+}
+.parent{
+    div{
+        background: lightcoral;
+    }
+    #ddd;// 这种混合 也会把子元素的样式拿过来
+    .pub;
+}
+
+.parent3:extend(#ddd){
+    // 只获取  #ddd  自己的样式 
+    // 不会获取 #ddd儿子的样式
+    background: red;
+}

@@ -28,8 +28,9 @@
     litBox.ondragstart = function(){
         console.log('start');
     }
-    bigBox.ondragover = function () {
+    bigBox.ondragover = function (e) {
         console.log('over');
+        e.preventDefault();
     }
     litBox.ondragend = function(){
         console.log('end')
@@ -40,7 +41,13 @@
     bigBox.ondragleave = function(){
         console.log('leave');
     }
-    bigBox.ondrop = function(){
+    bigBox.ondrop = function(e){
         // 需要配合着 ondragover 使用 ？？？？ 自己查一下 写到总结里边
+        console.log(e);
+        e.preventDefault();
+        var file = e.dataTransfer.files[0];//获取 拖拽的 元素
+        var name = file.name; // 获取文件的名字
+        var type = file.type; // 获取文件的类型
+        console.log(file,name,type)
     }
 </script>

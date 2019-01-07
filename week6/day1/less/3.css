@@ -1,0 +1,10 @@
+.box {
+  width: 600px;
+  height: 500px;
+  line-height: 600px;
+  background: url('../img/1.jpeg');
+  float: left;
+}
+.box2 {
+  width: 400px;
+}

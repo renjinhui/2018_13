@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul li {
+  height: 50px;
+  background: lightcoral;
+}
+ul div {
+  height: 100px;
+  background: sienna;
+}
+ul :nth-child(2) {
+  width: 200px;
+}
+ul :nth-of-type(2) {
+  width: 100px;
+}
+ul :first-child {
+  background: skyblue;
+}
+ul [ee*='qq'] {
+  background: black;
+}
+ul :target {
+  height: 300px;
+  background: black;
+}
+ul :nth-child(1) div {
+  float: left;
+}
+ul :nth-child(1)::before {
+  content: 'hello';
+}
+ul :nth-child(1)::after {
+  content: '';
+  clear: both;
+  display: block;
+}

@@ -1,0 +1,31 @@
+// 函数
+.w(@a:400px,@b:400px){
+    width: @a;
+    height: @b;
+}
+.parent{
+    .w(200px,300px)
+}
+.parent2{
+    .w(200px)
+}
+
+#ddd(){
+    width: 200px;
+    height: 300px;;
+}
+.parent3{
+    #ddd();
+}
+
+
+// 循环
+.w1(@n,@cor:#ccc) when(@n < 50){
+    .box_@{n}{
+        width: 200px * @n;
+        height: 200px * @n;
+        background: @cor;
+    }
+    .w1(@n+10,@cor)
+}
+.w1(10,red);

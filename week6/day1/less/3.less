@@ -1,0 +1,18 @@
+@w:200px;// 声明一个 w 变量(自己声明)  代表 200px;
+// @w:200px  var w = '200px'; 支持四则运算
+@h:300px;
+@img:'../img/';// 若是路径 需要我们用的是 用@{}
+@w:400px;// 变量的值 是可以被覆盖的；
+@b:box;
+.@{b}{
+    // @w:600px;// 声明变量 有 作用域的概念
+    width: @w;
+    height: @w - 100;
+    line-height: @w;
+    background: url('@{img}1.jpeg');
+    float: left;
+    @w:600px;
+}
+.box2{
+    width: @w;
+}

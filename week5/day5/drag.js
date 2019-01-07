@@ -7,6 +7,7 @@ class Drag{
         this.DragE = this.dragEnd.bind(this);
         this.ele.onmousedown = this.DragS;
     }
+    get m(){return 12}
     dragStart(e){
         // this 是实例
         // this.ele 是拖动的元素

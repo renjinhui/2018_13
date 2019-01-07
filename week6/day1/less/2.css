@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.parent {
+  background: #ccc;
+}
+.parent div {
+  color: red;
+  font-size: 30px;
+}
+.parent div span {
+  color: #fff;
+}
+.parent2 div {
+  color: #ccc;
+}

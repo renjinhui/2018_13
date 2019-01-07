@@ -1,0 +1,32 @@
+.parent {
+  width: 200px;
+  height: 300px;
+}
+.parent2 {
+  width: 200px;
+  height: 400px;
+}
+.parent3 {
+  width: 200px;
+  height: 300px;
+}
+.box_10 {
+  width: 2000px;
+  height: 2000px;
+  background: red;
+}
+.box_20 {
+  width: 4000px;
+  height: 4000px;
+  background: red;
+}
+.box_30 {
+  width: 6000px;
+  height: 6000px;
+  background: red;
+}
+.box_40 {
+  width: 8000px;
+  height: 8000px;
+  background: red;
+}

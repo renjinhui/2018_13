@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.box {
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+  margin: 50px auto;
+  position: relative;
+}
+.box .banner_box {
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+.box .banner_box li {
+  width: 600px;
+  height: 500px;
+  float: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+}
+.box .banner_box li:nth-child(1) {
+  z-index: 10;
+}
+.box .banner_box li img {
+  width: 100%;
+  height: 100%;
+}
+.box .banner_box li h2 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* 如元素是 绝对定位  宽度是按照内容撑开的 */
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 25px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+.box .left_btn,
+.box .right_btn {
+  position: absolute;
+  z-index: 100;
+  width: 30px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  margin-top: -25px;
+  font-size: 25px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+.box .left_btn {
+  left: 0;
+}
+.box .right_btn {
+  right: 0;
+}
+.box .tip_box {
+  position: absolute;
+  z-index: 100;
+  bottom: 60px;
+  left: 20px;
+  overflow: hidden;
+}
+.box .tip_box li {
+  float: left;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid lightpink;
+  margin: 10px;
+}
+.box .tip_box li.current {
+  background: #fff;
+}

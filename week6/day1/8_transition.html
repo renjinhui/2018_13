@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type='text/less'>
+        div{
+            width: 200px;
+            height: 200px;
+            background: lightcoral;
+            transition: width 2s ease-in,height 2s ease-out;
+            &:hover{
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @keyframes move{
+            0%{
+                width: 100px;
+                height: 100px;
+            }
+            50%{
+                width: 400px;
+                height: 400px;
+            }
+            100%{
+                width: 300px;
+                height: 300px;
+            }
+        }
+        @keyframes move2{
+            0%{
+                width: 200px;
+                height: 200px;
+            }
+            100%{
+                width: 400px;
+                height: 400px;
+            }
+        }
+        div:nth-child(2){
+            width: 200px;
+            height: 200px;
+            background: firebrick;
+            animation: move 2s 2 alternate;
+            /* infinite 无限次循环 */
+            overflow: hidden;
+        }
+    </style>
+    <script src="./js/less.js"></script>
+</head>
+<body>
+    <div>
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+    </div>
+
+    <div>
+        <img src="./img/1.jpeg" alt="">
+    </div>
+</body>
+</html>
