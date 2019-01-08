@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box{
+    width: 400px;
+    height: 600px;
+    margin: auto;
+    border: 1px solid #000;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    // 景深越大  变化越不明显
+    div{
+        width: 100%;
+        height: 100%;
+        background: sandybrown;
+    }
+    // 坐标箭头 冲着右手心  顺时针就是正数
+    &:hover{
+        div{
+            transform: rotateX(45deg) scaleZ(0.5);
+        }
+    }
+}

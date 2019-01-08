@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box{
+    margin: 30px auto;
+    width: 200px;
+    height: 300px;
+    background: lightblue;
+    img{
+        width: 100%;
+        height: 100%;
+        transition:all 1s;
+        // transform-origin: 0% 100%;// 以左上角为基准点
+        // transform-origin: top left;
+        transform: translate(30px,60px)
+    }
+    &:hover{
+        // 滑过盒子 让里边的图片璇转
+        img{
+            // transform: rotate(30deg);
+            // 顺时针旋转 30 度
+
+            // transform: skew(30deg);// 等同于 skewX
+            // transform: skew(30deg,30deg);// 等同于skewX,skewY
+            // transform: skewY(30deg)
+
+            // transform: scale(2) rotate(360deg); // 放大两倍
+            // transform: scaleX(2)
+            transform: translate(30px,60px);//横轴移动30 纵轴移动60
+        }
+    }
+}

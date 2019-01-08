@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box{
+    width: 400px;
+    height: 400px;
+    margin: 150px auto;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    ul{
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(-45deg) rotateY(30deg);
+        animation: move 10s linear infinite;
+        li{
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(216, 149, 149, 0.5);
+            border: 1px solid cornflowerblue;
+            &:nth-child(2){
+                // 上移 100%
+                transform: translateY(-100%) rotateX(90deg);
+                transform-origin: bottom;
+            }
+            &:nth-child(3){
+                // 下移100%
+                transform: translateY(100%) rotateX(-90deg);
+                transform-origin: top;
+            }
+            &:nth-child(4){
+                // 左移100%
+                transform: translateX(-100%) rotateY(-90deg);
+                transform-origin: right;
+            }
+            &:nth-child(5){
+                //右移 100%
+                transform: translateX(100%) rotateY(90deg);
+                transform-origin: left;
+            }
+            &:nth-child(6){
+                transform: translateZ(-200px) rotateX(180deg)
+            }
+        }
+    }
+}
+@keyframes move{
+    0%{
+        transform: rotateX(0) rotateY(0);
+        transform-origin: 100px 100px -100px;
+    }
+    100%{
+        transform: rotateX(360deg) rotateY(360deg);
+        transform-origin: 100px 100px -100px;
+    }
+}

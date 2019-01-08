@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.box {
+  width: 400px;
+  height: 600px;
+  margin: auto;
+  border: 1px solid #000;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.box div {
+  width: 100%;
+  height: 100%;
+  background: sandybrown;
+}
+.box:hover div {
+  transform: rotateX(45deg) scaleZ(0.5);
+}

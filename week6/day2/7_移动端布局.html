@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        div{
+            width: 7.5rem;
+            height: 7.5rem;
+            background: linear-gradient(45deg,red,blue,green)
+        }
+    </style>
+    <script>
+        var w = document.documentElement.clientWidth||document.body.clientWidth;
+        // w/750 = a/100; // 针对设计稿  保证 一个rem 就是100px
+        // w/a = 750/100 // w/a 一屏 有多少rem;  750/100 设计稿一个有几个rem
+        a = w/750*100; // a: 就是 一个 rem  是  a个  px;
+        document.documentElement.style.fontSize = a + 'px';
+    </script>
+</head>
+<body>
+    <div>
+        珠峰培训
+    </div>
+</body>
+</html>
+<script>
+    // dpr 1 ： 1px 对一个物理像素
+    //     2 :  1px 两个物理像素
+    // width=device-width  
+    // user-scalable= no 禁止用户缩放页面
+</script>

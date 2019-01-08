@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        header
+        main 
+        footer
+        nav 
+        article
+        section
+        新增的一些 块状元素
+        audio 音频
+        video 视频
+    -->
+
+    <!-- <input type="range" id='inp'> -->
+    <!-- color 拾色器； date 日历； range 范围-->
+    <input type="password" id='inp' pattern="\d+" placeholder="" autofocus>
+    <div id="ele" data='12'>hello</div>
+    <!-- getAttribute('data') -->
+
+    <input type="text" list = 'ddd' id='inp2'>
+    <!-- 
+        input 下边放一个 ul 列表；把需要展示的数据 放在一个数组里边
+        循环数组 把数据渲染到ul里边；
+        当用户输入字符时；根据用户输入的字符 从原数组中筛选出符合条件的数据；
+        放到一个新数组
+        然后重新渲染到ul中；
+        当用户点击某个选项时； 我们把这一项的某个值  赋给 input 的value；
+     -->
+    <datalist id='ddd'>
+        <option value="11">1</option>
+        <option value="12">1</option>
+        <option value="13">1</option>
+        <option value="14">1</option>
+        <option value="22">2</option>
+        <option value="33">3</option>
+    </datalist>
+    <audio id='mp3' src="http://111.202.98.149/amobile.music.tc.qq.com/C400003BRo9h4Suyp8.m4a?guid=1395949856&vkey=5F38E20B023B4EA1B5484A84AD60CD08931D7A9009B5660538B8882C7B36F1A045D8CD400F00027F6548A4FA1568235416F021C80D1B31CB&uin=0&fromtag=66"></audio>
+    <button id='btn'>按钮</button>
+</body>
+</html>
+<script>
+    inp.oninput = function () {
+        // console.log(this.value)
+        // ele.style.color = this.value;
+        let bol = this.checkValidity();
+        if(bol){
+            this.style.border = '1px solid green';
+        }else{
+            this.style.border = '1px solid red';
+        }
+    }
+    btn.onclick = function(){
+        if(mp3.paused){
+            // true 代表暂停状态
+            mp3.play();
+            this.innerHTML = '暂停'
+        }else{
+            mp3.pause()
+            this.innerHTML = '播放'
+        }
+    }
+    // cookie  localStorage   sessionStorage
+    // cookie 有大小限制  5k左右； 随着请求 会发送给后台；
+    // localStorage    不会清空
+    // sessionStorage  当页面关闭时  会清空内容
+
+
+
+    // navigator  userAgent 判断客户端类型的；
+    // navigator.geolocation.getCurrentPosition();获取当前客户端的地理位置
+
+    // hybird  把H5页面嵌入到APP中
+    // ios  7天的审核期； C语言
+    // Android  java；
+
+</script>
