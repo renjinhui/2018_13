@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    
+</head>
+<script>
+    let w = document.documentElement.clientWidth || document.body.clientWidth;
+    // w/640 = x/100
+    document.documentElement.style.fontSize = w/640*100 + 'px';
+</script>
+<body>
+    <!-- loading 块 -->
+    <section class='loadingBox'>
+        <header>
+            <h2>珠峰培训</h2>
+            <h3>H5场景的交互简历</h3>
+        </header>
+        <div class="progressBox">
+            <div class="progressBar"></div>
+        </div>
+    </section>
+
+    <!-- 接电话 块 -->
+    <section class='phoneBox'>
+        <header>
+            <h2>珠峰培训</h2>
+            <h3>www.zhufengpeixun.com</h3>
+            <h4 class='timeBox hidden'>00:00</h4>
+        </header>
+        <div class="listenBox">
+            <div class="listenBtn"></div>
+        </div>
+        <div class="no_listenBox">
+            <div class="no_listenBtn"></div>
+        </div>
+    </section>
+
+</body>
+</html>
+<script src="./js/zepto.min.js"></script>
+<script src="./js/index.js"></script>

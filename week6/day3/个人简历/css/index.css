@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hidden {
+  display: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+.loadingBox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  z-index: 30;
+  transition: all 0.8s 1s;
+}
+.loadingBox header {
+  position: relative;
+  top: 25%;
+  text-align: center;
+}
+.loadingBox header h2 {
+  font-size: 0.7rem;
+}
+.loadingBox header h3 {
+  font-size: 0.5rem;
+}
+.loadingBox .progressBox {
+  width: 80%;
+  height: 0.4rem;
+  position: relative;
+  top: 54%;
+  background: #fff;
+  margin: auto;
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+.loadingBox .progressBox .progressBar {
+  width: 0;
+  transition: width 1s;
+  height: 0.4rem;
+  background: linear-gradient(45deg, green 0%, green 25%, yellowGreen 25%, yellowGreen 50%, green 50%, green 75%, yellowGreen 75%, yellowGreen 100%);
+  background-size: 0.4rem 0.4rem;
+}
+.phoneBox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: 25;
+  background: url('../images/phone-bg.jpg') center center;
+  background-size: cover;
+  transition: all 1s;
+}
+.phoneBox header {
+  color: #fff;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.phoneBox header h2 {
+  font-size: 0.7rem;
+}
+.phoneBox header h3 {
+  font-size: 0.25rem;
+}
+.phoneBox header h4 {
+  font-size: 0.5rem;
+}
+.phoneBox .listenBox {
+  width: 5.2rem;
+  height: 3.6rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2.6rem;
+  bottom: 0.3rem;
+  background: url('../images/phone-listen.png') center center;
+  background-size: contain;
+}
+.phoneBox .listenBox .listenBtn {
+  width: 1.6rem;
+  height: 1.6rem;
+  position: absolute;
+  right: -0.07rem;
+  bottom: 0.45rem;
+  border: 1px solid #4cd864;
+  border-radius: 50%;
+  animation: move 1s infinite;
+}
+.phoneBox .no_listenBox {
+  position: absolute;
+  transform: translateY(7rem);
+  transition: transform 1s;
+  bottom: 0.3rem;
+  width: 5.2rem;
+  height: 6.6rem;
+  left: 50%;
+  margin-left: -2.6rem;
+  background: url('../images/phone-key.png') center center;
+  background-size: contain;
+}
+.phoneBox .no_listenBox .no_listenBtn {
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  bottom: 0.2rem;
+  left: 50%;
+  margin-left: -0.8rem;
+}
+@keyframes move {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}

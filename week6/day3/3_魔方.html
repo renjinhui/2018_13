@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="./css/魔方.css">
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="./img/cube-img1.png" alt=""></li>
+            <li><img src="./img/cube-img2.png" alt=""></li>
+            <li><img src="./img/cube-img3.png" alt=""></li>
+            <li><img src="./img/cube-img4.png" alt=""></li>
+            <li><img src="./img/cube-img5.png" alt=""></li>
+            <li><img src="./img/cube-img6.png" alt=""></li>
+        </ul>
+    </div>
+    
+</body>
+</html>
+<script>
+
+    let ul = document.querySelector('.box>ul');
+    // e.touches 在 start和move中有对应的值  end中没有
+    // e.changeTouches 三个中都有
+
+    // 上下拖动  是rotateX; 左右拖动 是 rotateY
+    let startX = -35,startY = 45;// 盒子的初始角度
+    document.ontouchstart = function (e) {
+        // 手指按下
+        console.log(e);
+        this.sx = e.touches[0].pageX;// 手指按下的初始位置
+        this.sy = e.touches[0].pageY;
+    }
+    document.ontouchmove = function(e){
+        // 手指按下并移动
+        console.log(e)
+        this.cx = e.touches[0].pageX - this.sx;// 手指横轴移动距离
+        this.cy = e.touches[0].pageY - this.sy;// 手指纵轴移动距离
+        ul.style.transform = `rotateX(${startY-this.cy}deg) rotateY(${startX+this.cx}deg)`
+    }
+    document.ontouchend = function (e) {
+        // 手指撒开
+        console.log(e)
+        startX = startX+this.cx;
+        startY = startY-this.cy;// 撒手之后 更新 盒子初始位置
+    }
+
+</script>

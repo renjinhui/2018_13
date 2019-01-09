@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.w(){
+    width: 100%;
+    height: 100%;
+}
+@img:'../img/';
+html,body{
+    .w();
+}
+.box{
+    .w();
+    position: relative;
+    background: url('@{img}cube-bg.jpg') center center;
+    background-size:cover;
+    // transform-style: preserve-3d;
+    perspective: 800px;
+    ul{
+        transform-style: preserve-3d;
+        // perspective: 800px;
+        transform: rotateX(-35deg) rotateY(45deg);
+        transform-origin: 2.5rem 2.5rem -2.5rem; 
+        width: 5rem;
+        height: 5rem;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        // position: absolute;
+        // left: 50%;// 50% 相对于父盒子
+        // top:50%;
+        // transform:translateX(-50%)  translateY(-50%);// 50% 相对于自己
+        // background: #000;
+        li{
+            position: absolute;
+            top: 0;
+            left: 0;
+            .w();
+            img{
+                .w();
+            }
+            &:nth-child(2){
+                transform: translateY(-100%) rotateX(90deg);
+                transform-origin: bottom;
+            }
+            &:nth-child(3){
+                transform: translateY(100%) rotateX(-90deg);
+                transform-origin: top;
+            }
+            &:nth-child(4){
+                transform: translateX(-100%) rotateY(-90deg);
+                transform-origin: right;
+            }
+            &:nth-child(5){
+                transform: translateX(100%) rotateY(90deg);
+                transform-origin: left;
+            }
+            &:nth-child(6){
+                transform: translateZ(-5rem) rotateX(180deg);
+            }
+        }
+    }
+}

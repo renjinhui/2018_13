@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @media all and (max-width:800px){
+            /* 屏幕最大宽度是 800 时的样式 */
+            div{
+                width: 400px;
+                height: 400px;
+                background: #000;
+            }
+        }
+        @media all and (max-width:600px){
+            /* 屏幕最大宽度是 600 时的样式 */
+            div{
+                width: 200px;
+                height: 200px;
+                background: red;
+            }
+        }
+        @media all and (min-width:800px){
+            div{
+                width: 500px;
+                height: 500px;
+                background: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
