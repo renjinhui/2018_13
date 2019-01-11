@@ -64,5 +64,103 @@ function phone() {
             $phoneBox.css({
                 transform:'translateY(100%)'
             })
+            msg();
         })
 }
+
+// 管理 消息模块
+function msg() {
+    let $msgBox = $('.msgBox'),
+        $ul = $msgBox.find('ul'),
+        $lis = $msgBox.find('li'),
+        $keyBoard = $msgBox.find('.keyBoard'),
+        $textBox = $keyBoard.find('.textBox'),
+        $btn = $keyBoard.find('.btn');
+    // 设置每条； 用css先把他们都向下挪动 并且是透明的
+    // 通过JS 设置，让他们回到原位即可
+    let moveTimer = null;
+    let n = 0;// 出现条的索引
+    let h = 0;// ul 上移高度
+    // 通过定时器 实现一条一条的出现
+    function move(){
+        moveTimer = setInterval(()=>{
+            // 判断所有条数是否已经走完
+            if(n === $lis.length){
+                clearInterval(moveTimer);
+                return;
+            }
+
+            $lis.eq(n).css({
+                opacity:1,
+                transform:'translateY(0)'
+            })
+            
+            // 让键盘升上来
+            if(n == 2){
+                clearInterval(moveTimer);
+                $keyBoard.css({
+                    transform:'translateY(0)'
+                })
+                let timer = setTimeout(() => {
+                    // 让键盘停稳之后再让字体出现
+                    clearTimeout(timer);
+                    input();
+                }, 1600);
+                
+            }
+            // 让整个ul 上移  每次移动 出现的li 的高度
+            if(n>=3){
+                h += $lis[n].offsetHeight;// 获取到的就是以px为单位的
+                $ul.css({
+                    transform:`translateY(-${h}px)`
+                })
+            }
+
+            n++;
+        },1000)
+    }
+    move();
+    
+    function input(){
+        let str = '我们现在使用的是VUE和REACT';
+        let str2 = '';// 用存储拼接好的字符串
+        let m = 0;
+        let timer = null;
+        timer = setInterval(()=>{
+            if(m === str.length){
+                // 字体输入完成
+                $btn.show();
+                clearInterval(timer);
+                return;
+            }
+            str2 += str[m];
+            m++;
+            $textBox.html(str2);
+        },100)
+    }
+    $btn.tap(function(){
+        // 点击发送按钮 重新定时器；发送该条数据
+        $lis.eq(n).css({
+            opacity:1,
+            transform:'translateY(0)'
+        })
+
+        // 让发送当前这条数据时  ul上移
+        h += $lis[n].offsetHeight;
+        $ul.css({
+            transform: `translateY(-${h}px)`
+        }) 
+        n++;
+
+
+        $textBox.html('');// 清空输入框；
+        // 让键盘下去
+        $keyBoard.css({
+            transform:'translateY(3.7rem)',
+            transition:'all 0.6s' // 去除 过渡效果的延迟效应
+        })
+
+        move();// 重启定时器
+    })
+}
+// msg();

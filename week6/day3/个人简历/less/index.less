@@ -113,12 +113,108 @@ html,body{
             margin-left: -0.8rem;
         }
     }
-}
-@keyframes move{
-    0%{
-        transform: scale(1.2)
+    @keyframes move{
+        0%{
+            transform: scale(1.2)
+        }
+        100%{
+            transform: scale(0.8)
+        }
     }
-    100%{
-        transform: scale(0.8)
+}
+
+
+.msgBox{
+    .w();
+    background: #f0a0a0;
+    padding-top:0.4rem;
+    ul{
+        transition: all 0.4s;
+        li{
+            overflow: hidden;
+            margin-bottom: 0.4rem;
+            transform: translateY(1rem);
+            opacity: 0;
+            transition: all 0.3s;
+            div{
+                max-width: 3.6rem;
+                padding: 0.25rem;
+                border:0.02rem solid #cacaca;
+                font-size: 0.26rem;
+                float: left;
+                border-radius: 0.1rem;
+                background: #fff;
+                position: relative;
+                left: 1.25rem;
+                img{
+                    width: 0.82rem;
+                    height: 0.82rem;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    position: absolute;
+                    left: -1rem;
+                    top:0;
+                }
+                &::before{
+                    content: '';
+                    width: 0.1rem;
+                    height: 0.2rem;
+                    display: block;
+                    background: url('@{img}message-arrow1.png')no-repeat center center;
+                    position: absolute;
+                    background-size: contain;
+                    top:0.2rem;
+                    left: -0.1rem;
+                }
+            }
+        }
+        li.right{
+            div{
+                float: right;
+                right:1.25rem;
+                left: auto;// 之前的left 冲掉
+                background: #a0e55f;
+                border-color:#93b474;
+                &::before{
+                    background: url('@{img}message-arrow2.png')no-repeat center center;
+                    background-size: contain;
+                    top:0.2rem;
+                    left: auto;
+                    right: -0.1rem;
+                }
+                img{
+                    left: auto;
+                    right: -1rem;
+                }
+            }
+        }
+    }
+    .keyBoard{
+        width: 6.4rem;
+        height: 5.16rem;
+        background: url('@{img}message-keyboard.png')no-repeat center center;
+        background-size: contain;
+        position: absolute;
+        bottom:0;
+        transform:translateY(3.7rem);
+        transition: all 0.6s 1s;
+        .textBox{
+            width: 4rem;
+            height: 0.4rem;
+            line-height: 0.4rem;
+            position: absolute;
+            top:0.35rem;
+            left: 0.9rem;
+            font-size: 0.25rem;
+        }
+        .btn{
+            width: 1.47rem;
+            height: 0.74rem;
+            position: absolute;
+            right: 0.1rem;
+            bottom: 0.6rem;
+            background: url('@{img}message-chatBtn.png')no-repeat center center;
+            background-size: contain;
+        }
     }
 }
