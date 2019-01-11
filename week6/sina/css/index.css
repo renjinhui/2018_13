@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hide {
+  display: none !important;
+}
+main header {
+  width: 100%;
+  min-height: 2rem;
+  background: -webkit-linear-gradient(45deg, #e213e2, #4b4bda);
+}

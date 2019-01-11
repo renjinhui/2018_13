@@ -117,6 +117,24 @@
             <div class="btn hidden"></div>
         </div>
     </section>
+
+    <audio src="./audio/bell.mp3" preload="none" id='bell' loop></audio>
+    <audio src="./audio/say.mp3" preload="none" id='say'></audio>
+    <audio src="./audio/music.mp3" preload="none" id='music' loop></audio>
+    <!-- 
+        audio
+        src 音频地址
+        controls 显示控制器
+        loop 循环播放
+        autoplay 自动播放  在移动端不太好使
+        preload  预加载
+                 none不进行预加载
+                 auto 预加载
+                 metadata 预加载 音频 元数据(大小 时长 ...)
+
+        audio.play(); 播放
+        audio.pause(); 暂停     
+     -->
 </body>
 
 </html>
