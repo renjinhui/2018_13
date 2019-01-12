@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
 <script>
     let w = document.documentElement.clientWidth || document.body.clientWidth;
-    let a = w/750*100;
+    let a = w / 750 * 100;
     document.documentElement.style.fontSize = a + 'px';
 </script>
+
 <body>
     <main>
         <!-- 头部部分 -->
@@ -41,7 +43,8 @@
                 <a class="hd_nav_a" href="https://photo.sina.cn/?vt=4&amp;pos=108&amp;his=0" title="美图">美图</a>
                 <a class="hd_nav_a" href="https://nba.sina.cn/?vt=4&amp;pos=108&amp;his=0" title="NBA">NBA</a>
                 <a class="hd_nav_a" href="http://blog.sina.cn/?vt=4&amp;pos=108&amp;his=0" title="博客">博客</a>
-                <a class="hd_nav_a" href="http://m.leju.com/?vt=4&amp;pos=108#source=m_sina_dbdh&amp;source_ext=sina&amp;pos=108&amp;his=0" title="房产">房产</a>
+                <a class="hd_nav_a" href="http://m.leju.com/?vt=4&amp;pos=108#source=m_sina_dbdh&amp;source_ext=sina&amp;pos=108&amp;his=0"
+                    title="房产">房产</a>
                 <a class="hd_nav_a" href="http://finance.sina.cn/stock?vt=4&amp;pos=108&amp;his=0" title="股票">股票</a>
                 <a class="hd_nav_a" href="http://games.sina.cn/?vt=4&amp;pos=108&amp;his=0" title="游戏">游戏</a>
                 <a class="hd_nav_a" href="http://book.sina.cn/?wm=book_wap_0043&amp;vt=4&amp;pos=108&amp;his=0" title="小说">小说</a>
@@ -55,7 +58,7 @@
         </header>
 
         <!-- 选项卡的头部 -->
-        <section class='tab_head'>
+        <section class='tab_head  white'>
             <ul>
                 <li class='current'>今日要闻</li>
                 <li>高清美图</li>
@@ -65,32 +68,91 @@
 
         <!-- 选项卡的三个身体 -->
         <section class='news_box'>
-            <div class="banner_box swiper-container">
+            <div class="banner_box white swiper-container">
                 <ul class="swiper-wrapper">
                     <li class="swiper-slide">
-                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
+                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos"
+                            alt="">
                         <h2>这是个title</h2>
-                    </li>
-                    <li class="swiper-slide">
-                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
-                        <h2>这是个title2</h2>
-                    </li>
-                    <li class="swiper-slide">
-                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
-                        <h2>这是个title3</h2>
-                    </li>
-                    <li class="swiper-slide">
-                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
-                        <h2>这是个title4</h2>
                     </li>
                 </ul>
                 <div class="swiper-pagination tip_box"></div>
             </div>
-            <ul class='list_box'></ul>
+            <ul class='list_box white'>
+                <!-- 三类 无图  一图  三图 -->
+                <li class='no_pic'>
+                    <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                    <div class="comment_box">
+                        <span>11</span>
+                        <span class="icon_com"></span>
+                    </div>
+                </li>
+                <li class="one_pic cl">
+                    <div class="img_box lt">
+                        <img src="./img/1.jpg" alt="">
+                    </div>
+                    <div class="text_box rt">
+                        <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                        <div class="comment_box">
+                            <span>11</span>
+                            <span class="icon_com"></span>
+                        </div>
+                    </div>
+
+                </li>
+                <li class="three_pic">
+                    <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                    <div class="three_box">
+                        <img src="./img/1.jpg" alt="">
+                        <img src="./img/2.jpg" alt="">
+                        <img src="./img/3.jpg" alt="">
+                    </div>
+                    <div class="comment_box">
+                        <span>11</span>
+                        <span class="icon_com"></span>
+                    </div>
+                </li>
+            </ul>
+            <ul class='list_box white'>
+                <!-- 三类 无图  一图  三图 -->
+                <li class='no_pic'>
+                    <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                    <div class="comment_box">
+                        <span>11</span>
+                        <span class="icon_com"></span>
+                    </div>
+                </li>
+                <li class="one_pic cl">
+                    <div class="img_box lt">
+                        <img src="./img/1.jpg" alt="">
+                    </div>
+                    <div class="text_box rt">
+                        <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                        <div class="comment_box">
+                            <span>11</span>
+                            <span class="icon_com"></span>
+                        </div>
+                    </div>
+
+                </li>
+                <li class="three_pic">
+                    <p>这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本这是个文本</p>
+                    <div class="three_box">
+                        <img src="./img/1.jpg" alt="">
+                        <img src="./img/2.jpg" alt="">
+                        <img src="./img/3.jpg" alt="">
+                    </div>
+                    <div class="comment_box">
+                        <span>11</span>
+                        <span class="icon_com"></span>
+                    </div>
+                </li>
+            </ul>
         </section>
         <section></section>
         <section></section>
     </main>
 </body>
+
 </html>
 <script src="./js/index.js"></script>

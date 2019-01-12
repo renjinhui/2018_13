@@ -21,6 +21,9 @@ a {
   display: block;
   clear: both;
 }
+.white {
+  background: #fff;
+}
 main header.head {
   width: 100%;
   min-height: 2rem;
@@ -134,4 +137,55 @@ main .news_box .banner_box .tip_box .current {
 }
 main .news_box .banner_box .tip_box .total {
   font-size: 0.25rem;
+}
+main .news_box .list_box {
+  padding: 0 0.2rem;
+  box-sizing: border-box;
+  border-bottom: 0.2rem solid #e46c6c;
+}
+main .news_box .list_box li {
+  color: #888;
+  font-size: 0.26rem;
+  border-bottom: 0.01rem solid #e46c6c;
+  padding: 0.2rem 0;
+}
+main .news_box .list_box li p {
+  font-size: 0.32rem;
+  color: #1a1a1a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+main .news_box .list_box li .comment_box {
+  text-align: right;
+}
+main .news_box .list_box .one_pic .img_box {
+  width: 2rem;
+  height: 1.34rem;
+  overflow: hidden;
+}
+main .news_box .list_box .one_pic .img_box img {
+  width: 100%;
+  height: 100%;
+}
+main .news_box .list_box .one_pic .text_box {
+  width: 5rem;
+}
+main .news_box .list_box .three_pic .three_box {
+  display: flex;
+  margin: 0.2rem 0;
+}
+main .news_box .list_box .three_pic .three_box img {
+  width: 2.3rem;
+  height: 1.54rem;
+  flex: 1;
+}
+main .news_box .list_box .three_pic .three_box img:nth-child(2) {
+  margin: 0 0.1rem;
+}
+main .news_box .list_box .three_pic .comment_box {
+  text-align: left;
 }
