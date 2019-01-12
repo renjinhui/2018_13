@@ -1,0 +1,147 @@
+//@import (reference) "common"; //引入这个less  但是不编译
+@import "common";
+@r:75rem;
+html,body{
+  .fullPage;
+}
+.box{
+  .fullPage;
+  background: url("../imgs/bg.jpg")no-repeat center center;
+  background-size: cover;
+  position: relative;
+  .mask{
+    position: absolute;
+    .fullPage;
+    background: rgba(0,0,0,0.4);
+  }
+}
+header{
+  height: 200/@r;
+  background: rgba(0,0,0,0.5);
+  position: relative;
+  .titleBox{
+    padding: 0.35rem;
+    box-sizing: border-box;
+    .fullPage;
+    .imgBox{
+      float: left;
+      width: 150/@r;
+      height: 150/@r;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .textBox{
+      float: left;
+      color: #FFFFFF;
+      padding-left: 0.35rem;
+      .songName{
+        height: 75/@r;
+        line-height: 75/@r;
+        font-size: 0.7rem;
+      }
+      .singer{
+        height: 75/@r;
+        line-height: 75/@r;
+        font-size: 0.4rem;
+      }
+    }
+  }
+  .playBtn{
+    width: 75/@r;
+    height: 75/@r;
+    background: url("../imgs/music.svg")no-repeat center center;
+    position: absolute;
+    top:57/@r;
+    right: 20/@r;
+    background-size: contain;
+  }
+  .move{
+    animation: move 1s linear infinite;
+  }
+}
+.lyricBox{
+  height: 850/@r;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-sizing: border-box;
+  .lyric{
+    transition: 1s;
+    p{
+      text-align: center;
+      font-size: 0.6rem;
+      font-weight: 200;
+      color: #fffeea;
+      height: 1.5rem;
+      line-height: 0.5rem;
+      padding: 0 20/@r;
+      &.active{
+        color: #52E025;
+      }
+    }
+  }
+
+}
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 260/@r;
+  .lineBox{
+    height: 1rem;
+    .runTime,.endTime{
+      float: left;
+      width: 1.5rem;
+      line-height: 1rem;
+      font-size: 0.5rem;
+      text-align: center;
+      color: #FFFFFF;
+    }
+    .line{
+      float: left;
+      width: 6rem;
+      height: 0.1rem;
+      background: #FFFFFF;
+      position: relative;
+      top: 0.45rem;
+      left: 0.5rem;
+      .runLine{
+        height: 100%;
+        //width: 25%;
+        background: #1DFF72;
+        //transition: width 1s linear;
+      }
+    }
+    .endTime{
+      float: right;
+    }
+  }
+  .btnBox{
+    margin: auto;
+    width: 600/@r;
+    height: 120/@r;
+    line-height: 120/@r;
+    text-align: center;
+    color: #fff;
+    font-size: 0.8rem;
+    border-radius: 20rem;
+    //background: rgb(29,255,114);
+    //background-image: url("../imgs/sprite_play.png");
+    //background-repeat: no-repeat;
+    background: rgb(29,255,114) url("../imgs/sprite_play.png") no-repeat 30/@r -575/@r;
+    background-size: 80/@r 700/@r;
+    //background-position: 30/@r -583/@r;
+  }
+}
+
+
+@keyframes move {
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}

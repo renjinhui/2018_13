@@ -1,0 +1,18 @@
+@color-white:#fff;
+@url:"../images";
+.pos(@position:absolute;@left:auto;@right:auto;@top:auto;@bottom:auto;@zIndex:0){
+  position: @position;
+  left:@left;
+  top:@top;
+  bottom: @bottom;
+  right:@right;
+  z-index: @zIndex;
+}
+.transition(@property:all;@duration:1s;@timing-function:ease;@delay:0s){
+  -webkit-transition: @arguments;
+  transition: @arguments ;
+}
+.css3(@k,@v){
+  -webkit-@{k}:@v;
+    @{k}: @v;
+}

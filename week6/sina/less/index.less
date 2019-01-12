@@ -1,15 +1,114 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.hide{
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hide {
     display: none !important;
 }
-main{
-    header{
+
+.lt {
+    float: left;
+}
+
+.rt {
+    float: right;
+}
+
+.cl::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+main {
+    header.head {
         width: 100%;
         min-height: 2rem;
-        background: -webkit-linear-gradient(45deg,rgb(226, 19, 226),rgb(75, 75, 218));
+        background: -webkit-linear-gradient(45deg, #f3a1f3, #77b6ef, #77b6ef);
+        color: #fff;
+        font-size: 0.32rem;
+        >header {
+            .logo {
+                font-size: 1.32rem;
+                margin-left: 0.2rem;
+                margin-top: -0.15rem;
+            }
+            nav {
+                background: #2c91e0;
+                width: 1.98rem;
+                height: 0.44rem;
+                line-height: 0.44rem;
+                border-radius: 0.44rem;
+                margin: auto;
+                text-align: center;
+                position: relative;
+                top: 0.25rem;
+                a:nth-child(1) {
+                    font-size: 0.24rem;
+                    border-right: 1px solid #fff;
+                    padding-right: 0.1rem;
+                }
+                a:nth-child(2) {
+                    font-size: 0.22rem;
+                    color: #106099;
+                }
+            }
+            .set,
+            .user {
+                font-size: 0.36rem;
+                margin-right: 0.2rem;
+                margin-top: -0.1rem;
+            }
+        }
+        >nav {
+            >a {
+                display: inline-block;
+                float: left;
+                width: 14%;
+                text-align: center;
+                margin: 0 0.02rem 0.24rem 0rem;
+            }
+        }
+    }
+    .tab_head {
+        ul {
+            display: flex;
+            margin: 0.2rem;
+            padding-bottom: 0.2rem;
+            border-bottom: 0.02rem solid #ccc;
+            li {
+                flex: 1;
+                font-size: 0.4rem;
+            }
+            li:nth-child(1) {
+                text-align: left
+            }
+            li:nth-child(2) {
+                text-align: center;
+            }
+            li:nth-child(3) {
+                text-align: right;
+            }
+            li.current {
+                color: #2c91e0;
+                font-weight: bolder;
+                &::after {
+                    content: '';
+                    display: block;
+                    position: relative;
+                    border-bottom: 0.05rem solid #2c91e0;
+                    width: 0.7rem;
+                    top: 0.23rem;
+                    left: 0.5rem;
+                }
+            }
+        }
     }
 }
