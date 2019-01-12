@@ -7,7 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
 </head>
+<script src="./js/zepto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
 <script>
     let w = document.documentElement.clientWidth || document.body.clientWidth;
     let a = w/750*100;
@@ -61,9 +64,33 @@
         </section>
 
         <!-- 选项卡的三个身体 -->
-        <section></section>
+        <section class='news_box'>
+            <div class="banner_box swiper-container">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide">
+                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
+                        <h2>这是个title</h2>
+                    </li>
+                    <li class="swiper-slide">
+                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
+                        <h2>这是个title2</h2>
+                    </li>
+                    <li class="swiper-slide">
+                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
+                        <h2>这是个title3</h2>
+                    </li>
+                    <li class="swiper-slide">
+                        <img src="https://k.sinaimg.cn/n/tech/transform/310/w710h400/20190111/RuC3-hrkkwei0577491.jpg/w710h400z1l50t1436.jpg?by=comos" alt="">
+                        <h2>这是个title4</h2>
+                    </li>
+                </ul>
+                <div class="swiper-pagination tip_box"></div>
+            </div>
+            <ul class='list_box'></ul>
+        </section>
         <section></section>
         <section></section>
     </main>
 </body>
 </html>
+<script src="./js/index.js"></script>
