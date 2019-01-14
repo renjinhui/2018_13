@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            opacity: 0.5;
+            background: greenyellow;
+            margin: auto;
+            transition: all 1s 2s; 
+            /* 过渡时间 1s   延迟2s */
+        }
+        .box:hover{
+            width: 600px;
+            height: 400px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+</body>
+</html>
+<script>
+    // rem  html 的font-size
+
+    // rem   1rem = 100px;
+    //       10rem 一屏;
+
+    // @media  媒体查询
+
+    // transition   ele.addEventListener('transitionend',function(){},false)
+    // animation
+    let box = document.querySelector('.box');
+    box.addEventListener('transitionend',function(){
+        console.log('过渡完成');// 几个属性变化 就触发几次该函数
+    },false);
+
+
+    // Hybird  混合APP开发  在APP内部嵌入 H5页面 
+    // navigator.userAgent 设备信息；  navigator.geolocation 设备位置信息 
+
+    // cookie 大小4k左右；前端发送请求时 会把cookie带给后端；
+    // localStorage： 大小在5兆左右； 不会传送给后端；
+    // sessionStorage：  sessionStorage 会在页面关闭时自动清空
+    // 都在 application 中存着
+
+    // 前端获取cookie   document.cookie
+    let obj = {};
+    document.cookie.replace(/([^; ]+)=([^; ]+)/,function(big,lit1,lit2){
+        // big 大正则捕获的内容
+        // lit1 第一个小分组捕获的内容
+        // lit2 第二个小分组捕获的内容
+        obj[lit1]=lit2
+    })
+    console.log(obj);// obj.u_main
+
+    function getCookie(name) {// 获取cookie中指定属性的属性值
+        let obj = {};
+        document.cookie.replace(/([^; ]+)=([^; ]+)/g,function(big,lit1,lit2){
+            // big 大正则捕获的内容
+            // lit1 第一个小分组捕获的内容
+            // lit2 第二个小分组捕获的内容
+            obj[lit1]=lit2
+        })
+        return obj[name];
+    }
+    function getCookie2(name){
+        //  /u_main=([^; ]+)/.exec(document.cookie)
+        let reg = new RegExp(name+'=([^; ]+)');
+        return reg.exec(document.cookie)[1];
+    }
+
+    // 前端种植cookie  document.cookie = 'haha = heihei'
+    // document.cookie = 'haha = heihei; expires = （格林尼治时间）（new Date()）'
+    //                                   expires 过期时间
+    function removeCookie(name) {
+        // 把值 设置成空  ； 日期设成过去的日期
+        document.cookie = `${name}='';expires=-1`
+    }
+
+
+
+    // localStorage
+    // localStorage.getItem('属性名') 获取对应的属性 拿到的是一个JSON字符串
+    // localStorage.setItem('属性名','属性值') 属性值需要是一个字符串； 若不是 则调用toString 转成 字符串
+    // localStorage.removeItem('属性名')
+    // localStorage.clear() // 清除所有的 键值对
+
+</script>

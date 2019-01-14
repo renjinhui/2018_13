@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 局部刷新 和 全局刷新
+    // ajax: async javascript and xml  XML传输的数据格式；
+    let xhr = new XMLHttpRequest();
+    console.log(xhr.readyState);// 0
+    // xhr.onreadystatechange = function(){
+    //     // 只要 readyState 发生变化； 就会触发该函数
+    //     console.log(xhr.readyState,1000)
+    // }
+    xhr.open('post','./1.json',true);
+    console.log(xhr.readyState);// 1
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState)
+        // readyState 
+        // 0 创建完ajax实例    值就是  0
+        // 1 open执行完之后    值就是  1
+        // 2 请求发出去之后，   后端已经接收到请求的头部信息；
+        // 3 正在接收响应体，
+        // 4 响应体接收完毕，
+
+        // status 
+        // 2开头的一般代表成功
+        // 3开头的一般代表重定向  304代表走的缓存
+        // 4开头的一般代表前端路径错误  404  405请求类型的错误
+        // 5开头的一般都是服务器的错误；
+
+        // 接口联调  原形图  接口文档
+    }
+    xhr.send();
+</script>
