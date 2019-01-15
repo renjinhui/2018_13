@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id='user' placeholder="输入用户ID">
+    <input type="text" id='flow' placeholder="输入流水号">
+    <button id='btn'>查寻</button>
+    <div id="box">
+
+    </div>
+</body>
+
+</html>
+<script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+<script>
+    $("#btn").click(function () {
+        let id = $('#user')[0].value;
+        let flow = $('#flow')[0].value;
+        $('#user')[0].value = '';
+        $('#flow')[0].value = '';
+        $.ajax({
+            url: 'https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/subAccount/confirmFreeze.do',
+            type: 'post',
+            data: {
+                // 传给后端的数据  若是get 方式 则会把 data中的参数拼接到url 后边 ；拼接时会把汉字编码
+                // 
+                userId: id,
+                flowNo: flow
+            },
+            // cache: false, // 是否缓存； false 不走缓存
+            // async: false,// false 同步  ;默认 true 异步
+            success: function (d) {
+                console.log(d);
+                $('#box').html(JSON.stringify(d))
+            },
+            error: function () {
+
+            }
+        })
+
+    })
+    $.ajax({
+        url:'./1.json',
+        type:'get',
+        success:function(){
+            
+        }
+    })
+    $.get('./1.json',function(data){
+        console.log(data);
+    });
+    $.get('./1.json',{a:12,b:13},function(){
+
+    })
+</script>

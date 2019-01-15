@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // reduce 的用法
+    // 数组.reduce(function(prev,next){
+        // 第一次回调执行时； prev，next 分别是 数组第一项和第二项
+        // 在这之后的回调执行时； prev 就是上一次回调执行的返回结果
+        // 整个reduce函数的运行结果是最后一次回调执行的返回结果
+    // })
+
+    // 数组.reduce(function(prev,next){},100) 
+    // 第一次回调时的prev 就是第二个参数100；next 是数组中的第一项； 再往后 跟上边一样
+
+
+    // 对象的解构赋值
+    var obj = {name:'珠峰',age:10,sex:1};
+    var {name,age} = obj;// 解构赋值 var name = obj.name; var age = obj.age
+    var {age2} = obj;
+    var {age3 = 100,sex = 20} = obj; // 给age3一个默认值； 
+    // 若后边的对象有与之对应的属性；则直接给属性的值，没有则给默认值
+    console.log(name,age3,sex);
+    // 数组的解构赋值  按照位置
+    var [a,b,,c] = [1,2,3,4,5,6];
+    var [x,y,z] = [1];// x = 1; y z undefined
+    console.log(a,b,c);//1 2 3
+</script>

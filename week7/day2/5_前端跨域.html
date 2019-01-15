@@ -10,14 +10,53 @@
 
 </body>
 </html>
+<script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
 <script>
     // 协议  域名  端口
     // 同源策略 ： 三者必须完全一致； 浏览器造就的同源策略；
 
     // 解决跨域
-    // jsonp 
+    // jsonp  创造一个script 标签； 引用不同源的js 文件
     function fn(data){
         console.log(data);
     }
+    // 使用JQ的JSONP调用数据
+    $.ajax({
+        url:'https://dl.reg.163.com/getConf',// 接口地址
+        data:{ // 传给后端的参数
+            pkid:'MODXOXd',
+            pd:'163',
+            mode:2
+        },
+        dataType:'jsonp', // 以jsonp 的方式调用数据
+        // 若后端限制了 callback 对应的函数名  
+        // 则需要我们添加一行 jsonpCallback属性；属性值就是后端要callBack函数函数名
+        jsonpCallback:'URSJSONP1547538708437',// 
+        success:function(data){
+            console.log(data);// 成功后的回调
+        },
+        error:function(){}
+    })
+
+    $.ajax({
+        url: "https://tui.taobao.com/recommend", // 接口地址
+        data: { // 传给后端的参数
+            _ksTS: "1547539277141_247",
+            appid: "2807",
+        },
+        dataType: 'jsonp', // 以jsonp的方式调用函数
+        // 若限制了callback对应的函数名，则需要添加一行jsonpCallback属性，属性值就是后端要callBack函数函数名
+        // jsonpCallback: 'jsonp248',
+        success: function (d) {
+            console.log(d); // 成功后的回调
+        },
+        error: function () {}
+    })
+
+    // cors 解决跨域 后端设置响应头  access-control-allow-origin: *
+    //                             Access-Control-Allow-Origin: https://www.souyidai.com
+
+    // proxy 代理
 </script>
-<script src='./1.js?cb = fn'></script>
+<!-- <script src="https://tui.taobao.com/recommend?_ksTS=1547539277141_247&callback=jsonp248&appid=2807"></script> -->
+<!-- <script src='https://nex.163.com/q?app=7BE0FC82&c=homepage&l=33&site=netease&affiliate=homepage&cat=homepage&type=logo300x250&location=1&cb=fn'></script> -->
