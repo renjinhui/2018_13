@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // get 系列: get head delete ： head 只请求响应头； delete 删除后台数据 
+    // post 系列: post put： put 向后台增加数据
+    // patch ????
+    let xhr = new XMLHttpRequest();
+    // get 传参是把参数拼接成字符串 放到接口后边 a=12 b=13
+    xhr.open('get','https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/userInfo?a=12&b=13',true);
+    // xhr.open('post','./1.json');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && /^(2\d{2}|304)$/.test(xhr.status)){
+            console.log(xhr.response);
+        }
+    }
+    // xhr.setRequestHeader(key,value); 设置请求头
+    let name = encodeURIComponent('珠峰');
+    xhr.setRequestHeader('name',name);// 需要写到open后边
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded') // mime ; 给后台的数据以form data的形式传给后台 
+    xhr.send('c=14&d=15');// send 中的参数是为post 方式服务的
+
+    // get请求和post的区别？
+    // 1、get 传参是问号传参； post 是通过send (通过请求体带着发送给后台)
+    // 2、get 传参 大小有限制； post 限制比较小；
+    // 3、get 相对不安全；post相对安全；
+    // 4、get 有缓存； post 没有缓存；
+
+    // 怎么解决get 缓存的问题？  ?qwe = Math.random()  ?qweqeq = new Date().getTime() 
+
+    // postman
+    
+
+</script>

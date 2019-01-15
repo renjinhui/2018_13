@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 协议  域名  端口
+    // 同源策略 ： 三者必须完全一致； 浏览器造就的同源策略；
+
+    // 解决跨域
+    // jsonp 
+    function fn(data){
+        console.log(data);
+    }
+</script>
+<script src='./1.js?cb = fn'></script>

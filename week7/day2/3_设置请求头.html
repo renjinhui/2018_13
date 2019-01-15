@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let xhr = new XMLHttpRequest();
+    xhr.open('post','https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/userInfo',true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && /^(2\d{2}|304)$/.test(xhr.status)){
+            console.log(xhr.response);
+        }
+    }
+    // xhr.setRequestHeader(key,value); 设置请求头
+    let name = encodeURIComponent('珠峰');
+    xhr.setRequestHeader('name',name);// 需要写到open后边
+    xhr.send();
+
+    // 汉字转译成其他字符
+    // escape unescape  基本不用
+    // encodeURI decodeURI 不常用 有些特殊字符时不转义
+    // encodeURIComponent 可以转义上边不转义的字符
+
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    // async javascript and XML
+    let xhr = new XMLHttpRequest();
+    // readyState 0 1 2前端接收到响应头 3 4；
+    xhr.open('get','./1.json',true);
+    xhr.onreadystatechange = function(){
+        // xhr.abort();
+        // console.log(xhr.response)
+        if(xhr.readyState == 4 && /^(2\d{2}|304)$/.test(xhr.status)){
+            console.log(xhr.response);
+
+            // let ele = xhr.responseXML.children[0];
+            // box.appendChild(ele)
+            // console.log(ele, xhr.responseXML.children[0])
+            // response  字符串
+            // responseText 字符串
+            // responseXML： XML 结构
+        }
+    }
+    xhr.onabort = function(){
+        console.log('请求被中止')
+    }
+    xhr.send();
+    console.log(1)
+    // xhr.abort(); //一般放到这个位置
+    // setTimeout(() => {
+    //     xhr.abort();
+    // }, 10);
+    
+
+    //  异步  通过回调函数来进行数据使用
+
+    // ajax 中的方法  open  send 
+    // abort 中止请求  onabort
+    // xhr.getResponseHeader(key) 获取指定响应头
+    // xhr.getAllResponseHeaders() 获取所有的响应头
+
+
+</script>
