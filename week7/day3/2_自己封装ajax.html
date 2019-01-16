@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /*
+        url: 必需 
+        type: get post  可以省略 默认get
+        data: 传给后台的数据； 可以省略
+        dataType: 要获取的数据类型 默认 json 可以省略
+        cache: 是否缓存  默认 true 可以省略
+        async: 是否异步 默认true 可以省略
+        success: 成功的回调 可以省略
+        error： 失败的回调  可以省略
+    */
+    ajax({
+        url:'https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/userInfo?qq=14&w=23&',
+        type:'get', // get post 默认get
+        data:{a:12},// 传给后台的数据
+        cache:false,// 走缓存
+        success:function(data){
+            console.log(data)
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
+    //  自己封装一个函数； 函数接受一个对象作为参数；
+    // 我们获取对象中的值来作为请求的依据；
+
+    function ajax(options){
+        // ajax 必须的四步； 
+        // 还需要把 options中的参数都获取到；没有的给默认值
+        let {
+            url,
+            type = 'get',// 给type一个备用值
+            data,
+            dataType = 'json',
+            cache = true, // 默认走缓存 处理get的缓存问题
+            async = true, // 默认异步
+            success, // 成功的回调函数
+            error // 失败的回调函数
+        } = options;
+        // 只有get 的方式  是否 走缓存  这个选项才有作用
+        // 需要区分 get 或 post
+        // get:  data cache;
+        // get系列  get  head  delete; post系列 post put;
+
+        // 判断是否是 get请求
+        let isGet = null; // true  是get
+        if(/^(get|head|delete)$/.test(type)){
+            isGet = true;
+        }else{
+            isGet = false;
+        }
+
+        let str = '';// 存储拼接好的字符串
+        for(let k in data){
+            str += `${k}=${encodeURIComponent(data[k])}&`
+        }
+        // 把str中最后边的&去掉；
+        // str = str.slice(0,str.length-1);
+        str = str.replace(/(&)$/,'');// a=12&b=13
+
+        // 若是 get
+        if(isGet){
+            let ary = url.split('?');
+            if(ary[1] === ''){
+                url += str; // 只一个问号的情况
+            }else if(ary[1] === undefined){
+                url += '?' + str;
+            }else{
+                // 有参数  有& 则直接拼上str  没有 & 拼一个&+str
+                /&$/.test(ary[1]) ? url += str : url += '&'+str;
+            }
+
+            // 若不需要缓存  只要在url 后边拼接一个新的参数；
+            if(!cache){
+                // 不要缓存
+                url += `&_=${Date.now()}`
+            }
+
+        }
+        // url的处理 1 自带一部分参数；  2 不带参数;
+        
+
+
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open(type,url,async);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){// 保证请求已经完成
+                if(/^(2\d{2}|304)$/.test(xhr.status)){
+                    // 成功
+                    // 需要把后台传的数据 再传递给回调函数
+                    // 根据 dataType 来决定返回回调函数的数据
+                    let data = null;
+                    switch (dataType) {
+                        case 'json':
+                            // let data = JSON.parse(xhr.responseText);
+                            // success && success(data)
+                            try{
+                                data = JSON.parse(xhr.responseText)
+                            }catch(e){
+                                data = xhr;
+                            }
+                            break;
+                        case 'xml':
+                            data = xhr.responseXML;
+                            break;
+                        default:
+                            data = xhr;
+                            break;
+                    }
+                    success && success(data) // 函数存在 再去执行
+                }else{
+                    // 失败
+                    error && error(xhr);
+                }
+            }
+        }
+        // 设置请求头  把数据以 formData 的形式传给 后端
+        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+        xhr.send(str);
+    }
+</script>

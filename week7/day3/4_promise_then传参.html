@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let p1 = new Promise((res,rej)=>{
+        res(123)
+    });
+    p1.then((d,q)=>{
+        console.log(d);
+        console.log(aaa);
+    },()=>{
+
+    }).then((d)=>{
+        consolse.log(d);
+        return 100
+    },(e)=>{
+        console.log(e);
+        return 2
+    }).then((d)=>{
+        console.log(d)
+    },(e)=>{
+        console.log(e)
+    })
+
+    // 可以使用 catch 简写； catch 可以捕获任何一个then处报的错误；
+    // 但是报错处下边的then 不在执行
+    let p2 = new Promise((res,rej)=>{
+        res(123)
+    });
+    p2.then((d,q)=>{
+        console.log(d);
+        console.log(aaa);
+    }).then((d)=>{
+        consolse.log(d);
+        return 100
+    }).then((d)=>{
+        console.log(d)
+    }).catch((e)=>{
+        console.log(e)
+    })
+</script>

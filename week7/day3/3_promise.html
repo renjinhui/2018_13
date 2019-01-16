@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // Promise  本身是一个类；我们通过 new 的方式 去创建一个新的 
+    // Promise实例，接收一个回调函数f作为实参；回调函数f 有两个形参 
+    // 分别是 resolve、reject; resolve 是一个成功后的回调，reject是
+    // 失败的回调，两个函数 谁去执行 由我们自己决定；
+    // 若f执行失败，则直接走到reject函数
+    // 两个对应的实参 是由 Promise原型上的 then方法传递过去的；
+    // 产生的实例 有三个状态 分别是 resolved  rejected  pending
+    // 当resolve 执行时，会把实例的状态从 pending 置成 resolved
+    // reject 执行时，会把实例的状态从 pending 置成 rejected
+    // 一旦状态变成 resolved或者rejected 就不会重新更改状态
+    // var p1 = new Promise(function(res,rej){
+    //     // res(123);
+    //     // rej(1)
+    //     // console.log(aaa)
+    //     setTimeout(() => {
+    //         res();
+    //     }, 3000);
+       
+    // });
+    // p1.then(function(d){
+    //     console.log(d,'success')
+    // },function(err){
+    //     console.log(err,'error')
+    // })
+    // 3s之后输出1 接着再3秒之后输出2 再接着3s后输出3
+    // setTimeout(() => {
+    //     console.log(1);
+    //     setTimeout(() => {
+    //         console.log(2)
+    //         setTimeout(() => {
+    //             console.log(3);
+    //         }, 3000);
+    //     }, 3000);
+    // }, 3000);
+
+    let p2 = new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve(666)
+        }, 3000);
+    }).then((a)=>{
+        console.log(1,a);
+    },()=>{}).then((b)=>{
+        console.log(b,2222)
+    },()=>{}).then(()=>{
+        console.log(3333)
+    },()=>{})
+
+
+    let p3 = new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve()
+        }, 3000);
+    }).then(()=>{
+        console.log(1);
+        return new Promise((res,rej)=>{
+            // res , rej 对应 下一个 then的 第一个和第二参数
+            setTimeout(() => {
+                res()
+            }, 3000);
+        })
+    },()=>{}).then(()=>{
+        console.log(2222);
+        return new Promise((res,rej)=>{
+            setTimeout(() => {
+                res()
+            }, 3000);
+        })
+    },()=>{}).then(()=>{
+        console.log(3333)
+    },()=>{})
+</script>

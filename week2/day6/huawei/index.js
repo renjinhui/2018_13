@@ -6,15 +6,23 @@ let listBox = document.getElementById('list_box');
 let btns = document.getElementsByTagName('button');
 let data = null; // 这个变量用来存储从后台获取的数据；
 
-let xhr = new XMLHttpRequest();
-xhr.open('get','./data.json',false);// get 请求方式；  ./data.json接口；  false 同步
-xhr.onreadystatechange = function () {
-    if(xhr.readyState == 4 && xhr.status == 200){
-        // 获取成功
-        data = JSON.parse(xhr.responseText);// 把获取到的JSON字符串转成JSON对象
+// let xhr = new XMLHttpRequest();
+// xhr.open('get','./data.json',false);// get 请求方式；  ./data.json接口；  false 同步
+// xhr.onreadystatechange = function () {
+//     if(xhr.readyState == 4 && xhr.status == 200){
+//         // 获取成功
+//         data = JSON.parse(xhr.responseText);// 把获取到的JSON字符串转成JSON对象
+//     }
+// }
+// xhr.send();
+ajax({
+    url:'./data.json',
+    async:false,
+    data:{a:'珠峰'},
+    success:function(d){
+        data = d;
     }
-}
-xhr.send();
+})
 
 console.log(data);
 function giveHtml(data) {// 实现 把数据  转成  页面  可见的  画面；

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <div></div>  
+</body>
+</html>
+<script>
+    ajax({
+        url:'https://www.souyidai.com/fragment/invest_index.json'
+    }).then((data)=>{
+        console.log(data);
+    },(err)=>{
+        console.log(err)
+    })
+
+
+
+    function ajax(options) {
+        let {
+            url,
+            type = 'get',
+            data,
+            cache = true
+        } = options;
+
+        let str = '';
+        for(let k in data){
+            str += `${k}=${encodeURIComponent(data[k])}&`
+        }
+        str = str.slice(0,str.length-1);// 去除最后边的&
+        let isGet = /^(get|head|delete)$/.test(type);// isGet 就是 test 的返回值
+        if(isGet){
+            let ary = url.split('?');
+            if(ary[1]===''){ // 只有? 后边没内容
+                url+=str;
+            }else if(ary[1] === undefined){
+                url += '?'+str;
+            }else{
+                /&$/.test(ary[1]) ? url+=str : url+='&'+str;
+            }
+            if(!cache){
+                // 不走缓存
+                url += `&_=${Date.now()}`
+            }
+        }
+        return new Promise((res,rej)=>{
+            let xhr = new XMLHttpRequest();
+            xhr.open(type,url,true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(/^(2\d{2}|304)$/.test(xhr.status)){
+                        let data = JSON.parse(xhr.responseText);
+                        res(data);
+                    }else{
+                        rej(xhr)
+                    }
+                }
+            }
+            xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+            xhr.send(str);
+        })
+    }
+
+
+
+    // windows 键 +  R键  调出 docs命令窗口； 输入 node -v  若出现 版本号 就可以了
+</script>

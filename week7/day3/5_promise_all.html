@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="./ajax.js"></script>
+<script>
+    // 页面有一处计算 依赖于 两组数据；
+    // 一组数据需要从A接口获取； 另外一组需要从B接口获取；
+    // let s = false;
+    // ajax({
+    //     url:'A',
+    //     success:function(data){
+    //         compute();
+    //         s = true;
+    //     }
+    // })
+    // ajax({
+    //     url:'B',
+    //     success:function(data){
+    //         compute();
+    //         s = true;
+    //     }
+    // })
+    // function compute() {
+    //     if(!s)return;
+    // }
+
+
+
+
+
+
+    let p1 = new Promise((res,rej)=>{
+        ajax({
+            url:'https://www.souyidai.com/soeasy/invest/fulllist',
+            success:res,
+            error:rej
+        })
+    });
+    let p2 = new Promise((res,rej)=>{
+        ajax({
+            url:'https://www.souyidai.com/newbid/user_status1',
+            type:'post',
+            success:res,
+            error:rej
+        })
+    });
+    // 所有的实例都完成 
+    // 参数是数组； 里边存放的都是 promise实例 
+    // 数组中所有的实例都成功  才会走 then 的第一个函数
+    // 只要有一个失败  就会走到 then 的第二个函数
+    Promise.all([p1,p2]).then((data)=>{
+        console.log(data);
+    },(err)=>{
+        console.log(err)
+    })
+</script>

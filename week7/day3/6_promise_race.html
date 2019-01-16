@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="./ajax.js"></script>
+<script>
+
+    let p1 = new Promise((res,rej)=>{
+        ajax({
+            url:'https://www.souyidai.com/soeasy/invest/fulllist',
+            success:res,
+            error:rej
+        })
+    });
+    p1.then((d)=>{
+        console.log(d)
+    })
+    let p2 = new Promise((res,rej)=>{
+        ajax({
+            url:'https://www.souyidai.com/newbid/user_status1',
+            type:'post',
+            success:res,
+            error:rej
+        })
+    });
+    let p3 = new Promise((res,rej)=>{
+        setTimeout(() => {
+            res('err')
+        }, 3000);
+    })
+    // 赛跑 谁先完成  回调谁； 也就是谁先完成，谁执行 then中的方法
+    Promise.race([p1,p3]).then((data)=>{
+        if(data == 'err'){
+            alert('超时')
+        }
+        console.log(data);
+    },(err)=>{
+        console.log(err)
+    })
+</script>

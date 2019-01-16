@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+<script>
+    // 前后端联调
+    $.ajax({
+        url:'',
+        type:'get', // get post 默认get
+        data:{},// 传给后台的数据
+        dataType:'json',// json xml; 默认 json,
+        cache:true,// 走缓存
+        async:true,// 是否异步
+        success:function(data){
+
+        },
+        error:function(){
+
+        }
+    })
+    
+    // ajax的jsonp
+    $.ajax({
+        url:'https://nex.163.com/q?app=7BE0FC82&c=homepage&l=31&site=netease&affiliate=homepage&cat=homepage&type=logo300x250&location=13&cb=jsonp_07198258570007494',
+        dataType:'jsonp',
+        jsonp:'cb',// callback
+        jsonpCallback:'qqq',
+        success:function(data){
+            console.log(data)
+        },
+        error:function(){}
+    })
+
+</script>
