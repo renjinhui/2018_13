@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // ajax({});  xhr四步；
+    // url type data cache async dataType success error 
+    // 处理这些参数时 我们使用的 es6对象的解构赋值
+    // let {name,age} = obj;
+    // console.log(name,age)
+    // 处理data  循环data 拼接成了一个 类似于 ‘a=12&b=13’ 的字符串 encodeURIComponent
+    // if(isGet) 根据url现在的形式 做了不同的处理   看是否需要缓存；
+    // 下一步 根据时请求成功 做了 成功就执行成功的回调（根据dataType做处理）  失败就执行失败的回调
+    // send(拼接好的str)
+
+    // ajax().then()
+    // promise封装  参数处理跟上边一样  success && success(data)==>resolve(data)
+
+    let p1 = new Promise((res,rej)=>{});
+    p1.then((data)=>{}).catch((err)=>{});
+    // Promise.all([Promise实例])
+    // Promise.race([Promise实例])
+
+</script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./js/axios.min.js"></script>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 设置通用的 基础路径
+    axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test';
+    axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    // // 在发送之前 把数据转成 a=12&b=13 格式
+    // axios.defaults.transformRequest = function (data) {
+    //     // 在数据发送之前  处理数据
+    //     // console.log(data);
+    //     data.haha = 14;
+    //     let str = '';
+    //     for (let k in data) {
+    //         str += `${k}=${data[k]}&`
+    //     }
+    //     str = str.replace(/&$/, '');
+    //     return str
+    // }
+    // 请求拦截器 先执行的 拦截器 后执行的transformRequest；
+    axios.interceptors.request.use(function (config) {
+        // 在发送请求之前做些什么
+        console.log(config)
+        // config.data = '';
+        config.data.t=Date.now();
+        return config;
+    }, function (error) {
+        // 对请求错误做些什么
+        return Promise.reject(error);
+    });
+
+    // 响应拦截器
+    axios.interceptors.response.use(function (response) {
+        // 对响应数据做点什么
+        return response;
+    }, function (error) {
+        // 对响应错误做点什么
+        return Promise.reject(error);
+    });
+
+
+
+
+    axios.post('/zf', {
+        a: 12,
+        b: 13
+    }).then(data => {
+        // console.log(data)
+    })
+    // axios.get('/userInfo',{params:{a:1}}).then(data=>{
+    //     console.log(data);
+    // })
+
+
+
+
+    // 若对于post请求 想给后台一个formData 的形式的数据；
+    // 需要我们设置 请求头； 并且把传的数据转成 ‘a=12&b=13’ 的格式，
+    // 这一步在拦截器 或者 transformRequest 中做都可以
+
+
+    // 我们可以从拦截器中获取较多的内容；比如 get 的参数、post的参数、headers、baseURL 等
+
+    // axios.get(url,{params:{}}).then()  
+    // axios.post(url,{}).then()
+    // axios.defaults.baseURL =  ;// 基础路径信息 
+
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/axios.min.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // axios 目前 比较常用的一种请求数据的插件； 基于Promise
+    // axios.get(url,{params:{}}) params 是要传给后端的参数；第二项可以不写
+    axios.get('https://help.souyidai.com/about/announce/index.json')
+    .then((data)=>{
+        console.log(data);
+    }).catch((err)=>{
+        console.log(err);
+    })
+
+    // get 请求； 参数传递的方式 只有params
+    axios.get('https://help.souyidai.com/about/announce/index.json',{params:{
+        a:12,
+        b:13
+    }}).then((data)=>{
+        console.log(data);
+    })
+
+    // post： axios.post(url,{a:1,b:2}).then(); 
+    // 第二个参数是个对象，对象里边是要给给后端的参数
+    axios.post('https://www.easy-mock.com/mock/5ad04d9cf49ac24a8cb47724/huaxia/huaxia/qryOpenBank',{
+        // get 时； 需要有一个params的属性，属性值时传给后端的参数
+        // post 时；这个里边放的就是传给后端的参数；
+        // get比post多套了一层 params
+        a:11,
+        b:12
+    }).then(data=>{
+        console.log(data);
+    })
+
+    axios({
+        url:'https://help.souyidai.com/about/announce/index.json',
+        method:'get',
+        params:{
+            // get 请求直接用 params; post请求用 data属性名
+            a:12,
+            b:13
+        }
+    }).then((data)=>{
+        console.log(data);
+    })
+</script>
