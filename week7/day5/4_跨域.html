@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 浏览器的同源策略引起的跨域；
+    // 页面数据访问时；只能访问同源下的数据；
+    // 同源：  协议 域名  端口 三者保持一致；
+
+    // jsonp
+    // cors  后台设置 响应头
+    // proxy代理
+    function data_callback(data) {
+        let str = '';
+        data.forEach(item=>{
+            str += item.title;
+        })
+        document.body.innerHTML = str
+        // console.log(data);
+    }
+</script>
+
+<script src="https://temp.163.com/special/00804KVA/cm_yaowen.js?callback=qqq"></script>

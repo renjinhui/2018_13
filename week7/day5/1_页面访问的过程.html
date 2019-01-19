@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href='#/111'>111</a>
+    <a href='#/222'>222</a>
+    <a href='#/333'>333</a>
+    <button myurl='#/111' id='btn1'>111</button>
+    <div style='display: none'>111</div>
+    <div style='display: none'>222</div>
+    <div style='display: none'>333</div>
+</body>
+
+</html>
+<script>
+    // 首先把地址栏的域名转成 IP；通过 DNS  domain name systerm
+    // 通过IP查找到对应的服务器；
+    // 再根据路径和端口找到对应的文件
+    // 服务器把页面源码返回给客户端
+    // 客户端再去 解析源码；先渲染DOM结构  再渲染 样式；
+
+
+    // URI 统一资源标识符
+    // URL 统一资源定位符
+    // URN 统一资源名称
+
+
+    // URL的组成部分
+    // https://shimo.im/sheet/BGpLXdxT0BAPxv9r/RIDOC
+    // 协议  域名  端口  路径  问号传参 或者 哈希值
+
+    // 怎么获取一个URL上的参数？
+    var str = 'https://www.baidu.com?qq=123&ww=345';
+    var reg = /([^?=&]+)=([^?&=]+)/g;
+    var obj = {};
+    // $1 $1 ... 小分组对应的内容
+    str.replace(reg, function (big, lit1, lit2) {
+        obj[lit1] = lit2;
+    })
+    console.log(obj);
+
+    //  hash 选项卡
+    let oDivs = document.querySelectorAll('div');
+    window.onhashchange = function () {
+        let str = location.hash;
+
+        switch (str) {
+            case '#/111':
+                oDivs[0].style.display = 'block';
+                oDivs[1].style.display = 'none';
+                oDivs[2].style.display = 'none';
+                break;
+
+            case '#/222':
+                oDivs[0].style.display = 'none';
+                oDivs[1].style.display = 'block';
+                oDivs[2].style.display = 'none';
+                break;
+
+            case '#/333':
+                oDivs[0].style.display = 'none';
+                oDivs[1].style.display = 'none';
+                oDivs[2].style.display = 'block';
+                break;
+        }
+    }
+
+
+    // location hash  href pathname reload; 查看地址栏信息
+    // navigator 查看设备信息
+</script>

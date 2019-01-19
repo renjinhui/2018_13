@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','./1.json',true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 2){
+            console.log(xhr.getAllResponseHeaders())
+        }
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let d = JSON.parse(xhr.responseText)
+            fn(d)
+        }
+    }
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+    xhr.send('Q=12&W=13')
+
+    //readyState :0  1  2  3  4;
+    // 0 新产生一个实例的时候
+    // 1 open函数执行之后
+    // 2 接受到响应头
+    // 3 正在接收响应体
+    // 4 完成
+
+    // status 网络状态码 
+    // 2开头
+    // 3开头的一般代表重定向  304缓存
+    // 404 路径错误； 405 method错误； 403 forbidden
+    // 5开头
+
+
+    // get系列: get head delete
+    // post系列：post put
+
+    // get 请求有大小的限制；post没有大小限制；
+    // get 缓存；post 没缓存； 解决get缓存 就是添加新的问号参数
+    // get 安全性问题，post请求；
+    // get ?问号传参  post请求体
+
+    // 异步  结合回调函数使用；
+    function fn(data){
+        console.log(data);
+    }
+</script>

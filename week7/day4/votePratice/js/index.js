@@ -21,7 +21,7 @@ function getData(){
         bindHtml(data.list);
         maxPage = data.pageNum;
         canGet = true;// 数据渲染完成之后  重新把值改成 true
-        bodyH = document.body.scrollHeight; // 更新 bodyH
+          // 更新 bodyH
     })
 }
 getData();

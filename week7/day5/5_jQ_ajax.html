@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="https://zeptojs.com/zepto.min.js"></script>
+<script>
+    $.ajax({
+        url:'https://help.souyidai.com/help/guide/usually/index.json?e=12&w=13&',
+        type:'get',
+        data:{
+            t:Date.now()
+            // 传给后台的数据
+        },
+        cache:true,// 针对get 请求 才有作用； true 走缓存
+        success:function(data){
+            console.log(data);
+        },
+        error:function(err){
+            console.log(err);
+        }
+    })
+    $.get('./1.json',{d:2,s:2},function(data){
+        console.log(data);
+    })
+    $.post('./1.json',{d:2,s:2},function(data){
+        console.log(data);
+    })
+</script>
