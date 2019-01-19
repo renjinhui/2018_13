@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    fetch('./1.json', {
+        method: 'get',
+        d:q
+    }).then((data) => {
+        // console.log(data);
+        if (/^[45]\d{2}$/.test(data.status)) {
+            throw Error('404')
+        } else {
+            res(data.json())
+        }
+    },()=>{
+        console.log(2);
+        
+    })
+    let p1 = new Promise(function (res, rej) {
+        fetch('./1.json', {
+            method: 'get'
+        }).then((data) => {
+            // console.log(data);
+            if (/^[45]\d{2}$/.test(data.status)) {
+                rej(data)
+            } else {
+                res(data.json())
+            }
+        })
+    }).then((data) => {
+        console.log(data)
+    }, () => {
+
+    })
+
+    let p2 = new Promise(function (res, rej) {
+        setTimeout(() => {
+            res(1)
+        }, 3000);
+    }).then(() => {
+        throw Error(123)
+    }).then(() => {
+
+    },()=>{
+        console.log(222)
+    }).catch(() => {
+
+    })
+    // Promise.all([promise实例,promise实例,promise实例]).then
+    // Promise.race([promise实例,promise实例,promise实例]).then
+</script>

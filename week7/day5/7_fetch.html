@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    fetch('https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/zf',{
+        method:'post',
+        // body:'a=12&b=13', // 需要是一个字符串
+        body:JSON.stringify({a:12,b:13}),
+        headers:{
+            // 'content-type':'application/x-www-form-urlencoded'
+        }
+    }).then((data)=>{
+        console.log(data.json());
+        // console.log(data)
+        // return data.json(); // data.text()  data.json()
+    }).then(data=>{
+        console.log(data)
+    })
+    fetch('https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/userInfo?',{
+        method:'get',
+        // 不能写body   传参需要自己拼接到url后边
+    }).then((data)=>{
+        // console.log(data.json());
+        return data.json(); // data.text()  data.json()
+    }).then(data=>{
+        console.log(data)
+    })
+</script>

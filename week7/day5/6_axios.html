@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="./axios.min.js"></script>
+<script>
+    axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test'; // 设置基础路径
+
+    // post 传参时 把传送的数据格式改成 formData
+    axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    axios.defaults.transformRequest = function(data){
+        //  只能获取到 post请求 发送给后台的参数
+        console.log(data)
+        let str = '';
+        for(let k in data){
+            str += `${k} = ${data[k]}&`
+        }
+        str = str.replace(/&$/,'');
+        return str
+    }
+
+
+    // 添加响应拦截器
+    axios.interceptors.response.use(function (response) {
+        // 对响应数据做点什么
+        let obj = {};
+        obj.data = response.data;
+        obj.t = 123;
+        return obj;
+        // return response.data;
+        // return 123
+    }, function (error) {
+        // 对响应错误做点什么
+        return Promise.reject(error);
+    });
+    axios({
+        url: '/zf',
+        method: 'post',
+        params: {
+            // get 传参使用
+            a: 1,
+            b: 2
+        },
+        data:{
+            // post 传参使用
+            a:10,
+            b:20
+        }
+    }).then((data) => {
+        console.log(data)
+    })
+    axios.get('/userInfo',{params:{a:23,b:32}}).then()
+    axios.post('/zf',{haha:12,hh:32}).then()
+</script>
