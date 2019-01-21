@@ -1,0 +1,19 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "description": "hello world",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hello": "node 1.js"
+  },
+  "author": "renjinhui",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.5.22"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.22.1"
+  }
+}

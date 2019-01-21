@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click='fn(name)'>按钮1</button>
+        <button v-on:click='fn'>按钮2</button>
+        <button @click='fn(123,name,$event)'>按钮3</button>
+        <button @mouseenter='fn2($event,123,name)'>按钮4</button>
+        <!-- {{this.name}} -->
+    </div>
+</body>
+</html>
+<script src="./node/node_modules/vue/dist/vue.js"></script>
+<script>
+    // 事件的绑定 我们用 v-on:事件类型='函数' 
+    // 或者 @事件类型='函数'
+    // 对应的函数一般不带小括号； 默认传递一个事件对象作为实参
+    // 但是 当我们需要传参数的时候，需要给函数带一个小括号，括号里边是要传的参数；
+    // 这里的小括号并不是直接让fn执行， 只是一种写法而已
+    // 函数一般是在 methods 中定义的
+    // el  data  methods 都是 VUE规定死的属性名
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:'珠峰'
+        },
+        methods: {
+            // 函数体的存放位置
+            // 函数中的this 全是  对应的实例
+            fn(val){
+                console.log(val);
+                console.log(this===vm);
+                console.log(this.name);
+                console.log(arguments);
+            },
+            fn2(e,n,name){
+                // 事件的事件对象 我们只能通过 $event 传进来；
+                // 传递参数的位置自定义
+                // 
+                console.log(e,n,name)
+            }
+        },
+    })
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'/>
+        <h2 v-text='name' v-once>hello zhufneg </h2>
+        {{q}}
+        <div v-html='q'></div>
+    </div>
+</body>
+</html>
+<script src="./node/node_modules/vue/dist/vue.js"></script>
+<script>
+    // 指令都是行内属性
+    // v-text 展示 对应的文本
+    // v-once 对应的标签只渲染一次
+    // v-html 把值中的标签渲染出来
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:'珠峰',
+            q:'<h1>哈哈哈</h1>'
+        }
+    })
+</script>

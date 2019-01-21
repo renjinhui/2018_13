@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    //VUE 数据驱动； 操作DOM JQ;
+
+    // JS的数据类型 基本和引用
+    // 数组中常用的方法
+    // pop  push shift unshift reverse sort  splice(n,m,x,y,z) 数组的变异  的方法
+    // slice(n,m) concat  indexOf  join('+')
+
+    // 数组的迭代方法
+    // forEach map filter
+    // (item)=>{return item}   item=>item
+    var a = [].forEach(item=>item) // undefined
+    var b = [].map(item=>item)// []
+    var ary = [1,2,3,4,5,6,7,8];
+    var c = ary.filter(item=>item%2===0)
+    // filter的回调函数中return值 若是true 则把当前迭代的向复制一份到 新数组arr中；
+    // filter的返回值是 新数组arr；
+
+    // some回调函数中只要有一个回调返回的是true;则 整个some 返回的值就是true
+    // 只要某个项满足条件  下边的项就不再去迭代
+    // true false
+    var arr = [232,34535,123,345,1354,2,4,1];
+    // 数组中是否有小于3的数 是的话就是true; 
+    var bol = arr.some((item)=>{
+        console.log(item);
+        // return false
+        return item < 3
+    });
+    console.log('结果',bol);
+
+    //every 回调函数 每一个都是true every的返回值才是true; 
+    //换句话说 就是只要有一个是false  整个结果就是false;
+    
+    // 判断数组中是否都是大于3的？
+    var bol2 = arr.every(item=>{
+        console.log(item);
+        return item > 3;
+    });
+    console.log('every',bol2);
+
+    // reduce((prev,next)=>{ console.log(prev,next) })
+    var arr2 = [1,2,3,4,5];
+    arr2.reduce((prev,next)=>{
+        console.log(prev,next);
+        // prev 若 reduce 有第二个参数； 则第一个prev 就是该参数
+        //                没有的话   第一个prev 就是数组中的第一项 
+        // 第二次的prev 上一个回调函数的return 值                  
+    })
+    // reduce 的结果  就是最后一次迭代的 return 值
+    var t = arr2.reduce((prev,next)=>{
+        return prev+next;
+        // 第一次迭代 1 + 2
+        // 第二次迭代 3 + 3
+        // 第三次迭代 6 + 4
+        // 第四次迭代 10 + 5
+    })
+
+    // find  includes
+    // find(()=>{}) 找到满足条件的第一项
+    // includes(要查找的项n,查找的起始索引m) 从索引m开始查找是否包含n;// true 或者false
+ 
+</script>

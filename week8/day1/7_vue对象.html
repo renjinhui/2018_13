@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}{{obj.a}}</h1>
+        <!-- 在模板中 不会显示出 undefined 这个关键字的；VUE 处理成了 空字符串 -->
+        {{obj}}
+        {{undefined}}
+        <input type="text" v-model = 'name'>
+        <input type="text" v-model = 'obj.a'>
+        <div style='display: none'>{{t}}</div>
+    </div>
+</body>
+</html>
+<script src="./node/node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:'珠峰',
+            obj:{
+                // 对于对象来说； 
+                // 新增一个属性: 不会触发视图的更新
+                a:'hello',
+                b:undefined
+            },
+            t:0 // 自己随便造的一个变量
+        }
+    })
+    // 1、 正常写全要用到的属性；先预留要用到的属性；
+    // 2、 整个对象的重新赋值
+    // 3、$set
+    // vm.obj.c = '666'; 能加上 ；但是不会触发视图的更新；
+    // vm.$set(vm.obj,'b','666') // 这种方式添加的 就会有 get set 两个属性
+
+    // 4、增加一个无关变量t，每次修改完数据之后； 重置t就可以了；
+    vm.obj.c = 666;
+    vm.t = Math.random();// 
+
+    //  修改数据 触发视图的更新 ；
+    //  大前提是 该数据  再页面上使用了
+    //  需要1、该变量有get set； 2、修改后的值 跟之前的值不一样
+</script>

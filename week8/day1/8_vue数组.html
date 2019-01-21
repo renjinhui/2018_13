@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ary}}
+    </div>
+</body>
+</html>
+<script src="./node/node_modules/vue/dist/vue.js"></script>
+<script>
+    // 数组原型上的那些 能够改变原有数组的方法 我们称为变异方法
+    // 这些变异方法 可以触发视图的更新；
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            ary:[1,2,3,4]
+            // length-- 和  ary[4] = 555; 
+            // 这些写法虽然可以改变原有数组  但是不会触发视图的更新
+        }
+    })
+    // 修改数组中的第一项；把第一项改成3
+    // vm.ary.splice(0,1,3)
+    // vm.ary.shift();vm.ary.unshift(3);
+    // vm.ary.map((item,index)=>{ if(index == 0)return 3;return item })
+</script>

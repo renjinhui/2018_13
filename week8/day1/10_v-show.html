@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1 v-text='name'></h1>
+        <h2 v-once>{{ht}}</h2>
+        <div v-html='ht'></div>
+        
+
+        <button @click='fn'>按钮</button>
+        <div v-show='bol'>哈哈哈</div>
+    </div>
+</body>
+</html>
+<script src="./node/node_modules/vue/dist/vue.js"></script>
+<script>
+    // vue 指令  v-model  v-text  v-once  v-html
+
+    // v-show='布尔' 布尔为true 显示； false 隐藏；
+    // 会把其他数据类型默认转成布尔类型
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:'珠峰',
+            ht:'<i>珠峰培训</i>',
+            bol:''
+        },
+        methods:{
+            fn(){
+                // 控制 bol 的值
+                // this.bol = !this.bol;
+                this.bol ? this.bol = false : this.bol = true;
+            }
+        }
+    })
+</script>

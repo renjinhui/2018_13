@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var obj = {};
+    var temp = {};
+    Object.defineProperty(obj,'name1',{
+        // value:'珠峰',
+        // configurable:true,// 是否可删
+        // writable:true,// 是否可写
+        // enumerable:true, // 是否可枚举 是否可循环
+        // get:function get(){}
+        get(){
+            // 只要是使用了 obj.name1 那么就会触发 该函数；
+            // 外界获取到的值 就是 该函数的return值
+            // console.log(111);
+            // return 123
+            return temp.a;
+        },
+        set(val){
+            // 只要外界给 name1赋值 就会触发该函数；
+            // 形参 val 就是外界赋予的那个值
+            // console.log(val);
+            temp.a = val
+            // console.log(this)
+            // this.name1 = val; //会触发 无限循环
+        }
+    })
+    console.log(obj);
+</script>
