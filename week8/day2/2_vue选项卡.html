@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div>
+            <span @click='index=10'>css</span>
+            <span @click='fn(20)'>html</span>
+            <span @click='fn(30)'>JS</span>
+        </div>
+        <ul>
+            <li v-show='index==10'>Css</li>
+            <li v-show='index==20'>HTML</li>
+            <li v-show='index==30'>JS</li>
+        </ul>
+
+        <div v-for='a in ary'>{{a}}</div>
+        <h2 v-for='(a,i) in ary'>索引：{{i}}；值：{{a}}</h2>
+        <h3 v-for='i in 5'>{{i}}</h3>
+        <h4 v-for='(a,index) in "qwer12345"' :key="a+index">{{a}}</h4>
+        <h5 v-for='(q,k,i) in obj'>属性值：{{q}};属性名：{{k}}{{i}}</h5>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 指令 v-for  循环显示元素的; 可以循环数组，也可以循环对象 数字 字符串；
+    // v-for = 'item in ary' ;在哪个标签上 就会自动循环显示哪个标签
+    // v-for的时候  最好都加上key 属性
+    // 
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            index:10,
+            ary:[1,2,3,4,5,6,7],
+            obj:{
+                a:10,
+                b:20,
+                c:30
+            }
+        },
+        methods: {
+            fn(n){
+                this.index = n;
+            }
+        },
+    })
+</script>

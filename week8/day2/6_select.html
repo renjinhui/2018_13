@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            border: 1px solid #000;
+            width: 300px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <select v-model='select'>
+            <!-- v-bind:src='变量' 适用于绑定行内属性 简写成:src -->
+            <option value="" disabled>请您选择</option>
+            <option v-for='item in ary' :value='item.val' :qqq='item'>{{item.text}}</option>
+            <!-- <option value="1">html</option>
+            <option value="2">JS</option>
+            <option value="3">VUE</option> -->
+        </select>
+        <h2>{{select}}</h2>
+
+        <div class='box' @click='fn'>{{selectText}}</div>
+        <ul v-show='flag'>
+            <li v-for='item in ary' @click='choose(item)'>{{item.text}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            select:'',
+            ary:[
+                {val:0,text:'css'},
+                {val:1,text:'html'},
+                {val:2,text:'jS'},
+                {val:3,text:'vue'}
+                ],
+            flag:false,
+            selectText:''    
+        },
+        methods: {
+            fn(){
+               this.flag = !this.flag 
+            },
+            choose(obj){
+                this.selectText = obj.text;// 让上边的文本展示成选中的内容
+                this.flag = false;// 让下拉框隐藏
+            }
+        },
+    })
+</script>

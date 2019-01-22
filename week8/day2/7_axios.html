@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="checkbox" value='0' v-model='check'>css
+        <input type="checkbox" value='1' v-model='check'>JS
+        <input type="checkbox" value='2' v-model='check'>HTML
+        <input type="checkbox" value='3' v-model='check'>VUE
+        </br>
+        <input type="radio" v-model='sex' value='1'>男
+        <input type="radio" v-model='sex' value='2'>女
+        </br>
+        <select v-model='city'>
+            <option value="1">北京</option>
+            <option value="2">上海</option>
+            <option value="3">杭州</option>
+        </select>
+        </br>
+        <textarea v-model='msg' type="text" placeholder="备注信息"></textarea>
+        </br>
+        <button @click='fn'>提交</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            check:[0,1,2,3],
+            sex:1,
+            city:1,
+            msg:''
+        },
+        methods: {
+            fn(){
+                // 先判断 check 是否为空
+                if(this.check.length===0){
+                    alert('课程不能为空');
+                    return;
+                };
+                axios.post('https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/zf',{
+                    course:this.check,
+                    sex:this.sex,
+                    city:this.city,
+                    msg:this.msg
+                }).then((data)=>{
+                    console.log(data);
+                    let obj = data.data.data;
+                    if(obj.age>18){
+                        alert('成功')
+                    }else{
+                        alert('失败')
+                    }
+                }).catch(()=>{
+                    alert('系统繁忙')
+                })
+            }
+        },
+    })
+</script>

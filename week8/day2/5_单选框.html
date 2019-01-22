@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- 多个input 绑定同一个变量即可 -->
+        <input type="radio" v-model='fruit' value='1'>苹果
+        <input type="radio" v-model='fruit' value='2'>香蕉
+        <input type="radio" v-model='fruit' value='3'>橘子
+        {{fruit}}
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            fruit:'3'
+        }
+    })
+</script>

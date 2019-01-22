@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2>{{(money/100).toFixed(2)}}</h2>
+        <h2>{{name2.toUpperCase()}}</h2>
+
+        <!-- 
+            管道符前边是要处理的数据 后边是处理的函数； 最终展示的是函数的返回值
+            过滤器是可以连续使用的 下一个过滤器获取的值 是上一个过滤器的返回值
+         -->
+        <h2>{{money | changeM(2)}}</h2>
+        <h2>{{money | changeM | toUpper | qqq}}</h2>
+        {{money|qqq}}
+        <!-- {{[name,name2]}} -->
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+    // 全局过滤器  是在整个项目中都能使用到的过滤器
+    // qqq 是自定义的过滤器的名称
+    Vue.filter('qqq',function(val){
+        return val+'hahaha'
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            money:123456,
+            name2:'helloKity2019'
+        },
+        filters:{
+            // 都是一些函数
+            changeM(val,n=2){// es6 函数参数的默认值写法
+                // n = n || 2;
+                console.log(arguments);
+                console.log(this);// 不是当前的实例；
+                return (val/100).toFixed(n)
+            },
+            toUpper(val){
+                return val.toUpperCase();
+            }
+        }
+    })
+</script>

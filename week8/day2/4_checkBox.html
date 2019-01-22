@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- 有 checked 属性 默认选中 -->
+        <!-- 多个input 必须绑定同一个“数组”  -->
+        <!-- <input type="checkbox" v-model='check' value='css'>css
+        <input type="checkbox" v-model='check' value='html'>HTML
+        <input type="checkbox" v-model='check' value='js'>JS
+        <input type="checkbox" v-model='check' value='js'>JS2 -->
+        <input type="checkbox" v-model='check' value='0'>css
+        <input type="checkbox" v-model='check' value='1'>HTML
+        <input type="checkbox" v-model='check' value='2'>JS
+        <input type="checkbox" v-model='check' value='3'>JS2
+
+        <h2>{{check}}</h2>
+        <button @click='fn'>按下</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            check:[]
+        },
+        methods: {
+            fn(){
+                let str = this.check.toString();
+                console.log(str)
+            }
+        },
+    })
+</script>

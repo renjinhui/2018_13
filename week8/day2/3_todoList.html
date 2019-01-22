@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- 按键修饰符 @keyup.enter  只有按enter键才会触发后边的函数 -->
+        <!-- <input type="text" v-model='todo'  @keyup='fn'> -->
+        <!-- <input type="text" v-model='todo'  @keyup.enter='fn2'> -->
+        <input type="text" v-model='todo'  @keyup.13='fn2'>
+        <ul>
+            <li v-for='(item,i) in ary'>
+                {{item}}
+                <button @click='del(item,i)'>
+                    删除{{item}}
+                </button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    //  按回车键时 获取内容 把内容放到数组中；
+    //  下边的li展示 用v-for循环该数组
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            todo:'',
+            ary:[1,2,3,4,5,6],
+            ary:[{},{},{}]
+        },
+        methods: {
+            fn(val){
+                console.log(val);
+                if(val.keyCode === 13){
+                    //敲回车键
+                    this.ary.push(this.todo);
+                    this.todo = '';
+                }
+            },
+            fn2(){
+                this.ary.push(this.todo);
+                this.todo = '';
+            },
+            del(item,index){
+                // 删除的操作
+                // console.log(index);
+                // console.log(this.i)
+                // this.ary.splice(index,1);
+                this.ary = this.ary.filter((val)=>{
+                    // val 1 2 3 4 5 6
+                    // item 1
+                    return item !== val
+                })
+            }
+        },
+    })
+</script>

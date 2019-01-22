@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name+123}}</br>{{age+20}}</h1>
+        <input type="text" v-model='name'>
+        <h2 v-text = 'name'>hello</h2>
+        <h3 v-text='name' v-once></h3>
+        <div v-html='qqq'></div>
+        <button @click='fn'>按钮1</button>
+        <button v-on:click='fn2(123)'>按钮2</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // data 中的属性最终都是挂载到了 对应的实例上；
+    // 属性需要有get set；
+    // vue的指令都是 v-开头的； 对于我们来说就是一些行内属性；
+    // v-model
+    // v-text  v-once  v-html
+    // v-show= 'true'
+
+    // 事件：@click='fn' 默认传一个 事件对象给fn
+    //       @click='fn()'  一个参数都没有传给fn;
+    //       @click='fn(123,$event)' $event 是vue规定的传入事件对象的一种方式
+    let vm = new Vue({
+        el:'#app',
+        // template:'<h1>1123</h1>',
+        data:{
+            name:"珠峰",
+            age:10,
+            qqq:'<h4>hello world</h4>',
+            fn2(val){
+                // 不在data 中写函数
+                console.log(this);// Proxy
+                console.log(val)
+            }
+        },
+        methods: {
+            // www:123, 只能写函数
+            fn(val,e){
+                console.log(this)
+                console.log(val,e);
+            }
+        },
+    }).$mount('#app')
+</script>
