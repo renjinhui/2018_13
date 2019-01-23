@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="checkbox" v-model='check' value='1'>
+        <input type="checkbox" v-model='check' value='2'>
+        <input type="checkbox" v-model='check' value='3'>
+        <input type="checkbox" v-model='check' value='4'>
+        <h1>{{check}}</h1>
+
+        <input type="radio" v-model='radio' value='1'>男
+        <input type="radio" v-model='radio' value='2'>女
+
+        <select v-model='select'>
+            <option value="" disabled>请选择</option>
+            <option value="1">css</option>
+            <option value="2">html</option>
+            <option value="3">js</option>
+        </select>
+
+        <input type="text" v-model='name'>
+        <h1>{{name|money|reverse|toUpper(1,2,3)}}</h1>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // {{表达式 变量 计算  三元}}
+    // v-model v-text v-once v-html v-show  v-for v-bind
+    // v-on:事件类型  @事件类型 = fn($event) fn
+    // @keyup.enter=fn; @keyup.13 = fn;
+
+    // checkbox  radio  select
+
+    // filter  filters
+    Vue.filter('money',function(val){
+        return `现金：`+val;
+    })
+
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰培训",
+            check:[],
+            radio:'',
+            select:'1'
+        },
+        filters:{
+            reverse(val){
+                return val.split('').reverse().join('');
+            },
+            toUpper(val,x,y,z){
+                return val.toUpperCase();
+            }
+        }
+    })
+</script>

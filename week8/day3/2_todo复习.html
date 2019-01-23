@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='todo' @keyup.13='fn'>
+        <ul>
+            <li v-for='(item,i) in ary'>
+                {{item}}
+                <button @click='del(i)'>删除{{item}}</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            todo:'',
+            ary:[]
+        },
+        methods: {
+            fn(){
+                this.ary.push(this.todo);
+                this.todo = '';
+            },
+            del(n){
+                this.ary.splice(n,1)
+            }
+        },
+    })
+</script>
