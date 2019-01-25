@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h2{
+            color: #fff;
+            background: #000;
+        }
+        .current{
+            color: blue;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag = !flag'>变色</button>
+        <!-- 绑定类名的一种方式  后边跟个三元表达式 -->
+        <h2 :class=' flag ? "current" : "" '>hello world</h2>
+
+        <!-- 以一个对象的方式 若flag是 true；VUE才会把属性名当作类名加到元素上-->
+        <h2 class='qqq www eee' :class='{current:flag}'>珠峰培训</h2>
+
+        <!-- 跟数组  -->
+        <button @click='fn'>按钮</button>
+        <h2 :class='["qqq","www","eee"]'>珠峰</h2>
+        <h2 :class='ary'>珠峰</h2>
+
+        <input type="color" v-model='col'>
+        <!-- <h2 style="color:red;background:#000">珠峰</h2> -->
+        <h2 :style="'color:'+col+';background:#000'">珠峰</h2>
+        <h2 :style="`color:${col};background:#000`">珠峰</h2>
+
+        <h2 :style='{color:col,background:"#000"}'>珠峰</h2>
+
+
+        <input type="color" v-model='bg'>
+        <h2 :style="[obj1,obj2]">珠峰培训</h2>
+
+    </div>
+
+    <div style='color: red;background:#000'>hello</div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true,
+            ary:['qqq','www','eee'],
+            col:'#111111',
+            bg:'#000000'
+        },
+        computed: {
+            obj1(){
+                return {color:this.col}
+            },
+            obj2(){
+                return {background:this.bg}
+            }
+        },
+        methods: {
+            fn(){
+                this.flag =! this.flag;
+                if(this.flag ){
+                    this.ary.push('current');
+                }else{
+                    this.ary.pop(); 
+                }
+            }
+        },
+    })
+</script>

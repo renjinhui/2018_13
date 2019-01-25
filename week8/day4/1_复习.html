@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h3 v-text='name'></h3>
+        {{name|money}}
+        <h3 v-for='item in name'>{{item}}</h3>
+        <button @click='fn'>按钮</button>
+
+        <!-- <h1>{{total()}}</h1> -->
+
+        <!-- 字符串的反转 -->
+        <h2>{{name.split('').reverse().join('')}}</h2>
+        <h2>{{reverse()}}</h2>
+        <h2>{{name|reverse1}}</h2>
+        <h2>{{name2}}</h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // v-model: input textaera select
+    // v-text 
+    // v-once
+    // v-html
+    // v-show:  display
+    // v-for : []  3  'abc'  {}
+    // v-bind  绑定行内属性  简写成 :
+    // v-on   绑定事件   简写成 @
+    // @keyup.13 = 'fn'  只有按下回车键时 才会触发
+    // v-if
+    // v-cloak 需要配合css 使用； 解决小胡子显示问题
+
+    // filters  filter
+    // Vue.filter('过滤器名',function(val){
+    //     val 就是管道符（|）前的值
+    // })
+
+    // computed
+
+ 
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            // name2:'22'
+        },
+        methods: {
+            fn(){
+                console.log(this);
+            },
+            total(){
+                return 111
+            },
+            reverse(){
+                return this.name.split('').reverse().join('')
+            },
+            name2(){
+                return 111
+            }
+        },
+        filters:{
+            money(val){
+                // 函数名就是 过滤器的名字
+                // this window
+                console.log(this)
+            },
+            reverse1(val){
+                return val.split('').reverse().join('')
+            }
+        },
+        computed: {
+            name2(){
+                // 挂在到vm实例上； 不能跟methods和data重名
+                // 目前这版 methods 中的 同名函数 会把 computed 中的覆盖
+
+                // 只要 name 不动  name2就不会改变
+                // name2用到谁 就依赖于谁
+                return this.name.split('').reverse().join('');
+            },
+            name3:{
+                get(){
+                    console.log(this.name)
+                    return 123
+                },
+                set(val){
+                    // 给name3 赋值的时候会触发 set函数
+                    // val 是外界给 name3赋的值
+                }
+            }
+        },
+    })
+</script>

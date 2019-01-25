@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+        .v-enter{
+            /* 这个是过渡开始的状态 */
+            opacity: 0;
+            transform: translateX(300px)
+        }
+        .v-enter-active{
+            /* 贯穿整个过渡期，这里一般写一些过渡动效 */
+            transition: all 3s;
+        }
+        .v-enter-to{
+            /* 过渡的最终目标值 */
+            opacity: 1;
+            transform: translateX(0)
+        }
+        .v-leave{
+            opacity: 1;
+            transform: translateX(0)
+        }
+        .v-leave-active{
+            transition: all 2s;
+        }
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(300px)
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click= 'flag = !flag'>按钮</button>
+        <transition>
+            <div v-show='flag'>不太会啊0</div> 
+        </transition>
+    </div>
+   
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            flag:true
+        }
+    })
+</script>
+</html>

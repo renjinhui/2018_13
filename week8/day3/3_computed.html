@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1 v-cloak>{{name}}</h1>
+        <h2>{{name.split('').reverse().join('')}}</h2>
+        <h2>{{name|reverse}}</h2>
+
+        <!-- 方法需要执行 -->
+        <h2>{{reverse2()}}</h2>
+
+        <!-- 计算属性不需要执行 -->
+        <h3>{{name2}}</h3>
+
+        <input type="number" v-model='age'>
+        年龄{{age}}
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            age:10
+        },
+        methods: {
+            reverse2(){
+                console.log('methods')
+                return this.name.split('').reverse().join('');
+            }
+        },
+        computed: {
+            // 计算属性
+            // 计算属性的名字  不能跟 data 或 methods 中的名字重复
+            name2(){
+                console.log('computed');
+                // name2 完全依赖于  this.name
+                // return this.name.split('').reverse().join('');
+                // 只要 函数中用到了 相关变量 ；
+                // 那么VUE就认为 该计算属性 依赖于 相关变量
+                console.log(this.name,this.age);
+                return 123
+            },
+        },
+        filters:{
+            reverse(val){
+                console.log('filters')
+                return val.split('').reverse().join('');
+            }
+        }
+    })
+</script>

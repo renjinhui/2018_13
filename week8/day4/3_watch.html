@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <h2>{{msg}}</h2>
+        <img :src="img" alt="">
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+    Vue.filter('qq',function(){
+
+    })
+    Vue.filter('wx',function(){
+        
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            timer:null,
+            msg:'',
+            img:''
+        },
+        computed: {
+            name2(){
+                return this.name
+            }
+        },
+        methods: {
+            getData(){
+                axios.get('https://yesno.wtf/api').then(data=>{
+                    console.log(data.data);
+                    this.msg = data.data.answer;
+                    this.img = data.data.image;
+                })
+            }
+        },
+        watch:{
+            // 监听 name  只要name 发生改变； 就会触发对应的函数
+            // name:function(newV,oldV){
+            //     console.log(newV,oldV);
+            //     setTimeout(() => {
+            //         console.log(111)
+            //     }, 2000);
+            // }
+            name:function(){
+                clearTimeout(this.timer);
+                this.msg = '还没输完， 我等着你'
+                this.timer = setTimeout(() => {
+                    this.msg = '你已输入完成,正在思考'
+                    this.getData();
+                }, 500);
+            }
+        }
+    })
+</script>

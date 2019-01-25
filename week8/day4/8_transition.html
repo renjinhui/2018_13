@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+    <style>
+        div{
+            margin: auto
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background: rosybrown;
+            transition:all 0.5s;
+        }
+        .box:hover{
+            width: 300px;
+            height: 300px;
+            background: orange;
+        }
+        .box2{
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            animation: move 1s infinite;
+        }
+        @keyframes move{
+            0%{
+                opacity: 1;
+            }
+            50%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        .my-enter,.my-leave-to{
+            /* 这是个过渡要开始时的状态 */
+            opacity: 0;
+            transform: translateX(300px);
+            /* transition:all 1s; */
+        }
+        .my-enter-active,.my-leave-active{
+            /* 贯穿整个过渡期 这里一般写一些 过渡动效 */
+            /* opacity: 1; */
+            transition:all 3s;
+        }
+        .my-enter-to,.my-leave{
+            /* 过渡的最终目标值 */
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* .v-leave{
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .v-leave-active{
+            transition:all 1s;
+        }
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(300px);
+        } */
+        @keyframes move2{
+            from{
+                opacity: 0;
+                /* rotate scale skew translate */
+                transform: scale(0.4)
+            }
+            50%{
+                transform: scale(1.2)
+            }
+            to{
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .qqq{
+            animation: move2 2s;
+        }
+        .www{
+            animation: move2 2s reverse;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag=!flag'>按钮</button>
+        <transition name='my' :duration="{ enter: 10000, leave: 10000 }">
+            <!-- transition 是 vue提供的内置标签 -->
+            <div v-show='flag' style="width: 100px;background: orange">珠峰</div>
+        </transition>
+
+        <!-- enter-active-class 进入（显示）的类名 -->
+        <!-- leave-active-class 离开（消失）的类名 -->
+        <transition
+            enter-active-class="qqq" 
+            leave-active-class="www"
+        >
+            <div v-show='flag' style="width: 100px;background: orange">珠峰</div>
+        </transition>
+
+        <transition-group
+            enter-active-class="animated rollIn" 
+            leave-active-class="animated rollOut"
+        >
+            <div v-show='flag' key='1' style="width: 100px;background: orange">珠峰1</div>
+            <div v-show='flag' key='2' style="width: 100px;background: orange">珠峰2</div>
+            <div v-show='flag' key='3' style="width: 100px;background: orange">珠峰3</div>
+            <div v-show='flag' key='4' style="width: 100px;background: orange">珠峰4</div>
+        </transition-group>
+    </div>
+
+    <!-- <div class='box'>珠峰</div> -->
+    <!-- <div class="box2"></div> -->
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true
+        }
+    })
+</script>

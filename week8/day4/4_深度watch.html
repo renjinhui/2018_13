@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='obj.a'>
+        <h1>{{obj.a}}</h1>
+        <h2>{{obj2}}</h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            obj:{
+                a:12
+            }
+        },
+        computed: {
+            obj2(){
+                return this.obj
+            }
+        },
+        watch:{
+            // watch监听时 若是下边的这种写法；则 监听不到
+            // 引用数据类型内部的改变；
+            // 也就是 obj的地址没有发生改变， 就不会有反应
+            // obj(){
+            //    console.log(111) 
+            // },
+
+
+            obj:{
+                handler(newV,oldV){
+                    //深层监听时  不会保存老值
+                    //两个参数都是 新值
+                    console.log(newV,oldV);
+                },
+                deep:true
+            }
+        }
+    })
+</script>

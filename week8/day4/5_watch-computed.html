@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        姓：<input type="text" v-model='name1'>
+        名：<input type="text" v-model='name2'>
+        <h2>全名：{{name3}}</h2>
+        <h2>全名：{{name3_1}}</h2>
+        迪丽热巴·热吧
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            name1:'',
+            name2:'',
+            name3:''
+        },
+        watch:{
+            name1(newV){
+                this.name3 = newV + '·' + this.name2;
+            },
+            name2(newV){
+                this.name3 = this.name1 + '·' + newV; 
+            }
+        },
+        computed: {
+            name3_1(){
+                return this.name1 + '·' + this.name2
+            }
+        },
+    })
+</script>

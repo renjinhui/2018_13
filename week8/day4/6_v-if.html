@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag=!flag'>按钮</button>
+        <h2 v-show='flag'>hello</h2>
+        <h2 v-show='!flag'>world</h2>
+
+        <button @click='n=1'>1</button>
+        <button @click='n=2'>2</button>
+        <button @click='n=3'>3</button>
+        <h3 v-if='n===1'>hello</h3>
+        <!-- <div></div> 中间不能插入DOM节点 -->
+        <h3 v-else-if='n===2'>world</h3>
+        <h3 v-else>哈哈哈</h3>
+
+        <div v-if='true'>
+            <div v-if='false'></div>
+
+        </div>
+
+        <template v-if='flag'>
+            <h2>1</h2>
+            <h2>1</h2>
+            <h2>1</h2>
+            <h2>1</h2>
+            <h2>1</h2>
+        </template>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:true,
+            n:1
+        }
+    })
+</script>

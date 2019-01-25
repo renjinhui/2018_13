@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <h2>{{name2}}</h2>
+        <h2>{{name3}}</h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        computed:{
+            name2(){
+                return this.name.split('').reverse().join('');
+            },
+            name3:{
+                get(){
+                    return this.name+'哈哈哈'
+                },
+                set(val){
+                    console.log(val);
+                    this.name = val;
+                }
+            }
+        }
+    })
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="checkbox" v-model='all'>
+        <h2>{{all}}</h2>
+        <input type="checkbox" v-for='item in ary' v-model='item.a'>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:[{a:true},{a:true},{a:false},{a:true}]
+        },
+        computed: {
+            // all(){
+            //     // all 所有的 a属性都是true ;all 才是true
+            //     return this.ary.every(item=>item.a);
+            // },
+            // all:{
+            //     get(){
+            //         return this.ary.every(item=>item.a);
+            //     }
+            // },
+            all:{
+                // 点击的时候 通过 v-model 给 all 赋值  all=true
+                // 赋值时 出发了  set函数； set函数修改了 ary;
+                // ary一经修改，就会触发 get 函数； 这时 才是真正改变了 all 的值；
+                get(){
+                    // console.log(222)
+                    return  this.ary.every(item=>item.a);
+                },
+                set(val){   
+                    // 只要给all赋值 就会触发set;
+                    // console.log(this.all);
+                    this.ary.forEach(item => {
+                        item.a = val;
+                    });
+                }
+            }
+        },
+    })
+</script>

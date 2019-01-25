@@ -1,0 +1,61 @@
+!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+        <h2>提示语：{{msg}}</h2>
+        <h2>提示语2：{{msg2}}</h2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./jd购物车/node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            msg2:'',
+            timer:null
+        },
+        computed: {
+            msg(){
+                let str = '';
+                console.log(1111)
+                // 计算属性 不支持异步；
+                // VUE检测不到使用了 某个属性
+                setTimeout(() => {
+                    if(this.name.length > 5){
+                        str = '名字不能超过5位'
+                    }
+                    // return str;
+                }, 500);
+                return str;
+            }
+        },
+        watch:{
+            // 监听 name
+            name(newV,oldV){
+                // newV  当前值
+                // oldV  老值
+                console.log(arguments);
+                clearTimeout(this.timer);
+                axios.get('https://yesno.wtf/api');
+                this.timer = setTimeout(() => {
+                    if(newV.length>5){
+                        this.msg2 = '名字太长';
+                    }else{
+                        this.msg2 = '';
+                    }
+                }, 500);
+            }
+        }
+    })
+</script>
