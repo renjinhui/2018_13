@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 ref='qqq'>{{name}}</h1>
+        <h2 ref='qqq'>{{name}}</h2>
+
+        <ul>
+            <li v-for='i in 4' ref='aaa'>{{i}}</li>
+        </ul>
+        <h3 ref='www'>{{name}}</h3>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        mounted(){
+            console.log(this.$refs)
+            // 若有多个同样的ref  而且是写死到页面上的；则只能获取最后一个 
+            // 若有多个同样的ref  但是是通过v-for循环出来的； 则可以获取多个
+        }
+    })
+</script>

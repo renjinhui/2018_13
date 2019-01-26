@@ -20,6 +20,7 @@
         self.resCallbacks = [];// 成功要去执行的函数
         self.rejCallbacks = [];// 失败要去执行的函数
         function resolve(value){
+            console.log(22222)
             if(self.status === 'pending'){
                 self.status = 'resolved';
                 self.value = value;
@@ -51,6 +52,7 @@
             return new MyPromise(function(res2,rej2){
                 try{
                     let val = resolve(self.value);
+                    
                     res2(val)
                 }catch(e){
                     rej2(e)
@@ -104,14 +106,18 @@
         // console.log(qqq)
         setTimeout(() => {
             // res(123)
-            rej(2345)
+            res(2345)
         }, 2000);
-    }).then().then()
+    }).then(()=>{
+        console.log(1)
+    },()=>{}).then(()=>{
+        console.log(2)
+    },()=>{})
 </script>
 <script>
-    let p2 = new Promise(function(res,rej){
-        console.log('qqq')
-        res(123)
-    });
+    // let p2 = new Promise(function(res,rej){
+    //     console.log('qqq')
+    //     res(123)
+    // });
 
 </script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            margin: auto;
+            padding: 20px;
+            border: 1px solid salmon;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        .self  只有点击元素本身的时候才能触发 
+        .stop  阻止冒泡；
+        .prevent 阻止默认事件
+        .once  对应函数只能触发一次
+
+        .capture 让事件在捕获阶段触发
+        .passive 优先执行默认事件（滚动行为） 提升性能
+    -->
+    <div id="app">
+        <h1>{{name}}</h1>
+        <div class="outer" @click='fn'>outer
+            <div class="center" @click.once='fn'>center
+                <div class="inner" @click.stop='fn'>inner</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        methods: {
+            fn(){
+                console.log(111)
+            }
+        },
+    })
+</script>

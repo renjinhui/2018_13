@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <ul>
+            <li v-for='item in ary' ref='li'>{{item}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:[1,2,3]
+        },
+        // mounted:fucntion(){}{}
+        mounted(){
+            console.log(this.$refs.li.length);
+            this.ary.push(4);// DOM 的重新渲染是个  异步执行
+            console.log(this.$refs.li.length);
+            debugger
+            this.$nextTick(()=>{
+                // DOM更新完成之后执行
+                console.log(this.$refs.li.length)
+            })
+        },
+        beforeUpdate() {
+            debugger
+        },
+    })
+</script>

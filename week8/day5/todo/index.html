@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        nav{
+            box-sizing: border-box;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background: #111;
+            border-radius: 5px;
+            padding-left: 20px;
+            color: #fff;
+        }
+        .content{
+            width: 800px;
+            min-height: 200px;
+            padding: 20px;
+            border-radius: 5px;
+            background: #e7e1cd;
+            margin: 30px auto;
+            border: 1px solid #ccc;
+        }
+        .inp{
+            width: 100%;
+            height: 40px;
+            margin: auto;
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+        .todo_list{
+            list-style: none;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            background: #fff;
+        }
+        .todo_list li{
+            padding: 0 20px;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+        .todo_list li .text_del{
+            text-decoration: line-through;
+            color: #ccc;
+        }
+        .todo_list li>input{
+            height: 30px;
+            width: 200px;
+        }
+        .todo_list li button{
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            outline: none;
+            border: none;
+            background: #cc080b;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .hash_tab{
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 0;
+            list-style: none;
+            background: #EFF3EF;
+            margin-top: 30px;
+        }
+        .hash_tab li{
+            cursor: pointer;
+            float: left;
+            margin-left: 40px;
+            font-size: 22px;
+            height: 60px;
+            line-height: 60px;
+        }
+        .hash_tab li a{
+            text-decoration: none;
+            color: #24ccc8;
+        }
+        .hash_tab li.current{
+            background: #15b3fb;
+            border-radius: 10px;
+        }
+        .hash_tab li.current a{
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <nav>
+        TODO-LIST
+    </nav>
+    <div class="content">
+        <h2>亲~ 你还有{{count}}件事要完成</h2>
+        <!-- .trim  修饰符  去掉数据中的首尾空格 -->
+        <!--<input type="text" class="inp" v-model.trim="todo" @keyup.13="add">-->
+        <input type="text" class="inp" v-model="todo" @keyup.13="add">
+        <ul class="todo_list">
+            <li v-for="(item,i) in todoAry" @dblclick="show(item)">
+                <!-- 有没有删除线 跟这一项有没有选中（item.isSelect）有直接关系 -->
+                <!--<span :class="item.isSelect ? 'text_del' : ''">-->
+                <span :class="{text_del:item.isSelect}" v-show="!item.isShow">
+                    <input type="checkbox" v-model="item.isSelect">
+                    {{item.title}}
+                </span>
+                <!--@blur="item.isShow = !item.isShow"-->
+                <input type="text"
+                       v-show="item.isShow"
+                       v-focus="item.isShow"
+                       v-model="item.title"
+                       @blur="item.isShow = false"
+                       @keyup.13="item.isShow= false">
+                <button @click="remove(item)">删除</button>
+            </li>
+        </ul>
+        <ul class="hash_tab">
+            <!--用当前页面的路由跟对应A标签的href中的路由作比较-->
+            <li :class="{current: hash === 'all'}"><a href="#/all">全部任务</a></li>
+            <li :class="{current: hash === 'finished'}"><a href = "#/finished">已完成</a></li>
+            <li :class="{current: hash === 'unfinished'}"><a href = "#/unfinished">未完成</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./index.js"></script>

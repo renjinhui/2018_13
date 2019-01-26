@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .qqq-enter{
+            opacity: 0
+        }
+        .qqq-enter-active{
+            transition: all 1s;
+        }
+        .qqq-enter-to{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        {{obj}}
+        <button @click='flag = !flag'>按钮</button>
+        <transition name='qqq'>
+            <!-- transition 只能有一个根元素 ；transition这个过渡 只能对 根元素 起作用-->
+            <!-- 错误写法 -->
+            <!-- <div>
+                <span v-if='flag'>珠峰</span> 
+                <span v-show='flag'>培训</span>
+            </div> -->
+        </transition>
+
+        <!-- <transition-group name='qqq' tag='div' :duration='3000'> -->
+        <transition-group name='qqq' tag='div' :duration='{enter:3000,leave:0}'>
+            <!-- duration 控制vue设置的类名存在的时间 -->
+            <!-- tag 指定外层包裹元素的 tag类型； 不写该属性  默认span -->
+            <span v-if='flag' key='1'>珠峰</span> 
+            <span v-show='flag' key='2'>培训</span>
+        </transition-group>
+
+        <div :class="{current:flag}"></div>
+        <div :style="{color:col,background:'#ccc'}">珠峰</div>
+        <input type="color" v-model='col'>
+
+        <ul>
+            <li v-for='i in 5' v-if=' i!==2 '>{{i}}</li>
+            <!-- for 循环里套了一个； if 判断 -->
+        </ul>
+
+
+
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 计算属性  依赖 不支持异步
+    // watch:{obj(){}}  watch:{obj:{handler(){},deep:true}
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            col:'#000000',
+            obj:{
+                a:123,
+                b:''
+            },
+            flag: true,
+
+        },
+        watch:{
+            obj:{
+                handler(){
+                    console.log(1111)
+                },
+                deep:true
+            }
+            
+        }
+    })
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        template:'<h1>哈哈哈{{name}}</h1>',
+        data:{
+            name:"珠峰",
+            // 数据的修改能触发视图更新的前提是 页面有用到该数据
+            age:10
+        },
+        // 生命周期钩子函数 就是VUE规定的一些在固定阶段执行的函数
+        // 语法上 跟 data和el、methods等 同级
+        beforeCreate(){
+            // 创造之前
+            console.log('beforeCreate');
+            // debugger;
+        },
+        created(){
+            // 我们可以通过this 获取到 data和methods中的属性
+            // 一般会在这个函数中 发送一些ajax请求
+            // debugger;
+        },
+        beforeMount(){
+            // DOM模板编译完成；但是未替换到页面上
+            console.log(222);
+            // debugger;
+        },
+        mounted(){
+            // mounted 跟 页面渲染 没有关系；只是 走到这一步VUE
+            // 会执行这个函数而已；
+            
+            // 已经用编译好的模板替换了页面上的显示元素
+            // 可以理解成DOM渲染完成
+            // debugger;
+        },
+        beforeUpdate(){
+            // 当视图 要更新的时候 会触发该函数；并不一定是data发生了改变；
+            // debugger;
+        },
+        updated(){
+            // 当 视图 更新 完成之后 会触发
+            // 这里一定不能写触发视图更新的 代码；否则就是个死循环
+            // this.name = Math.random();
+            // debugger;
+        },
+        beforeDestroy(){
+            // debugger;
+        },
+        destroyed(){
+            // debugger;
+        }
+    })
+    // vm.$destroy();// 手动销毁该实例
+
+    //最常用的就是 created和mounted这两个钩子函数
+</script>
