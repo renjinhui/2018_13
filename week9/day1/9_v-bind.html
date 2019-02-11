@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .current{
+            color: red
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定类名的最常用方式 就是跟一个对象 
+            对象的属性名是要加给标签的类名  
+            属性值是控制要不要把这个属性名加给这个标签 -->
+        <h1 class='qqq www eee' :class='{current:flag}'>{{name}}</h1>
+        <button @click='fn'>变色</button>
+        <div :class='flag ? "current" : ""'>珠峰</div>
+
+        <div style='color:blue;font-size: 24px'>珠峰培训</div>
+        <div :style='{color:"red",fontSize:"24px",background:bg}'>珠峰培训</div>
+        <div :style='obj'>珠峰培训</div>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:false,
+            bg:'#ccc',
+            obj:{color:"red",fontSize:"24px"}
+        },
+        methods: {
+            fn(){
+               this.flag = !this.flag 
+            }
+        },
+    })
+</script>

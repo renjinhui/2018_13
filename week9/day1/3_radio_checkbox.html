@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- <input type="checkbox" checked> -->
+        <input v-model='arr' type="checkbox" value='css'>css
+        <input v-model='arr' type="checkbox" value='js'>js
+        <input v-model='arr' type="checkbox" value='vue'>vue
+        <h2>您选中了{{arr}}</h2>
+
+        <input v-model='age' type="radio" value='0'>未成年
+        <input v-model='age' type="radio" value='1'>成年
+        <input v-model='age' type="radio" value='2'>老年
+        <h2>您选中了{{age==0 ? '未成年' : (age==1 ? '成年' : '老年')}}</h2>
+
+        <select v-model='select'>
+            <option value="" disabled>请您选择</option>
+            <option value="1">css</option>
+            <option value="2">JS</option>
+            <option value="3">vue</option>
+        </select>
+
+
+        <div @click='isShow = !isShow' style='border:1px solid #ccc'>{{qqq}}</div>
+        <ul v-show='isShow' @click='fn'>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+        <button @click='submit'>提交</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5bcfddd37ed09630d2c8dae7/jd';
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            arr:['css','js','vue'],
+            age:0,
+            select:'',
+            isShow:false,
+            qqq:'1'
+        },
+        methods: {
+            fn(e){
+                this.qqq = e.target.innerHTML;
+                this.isShow = false;
+            },
+            submit(){
+                axios.post('/list',{
+                    checked:this.arr,
+                    age:this.age,
+                    selected:this.select
+                }).then((data)=>{
+                    console.log(data)
+                },(err)=>{
+                    console.log(err)
+                })
+            }
+        },
+    })
+</script>

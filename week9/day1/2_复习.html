@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2>{{obj.b}}</h2>
+        {{obj}}
+        <ul>
+            <li v-for='v in arr'>{{v>2 ? 'ok' : 'no'}}</li>
+        </ul>
+        <div v-show='false'>{{t}}</div>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            obj:{
+                a:12,
+                b:undefined
+            },
+            arr:[1,2,3,4,5],
+            t:0
+        }
+    })
+</script>

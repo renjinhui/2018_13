@@ -68,10 +68,11 @@ let vm = new Vue({
             // 它依赖于 this.ary 和 this.hash
             console.log(this.ary);
             //
-            localStorage.setItem('myData',JSON.stringify(this.ary))
+            JSON.stringify(this.ary);
+            // localStorage.setItem('myData',JSON.stringify(this.ary))
             switch (this.hash) {
                 case '#/all':
-                    return this.ary
+                    return this.ary;
                     break;
                 case '#/finished':
                     //若是 已完成  则显示 isSelect是true的项 

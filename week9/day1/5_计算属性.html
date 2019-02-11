@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h1>{{t}}</h1>
+        <input type="text" v-model='name' placeholder="姓名">
+        <!-- <h2>name反转：{{name.split('').reverse().join('')}}</h2>
+        <h2>name2:{{rev()}}</h2>
+        <h2>name3:{{name3}}</h2> -->
+        {{age}}
+        <ul>
+            <li>全选<input type="checkbox" v-model='all'></li>
+            <li v-for='item in ary'><input type="checkbox" v-model='item.a'></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            t:0,
+            ary:[{a:true},{a:true},{a:true}]
+        },
+        methods:{
+            rev(){
+                return this.name.split('').reverse().join('')
+            }
+        },
+        computed:{
+            // name3(){
+            //     // 这个函数只有在 name 发生改变时，才会执行
+            //     return this.name.split('').reverse().join('')
+            // },
+            name3:{
+                get(){
+                    return this.name.split('').reverse().join('')
+                },
+                set(val){
+                    // 给name3设置的值
+                    // debugger
+                    this.name = val;
+                }
+            },
+            // all(){
+            //     return this.ary.every(item=>item.a)
+            // }
+            all:{
+                get(){
+                    // 用到谁；那么all 就依赖于谁；用到ary 则依赖于ary;
+                    // 但是不依赖于ary的每一项的内部；
+                    // console.log(this.ary);//只是依赖于ary;不依赖ary的内部每一项
+                    // this.ary.forEach(item=>item.a);// 依赖于ary内部每一项的a属性
+                    console.log(111)
+                    return this.ary.every(item=>item.a)// 依赖于ary内部每一项的a属性
+                },
+                set(val){
+                    // val 是  给 all 设置的值；
+                    console.log(val)
+                    this.ary.forEach(item => {
+                        item.a = val;
+                    });
+                }
+            },    
+            age(){
+                // console.log(this.name);
+                // 计算属性不支持异步；
+                setTimeout(() => {
+                    if(this.name > 18){
+                        console.log(1)
+                    }else{
+                        console.log(2);
+                    }
+                }, 200);
+                return 123;
+            }
+        }
+    })
+</script>

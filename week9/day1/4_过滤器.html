@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="number" v-model='num'>
+        <h2>money:{{num | money(222) | haha | haha | money}}</h2>
+        <!-- 过滤器执行的顺序是从左到右执行的 -->
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 全局过滤器  局部过滤器
+    // 过滤器可以连续多次使用
+    Vue.filter('money',function(val,n){
+        // 第一个参数永远是 管道符前边的值；从第二个参数开始才是传进来的值
+        // val 就是管道符前边的值
+        return '$'+val;
+    })
+    Vue.filter('haha',function(val){
+        return 'haha'+val;
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            num:0
+        },
+        filters:{
+            money(val){
+                // this 不是指向该实例的
+                return '￥'+val
+            }
+        }
+    })
+    
+</script>

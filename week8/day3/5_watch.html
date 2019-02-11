@@ -12,6 +12,7 @@
         <h1>{{name}}</h1>
         <h2>提示语：{{msg}}</h2>
         <h2>提示语2：{{msg2}}</h2>
+        <h1>eee{{tt}}</h1>
     </div>
 </body>
 </html>
@@ -23,7 +24,8 @@
         data:{
             name:"珠峰",
             msg2:'',
-            timer:null
+            timer:null,
+            tt:''
         },
         computed: {
             msg(){
@@ -32,8 +34,10 @@
                 // 计算属性 不支持异步；
                 // VUE检测不到使用了 某个属性
                 setTimeout(() => {
+                    console.log(222)
                     if(this.name.length > 5){
-                        str = '名字不能超过5位'
+                        this.tt = str = '名字不能超过5位';
+                        console.log(0)
                     }
                     // return str;
                 }, 500);

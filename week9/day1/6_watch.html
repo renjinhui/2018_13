@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='name'>
+        <h1>{{name}}</h1>
+
+        <input type="text" v-model='phone' placeholder="手机号">
+        <h2>{{msg}}</h2>
+        <img :src="img" alt="">
+
+        <input type="text" v-model='name1'>
+        <input type="text" v-model='name2'>
+
+        全名：{{name1}}~{{name2}}
+        全名2：{{fullName}}
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            timer:null,
+            phone:'',
+            timer2:null,
+            msg:'',
+            img:''
+        },
+        watch:{
+            name(newV,oldV){
+                // 该函数 只要name 发生改变就会触发该函数
+                console.log(newV,oldV);
+                clearTimeout(this.timer);// 保证连续输入时，只输出一次
+                this.timer = setTimeout(() => {
+                    if(this.name.length>5){
+                        console.log('太长')
+                    }else{
+                        console.log('太短')
+                    }
+                }, 500);
+            },
+            phone(){
+                this.msg = '正在输入';// 当用户输入内容时的显示文案
+                clearTimeout(this.timer2);
+                this.timer2 = setTimeout(() => {
+                    this.msg = '正在思考';// 前台像后端发送请求时的显示文案
+                    this.img = '';
+                    axios.get('https://yesno.wtf/api').then((d)=>{
+                        console.log(d)
+                        this.msg = d.data.answer;
+                        this.img = d.data.image
+                    },()=>{})
+                    console.log('发送数据')
+                }, 500);
+            }
+        }
+    })
+</script>

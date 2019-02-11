@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- yarn add vue  -->
+    <!-- npm i vue  -->
+    <!-- web-app -->
+    <div id='app'>
+        <input type="text" v-model='name2'>
+        <ul v-pre>
+            <li>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+        <h1>{{name2}}</h1>
+        <span v-text='str'></span>
+        <span v-html='str'></span>
+
+        <h2 v-show='0'>hello</h2>
+        <h2 v-if='2'>world</h2>
+        <ul>
+            <li v-text='val' v-for="val in arr" v-if='val != 3'></li>
+        </ul>
+        <button v-on:click='fn'>按钮</button>
+        <!-- $event ： vue 规定的传递事件对象的关键字 -->
+        <button @click='fn(111,$event.target)'>按钮2</button>
+        <img v-bind:src="obj.src" alt="">
+        <img :src="obj.src" alt="">
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        // template:'<h2>哈哈</h2>',
+        data:{
+            name2:'珠峰',
+            str:'<h4>hahaha</h4>',
+            arr:[1,2,3,4,5,6],
+            obj:{
+                src:'http://cms-bucket.ws.126.net/2019/02/11/cb85c90c436a4cfdbac97aea2f3e0646.jpeg?imageView&thumbnail=453y225&quality=85'
+            }
+        },
+        methods: {
+            fn(n,e){
+                console.log(123);
+                console.log(e);
+            }
+        },
+    })
+    // 指令  v-model v-text v-html v-once v-show  v-if
+    //       v-for  v-on  v-bind  v-cloak v-pre
+    // v-pre ： 跳过有这个指令的标签的编译；
+    //          换句话说就是不编译有这个指令的标签及其子元素
+
+</script>

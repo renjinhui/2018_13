@@ -39,7 +39,10 @@
                 // ary一经修改，就会触发 get 函数； 这时 才是真正改变了 all 的值；
                 get(){
                     // console.log(222)
-                    return  this.ary.every(item=>item.a);
+                    console.log(this.ary.forEach(item=>{
+                        item.a
+                    }))
+                    // return  this.ary.every(item=>item.a);
                 },
                 set(val){   
                     // 只要给all赋值 就会触发set;
