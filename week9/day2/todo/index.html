@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        [v-cloak]{
+            display: none
+        }
+        nav{
+            box-sizing: border-box;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background: #111;
+            border-radius: 5px;
+            padding-left: 20px;
+            color: #fff;
+        }
+        .content{
+            width: 800px;
+            min-height: 200px;
+            padding: 20px;
+            border-radius: 5px;
+            background: #e7e1cd;
+            margin: 30px auto;
+            border: 1px solid #ccc;
+        }
+        .inp{
+            width: 100%;
+            height: 40px;
+            margin: auto;
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+        .todo_list{
+            list-style: none;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            background: #fff;
+        }
+        .todo_list li{
+            padding: 0 20px;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+        .todo_list li .text_del{
+            text-decoration: line-through;
+            color: #ccc;
+        }
+        .todo_list li>input{
+            height: 30px;
+            width: 200px;
+        }
+        .todo_list li button{
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            outline: none;
+            border: none;
+            background: #cc080b;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .hash_tab{
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 0;
+            list-style: none;
+            background: #EFF3EF;
+            margin-top: 30px;
+        }
+        .hash_tab li{
+            cursor: pointer;
+            float: left;
+            margin-left: 40px;
+            font-size: 22px;
+            height: 60px;
+            line-height: 60px;
+        }
+        .hash_tab li a{
+            text-decoration: none;
+            color: #24ccc8;
+        }
+        .hash_tab li.current{
+            background: #15b3fb;
+            border-radius: 10px;
+        }
+        .hash_tab li.current a{
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <nav>
+        TODO-LIST
+    </nav>
+    <div class="content" v-color='"red"' v-cloak>
+        <h2 v-color='"red"'>亲~ 你还有{{num}}件事要完成</h2>
+        <input type="text" class="inp" v-model='todo' @keyup.13='add'>
+        <ul class="todo_list">
+            <li v-for='(item,i) in todoAry' :key='item.id' @dblclick='change(item)'>
+                <!-- 按照数组循环显示 列表 -->
+                <span :class="{text_del:item.isSelect}" v-show='!item.isShow'>
+                    <!-- 根据每一项的isShow属性来决定显示文本还是输入框 -->
+                    <input type="checkbox" v-model='item.isSelect'>
+                    <!-- 复选框 根据每一项的 isSelect 来决定是否选中 -->
+                    {{item.text}}
+                </span>
+                <input type="text" v-model='item.text' v-show='item.isShow' v-focus123='item.isShow' @blur='blur(item)'>
+                <button @click='remove(i)'>删除</button>
+            </li>
+        </ul>
+        <ul class="hash_tab" v-color='"red"'>
+            <!--用当前页面的路由跟对应A标签的href中的路由作比较-->
+            <li :class="{current:myHash==='#/all'}"><a href="#/all">全部任务</a></li>
+            <li :class="{current:myHash==='#/finished'}"><a href = "#/finished">已完成</a></li>
+            <li :class="{current:myHash==='#/unfinished'}"><a href = "#/unfinished">未完成</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./index.js"></script>

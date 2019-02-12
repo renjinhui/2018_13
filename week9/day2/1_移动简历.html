@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        div{
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .hidden{
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div>第一屏</div>
+    <div class='hidden'>第2屏</div>
+    <div class='hidden'>第3屏</div>
+    <div class='hidden'>第4屏</div>
+</body>
+</html>
+<script>
+    function move(el,fn) {
+        let str = 'up';
+        el.ontouchstart = function(e){
+            this.y = e.changedTouches[0].pageY; 
+        }
+        el.ontouchend = function (e) {
+
+            let y = e.changedTouches[0].pageY - this.y;
+            if(y>0){
+                str = 'down'
+            }else{
+                str = 'up'
+            }
+            fn(str);
+        }
+        
+    }
+    let oDivs = document.getElementsByTagName('div');
+    move(oDivs[0],function(str){
+        if(str == 'up'){
+            oDivs[0].style.display = 'none';
+            oDivs[1].style.display = 'block'
+        }else{
+            oDivs[0].style.display = 'none';
+            oDivs[3].style.display = 'block'
+        }
+    })
+    move(oDivs[1],function(str){
+        if(str == 'up'){
+            oDivs[1].style.display = 'none';
+            oDivs[2].style.display = 'block'
+        }else{
+            oDivs[1].style.display = 'none';
+            oDivs[0].style.display = 'block'
+        }
+    })
+</script>

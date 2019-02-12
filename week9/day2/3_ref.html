@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 ref='qqq'>{{name}}</h1>
+        <h2 ref='qqq'>{{name}}</h2>
+        <ul>
+            <li v-for='i in ary' ref='aaa'>{{i}}</li>
+        </ul>
+        <button @click='fn'>按钮</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:[1,2,3]
+        },
+        created(){
+            // console.log(this.$refs);
+            //若想通过ref获取元素 需要在DOM渲染完成之后再去获取
+            this.ary.push(10);
+            this.$nextTick(function(){
+                console.log(this.$refs.aaa,222)
+            })
+        },
+        mounted(){
+            // ref 若是页面上有多个写死的ref 那么我们只能获取到最后一个ref
+            //     若是通过v-for循环出来的ref  我们获取到的是一个数组；
+            console.log(this.$refs);
+            this.ary.push(4);
+            console.log(this.$refs.aaa);// DOM 的渲染是异步的
+            
+            // $nextTick
+            this.$nextTick(function(){
+                // $nextTick函数的回调函数 将会在 DOM更新完成之后再去执行
+                // 该函数只会触发一次
+                console.log(this.$refs.aaa,111)
+            })
+        },
+        updated() {
+            console.log(this.$refs.aaa);
+        },
+        methods: {
+            fn(){
+                this.ary.push(100);
+                this.$nextTick(function(){
+                    console.log(this.$refs.aaa,333)
+                })
+            }
+        },
+    })
+</script>

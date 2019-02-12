@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-color='"blue"' v-bg='"#ccc"'>{{name}}</h1>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 全局的自定义指令
+    Vue.directive('bg',function(el,obj){
+        el.style.background = obj.value
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        directives:{
+            // 局部的自定义指令
+            color(el,obj){
+                console.log(123)
+                el.style.color = obj.value || 'red';
+            },
+            text:{
+                // 自定义指令的 钩子函数
+                bind(){},
+                inserted(){},
+                update(){},
+                componentUpdated(){},
+                unbind(){}
+            }
+        }
+    })
+</script>

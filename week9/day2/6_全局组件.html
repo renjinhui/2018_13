@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <my-name/></my-name>
+        <q1></q1>
+        <q1></q1>
+        <!-- 不能支持 驼峰命名 需要转成以-分割的字符 -->
+        <!-- 组件尽量写成双闭合标签  单闭合会影响下边的组件渲染-->
+        
+    </div>
+    <q1></q1>
+</body>
+</html>
+<template id='qqq'>
+    <!-- template中只能包含一个根元素 -->
+    <div>
+        <input type="text" v-model='name'>
+        <h1><i>{{name}}</i></h1>
+        <my-name/>
+        --------------------------------------------------------------
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 全局组件的定义
+    // Vue.component('组件名'，{}) ；组件名 不能是已有的html标签
+    // 使用时 只要把 组件名 当作 标签 使用即可
+    // 全局组件可以在任意组件中使用；但是不能在自己里边使用；
+    let obj = {name:'珠峰'}
+    
+    Vue.component('my-name',{
+        template:`<h2>My name is 珠峰培训</h2>`
+    })
+    Vue.component('q1',{
+        // 该对象 就是咱们创造实例是的那个对象；
+        // 只是 没有el属性，有template属性；data需要是一个函数并且返回一个对象
+        // 组件的data 是一个函数；
+        // template:'<i>hello {{name}}</i>',
+        template:'#qqq',
+        // template 就是qqq标签要去展示的内容；
+        data(){
+            // return obj
+            return {
+                name:'珠峰'
+            }
+        },
+        created() {
+            console.log(this.name)
+        },
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        created() {
+            
+        },
+        mounted() {
+            
+        },
+        methods: {
+            
+        },
+        computed: {
+            
+        },
+    })
+
+    // 全局组件的注册 Vue.component('组件名',{template:'只能有一个跟标签'})
+    // 第二个参数 也就是咱们的那个对象；里边的属性基本跟new Vue时的对象一致
+    // 生命周期钩子函数、computed、methods、watch、directives、filters
+    // 把组件名当作标签使用即可
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 生命周期钩子函数 是使用者定义函数体内容的  VUE让其执行的
+    // beforeCreate  
+    // created 我们获取data和methods中的属性；一般会把ajax请求的发送写到该钩子函数中；
+    // beforeMount
+    // mounted  这个时候 DOM已经渲染完成
+    // beforeUpdate  updated 只有在视图更新的时候才会触发; 不要写那些会触发视图更新的操作
+    // beforeDestroy destroyed 当实例被销毁的时候会触发这两个函数
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            age:10
+        },
+        mounted(){
+            console.log('mounted')
+        },
+        beforeCreate() {
+            console.log('beforeCreate')
+        },
+        created(){
+            console.log('created')
+        },
+        beforeMount(){
+            console.log('beforeMount')
+        },
+        beforeUpdate() {
+            console.log(1);
+            debugger;
+        },
+        updated(){
+            // this.name = Math.random()
+            this.name = 1;
+            debugger;
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy')
+        },
+        destroyed() {
+            debugger;
+            console.log('destroyed')
+        },
+    })
+</script>
