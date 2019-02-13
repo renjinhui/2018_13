@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son @qqq='change' :aaa='name'></son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <input type="text" v-model='n'>
+        <button @click='fn'>改变父组件的name</button>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 父组件怎么调用子组件的数据
+    // 自己定义事件： 通过  自定义事件  结合  $emit  实现
+    // 1、自定义一个事件，通过该自定义事件event 绑定一个属于父组件的 函数f
+    // 2、在组件中通过$emit触发 函数f执行，并把子组件的数据通过参数的形式传给函数f
+    // 3、这时 我们就可以在父组件 通过函数f的参数 获取到 子组件的数据
+
+    let son = {
+        template:'#son',
+        data(){
+            return {
+                name:'珠峰',
+                n:0
+            }
+        },
+        methods: {
+            fn(){
+                // 点击button时 执行fn函数
+                // fn执行时，通过$emit让自定义事件qqq对应的函数(change)执行
+
+                // this.$emit('qqq',1,2,3,4,5,6,7)
+                // 让父组件的change执行，并传参数1，2，3，4，5，6，7
+
+                this.$emit('qqq',this.n)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        methods: {
+            change(val){
+                this.name = val;
+                console.log(arguments)
+            }
+        },
+    })
+</script>

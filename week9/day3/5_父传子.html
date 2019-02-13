@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <son :zhufeng='val' :my_name='name' :qqq='"123456"' v-for='val in ary' :key='Math.random()'></son>
+    </div>
+</body>
+</html>
+<template id='son1'>
+    <div>
+        <h2>我爱{{zhufeng}}</h2>
+        <h1 v-for='i in qqq'>{{qqq}}{{arr}}</h1>
+        <button @click='fn'>这个按钮点击了{{n}}次</button>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son1',
+        data(){
+            return {
+                n:0,
+                // name:''
+            }
+        },
+        // props:['zhufeng','my_name'],// 接收传递的数据
+        props:{
+            zhufeng:{
+                type:[String,Number],// 限定传递进来的数据类型； 可以省略，省略代表不限数据类型
+                default:'123' // 给zhufeng一个默认值； 对于对象或者数组；值必须是一个函数
+            },
+            qqq:{
+                type:String,
+                default:'hello',
+                required:true,// 是否必传
+                validator(val){
+                    //val 就是父组件传进来的值
+                    // 一般我们使用这个属性 自定义一个规则
+                    let bol = false;
+                    if(val.length > 4){
+                        bol = true
+                    }
+                    return bol;// return true 代表满足自定义规则；
+                }
+            },
+            arr:{
+                type:Array,
+                // default:[]
+                default(){
+                    return []
+                }
+            }
+        },
+        methods:{
+            fn(){
+                this.n++;
+                // this.zhufeng = 123;// 不支持直接修改父组件传进来的数据
+                // 子组件使用父组件的数据是一个单向的数据流；父传子
+                // console.log(this.zhufeng())
+            }
+        },
+        created() {
+            console.log(this)
+        },
+    }
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:['css','js','vue']
+        },
+        methods: {
+            ff(){
+                console.log(this);
+            }
+        },
+        components:{
+            son
+        }
+    })
+</script>

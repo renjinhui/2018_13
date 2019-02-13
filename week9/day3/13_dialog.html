@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .mask{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            top: 0;
+            left: 0;
+        }
+        .content{
+            width: 400px;
+            height: 300px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            margin-left: -200px;
+            top:20%;
+        }
+        .content header{
+            font-size: 30px;
+            text-align: center
+        }
+        .content main{
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .content footer{
+            position: absolute;
+            bottom: 20px;
+            width: 80%;
+            text-align: right
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <button @click='flag = true'>显示</button>
+        <!-- 模态框 -->
+        <!-- <dialog></dialog> -->
+        <model 
+            v-show='flag' 
+            @cancel='flag = false'
+            @sure='flag = false'
+            :title='name'
+        ></model>
+
+        <button @click='flag1 = true'>显示</button>
+        <model 
+            v-show='flag1' 
+            @cancel='flag1 = false'
+            @sure='flag1 = false'
+            title='我是第二个模态框'
+        ></model>
+
+        <button @click='flag2 = true'>显示</button>
+        <model 
+            v-show='flag2' 
+            @cancel='flag2 = false'
+            @sure='flag2 = false'
+            title='我是第三个模态框'
+        ></model>
+
+
+        
+    </div>
+</body>
+</html>
+<template id='model'>
+    <div class='mask'>
+        <div class="content">
+            <header>{{title}}</header>
+            <main>这是主体部分</main>
+            <footer>
+                <button @click='no'>取消</button>
+                <button @click='ok'>确定</button>
+            </footer>
+        </div>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let model = {
+        template:'#model',
+        props:['title'],
+        methods: {
+            no(){
+               this.$emit('cancel') 
+            },
+            ok(){
+                this.$emit('sure')
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:false,
+            flag1:false,
+            flag2:false
+        },
+        components:{
+            model
+        }
+    })
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .inputBox input{
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            padding: 5px;
+            border: 1px solid rgb(230, 175, 175);
+            outline: none;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <my-input v-model='name' pd='hahaha'></my-input>
+        <!-- <my-input :value='name' @input="function(val){name = val}"></my-input> -->
+    </div>
+</body>
+</html>
+<template id='inp'>
+    <div class='inputBox'>
+        <input type="text" :value='value' @input='fn' :placeholder='pd'>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let myInput = {
+        template:'#inp',
+        props:['value','pd'],
+        methods: {
+            fn(e){
+                this.$emit('input',e.target.value)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            'my-input':myInput
+        }
+    })
+</script>

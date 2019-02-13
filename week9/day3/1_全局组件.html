@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <my-name></my-name>
+        <my-name></my-name>
+        <my-age></my-age>
+    </div>
+    <my>dfsggssgsd</my>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    //组件名不能是以有的html标签
+    Vue.component('my-name',{
+        template:"<h1>我是珠峰培训 <my-age></my-age></h1>",// 只能有一个跟根标签
+        data(){
+            return {
+                name:"hello"
+            }
+        },
+        methods: {
+            fn(){
+                alert(123)
+            }
+        },
+        created(){
+            console.log(this)
+        }
+    })
+    Vue.component('my-age',{
+        template:`<h1>我的年龄是10岁</h1>`
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>

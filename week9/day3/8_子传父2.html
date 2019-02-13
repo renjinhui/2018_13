@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son @click='change' :aaa='name'></son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <input type="text" v-model='n'>
+        <button @click='fn'>改变父组件的name</button>
+        <span v-show='false'>{{m}}</span>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son',
+        data(){
+            return {
+                name:'珠峰',
+                n:0
+            }
+        },
+        methods: {
+            fn(){
+                this.$emit('click',this.n)
+            }
+        },
+        // 只要n 发生改变 我们就执行 $emit
+        // watch:{
+        //     n(newV,oldV){
+        //         this.$emit('click',newV)
+        //     }
+        // }
+        computed: {
+            m(){
+                this.$emit('click',this.n)
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        methods: {
+            change(val){
+                this.name = val;
+                console.log(arguments)
+            }
+        },
+    })
+</script>

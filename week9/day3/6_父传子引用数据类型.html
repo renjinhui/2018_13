@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son :arr='ary'></son>
+    </div>
+</body>
+</html>
+<template id='son1'>
+    <div>
+        <h2 v-for='i in arr'>我爱{{zhufeng}}</h2>
+        <button @click='fn'>这个按钮点击了{{n}}次</button>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son1',
+        props:['zhufeng','arr'],
+        data(){
+            return{
+                n:0
+            }
+        },
+        methods: {
+            fn(){
+                // 若父组件传给子组件的是一个引用数据类型；
+                // 则 当我们在原地址修改数据时；
+                // 不会引起报错，能成功修改父组件的数据
+                this.arr.push('node')
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            ary:['css','js','vue']
+        },
+        components:{
+            son
+        }
+    })
+</script>

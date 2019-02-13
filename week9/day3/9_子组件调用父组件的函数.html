@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son @qqq='parentFn' :f='parentFn'></son>
+        <son1></son1>
+        <son2></son2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 通过自定义事件 自定义属性  this.$parent
+    let son = {
+        template:'<button @click="fn">按钮</button>',
+        props:['f'],
+        methods: {
+            fn(){
+                console.log(this)
+                // this.f(222);
+                this.$emit('qqq',111,666);
+                this.$parent.parentFn();// 直接调用父组件的任何数据
+            }
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        methods: {
+            parentFn(){
+                console.log("我是父组件的函数")
+                console.log(arguments)
+            }
+        },
+    })
+</script>

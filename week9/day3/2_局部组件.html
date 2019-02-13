@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- <son></son> -->
+        <parent></parent>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 1、先去声明一个组件（对象）；这个组件中的属性名都是规定死的
+    // 2、去对应的组件中注册该 子组件；
+    // 3、在对应的组件的模板中使用该 子组件即可
+
+
+    //  parent组件怎么使用son组件？？
+    //  根组件怎么使用的parent,那么parent就怎么使用son
+
+
+    // 声明一个组件
+    let son = {
+        template:'<h1>这是一个局部组件1{{name}}</h1>',
+        data(){
+            return {
+                name:"hello 珠峰"
+            }
+        },
+        // components:{
+        //     son2
+        // }
+    }
+    let son2 = {
+        template:'<h1>这是一个局部组件12{{name}} <son></son></h1>',
+        data(){
+            return {
+                name:"son2"
+            }
+        },
+        components:{
+            son
+        }
+    }
+    let parent = {
+        template:'<div><h1>这是一个局部组件2</h1><son></son> <qqq></qqq></div>',
+        components:{
+            son
+        }
+    }
+    Vue.component('qqq',{
+        template:'<h2>这是个全局组件</h2>'
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            // 注册局部组件
+            // 属性名 是你注册的组件名
+            son:son,
+            parent:parent
+        }
+    })
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+
+        <!-- 通过v-bind绑定父组件的数据；通过绑定的字符把相应的数据传给 子组件； 
+            子组件通过props 接收传进来的数据 
+        -->
+        <son :zhufeng='name'></son>
+        <!-- 
+            把name这个变量 通过 zhufeng这个字符 传给son这个组件 
+            son组件通过 props 接收zhufeng; 我们可以在son组件中使用
+            zhufeng 这个变量 来代表传进来的数据
+        -->
+    </div>
+</body>
+</html>
+<template id='son1'>
+    <div>
+        <h2>{{zhufeng}}</h2>
+        <button @click='fn'>这个按钮点击了{{n}}次</button>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son1',
+        data(){
+            return {
+                n:0,
+                // name:''
+            }
+        },
+        props:['zhufeng'],// 接收传递的数据
+        methods:{
+            fn(){
+                this.n++;
+                this.zhufeng = 123;
+                console.log(this.zhufeng)
+            }
+        }
+    }
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        }
+    })
+</script>

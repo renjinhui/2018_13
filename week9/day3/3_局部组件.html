@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <parent></parent>
+    </div>
+</body>
+</html>
+<template id='son1'>
+    <div>
+        <button @click='fn'>这个按钮点击了{{n}}次</button>
+    </div>
+</template>
+<template id='parent'>
+    <div>
+        <son1 v-for='i in 2' :key='Date.now()'></son1>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let f,q,n=0;
+    let son1 = {
+        template:'#son1',
+        data(){
+            return {
+                n:0
+            }
+        },
+        created() {
+            if(n==0){
+                f = this.fn;
+            }else{
+                q = this.fn
+            }
+            n++;
+            console.log(this)
+        },
+        methods:{
+            fn(){
+                this.n++;
+            }
+        }
+    }
+    let parent = {
+        template:'#parent',
+        components:{
+            son1
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            parent
+        }
+    })
+</script>

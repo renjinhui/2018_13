@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1 @click='fn'>{{name}}</h1>
+        <son ref='son1'></son>
+        <son ref='son2'></son>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 父组件想要调用子组件的方法； 我们只能通过获取对应的子组件实例，来获取
+    let son = {
+        template:'<button>按钮</button>',
+        props:['f'],
+        methods: {
+            fn(){
+                console.log(1)
+            }
+        },
+        created() {
+            // console.log(this)
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        methods: {
+            fn(){
+                console.log(this)
+                this.$children[0].fn();
+                this.$children[1].fn();
+                console.log(this.$children[0]==this.$children[1])
+                this.$refs.son1.fn();
+                this.$refs.son2.fn();
+            }
+        },
+        components:{
+            son
+        }
+    })
+</script>
