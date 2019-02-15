@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son></son>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'<h1>珠峰培训</h1>',
+        created(){
+            console.log('son_created')
+        },
+        mounted(){
+            console.log('son_mounted')
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        created() {
+            console.log('vm_created')
+            console.log(this.$children.length)
+        },
+        mounted(){
+            console.log('vm_mounted')
+            console.log(this.$children.length)
+        }
+    })
+</script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        {{arr}}
+        <my-name :name2='name' :ary='arr'></my-name>
+    </div>
+</body>
+</html>
+<template id='myname'>
+    <div>
+        ======================================
+        这个是子组件；用来显示输入的用户名
+        <h1>用户名：{{name}}</h1>
+        <h1>用户名：{{$parent.name}}</h1>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 官方推荐 自定义属性
+    // $parent: 父组件
+    // 父传子是单向数据流 
+    Vue.component('my-name',{
+        template:'#myname',
+        created() {
+            // this.ary = [2,2,2];
+            this.ary.push(2,2,2)
+        },
+        props:{
+            name2:{
+                // type  default  required validator(){}
+                default:'我是默认值',
+                // default(){return []}
+            },
+            ary:{
+                default(){
+                    return []
+                }
+            }
+        }
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            arr:[1,2,3]
+        }
+    })
+</script>

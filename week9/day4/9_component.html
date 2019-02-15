@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!--  component 是一个内置组件； is属性用控制显示哪个子组件 -->
+        <button @click='son="son1"'>son1</button>
+        <button @click='son="son2"'>son2</button>
+        <component :is='son'></component>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son1 = {
+        template:"<h1>这是son1</h1>"
+    }
+    let son2 = {
+        template:"<h1>这是son2</h1>"
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            son:'son1'
+        },
+        components:{
+            son1,son2
+        }
+    })
+</script>

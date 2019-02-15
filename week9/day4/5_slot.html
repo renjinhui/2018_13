@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son son-class='zf'>
+            hello 珠峰
+            <h2>只是自定义组件包含的部分</h2>
+        </son>
+        <!-- hello -->
+        <my-button text='hello'>123</my-button>
+        <my-button>珠峰</my-button>
+        <my-button>培训</my-button>
+
+        <!-- world -->
+        <my-button text='world'>123</my-button>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div :class='sonClass'>
+        <h1>这个是子组件</h1>
+        <!-- slot 相当于把son标签包含所有内容放到 slot标签的位置 -->
+        <slot></slot>
+
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // slot 插槽
+    Vue.component('my-button',{
+        template:"<button @click='fn'><slot></slot></button>",
+        props:['text'],
+        methods: {
+            fn(){
+                this.$emit('click123');//执行click123对应的函数
+            }
+        },
+    })
+    let son = {
+        template:'#son',
+        props:{
+            sonClass:{
+                default:''
+            }
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        }
+    })
+</script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .mask{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            top: 0;
+            left: 0;
+        }
+        .content{
+            width: 400px;
+            height: 300px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            margin-left: -200px;
+            top:20%;
+        }
+        .content header{
+            font-size: 30px;
+            text-align: center
+        }
+        .content main{
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .content footer{
+            position: absolute;
+            bottom: 20px;
+            width: 80%;
+            text-align: right
+        }
+
+    </style>
+    <style>
+        .qqq button{
+            font-size: 20px
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag = true'>显示</button>
+        <model 
+            v-show='flag' 
+            @cancel='cancel' 
+            @sure='sure'
+            tip='投资有风险'
+        >
+            <div>用户自己的结构</div>
+            <h2>哈哈</h2>
+            <h4>哈哈哈</h4>
+            <span slot='footer' class='ggggg'>
+                <!-- 投资有风险 -->
+                <button @click='cancel'>用户自己的取消</button>
+                <button @click='sure'>用户自己的确定</button>
+                <my-button></my-button>
+            </span>
+        </model>
+    </div>
+</body>
+</html>
+<template id='model'>
+    <div class='mask' :class="class1">
+        <div class="content">
+            <header>{{title}}</header>
+            <main>
+                <slot>
+                    {{content}}
+                </slot>
+            </main>
+            <footer>
+                <slot name='footer'>
+                    <span>{{tip}}</span>
+                    <button @click='no' v-show='showCancel'>取消</button>
+                    <button @click='ok'>确定</button>
+                </slot>
+            </footer>
+            <my-button></my-button>
+        </div>
+    </div>
+</template>
+    
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('my-button',{
+        template:"<button>自己的button</button>"
+    })
+    let model = {
+        template:"#model",
+        props:{
+            title:{
+                default:'默认标题'
+            },
+            content:{
+                default:'默认content'
+            },
+            showCancel:{
+                // 控制 取消 按钮的显示问题
+                default:true
+            },
+            tip:{
+                default:''
+            }
+        },
+        methods: {
+            no(){
+                this.$emit('cancel')
+            },
+            ok(){
+                this.$emit('sure')
+            }
+        },  
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰",
+            flag:false,
+        },
+        methods: {
+            cancel(){
+                this.flag = false
+            },
+            sure(){
+                this.flag = false
+            }
+        },
+        components:{
+            model
+        }
+    })
+</script>

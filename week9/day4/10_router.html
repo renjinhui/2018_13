@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- router-link   router-view  ====》 vue-router 定义好的组件-->
+        <!-- router-link 控制跳转的路径和显示的文本 -->
+        <!-- router-view 控制的是路径对应的组件 -->
+        <!-- active-class  控制 选中 对应路径 时的 类名 -->
+        <router-link to='/home' active-class="current">首页</router-link>
+        <router-link to='/list' active-class="current">列表页</router-link>
+        <a href='#/home'>首页2</a>
+        <a href='#/list'>列表页2</a>
+        <h1>{{name}}</h1>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    /*
+        1、声明组件
+        2、编写路由映射表
+        3、把编辑好的映射表注入到 router实例中
+        4、把router实例注入到根实例中
+
+        使用时 编写router-link router-view 即可
+    */
+    let home={
+        template:'<div>home</div>'
+    }
+    let list={
+        template:'<div>list</div>'
+    }
+    let qqq = [
+        // 路由映射表  数组包对象
+        {
+            path:'/home', // 路径
+            component:home // 路径对应的组件
+        },
+        {
+            path:'/list',
+            component:list
+        }
+    ]
+    let www = new VueRouter({
+        // 在router实例中注入路由映射表
+        routes:qqq,
+        // routes,
+    })
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        router:www // 把router实例注入到根实例中
+        // router,
+    })
+</script>

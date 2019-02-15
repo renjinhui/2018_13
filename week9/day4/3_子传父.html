@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son @change='fn'></son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <input type="text" v-model='sonName' @input='f2'>
+        <button @click='$emit("change",sonName)'>提交</button>
+        <button @click='f'>提交</button>
+        <!-- {{m}} -->
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    //  父组件  使用  子组件  的数据
+    //  自定义事件  $emit
+    //  $children  ref： 获取到子组件对应的实例
+    let son = {
+        template:'#son',
+        data(){
+            return{
+                sonName:'珠峰培训'
+            }
+        },
+        methods: {
+            f(){
+                this.$emit('change',this.sonName)
+                // 触发了 change 对应的函数； 并给该函数传递了一个 值
+            },
+            f2(e){
+                console.log(e.target.value);
+                this.$emit('change',this.sonName);
+            }
+        },
+        // computed: {
+        //     m(){
+        //         // 只要this.sonName 发生改变 我们就让下边函数执行
+        //         this.$emit('change',this.sonName)
+        //     }
+        // },
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        mounted() {
+            //父组件调用子组件的函数 通过找到对应的实例
+            //子组件调用父组件的函数 1、通过找到对应的实例；2、自定义事件；3、自定义属性
+            this.$children[0].f2();
+        },
+        methods: {
+            // fn:functio n(){}
+            fn(val){
+                console.log(val)
+                this.name = val
+            }
+        },
+    })
+</script>

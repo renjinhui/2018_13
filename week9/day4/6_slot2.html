@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son>
+            <div slot='qqq'>hhaha</div>
+            <h2>hehehe</h2>
+            <div>24324</div>
+            <div slot='www'>111</div>
+            <div slot='www'>222</div>
+        </son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <slot name='qqq'></slot>
+        <!-- 
+            slot 的name属性是控制 要去显示哪一部分的一个功能 
+            不写时默认default
+            name 对应的是 模板中slot=xxx 的 xxx;
+
+            模板中若有与name值对应的元素；则 slot标签包含的代码不会显示出来
+            否则，可以显示slot标签包含的内容
+        -->
+        <h1>这是个子组件</h1>
+        
+        <slot></slot>
+        ===================
+        <slot name='www'>
+            <div name='2342342'>777</div>
+        </slot>
+        <slot name='eee'>
+            <div name='2342342'>666</div>
+            <slot name='www'></slot>
+        </slot>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:"#son"
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        }
+    })
+</script>
