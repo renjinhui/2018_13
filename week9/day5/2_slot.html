@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- 对于组件的 class 和 style ; VUE自动把组件的这两个属性直接放到 组件的根元素上  -->
+        <son class='qqqqq' style='color:red'>
+            <div>gsdfgsdg</div>
+            sdfgsgfsgs
+            <h1 slot='www'>11111111111111111</h1>
+        </son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        子组件
+        <slot></slot>
+        <slot name='www'></slot>
+        <slot name='qqq'>33333333333333</slot>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // slot 
+    let son = {
+        template:"#son"
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        }
+    })
+</script>

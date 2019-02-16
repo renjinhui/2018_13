@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <router-link :to="{path:'/home',query:{a:12,b:13}}">首页</router-link>
+        <router-link :to="{path:'/list',query:{a:12,b:13}}">列表页</router-link>
+
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:"<h1>首页</h1>",
+        created(){
+            let id = this.$route.query.id;
+        },
+        mounted() {
+            console.log(this)
+        },
+    }
+    let list = {
+        template:"<h1>列表页 <router-view></router-view></h1>"
+    }
+    let hy = {
+        template:"<h2>惠盈</h2>"
+    }
+    let zt = {
+        template:"<h2>直投</h2>"
+    }
+    let routes = [
+        {
+            path:'/',
+            // 刚进页面时 默认路径是'/' 我们在匹配到这个路径之后 让他重新指向一个新的路径
+            redirect:'/home'
+        },
+        {
+            path:'/home',
+            name:'home',
+            component:home
+        },
+        {
+            path:'/list',
+            component:list,
+            children:[// 子 路由映射表
+                {
+                    path:'/list/hy',
+                    component:hy
+                },
+                {
+                    path:'/list/zt',
+                    component:zt
+                },
+                {
+                    path:'/list/*',
+                    redirect:'/list/hy'
+                }
+            ]
+        },
+        {
+            path:'/*', // 当走到一个不存在的路径时； 我们让路径走到默认值；只能写到最下边
+            redirect:'/home/222'
+        }
+    ];
+    const router = new VueRouter({
+        routes,
+        linkActiveClass:'current',
+        // mode:'history' 
+        // 默认: 'hash'
+        // 在开发阶段 用 hash ; 上线时 可以选择history模式；history模式需要后台配合
+    });
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .qqq{
+            font-size: 20px;
+        }
+        .qqq.current{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <!-- 
+            router-link 
+            router-view 
+            active-calss 
+            linkActiveClass 
+            tag 
+            to 
+            path 
+            component 
+            routes 
+            router 
+            query  
+        -->
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <button>提交</button>
+        <!-- router-link  router-view  router声明的全局组件-->
+
+        <!-- 
+            to  控制的是跳转的路径；  
+            active-class的优先级高于统一设置的优先级 
+        -->
+        <!-- <router-link class='qqq' to='/home?id=123&e=123' active-class='current' tag='button'>home</router-link>
+        <router-link class='qqq' to='/list' tag='button'>list</router-link> -->
+        <!-- <router-link class='qqq' :to='"/home?id="+name+"&e=123"'>home</router-link> -->
+        
+        <router-link 
+            class='qqq' 
+            :to='{path:"/home",query:{id:name}}'
+        >home</router-link>
+        <router-link class='qqq' to='/list' tag='button'>list</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:"<h1>首页</h1>",
+        created(){
+            let id = this.$route.query.id;
+            console.log(id)
+            // axios.post('/user',{id:id}).then()
+        },
+        mounted() {
+            // 在实例中我们可以通过 this.$route.query获取 通过问号传递的参数
+            console.log(this)
+        },
+    }
+    let list = {
+        template:"<h1>列表页</h1>"
+    }
+    let routes = [
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list',
+            component: list
+        }
+    ];
+    let router = new VueRouter({
+        routes,
+        linkActiveClass:'cur' // 把所有的被选中的路径 对应按钮的类名改成 cur
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰",
+            obj:{
+                a:12
+            }
+        }
+    })
+</script>

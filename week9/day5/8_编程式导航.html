@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='fn'>跳转</button>
+        <button @click='$router.go(-1)'>回退</button>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let son = {
+        template:"<h1>son</h1>"
+    }
+    const router = new VueRouter({
+        routes:[
+            {
+                path:'/son',
+                component:son
+            }
+        ]
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        },
+        created() {
+            console.log(this)
+        },
+        methods: {
+            fn(){
+                setTimeout(() => {
+                    //一秒后再去跳转
+                    // this.$route.params
+                    // this.$route.query
+                    // this.$router.push('/son')
+
+                    this.$router.push({path:'/son',query:{a:12,b:13}})
+                    // push的参数 跟 to后边的值 保持一致
+                    
+                    // this.$router.replace({path:'/son',query:{a:12,b:13}})
+
+                    // replace 和 push 用法一样；
+                    // 区别在于 replace 不会新增历史纪录； push会产生一条新的纪录
+                    // back 相当于点击浏览器的回退按钮
+                    // go(n) n 是几就跳几步；正数往前跳；负数是往回跳几步 
+                }, 1000);
+            }
+        },
+    })
+</script>

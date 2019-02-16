@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    // 第一层  投资路由  invest
+    // 第二层  分为网贷和理财  wd  lc
+    // 第三层  wd->(zt,dqb) lc->(hy,ht)
+    let invest = {
+        template:`<div> 
+            投资层 
+            <router-link to='/invest/lc'>理财</router-link>
+            <router-link to='/invest/wd'>网贷</router-link>
+            <router-view></router-view>
+        </div>`
+    }
+    let wd = {
+        template: `<div>
+            网贷
+            <router-link to='/invest/wd/zt'>直投</router-link>
+            <router-link to='/invest/wd/dqb'>定期宝</router-link>
+            <router-view></router-view>
+        </div>`
+    }
+    let lc = {
+        template: `<div>
+            理财
+            <router-link to='/invest/lc/hy'>惠盈</router-link>
+            <router-link to='/invest/lc/ht'>惠投</router-link>
+            <router-view></router-view>
+        </div>`
+    }
+    let zt = {
+        template:'<h1>直投标</h1>'
+    }
+    let dqb = {
+        template:'<h1>定期宝标</h1>'
+    }
+    let hy = {
+        template:'<h1>惠盈标</h1>'
+    }
+    let ht = {
+        template:'<h1>惠投标</h1>'
+    }
+    const routes = [
+        {
+            path:'/',
+            redirect:'/invest'
+        },
+        {
+            path:'/invest',
+            component:invest,
+            children:[
+                {
+                    path:'/invest/wd',
+                    component:wd,
+                    children:[
+                        {
+                            path:'/invest/wd/zt',
+                            component:zt
+                        },
+                        {
+                            path:'/invest/wd/dqb',
+                            component:dqb
+                        }
+                    ]
+                },
+                {
+                    path:'/invest/lc',
+                    component:lc,
+                    children:[
+                        {
+                            path:'/invest/lc/hy',
+                            component:hy
+                        },
+                        {
+                            path:'/invest/lc/ht',
+                            component:ht
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            path:'/*',// 只要路径找不到对应的组件；都会走到/invest
+            redirect:'/invest'
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>

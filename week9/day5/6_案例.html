@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <router-link :to="{name:'home123'}">home</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:`<h1>
+                首页
+                <input v-model='userName' />
+                <router-link :to='{path:"/list",query:{id:userName}}'>查存</router-link>
+                <router-link :to='{name:"list",params:{id:userName}}'>查存2</router-link>
+            </h1>`,
+        data(){
+            return{
+                userName:''
+            }
+        }
+    }
+    let list = {
+        template:"<h1>列表页</h1>",
+        created() {
+            console.log(this.$route.query)
+            console.log(this.$route.params)
+        },
+    }
+    let routes = [
+        {
+            path:'/home',
+            name:'home123',
+            component:home
+        },
+        {
+            path:'/list/:id',
+            name:'list',
+            component: list
+        }
+    ];
+    let router = new VueRouter({
+        routes,
+        linkActiveClass:'cur'
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>

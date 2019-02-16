@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+
+        <!-- 使用 路径传参的时候 只能使用 name 来表示要跳转到哪个路径 -->
+        <router-link :to="{name:'home123',query:{id:123},params:{qqq:333,www:666}}">home</router-link>
+        <!-- <router-link :to="{path:'/home',query:{id:123},params:{qqq:333}}">home</router-link> -->
+        <router-link :to="{path:'/list'}">list</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    /*
+        vueRouter 一共提供了两种传参的方式： 
+        1、query传参     问号传参 
+                路由映射表不用改动 :to={path:'',query:{}}或者:to={name:'',query:{}}
+                this.$route.query.xxx
+
+        2、params传参    路径传参
+                在映射表中添加   /:变量  的形式； :to={name:'',params:{变量:''}}
+                this.$route.params.xxx
+    */
+    let home = {
+        template:"<h1>首页</h1>",
+        created(){
+            let id = this.$route.query.id;
+        },
+        mounted() {
+            console.log(this)
+        },
+    }
+    let list = {
+        template:"<h1>列表页</h1>"
+    }
+    let routes = [
+        // {
+        //     path:'/home/:qqq',
+        //     name:'home123',
+        //     component:home
+        // },
+        {
+            path:'/home/:qqq',
+            name:'home123',
+            component:home
+        },
+        {
+            path:'/list',
+            component: list
+        }
+    ];
+    let router = new VueRouter({
+        routes,
+        linkActiveClass:'cur'
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>
