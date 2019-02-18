@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <input type="text" v-model='name'>
+        <input type="text" v-model='age'>
+        <button @click='fn'>提交</button>
+        <adult></adult>
+        <child></child>
+    </div>
+</body>
+</html>
+<template id='adult'>
+    <div>
+        成年组件
+        <ul>
+            <li v-for='item in adultAry'>
+                姓名：{{item.name}}；年龄：{{item.age}}
+            </li>
+        </ul>        
+    </div>
+</template>
+<template id='child'>
+    <div>
+        未成年组件
+        <ul>
+            <li v-for='item in childAry'>
+                姓名：{{item.name}}；年龄：{{item.age}}
+            </li>
+        </ul>        
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    let store = new Vuex.Store({
+        state:{
+            ary:[]
+        },
+        getters:{
+            adultAry(state){
+                return state.ary.filter(item => item.age >=18)
+            },
+            childAry(state){
+                return state.ary.filter(item => item.age < 18)
+            }
+        },
+        mutations:{
+            add(state,option){
+                state.ary.push(option);
+                console.log(state.ary)
+            }
+        },
+        actions:{}
+    })
+
+    let adult = {
+        template:"#adult",
+        computed: {
+            arr(){
+                return this.$store.state.ary.filter(item=>item.age >= 18);
+            },
+            werwrwrwe(){
+                return this.$store.getters.adultAry
+            },
+            // adultAry(){
+            //     return this.$store.getters.adultAry
+            // },
+            ...Vuex.mapGetters(['adultAry','childAry'])// getters 中存在adultAry
+        },
+    }
+    let child = {
+        template:'#child',
+        computed: {
+            ary(){
+                return this.$store.state.ary.filter(item=>item.age < 18);
+            },
+            ...Vuex.mapGetters(['childAry'])
+        },
+    }
+    let vm = new Vue({
+        el:'#app',
+        store,
+        data:{
+            name:"珠峰",
+            age:10
+        },
+        methods: {
+            fn(){
+                let obj = {name:this.name,age:this.age}
+                this.$store.commit('add',obj);
+                this.name = '';
+                this.age = '';
+            }
+        },
+        components:{
+            adult,child
+        }
+    })
+</script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son :qqq='123' @click='fn'></son>
+        <son2 :qqq='123' @click='fn'></son2>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <h1 @click='$emit("click",name)'>son--子组件</h1>
+    </div>
+</template>
+<template id='son2'>
+    <div>
+        <h1 @click='fn2'>son2--子2组件</h1>
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son',
+        props:{
+            qqq:{
+                default:'666'
+            }
+        },
+        created(){
+            vm2.$on('test',(val)=>{
+                this.name = val;// val 是son2 的变量
+                console.log(this);
+            })
+        },
+        data(){
+            return{
+                name:"珠峰2019"
+            }
+        }
+    }
+    let son2 = {
+        template:'#son2',
+        props:{
+            qqq:{
+                default:'666'
+            }
+        },
+        data(){
+            return{
+                name:"珠峰2020"
+            }
+        },
+        methods: {
+            fn2(){
+                vm2.$emit('test',this.name)
+            }
+        },
+    }
+    let vm2 = new Vue();
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son,son2
+        },
+        methods: {
+            fn(val){
+                this.name = val;
+            }
+        },
+    })
+</script>

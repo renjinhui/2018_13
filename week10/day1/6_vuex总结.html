@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    //  方便组件之间的数据传递
+    let obj = {
+        state:{
+            count:0
+        },
+        mutations:{
+            // mutations 中的函数 我们通过 commit触发
+            // 存放的是用来修改state中的数据 的 方法
+            add(state,option){
+                state.count += option
+            },
+            replace(state,option){
+                state.count = option
+            }
+        },
+        actions:{
+            // actions 中的函数 我们通过 dispatch触发
+            fn(obj,option){
+                console.log(obj)
+                axios.get('./data').then((data)=>{
+                    let d = data.data;
+                    obj.commit('replace',d)
+                })
+            }
+            
+        },
+        getters:{
+            // 多个组件使用同一套规则时  我们可以把这套规则单独拎出来
+            odd(state){
+                return state.count%2==0 ? '偶数' : '奇数' 
+            }
+        }
+    }
+    let store = new Vuex.Store(obj)
+    let vm = new Vue({
+        el:'#app',
+        store,
+        data:{
+            name:"珠峰"
+        },
+        created() {
+            this.fn2();
+        },
+        methods: {
+            fn2(){
+                this.$store.dispatch('fn');
+            }
+        },
+    })
+</script>

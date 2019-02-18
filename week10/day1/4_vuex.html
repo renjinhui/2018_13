@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son1></son1>
+        ===============================
+        <son2></son2>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    // 1、创造一个vueX实例
+    // 2、把创造的实例放到根实例中即可
+    // 使用vuex中的数据： this.$store.state 可以调用数据
+    // vuex中的数据全都存放在 state中，
+    // 当state中的某个数据发生改变时，
+    // 所有用到该数据的地方全都会跟着改变
+    // 若想修改state中的数据； 推荐使用 mutations
+
+    let son1 = {
+        template:`<div>
+                <button @click='add'>增加</button>
+                <button @click='mu_add(100)'>增加</button>
+                <button @click='add2'>2增加</button>
+                <h2>{{myCount}}</h2>
+                <h2>{{count}}---{{qqq}}</h2>
+                <h2>{{$store.state.count}}</h2>
+                {{$store.getters.str}}
+            </div>`,
+        data(){
+            return{
+                // myCount:this.$store.state.count
+            }
+        },  
+        computed: {
+            myCount(){
+                return this.$store.state.count
+            },
+            ...Vuex.mapState(['count','qqq']),
+            // Vuex.mapState(['count','qqq'])
+            // ... 展开的是 mapState的返回结果
+            str(){
+                // return this.$store.state.count%2==0 ....
+            }
+        },  
+        methods: {
+            add(){
+                // this.$store.state.count++;  
+                // this.$store.commit('mu_add',1,2,3) 
+
+
+                this.$store.commit('mu_add',10) ;
+                // this.mu_add(10)
+            },
+            add2(){
+                this.$store.dispatch('ac_add',1,2,3);
+                // dispatch 触发的是 actions 中的函数
+                // commit 触发的是  mutations 中的函数
+                // mutations 中必须是同步函数，actions 中 任意
+                // 想要修改state中的数据 我们只能通过 commit 执行 mutations中的函数
+            },
+            ...Vuex.mapMutations(['mu_add']),
+            // 相当于我们写了 add(){this.$store.commit('')}
+        },    
+    }
+    let son2 = {
+        template:`<div>
+                <button @click='remove'>减少</button>
+                <h2>{{$store.state.count}}</h2>
+            </div>`,
+        methods: {
+            remove(){
+                this.$store.state.count--;
+            }
+        },    
+    }
+    let store = new Vuex.Store({
+        state:{
+            // 放数据
+            count:0,
+            qqq:0
+        },
+        getters:{
+            // 理解成 store 的 计算属性
+            str(state){
+                // console.log(arguments);
+                return state.count%2==0 ? '偶数' : '奇数' 
+            }
+        },
+        mutations:{
+            // 这里放的是一些方法; 它是vuex提供的一种用于修改state中数据的方式
+            mu_add(state,n){
+                // 函数只有一个或两个实参
+                // 第一个实参对应的state 是默认传递的 state
+                // 第二个实参对应的n 是我们调用时自己传递的实参
+                // 我们通过 $store.commit('mutations中对应的函数名',我们传递的参数)
+                console.log(arguments);
+                n = n || 1;
+                state.count += n;
+            }
+        },
+        actions:{
+            ac_add(obj,n){
+                // obj 是vuex封装好的一个对象，里边提供了commit方法
+                // obj.commit('mu_add',n)
+                // console.log(arguments);
+                setTimeout(() => {
+                   obj.commit('mu_add',n) 
+                }, 1000);
+            }
+        }
+    })
+    let vm = new Vue({
+        el:'#app',
+        // store:store,
+        store,
+        data:{
+            name:"珠峰"
+        },
+        created() {
+            console.log(this);
+        },
+        components:{son1,son2}
+    })
+</script>

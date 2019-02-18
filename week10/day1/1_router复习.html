@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <!-- <router-link to='/son1'>son1</router-link> -->
+        <router-link :to='{path:"/son1",query:{a:1,b:2}}'>son1</router-link>
+        <!-- <router-link to='/son2'>son2</router-link> -->
+        <router-link :to="{name:'son2',params:{bl1234:666}}">son2</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    /*
+        query传参 to='{path:"/son1",query:{a:1,b:2}}';
+                    在每一个组件里 通过this.$route.query 参数对象
+        params传参  to = '{name:'son2',params:{bl1234:12}}'            
+                    在每一个组件里 通过this.$route.params 参数对象
+
+
+        重定向：redirect
+        嵌套：children
+        编程式导航 this.$router.push('/son1/sz') replace() back go
+        push({path:'/son1/sz',query:{}})
+    */
+    let son1 = {
+        template:"<h1>son1 <router-view></router-view></h1>"
+    }
+    let son2 = {
+        template:"<h1>son2</h1>"
+    }
+    let sz = {
+        template:'<h2>孙子组件</h2>'
+    }
+    let routes = [
+        {
+            path:'/',
+            redirect:'/son2/222'
+        },
+        {
+            path:'/son1',
+            // redirect:'/son2/5555',
+            name:'son1',
+            component:son1,
+            redirect:'/son1/sz',
+            children:[
+                {
+                    path:'/son1/sz',
+                    component:sz
+                }
+            ]
+        },
+        {
+            path:'/son2/:bl1234',
+            name:'son2',
+            component:son2
+        },
+        {
+            path:'/*',
+            redirect:'/son1'
+        }
+    ]
+    let router = new VueRouter({
+        routes:routes
+    })
+    let vm = new Vue({
+        el:'#app',
+        router,
+        data:{
+            name:"珠峰"
+        }
+    })
+</script>

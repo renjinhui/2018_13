@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son :qqq='123' @click='fn'>
+            <div>dfgsgs{{name}}</div>
+            sdgfsgsd
+            sdfgsgf
+        </son>
+    </div>
+</body>
+</html>
+<template id='son'>
+    <div>
+        <h1 @click='$emit("click",name)'>son--子组件</h1>
+        {{typeof qqq}}
+        <!-- <component :is="componentId"></component> -->
+    </div>
+</template>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+        父传子： 子调用父的数据；自定义属性 + props
+        子传父： 父调用子的数据；自定义事件 + $emit
+    */
+    let son = {
+        template:'#son',
+        props:{
+            qqq:{
+                default:'666'
+            }
+        },
+        data(){
+            return{
+                name:"珠峰2019"
+            }
+        }
+    }
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰"
+        },
+        components:{
+            son
+        },
+        methods: {
+            fn(val){
+                this.name = val;
+            }
+        },
+    })
+</script>
