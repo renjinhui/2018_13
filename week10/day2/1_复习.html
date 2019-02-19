@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        {{$store.state.count}}
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vuex/dist/vuex.js"></script>
+<script>
+    let store = new Vuex.Store({
+        state:{
+            count:0
+        },// 存放共用数据
+        mutations:{
+            // 想要修改state中的数据 我们只能通过 这个属性中的函数
+            // 必须是同步 
+            changeCount(state,option){
+                // setTimeout(() => {
+                //     state.count += option;
+                // }, 1000);
+                state.count += option
+            },
+            changeCount3(state,option){
+                // setTimeout(() => {
+                //     state.count -= option;
+                // }, 1000);
+                state.count += option
+            }
+        },
+        actions:{
+            changeCount2(obj,option){
+                setTimeout(() => {
+                    obj.commit('changeCount',option)
+                }, 2000);
+            },
+            changeCount4({commit},option){
+                setTimeout(() => {
+                    commit('changeCount',option)
+                }, 2000);
+            }
+        },
+        getters:{
+            odd(state){
+                return state.count%2==0 ?"偶数":"奇数"
+            }
+        }
+    })
+    let vm = new Vue({
+        el:'#app',
+        store,
+        data:{
+            name:"珠峰"
+        },
+        created() {
+            // this.$store.commit('changeCount',100);
+            // this.$store.dispatch('chagneCount2',300)
+            this.changeCount(40)
+        },
+        computed: {
+            ...Vuex.mapState(['count']),
+            ...Vuex.mapGetters(['odd']),
+            myCount(){
+                return this.$store.state.count
+            }
+            // 在本组件直接使用 count 或者 odd 这两个变量即可
+        },
+        methods: {
+            // 调用时 this.changeCount2(10)  等同于  this.change(10)
+            
+            ...Vuex.mapActions(['changeCount2']),
+            // changeCount2(n){
+            //     this.$store.dispatch('changeCount2',n)
+            // },
+            // 两种写法 是   等价的
+            change(n){
+                this.$store.dispatch('changeCount2',n)
+            },
+
+            // 调用时  this.changeCount(40) 等同于 this.change2(40)
+            ...Vuex.mapMutations(['changeCount']),
+            change2(n){
+                this.$store.commit('changeCount',n)
+            }
+        },
+    })
+</script>
