@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router123 from './router'
+import router from './router'
 import store from './store/store.js'
+
+// 引入共用css
+import './assets/common.css';
+// 引入swiper的 css
+import 'swiper/dist/css/swiper.min.css'
 
 Vue.config.productionTip = false
 
 new Vue({
-  router:router123,
+  router:router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app2')

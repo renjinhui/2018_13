@@ -1,17 +1,16 @@
 <template>
     <div class='add'>
+        <my-title til='添加页'></my-title>
         添加页
     </div>
 </template>
 
 <script>
+    import title from '@/common/title.vue'
     export default {
-        created() {
-            console.log(2)
-        },
-        mounted() {
-            console.log(3)
-        },
+        components:{
+            'my-title':title
+        }
     }
 </script>
 

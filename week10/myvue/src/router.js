@@ -7,15 +7,15 @@ import list from './components/list/list.vue'
 import collect from './components/collect/collect.vue'
 import add from './components/add/add.vue'
 
-// import qqq from './components/index.vue'
+import index from './components/index.vue'
 
 Vue.use(Router)
 const routes = [
   {
     path: '/',
     //让 index.vue 加载了之后 再去加载 home
-    component:() => import('./components/index.vue'),
-    // component:qqq,
+    // component:() => import('./components/index.vue'),
+    component:index,
     redirect: '/home',
     children:[
       {
@@ -57,6 +57,7 @@ const routes = [
 ]
 export default new Router({
   mode: 'hash',
+  linkActiveClass:'current',
   base: process.env.BASE_URL,
   routes 
 })
