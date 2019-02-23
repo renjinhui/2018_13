@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        gitlab  github  码云  三个不同的存储代码的地方
+        都是使用的 git 命令
+    -->
+    <!-- 
+        常用的linux命令
+        mkdir 创建文件夹
+        cd  切换路径
+        touch 创建文件
+        vi 编辑文件 按i进入编辑状态  
+            编辑完成后 ctrl+c 退出编辑状态 敲入 :wq 按回车保存
+        cat 查看文件
+        rm  删除文件
+        rmdir 删除文件夹
+        ls 查看当前文件夹下的目录    
+    -->
+
+    <!-- 
+        在远程新创建一个仓库  new repository
+        复制仓库地址
+        本地找一个文件夹  运行 git 命令  git clone 远程仓库地址
+        本地编辑
+        git status // 不是必须的  查看当前文件的状态
+        git add . 工作区的代码提交到缓存区
+        git commit -m '备注信息'  把缓存去的代码提交到 历史区
+        git push  把历史去的代码提交到远程
+
+        //适合 未 add 之前
+        git checkout . 用缓存区的代码覆盖工作区
+
+
+        // 使用提交的历史，回退到指定版本
+        git log 查看提交记录
+        git reset --hard 历史版本号 // 只是撤回到了本地的历史版本
+        git push -f 强制提交远程
+
+
+        分支： 简单理解成不同的开发环境
+        git branch  :查看本地有哪些分支
+        git branch 自定义的分支名  :新建一个本地分支
+        git checkout 分支名     :切换到对应的分支
+        git checkout -b 分支名   :建立并切换到对应分支
+
+
+        假如 想在master分支上合并 zhufeng分支 和 peixun分支  的内容
+        先保证当前分支 是master分支；
+        然后在master分支上运行  git merge zhufeng
+        上述命令 把 zhufeng分支的内容合并到了 master分支，
+        上述命令执行时有时会让我们提交；有时会出现很多波浪号，出现波浪号直接:q回车即可
+
+        再去合并peixun分支， git merge peixun
+
+        从哪个分支切出去的，那么新建的分支就和哪个分支的内容保持一致；
+
+        冲突解决
+            1、远程和本地修改了同一个文件  在第二个人 git pull 产生的冲突 
+            2、两个分支修改同一个文件 在合并分支是产生的冲突
+        解决冲突需要认为的决定怎么修改冲突文件    
+
+    -->
+</body>
+</html>

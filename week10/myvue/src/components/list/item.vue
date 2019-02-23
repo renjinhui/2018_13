@@ -8,8 +8,8 @@
             <p class="desc">{{data.bookInfo}}</p>
             <div class="price">${{(data.bookPrice/100).toFixed(2)}}</div>
             <div class="btn_box">
-                <button>删除</button>
-                <button>收藏</button>
+                <button @click='f(data)'>删除</button>
+                <button v-show='button_show' @click='f2(data)'>收藏</button>
             </div>
         </div>
     </div>
@@ -17,7 +17,27 @@
 
 <script>
     export default {
-        props:['data'],
+        // props:['data','button_show'],
+        props:{
+            data:{
+                default(){
+                    return {}
+                }
+            },
+            button_show:{
+                default:true
+            }
+        },
+        methods: {
+            f(data){
+                //点击删除执行的动作
+                this.$emit('change',data)
+            },
+            f2(data){
+                //点击收藏执行的动作
+                this.$emit('collect',data)
+            }
+        },
     }
 </script>
 

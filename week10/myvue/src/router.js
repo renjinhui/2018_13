@@ -20,19 +20,31 @@ const routes = [
     children:[
       {
         path: '/home',
-        component:home
+        component:home,
+        meta:{
+          til:"首页", // 内部属性自定义
+        }
       },
       {
         path: '/list',
-        component: list
+        component: list,
+        meta:{
+          til:"列表页", // 内部属性自定义
+        }
       },
       {
         path: '/collect',
-        component: collect
+        component: collect,
+        meta:{
+          til:"收藏页", // 内部属性自定义
+        }
       },
       {
         path: '/add',
-        component: add
+        component: add,
+        meta:{
+          til:"添加页", // 内部属性自定义
+        }
       }
     ]
   },
