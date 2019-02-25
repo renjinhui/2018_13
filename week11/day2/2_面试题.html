@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /*实现一个LazyMan，可以按照以下方式调用:
+     1) LazyMan(“Hank”)输出:
+     Hi! This is Hank!
+
+     2) LazyMan(“Hank”).sleep(10).eat(“dinner”)输出
+     Hi! This is Hank!
+     //等待10秒..
+     Wake up after 10
+     Eat dinner~
+
+     3) LazyMan(“Hank”).eat(“dinner”).eat(“supper”)输出
+     Hi This is Hank!
+     Eat dinner~
+     Eat supper~
+
+     4) LazyMan(“Hank”).eat(“dinner”).sleepFirst(5).eat(“supper”)输出
+     //等待5秒
+     Hi This is Hank!
+     Wake up after 5
+     Eat supper*/
+    class Man {
+        constructor(name){
+            this.ary = [];
+            console.log(`hi this is ${name}`);
+            // this.next()
+            setTimeout(() => {
+                this.next();
+            }, 10);
+        }
+        next(){
+            let f = this.ary.shift();
+            f && f();
+        }
+        eat(str) {
+            let fn = ()=>{
+                console.log(`吃${str}`);
+                this.next();
+            }
+            this.ary.push(fn)
+            return this
+        }
+        sleep(n) {
+            let fn = ()=>{
+                console.log(`我要睡${n}秒`)
+                setTimeout(() => {
+                    console.log(`睡了${n}秒`);
+                    this.next();
+                }, n*1000);
+            }
+            this.ary.push(fn);
+            return this
+        }
+        sleepFirst(n) {
+            let fn = ()=>{
+                console.log(`我要先睡${n}秒`);
+                setTimeout(() => {
+                    console.log(`我已经先睡了${n}秒`);
+                    this.next();
+                }, n*1000);
+            }
+            this.ary.unshift(fn);
+            return this
+        }
+    }
+
+    function LazyMan(name) {
+        return new Man(name)
+    }
+    LazyMan('珠峰').sleep(2).eat('午饭').sleep(3).eat('晚饭').sleepFirst(5)
+
+    function f() {
+        console.log(1)
+        setTimeout(() => {
+            console.log(111)
+        }, 2000);
+    }
+    function f2() {
+        console.log(2)
+        setTimeout(() => {
+            console.log(222)
+        }, 1000);
+    }
+    f();f2();
+</script>
