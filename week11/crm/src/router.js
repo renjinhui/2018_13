@@ -9,7 +9,22 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: ()=>import('./components/home/index.vue'),
+      redirect:'/table',
+      children:[
+        {
+          path:'/table',
+          component:()=>import('./components/home/table.vue')
+        },
+        {
+          path:'/info',
+          component:()=>import('./components/home/info.vue')
+        }
+      ]
+    },
+    {
+      path:'/login',
+      component: ()=>import('./components/login/login.vue')
     },
     {
       path: '/about',
