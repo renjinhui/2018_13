@@ -70,6 +70,9 @@
             werwrwrwe(){
                 return this.$store.getters.adultAry
             },
+            au(){
+                return this.$store.state.ary.filter(item => item.age >=18)
+            },
             // adultAry(){
             //     return this.$store.getters.adultAry
             // },
