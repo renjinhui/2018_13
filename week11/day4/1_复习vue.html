@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        vue 指令 v-on @ ; v-bind : 
+        v-for 等级最高 最好有一个唯一的key
+        directives 
+        Vue.directive  自定义指令
+        v-model  <input :value='value' @input='$emit('input',$event.targe.value)'>
+        {{可以写表达式  不能写语句}}
+        全局组件  Vue.component('组件名',{})
+        let son = {}
+        组件（除了根实例）里的 data属性必须是个函数；
+        子父组件；
+        子传父 父组件使用子组件的数据 ： 自定事件 + $emit；
+        ref  $refs
+
+        父传子 子组件使用父组件的数据 ： 自定义属性 + props(数组或对象)
+        $parent
+
+        vuex 为了方便组件之间的数据传递；
+        new Vue.Store({
+            state:{
+                ary:[123,34,33,53,553,4532,14,45]
+            },
+            mutations:{}, 使用 commit 调用
+            actions:{}, 使用 dispatch 调用
+            getters:{}
+        });
+        ...mapState
+        ...mapGetters 一般放在组件的计算属性里
+
+        ...mapActions
+        ...mapMutations 一般放在组件的methods中
+
+        使用上述简写的方式的前提是 
+            自己组件的变量名或者函数名跟vuex中的重复了
+        
+        router
+        路由映射表 [] 
+        mode 
+        linkActiveClass
+        <router-link :to="{path:'',query:{}}" active-class tag='div'>qqq</router-link>  
+        <router-link :to="{name:'',query:{},params:{}}" active-class tag='div'>qqq</router-link>  
+        <router-view></router-view>
+
+        this.$router.push()
+
+        <component is=></component>
+        <son>
+            <div slot='qqq'>gsdfgsdgfsgf</div>
+        </son>
+        
+        <slot name='qqq'></slot>
+
+        transition
+
+
+
+     -->
+</body>
+</html>

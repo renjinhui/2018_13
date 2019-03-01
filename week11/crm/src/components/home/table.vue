@@ -40,7 +40,7 @@
       width="150">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="primary" size="small">编辑</el-button>
-        <el-button type="danger" size="small">删除</el-button>
+        <el-button type="danger" @click='fn(scope.row)' size="small">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -53,7 +53,15 @@
     },
     methods: {
       handleClick(row) {
-        console.log(row);
+        console.log(row);// 点击的那一条数据 对象
+        //跳转到 info 界面
+        this.$router.push({path:'/info',query:row})
+      },
+      fn(row){
+        // row 当前点击那一行的数据
+        // 告诉后台删除这条数据
+        // 调用 actions中的 deleteFn 即可
+        this.$store.dispatch('deleteFn',row.id)
       }
     },
 

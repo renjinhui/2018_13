@@ -16,6 +16,10 @@ export default new Vuex.Store({
     },
     changeList(state,option){
       state.list = option;
+    },
+    deleteList(state,option){
+      let ary = state.list.filter(item=>item.id != option);
+      state.list = ary;
     }
   },
   actions: {
@@ -28,6 +32,16 @@ export default new Vuex.Store({
       return axios.get('/list').then((data)=>{
         console.log(data);// data.data是后台给的数据
         commit('changeList',data.data)
+      })
+    },
+    deleteFn({commit},option){
+      axios.get('/delete',{params:{id:option}}).then((data)=>{
+        // 若成功 data.data 是 ‘success’；
+        if(data.data ==='success'){
+          // 从state.list中把这条数据删除
+          
+          commit('deleteList',option)// option 就是那条数据的ID
+        }
       })
     }
   }
