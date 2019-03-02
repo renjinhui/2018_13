@@ -1,0 +1,6 @@
+// import './components/1_jsx.js'
+// import './components/2_createElement.js'
+// import './components/3_selfJSX'
+// import './components/4_clock'
+// import './components/5_组件.js'
+import './components/6_class'
