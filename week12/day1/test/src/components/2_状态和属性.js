@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 console.log(React.Component.prototype)
 class App extends React.Component {
     constructor(props) {
-        super(props);
+        super();
         console.log(this.props);
         this.state = {
             age:10,
