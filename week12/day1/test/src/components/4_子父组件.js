@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 class Count extends React.Component{
     // constructor 可以不写;  写了的话就必须有 super()
+    
     render() {
         return(
             <div>
@@ -14,7 +15,7 @@ class Count extends React.Component{
 }
 class Button extends React.Component{
     fn(){
-        
+        console.log(this)
     }
     render(){
         console.log(this.props)
@@ -43,7 +44,7 @@ class App extends React.Component {
         this.setState({
             count:m,
             // name:str
-        })
+        });
     }
     remove(){
         this.setState({
