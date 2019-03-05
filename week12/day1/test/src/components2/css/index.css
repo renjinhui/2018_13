@@ -8,6 +8,7 @@
   margin: 30px auto;
   overflow: hidden;
   background: #ccc;
+  position: relative;
 }
 .arrowBox {
   position: relative;
@@ -28,7 +29,24 @@
   font-size: 30px;
   cursor: pointer;
   user-select: none;
+  z-index: 100;
 }
 .arrowBox span:nth-child(2) {
   right: 0;
+}
+.listBox {
+  overflow: hidden;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.listBox li {
+  float: left;
+  list-style: none;
+  background: red;
+  text-align: center;
+  width: 400px;
+  height: 100%;
+  color: #fff;
 }
