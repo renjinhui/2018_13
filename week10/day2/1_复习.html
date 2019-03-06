@@ -15,6 +15,7 @@
 </html>
 <script src="./node_modules/vue/dist/vue.js"></script>
 <script src="./node_modules/vuex/dist/vuex.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
 <script>
     let store = new Vuex.Store({
         state:{
@@ -58,12 +59,14 @@
         el:'#app',
         store,
         data:{
-            name:"珠峰"
+            name:"珠峰",
+            data:''
         },
         created() {
             // this.$store.commit('changeCount',100);
             // this.$store.dispatch('chagneCount2',300)
-            this.changeCount(40)
+            this.changeCount(40);
+            this.fn()
         },
         computed: {
             ...Vuex.mapState(['count']),
@@ -83,6 +86,13 @@
             // 两种写法 是   等价的
             change(n){
                 this.$store.dispatch('changeCount2',n)
+            },
+            async fn(){
+                // this.data = await axios.get('./package.json');
+                await setTimeout(() => {
+                    console.log(111)
+                }, 2000);
+                console.log(this.data)
             },
 
             // 调用时  this.changeCount(40) 等同于 this.change2(40)

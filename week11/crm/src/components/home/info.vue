@@ -40,7 +40,7 @@
             this.num = obj.zip;
         },
         methods: {
-            fn() {
+            async fn() {
                 // date: '2016-05-03',
                 // name: '王小虎',
                 // province: '上海',
@@ -62,12 +62,21 @@
                     obj.id = this.$route.query.id
                 }
 
-                let p = this.$store.dispatch('addFn',obj);
-                p.then((data)=>{
-                    console.log(data)
-                    // 编辑成功后，跳转到table页
-                    this.$router.push('/table')
-                })
+                // let p = this.$store.dispatch('addFn',obj);
+                // p.then((data)=>{
+                //     console.log(data)
+                //     // 编辑成功后，跳转到table页
+                //     this.$router.push('/table')
+                // })
+                let data ;
+                try {
+                    data = await this.$store.dispatch('addFn',obj);
+                } catch (error) {
+                    data = 'fail'
+                }
+                // let data = await this.$store.dispatch('addFn',obj);
+                console.log(data);
+                this.$router.push('/table')
             }
         },
     }

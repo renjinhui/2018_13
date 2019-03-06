@@ -9,6 +9,9 @@ class Item extends React.Component {
             len:props.data.length+1 // 填补后的数组的长度
         }
     }
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps)
+    }
     render() {
         // let {data} = this.props;
         // data.push(data[0]);// 在最后补一张
@@ -25,6 +28,7 @@ class Item extends React.Component {
             })
             // console.log(initIndex)
             // initIndex(0) // 改变父组件的index
+            // initIndex(1)
             setTimeout(() => {
                 initIndex(1) 
             }, 10);

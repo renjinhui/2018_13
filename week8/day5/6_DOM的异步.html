@@ -25,14 +25,19 @@
         },
         // mounted:fucntion(){}{}
         mounted(){
-            console.log(this.$refs.li.length);
-            this.ary.push(4);// DOM 的重新渲染是个  异步执行
-            console.log(this.$refs.li.length);
-            debugger
-            this.$nextTick(()=>{
-                // DOM更新完成之后执行
-                console.log(this.$refs.li.length)
-            })
+            // console.log(this.$refs.li.length);
+            // this.ary.push(4);// DOM 的重新渲染是个  异步执行
+            // console.log(this.$refs.li.length);
+            // debugger
+            // this.$nextTick(()=>{
+            //     // DOM更新完成之后执行
+            //     console.log(this.$refs.li.length)
+            // })
+        },
+        methods: {
+            fn(){
+                this.data = await  axios.get();
+            }
         },
         beforeUpdate() {
             debugger

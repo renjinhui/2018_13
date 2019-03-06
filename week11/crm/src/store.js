@@ -25,7 +25,7 @@ export default new Vuex.Store({
   actions: {
     addFn({commit},option){
       // option  是使用时传递的一个对象
-      return axios.post('/add',option)
+      return axios.post('/add2',option)
     },
     getList({commit},option){
       // 从后台获取列表数据
