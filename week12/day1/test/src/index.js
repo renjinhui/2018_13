@@ -9,5 +9,10 @@ import ReactDOM from 'react-dom';
 // import HHH from  './components2/1_复习'
 // import HHH from  './components2/2_setState'
 // import HHH from  './components2/3_dialog'
-import HHH from './components2/slide/index'
+// import HHH from './components2/slide/index'
+// import HHH from './day3/1_ref'
+// import HHH from './day3/2_受控组件'
+// import HHH from './day3/3_todoList'
+// import HHH from './day3/4_生命周期钩子函数'
+import HHH from './day3/5_redux简介'
 ReactDOM.render(<HHH/>,window.root)

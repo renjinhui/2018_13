@@ -1,20 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 class Arrow extends React.Component {
-    constructor() {
-        super();
-    }
-    componentWillReceiveProps(next){
-        console.log(next)
-    }
-    shouldComponentUpdate(nextProps,nextState){
-        return false
-    }
+    
     render() {
-        console.log(111)
+        console.log('arrow')
+        let {onLeft,onRight} = this.props;
         return <div className='arrowBox'>
-            <span> {'<'} </span>
-            <span> {'>'} </span>
+            <span
+                onClick={onLeft}
+            > {'<'} </span>
+            <span
+                onClick={onRight}
+            > {'>'} </span>
         </div>;
     }
 }

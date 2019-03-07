@@ -22,8 +22,8 @@ class Button extends React.Component{
         let {text='按钮',www} = this.props;
         return (
             <div>
-                <button onClick={()=>{www()}}>{text}</button>
-                {/* <button onClick={this.props.www.bind(this,"珠峰")}>按钮2</button> */}
+                {/* <button onClick={()=>{www()}}>{text}</button> */}
+                <button onClick={this.props.www.bind(this,"珠峰")}>按钮2</button>
             </div>
         )
     }

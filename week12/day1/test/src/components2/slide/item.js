@@ -9,10 +9,8 @@ class Item extends React.Component {
             len:props.data.length+1 // 填补后的数组的长度
         }
     }
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps)
-    }
     render() {
+        console.log('item')
         // let {data} = this.props;
         // data.push(data[0]);// 在最后补一张
         let {ary,len} = this.state;
@@ -20,7 +18,7 @@ class Item extends React.Component {
         let sty = {
             width: len*400+'px'
         };
-        if(index==len){
+        if(index>=len){
             // 接下来 就要露白了
             // 要求 闪到第一张；然后再从第一张往后走
             sty = Object.assign(sty,{
@@ -31,6 +29,15 @@ class Item extends React.Component {
             // initIndex(1)
             setTimeout(() => {
                 initIndex(1) 
+            }, 10);
+        }else if(index<0){
+            // 闪到最后一张
+            sty = Object.assign(sty,{
+                left:-(len-1)*400+'px'
+            })
+            // 再向倒数第2张移动
+            setTimeout(() => {
+                initIndex(len-2)
             }, 10);
         }else{
             sty = Object.assign(sty,{
