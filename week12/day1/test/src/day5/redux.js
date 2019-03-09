@@ -25,5 +25,17 @@ export function createStore(reducer){
         subscribe
     }
 }
+export function combineReducers(reducers) {
+    // reducers是一个对象 里边包含了我们所有的 reducer
+    //{countReducer:countReducer,colorReducer:colorReducer}
+    return (state={},action)=>{
+        let obj = {};
+        for(let k in reducers){
+            obj[k] = reducers[k](state[k],action)
+        }
+        
+        return obj
+    }
+}
 
 //
