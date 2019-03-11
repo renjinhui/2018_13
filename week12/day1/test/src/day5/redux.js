@@ -33,7 +33,6 @@ export function combineReducers(reducers) {
         for(let k in reducers){
             obj[k] = reducers[k](state[k],action)
         }
-        
         return obj
     }
 }

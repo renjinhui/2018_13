@@ -21,7 +21,8 @@ import ReactDOM from 'react-dom';
 // import HHH from './day4/5_myredux'
 // import HHH from './day5/1_myredux'
 // import HHH from './day5/2_context'
-import HHH from './day5/myreact/index'
+// import HHH from './day5/myreact/index'
+import HHH from './router/index'
 ReactDOM.render(<HHH />,window.root)
 
 // import './day4/4_redux'

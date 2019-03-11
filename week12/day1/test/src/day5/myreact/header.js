@@ -12,7 +12,7 @@ class Header extends React.Component {
 }
 const mapStateToProps = (state)=>{
     return{
-        state1:state,
+        state:state,
         color:state.colorReducer.color
     }  
 }
