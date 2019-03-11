@@ -22,7 +22,8 @@ class Content extends React.Component {
                 // this.props.dispatch(changeColor('blue'))
 
                 // 通过this.props执行
-                this.props.qqq('blue')
+                // this.props.qqq('blue')
+                this.props.dispatch(changeColor1('blue'))
             }}>变蓝</button>
             <button onClick={()=>{
                 // 相当于直接当用了 store里的dispatch
@@ -35,6 +36,13 @@ Content = connect((state)=>{
     return{
         color:state.myCol.color
     }
-},{qqq:changeColor1})(Content)
+},(dispatch)=>{
+    return{
+        qqq:(str)=>{
+            dispatch(changeColor1(str))
+        },
+        dispatch
+    }
+})(Content)
 
 export default Content
