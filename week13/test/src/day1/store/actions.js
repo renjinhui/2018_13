@@ -14,6 +14,7 @@ export const changeColor = (str)=>{
     }
 }
 export function changeColor1(str) {
+    
     return function(dispatch,getState){
         // dispatch,getState 就是 store里的 对应的那两个函数
         console.log(getState,dispatch);
