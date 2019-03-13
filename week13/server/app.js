@@ -1,9 +1,9 @@
 let express = require('express');
-let bodyParser = require('body-parser');
+let bodyParser = require('body-parser');// 专门处理post请求的请求体
 let app = express();
 
 app.use(function(req,res,next){
-  res.header('Access-Control-Allow-Origin',"http://localhost:9000");//来源的域名和端口号
+  res.header('Access-Control-Allow-Origin',"http://localhost:3000");//来源的域名和端口号
   res.header('Access-Control-Allow-Headers',"Content-Type,Accept");//允许的跨域头
   res.header('Access-Control-Allow-Methods',"GET,POST,PUT,OPTIONS,DELETE");//允许的方法
   //如果请求的方法名是OPTIONS的话，则直接结束 请求

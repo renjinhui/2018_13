@@ -1,0 +1,29 @@
+.nav_box{
+    position: fixed;
+    width: 100%;
+    height: 1.5rem;
+    bottom:0;
+    left: 0;
+    display: flex;
+    box-shadow: 1px 1px 17px 4px #ccc;
+    background: blue;
+    align-items: center;// 让子元素上下居中 跟flex连着用
+    a{
+        flex: 1;
+        display: block;
+        font-size:0.6rem;
+        color: #333; 
+        text-align: center;
+        // text-decoration: none;//
+        div{
+            font-size: 0.4rem;
+        }
+        div.iconfont{
+            font-size: 0.6rem
+        }
+    }
+    a.active{
+        text-decoration: none;
+        color:rgb(109, 154, 221)
+    }
+}

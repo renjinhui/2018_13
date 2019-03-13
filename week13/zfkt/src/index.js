@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './scss/index.scss';
+// import './scss/index.scss';
+import './css/index.css'
+import 'swiper/dist/css/swiper.css' // 引入 swiper.css
 import App from './components/index';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
