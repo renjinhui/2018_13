@@ -21,12 +21,12 @@ class App extends React.Component {
             })
         });
         // 加载完 home后 请求列表数据  默认是 all 类型
-        this.props.dispatch(getHomeList('all'))
+        this.props.dispatch(getHomeList('all'));
     }
     render() {
         console.log(this)
         let {swiperList} = this.state;// 解构获取 轮播图数据
-        return <div className='home_box' style={{paddingTop:'1.5rem'}}>
+        return <div className='home_box'  style={{padding:'1.5rem 0'}}>
             <Header/>
             <Swiper data={swiperList}/>
             <Content/>

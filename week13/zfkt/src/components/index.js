@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter,Route,Redirect,Switch} from 'react-router-dom'
 import Info from './info'
 import Login from './login/login'
+import  Reg  from "./login/reg";
 class App extends React.Component {
     constructor() {
         super();
@@ -22,6 +23,7 @@ class App extends React.Component {
                     <Switch>
                         <Route path='/index' component={Info}></Route>
                         <Route path='/login' component={Login}></Route>
+                        <Route path='/reg' component={Reg}></Route>
                         <Route render={()=><h1>404</h1>}></Route>
                     </Switch>
                 </div>

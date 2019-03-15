@@ -5,13 +5,21 @@ class App extends React.Component {
         super();
         
     }
+    shouldComponentUpdate(nextProps,nextState){
+        // nextProps 存储是新的属性， this.props是老属性
+        if(nextProps.data === this.props.data){
+            // 数据没有更新
+            return false
+        }
+        return true;
+    }
     componentDidUpdate(){
         // 因为首次加载完成时， 我们拿到的数据是一个空的；所以这个时候 new ；
         //  不会有任何动效，因为 没有任何 slide
         // 当数据更新之后， 会重新渲染； 这时 当新数据渲染完毕之后
         // DOM结构中就有了我们要的 slide 这时 再去new ,就有对应的动效了
         //在DOM加载完成之后才能执行 new swiper
-        // console.log(111111111111111111);
+        console.log(111111111111111111);
         var mySwiper = new Swiper('.swiper-container', {
             autoplay: {
                 disableOnInteraction: false,

@@ -6,10 +6,11 @@ class App extends React.Component {
         
     }
     render() {
+        let {data1} = this.props;
         return <div className='list_box'>
-            <img src="" alt=""/>
-            <p>gdsfgsgsfgsg</p>
-            <div>$123.00</div>
+            <img src={data1.url} alt=""/>
+            <p>{data1.title}</p>
+            <div>{data1.price}</div>
         </div>;
     }
 }

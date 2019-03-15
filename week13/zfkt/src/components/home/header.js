@@ -1,6 +1,6 @@
 import React from 'react';
 import  '../../css/home_header.css'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { getHomeList } from '../../store/actions';
 class Header extends React.Component {
     constructor() {
@@ -21,7 +21,13 @@ class Header extends React.Component {
         }
     }
     getData(str){
-        this.props.dispatch(getHomeList(str))
+        this.props.dispatch(getHomeList(str));
+        // 为什么 header执行 dispatch 会触发 home 的render?
+        // 因为 上述dispatch执行时， 会触发 getHomeList返回的那个函数f;
+        // f执行时， 执行了 两个内部dispatch,这两个dispatch执行，会让当前事件池中的
+        // 所有事件挨个执行；因为 事件池中有 有home组件对应的事件(home使用了connect)
+        // 所以 home组件重新 render了一次；
+        this.changeClass();
     }
     render() {
         return <div className='header_box'>

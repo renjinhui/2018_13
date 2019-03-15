@@ -48,6 +48,12 @@ export const homeList = (state=homeListData,action)=>{
                 list:action.list
             }
             break;
+        // case types.ADDLIST:
+        //     return{
+        //         ...state,
+        //         list:action.list.concat(state.list)
+        //     }
+        //     break;    
         case types.HOMETITLE:
             return{
                 ...state,
