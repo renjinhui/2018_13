@@ -1,0 +1,25 @@
+.main-page {
+  padding-top: 100px;
+}
+.main-page .new-wrap {
+  height: 70px;
+  padding: 10px 10px 10px 20px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+.main-page .new-wrap .add-icon {
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.main-page .new-wrap .add-text {
+  vertical-align: 1px;
+}
+.main-page .recently-wrap a:last-child .feed-card-item {
+  margin-bottom: 20px;
+}
+.qqq {
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}

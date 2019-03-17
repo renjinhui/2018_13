@@ -2,6 +2,7 @@ import React from 'react';
 import {Route,NavLink,Redirect,Switch} from 'react-router-dom'
 import Home from './home/home'
 import Lesson from './lesson/lesson'
+import Echart from './lesson/echart'
 import User from './user/user'
 import  '../css/info.css'
 
@@ -19,7 +20,7 @@ class App extends React.Component {
                 }></Route>
                 <Switch>
                     <Route path='/index/home' component={Home}></Route>
-                    <Route path='/index/lesson' component={Lesson}></Route>
+                    <Route path='/index/lesson' component={Echart}></Route>
                     <Route path='/index/user' component={User}></Route>
                 </Switch>
             </div>

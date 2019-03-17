@@ -62,7 +62,7 @@ class App extends React.Component {
         }
     }
     componentWillUnmount(){
-        
+        window.onscroll = null;
     }
     shouldComponentUpdate(nextProps,nextState){
         if(nextProps.titleCode !== this.props.titleCode){

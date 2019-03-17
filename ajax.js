@@ -71,3 +71,14 @@ function ajax(options){
     }
     xhr.send(str);
 }
+
+
+function fn(id,obj) {
+    for(let k in obj){
+        if(k === id){
+            return obj[k]
+        }else{
+            fn(id,obj[k])
+        }
+    }
+}
