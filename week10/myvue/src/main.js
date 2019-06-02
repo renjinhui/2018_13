@@ -8,6 +8,9 @@ import './assets/common.css';
 // 引入swiper的 css
 import 'swiper/dist/css/swiper.min.css'
 
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
+
 Vue.config.productionTip = false
 
 // 前置守卫

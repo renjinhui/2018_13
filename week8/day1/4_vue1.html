@@ -16,6 +16,15 @@
         <input type="text" v-model='name'>
         <textarea v-model='age'></textarea>
     </div>
+    <div id="app2">
+        <!-- 小胡子语法  -->
+        <!-- 小胡子中只能写 表达式 不能写JS语句 -->
+        <!-- {{name=1234}} 展示的是 表达式的返回结果  -->
+        <!-- {{[name=12345,age]}} -->
+        {{age > 17 ? '成年22' : '未成年22'}}
+        <input type="text" v-model='name'>
+        <textarea v-model='age'></textarea>
+    </div>
 </body>
 </html>
 <script src="./node/node_modules/vue/dist/vue.js"></script>
@@ -24,7 +33,7 @@
     // v-model='name ' name 是实例中的变量
     // 指令 是 让对应 元素 做某件事情
     let vm = new Vue({
-        // el:'#app', //不能使用body 或者 html 作为渲染的模板
+        el:'#app', //不能使用body 或者 html 作为渲染的模板
         template:'<h1>hello world {{age}}</h1>',
         // 若有template属性； 则会把该属性对应的值作为模板；
         data:{
@@ -32,5 +41,5 @@
             name:'hello zhufeng',
             age:10
         }
-    }).$mount('#app')
+    }).$mount('#app2')
 </script>

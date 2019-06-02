@@ -5,7 +5,11 @@
             <swiper :list="banner"></swiper>
         </div>
         <hotbook></hotbook>
-        首页
+        <!-- <pullto :top-load-method="refresh">
+            <ul v-for="item in 10">
+                <li>{{ item }}</li>
+            </ul>
+        </pullto> -->
     </div>
 </template>
 
@@ -13,10 +17,23 @@
     import title from '@/common/title.vue'
     import swiper from '@/common/swiper.vue'
     import hotbook from './hotbook'
+    import pullto from 'vue-pull-to'
     export default {
+        components: {
+            pullto,
+            'my-title':title,
+            swiper,
+            hotbook
+        },
         data() {
             return {
                 banner: []
+            }
+        },
+        methods: {
+            refresh(loaded) {
+                console.log(loaded)
+                loaded('done')
             }
         },
         created() {
@@ -27,11 +44,6 @@
             // q.then((data)=>{
             //     console.log(data);
             // })
-        },
-        components:{
-            'my-title':title,
-            swiper,
-            hotbook
         }
     }
 </script>

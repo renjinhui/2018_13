@@ -1,3 +1,6 @@
+let $fixedTab = $('.fixed_tab'),
+    $tabBox = $('.tab_box');
+
 //实现轮播图
 function banner() {
     new Swiper('.banner_box',{
@@ -81,44 +84,56 @@ function bindBannerHtml(data) {
     });
     $ul.html(str);
 }
+function toTop() {
+    let t = document.documentElement.scrollTop||document.body.scrollTop;
+    // console.log($tabBox.offset(),t)
+    if($tabBox.offset().top <= t){
+        $fixedTab.removeClass('hide')
+    }else{
+        $fixedTab.addClass('hide')
+    }
+}
+window.onscroll = function () {
+    toTop()
+}
 // 先获取数据  然后再把数据渲染到页面上  渲染完成之后 再执行轮播图
 
-let p = new Promise(function(res,rej){
-    $.ajax({
-        url:'./data.json',
-        type: 'get',
-        success:function(data){
-            res(data) // 成功 执行 res函数
-        },
-        error:function(e){
-            rej(e) // 失败 执行  rej函数
-        }
-    })
-})
-p.then(function(d){
-    console.log(d)
-},function(err){
-    console.log(err);
-})
+// let p = new Promise(function(res,rej){
+//     $.ajax({
+//         url:'./data.json',
+//         type: 'get',
+//         success:function(data){
+//             res(data) // 成功 执行 res函数
+//         },
+//         error:function(e){
+//             rej(e) // 失败 执行  rej函数
+//         }
+//     })
+// })
+// p.then(function(d){
+//     console.log(d)
+// },function(err){
+//     console.log(err);
+// })
 
 
 
-let p2 = new Promise((res,rej)=>{
-    setTimeout(() => {
-        res(1);
-    }, 3000);
-    rej(2);
-});
-p2.then((data)=>{
-    console.log(data)
-},(err)=>{
-    console.log(err);
-    return 1111
-}).then((data)=>{
-    console.log(data)
-},(err)=>{
-    console.log(err)
-})
+// let p2 = new Promise((res,rej)=>{
+//     setTimeout(() => {
+//         res(1);
+//     }, 3000);
+//     rej(2);
+// });
+// p2.then((data)=>{
+//     console.log(data)
+// },(err)=>{
+//     console.log(err);
+//     return 1111
+// }).then((data)=>{
+//     console.log(data)
+// },(err)=>{
+//     console.log(err)
+// })
 
 // JS 刷新页面 
 // window.location.href = window.location.href;

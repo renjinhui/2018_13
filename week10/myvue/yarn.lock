@@ -7677,6 +7677,11 @@ vue-hot-reload-api@^2.3.0:
   resolved "http://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.2.tgz#1fcc1495effe08a790909b46bf7b5c4cfeb6f21b"
   integrity sha1-H8wUle/+CKeQkJtGv3tcTP628hs=
 
+vue-infinite-scroll@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-infinite-scroll/-/vue-infinite-scroll-2.0.2.tgz#ca37a91fe92ee0ad3b74acf8682c00917144b711"
+  integrity sha512-n+YghR059YmciANGJh9SsNWRi1YZEBVlODtmnb/12zI+4R72QZSWd+EuZ5mW6auEo/yaJXgxzwsuhvALVnm73A==
+
 vue-loader@^15.6.2:
   version "15.6.3"
   resolved "http://registry.npm.taobao.org/vue-loader/download/vue-loader-15.6.3.tgz#94a5d8a4912a37392a79e22cf9ebc091fe3ef51b"
@@ -7687,6 +7692,13 @@ vue-loader@^15.6.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-pull-to@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/vue-pull-to/-/vue-pull-to-0.1.6.tgz#07688e6ae062a94041bd78ac6d59fdc0eb060dc5"
+  integrity sha512-uw7mt93N4eE8hiUdEjTGhDu0OmdkmDJtCGUN5L+YmE75DLVQSd7t5bTM080cJREFt0/GjwshMTVaUcifZzx/4Q==
+  dependencies:
+    vue "^2.2.6"
 
 vue-router@^3.0.1:
   version "3.0.2"
@@ -7701,6 +7713,11 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue-swiper@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/vue-swiper/-/vue-swiper-0.5.0.tgz#d6550e0e951a73986d137029126983c7aadaa30e"
+  integrity sha1-1lUODpUac5htE3ApEmmDx6raow4=
+
 vue-template-compiler@^2.5.21:
   version "2.6.6"
   resolved "http://registry.npm.taobao.org/vue-template-compiler/download/vue-template-compiler-2.6.6.tgz#a807acbf3d51971d3721d75ecb1b927b517c1a02"
@@ -7713,6 +7730,11 @@ vue-template-es2015-compiler@^1.8.2:
   version "1.8.2"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
   integrity sha1-3XPoC6WLtl3XqKoq7vYInPYRbyo=
+
+vue@^2.2.6:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
+  integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
 vue@^2.5.22:
   version "2.6.6"

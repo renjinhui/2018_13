@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <h1>{{name}}</h1>
-        <input type="text" v-model.trim='name'>
+        <h1>{{typeof name}}</h1>
+        <input type="text" v-model.number='name'>
         <!-- v-model.number 自动转成数字 -->
         <!-- v-model.trim 自动去除首位空格 -->
     </div>

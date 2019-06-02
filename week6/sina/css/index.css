@@ -101,6 +101,16 @@ main .tab_head ul li.current::after {
   top: 0.23rem;
   left: 0.5rem;
 }
+main .tab_head .fixed_tab {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+}
 main .news_box .banner_box {
   height: 3.6rem;
   margin: 0 0.2rem;

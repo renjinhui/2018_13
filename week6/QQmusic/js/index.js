@@ -62,6 +62,7 @@ function getLyric(){
 //获取歌词
 getLyric().then(function (data) {
     // console.log(data);
+    debugger;
     let ary =  changeLyric(data);//处理歌词
     giveHTML(ary)//把数据放到页面上
 });

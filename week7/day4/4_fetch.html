@@ -35,6 +35,7 @@
     let url2 = ' https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/test/zf';
     fetch(url2,{
         method:'post',
+        credentials: 'include' ,
         body:'a=12', // 需要是一个字符串 传给后台的参数
         headers:{
             //设置请求头
@@ -42,5 +43,6 @@
         }
     }).then((data)=>{
         console.log(data);
+        return data.json()
     })
 </script>

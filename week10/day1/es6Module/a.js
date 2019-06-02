@@ -2,7 +2,7 @@ export let str = '珠峰';
 export let obj = {
     qqq:12
 }
-// export default str; //默认导出 str
+export default 123; //默认导出 str
 
 
 // export {str,obj} 

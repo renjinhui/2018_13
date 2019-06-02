@@ -47,59 +47,68 @@
     }
     MyPromise.prototype.then = function(resolve,reject){
         let self = this;
-        if(self.status==='resolved'){
-            // resolve(self.value)
-            return new MyPromise(function(res2,rej2){
+        let promise2 = new MyPromise((res,rej)=>{
+            if(self.status === 'resolved'){
                 try{
                     let val = resolve(self.value);
-                    
-                    res2(val)
+                    res(val);
                 }catch(e){
-                    rej2(e)
+                    rej(e);
                 }
-                
-            })
-        }
-        if(self.status === 'rejected'){
-            // reject(self.reason)
-            return new MyPromise(function(res2,rej2){
+            }
+            if(self.status === 'rejected'){
                 try{
                     let val = reject(self.reason);
-                    res2(val)
+                    res(val)
                 }catch(e){
-                    rej2(e)
+                    rej(e)
                 }
-                
-            })
-        }
-        
-        if(self.status === 'pending'){
-            // self.resCallbacks.push(resolve);
-            // self.rejCallbacks.push(reject);
-            return new MyPromise(function(res2,rej2){
+            }
+            if(self.status === 'pending'){
                 self.resCallbacks.push(function(value){
                     try{
                         let val2 = resolve(value);
-                        res2(val2)
+                        res(val2)
                     }catch(e){
-                        rej2(e)
+                        rej(e)
                     }
                     
                 })
                 self.rejCallbacks.push(function(reason){
                     try{
                         let val2 = reject(reason);
-                        res2(val2)
+                        res(val2)
                     }catch(e){
-                        rej2(e)
+                        rej(e)
                     }
                     
                 })
-            })
-        }
+            }
+        })
+        return promise2;
         console.log(self.status)
     }
     
+    MyPromise.all = function (ary) {
+        return new MyPromise((res,rej)=>{
+            let done = gen(ary.length,res);
+            ary.forEach((item,index)=>{
+                item.then((value)=>{
+                    done(index,value)
+                },rej)
+            })
+        })
+    }
+    function gen(len,res) {
+        let values = [];
+        let count = 0;
+        return function(index,value){
+            values[index] = value;
+            if(++count == len){
+                res(values)
+            }
+        }
+    }
     let p1 = new MyPromise(function(res,rej){
         // res(123)
         // rej(1234)
@@ -108,16 +117,69 @@
             // res(123)
             res(2345)
         }, 2000);
-    }).then(()=>{
-        console.log(1)
-    },()=>{}).then(()=>{
-        console.log(2)
-    },()=>{})
+    })
+    // .then(()=>{
+    //     console.log(1)
+    // },()=>{}).then(()=>{
+    //     console.log(2)
+    // },()=>{});
+    let p2 = new MyPromise(function(res,rej){
+        // res(123)
+        // rej(1234)
+        // console.log(qqq)
+        setTimeout(() => {
+            // res(123)
+            rej(2345)
+        }, 4000);
+    })
+    MyPromise.all([p1,p2]).then((data)=>{
+        console.log(data)
+    },(e)=>{console.log(e)})
 </script>
 <script>
     // let p2 = new Promise(function(res,rej){
     //     console.log('qqq')
     //     res(123)
     // });
+
+</script>
+
+<script>
+    // ==========原生部分
+    // 1、介绍一下你理解的 JS中的事件循环，你对宏任务和微任务的理解
+    // 2、DOM的0级事件和2级事件有哪些区别？介绍一下点击事件的事件流，事件委托的原理
+    // 3、查看数据类型的方法，其中的 Object.prototype.toString.call()的原理是什么？
+    // 4、对于变量提升你是怎么理解的？let const 相对于var 有什么优点？
+    // 5、什么是深拷贝和浅拷贝？ 怎么实现深拷贝？
+    // 6、es6的箭头函数和普通函数有什么区别？
+    // 7、call apply bind 的异同点？
+    // 8、简单介绍一下Promise的用法；Promise有哪些静态方法？
+    // 9、介绍一下jsonp原理
+    // 10、请描述一下 cookies，sessionStorage 和 localStorage 的区别
+    // 11、介绍一下JS的事件节流
+    // 12、[1] == true 的结果是true还是false
+
+
+    // ==========vue框架部分
+    // 1、在 new Vue 时，传递的参数对象中的 template属性存在时，vue的渲染模板还是el属性对应的DOM结构吗？
+    // 2、vue父子组件之间的数据是怎么传递的？
+    // 3、自定义组件的怎么实现 v-model?
+    // 4、components 这个内置组件是怎么用的？
+    // 5、本地开发时，是怎么实现跨域请求的？
+    // 6、怎么使用vue-router 实现 404页面？hash模式和history模式有什么区别？
+    // 7、介绍一下你对vuex的理解？其中的mutations中的函数为什么必须时同步的？
+    // 8、当我在 updated钩子函数中触发了视图更新会发生什么？
+
+    // ==========react框架部分
+    // 1、什么是jsx? jsx最终被babel转化成了什么？
+    // 2、组件之间的数据怎么传递？
+    // 3、react组件和vue组件有什么区别吗？
+    // 4、在react中，哪一个属性是跟vue的插槽类似的？
+    // 5、在react中，哪一个钩子函数是可以提升react的执行效率的？
+    // 6、介绍一下高阶组件和纯组件？
+    // 7、介绍一下redux的三大原则？
+    // 8、简单介绍一下redux 和 react-redux的原理？
+    // 9、在react-router的4.0版本中的switch有什么作用？
+    // 10、简单介绍一下router的原理？
 
 </script>

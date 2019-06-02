@@ -1,42 +1,40 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
-import Echarts from 'echarts'
-// import {dataMap} from './data'
-import dataMap from './data'
-import option from './option'
+import qqq from 'echarts'
+import {dataMap,option} from './data'
 class App extends React.Component {
     constructor() {
         super();
         
     }
     componentDidMount(){
-        // this.init()
-        // this.init3()
-        // this.bing()
-        this.init4()
+        this.init();
+        this.init2();
+        this.init3();
+        this.init4();
     }
     init(){
-        var myChart = Echarts.init(this.box);
-        myChart.setOption({
+        var myChart = qqq.init(this.box);
+        let option = {
             title: {
                 text: 'ECharts 入门示例'
             },
             tooltip: {},
             xAxis: {
-                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                data: ['css', 'js', 'html', 'vue', 'react', 'angular']
             },
             yAxis: {},
             series: [{
-                name: 'ssssss',
+                name: '掌握程度',
                 type: 'bar',
-                data: [51, 220, 362, 120, 102, 202]
+                data: [50, 200, 360, 100, 100, 200]
             }]
-        });
+        }
+        myChart.setOption(option);
     }
-    bing(){
-        var myChart = Echarts.init(this.box1);
-
-        myChart.setOption({
+    init2(){
+        var myChart = qqq.init(this.box2);
+        let option = {
+            roseType: 'angle',
             backgroundColor: '#2c343c',
             series : [
                 {
@@ -48,9 +46,9 @@ class App extends React.Component {
                         {value:274, name:'联盟广告'},
                         {value:310, name:'邮件营销'},
                         {value:335, name:'直接访问'},
-                        {value:400, name:'搜索引擎'}
+                        {value:400, name:'搜索引擎'},
+                        {value:600, name:'搜索引擎3'}
                     ],
-                    roseType:'angle',
                     itemStyle: {
                         // 阴影的大小
                         shadowBlur: 200,
@@ -61,10 +59,10 @@ class App extends React.Component {
                         // 阴影颜色
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
-                },
-            ],
-        })
-        
+                }
+            ]
+        }
+        myChart.setOption(option);
     }
     init3(){
         var option = {
@@ -82,46 +80,34 @@ class App extends React.Component {
                 areaStyle: {}
             }]
         };
-        var myChart = Echarts.init(this.box3);
+        var myChart = qqq.init(this.box3);
         myChart.setOption(option);
     }
     init4(){
-        var myChart = Echarts.init(this.box4);
-        // console.log(option)
-        // debugger
-        setTimeout(()=>{
-            debugger
-            myChart.setOption(option);
-        },20)
-        
+        var myChart = qqq.init(this.box4);
+        myChart.setOption(option);
     }
-
     render() {
-        
-        return <div className="">
-                <div 
-                    className='sss' 
-                    style={{height:'300px',width:"100%"}} 
-                    ref={(ele)=>{this.box=ele}}>
+        return <div className=''>
+            <div className='weqwe' 
+                ref={(ele)=>{this.box=ele}} 
+                style={{height:'300px',margin:'auto'}}>
+            </div>
+            <div className='weqwe' 
+                ref={(ele)=>{this.box2=ele}} 
+                style={{height:'500px',margin:'auto'}}>
+            </div>
+            
+            <div className='weqwe' 
+                ref={(ele)=>{this.box3=ele}} 
+                style={{height:'500px',margin:'auto'}}>
+            </div>
 
-                </div>
-                <div 
-                    className='sss' 
-                    style={{height:'500px',width:"100%"}} 
-                    ref={(ele)=>{this.box1=ele}}>
-                </div>
-                <div 
-                    className='sss' 
-                    style={{height:'500px',width:"100%"}} 
-                    ref={(ele)=>{this.box3=ele}}>
-                </div>
-                <div 
-                    className='sss' 
-                    style={{height:'800px',width:"100%"}} 
-                    ref={(ele)=>{this.box4=ele}}>
-                </div>
+            <div className='weqwe' 
+                ref={(ele)=>{this.box4=ele}} 
+                style={{height:'500px',margin:'auto'}}>
+            </div>
         </div>;
-        
     }
 }
 
