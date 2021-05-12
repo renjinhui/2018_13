@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "swiper": "^4.4.6",
+    "swiper": "^6.5.1",
     "vue": "^2.5.22",
     "vue-infinite-scroll": "^2.0.2",
     "vue-pull-to": "^0.1.6",
